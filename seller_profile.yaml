@@ -1,0 +1,76 @@
+# What "we" sell. Relevance scoring, hook choice and drafting all read this file.
+# The seller is fictional (see ASSUMPTIONS.md).
+
+company: Ledgerline
+rep:
+  name: Shivam Shukla
+  title: Account Executive
+
+offer: >
+  Ledgerline is an accounts-payable automation platform. It captures invoices from email
+  and PDFs, matches them to POs and receipts, routes approvals, and pays vendors, so
+  finance teams close faster without adding AP headcount.
+
+problem_solved: >
+  manual invoice processing that slows the month-end close and forces AP teams to hire
+  as invoice volume grows
+
+icp:
+  industries: [fintech, SaaS, e-commerce, logistics, retail]
+  company_size: 200-5,000 employees
+  regions: [India, US, UK]
+  buyer_titles: [CFO, VP Finance, Controller, Head of Finance Ops, AP Manager]
+  triggers:
+    - funding round or rapid growth (invoice volume rises)
+    - hiring AP clerks or accountants
+    - ERP migration or new finance leadership
+    - expansion into new entities or countries
+
+tone:
+  voice: plain, specific, peer-to-peer; no hype
+  max_words: 120
+  banned_phrases:
+    - "I hope this finds you well"
+    - "I came across your profile"
+    - "I wanted to reach out"
+    - "quick question"
+    - "synergy"
+
+# Case 3: title patterns -> the angle each persona cares about.
+personas:
+  - match: [CFO, Chief Financial Officer, VP Finance]
+    angle: cost of scaling finance operations as the company grows
+  - match: [Controller, Head of Accounting, Finance Ops]
+    angle: close timeline and accuracy
+  - match: [AP Manager, Accounts Payable, Payables]
+    angle: team workload and invoice backlog
+
+# Case 3: staggered send days within one account (assumption).
+send_order:
+  - persona: AP Manager
+    day: 0
+  - persona: Controller
+    day: 2
+  - persona: CFO
+    day: 5
+
+# Case 6: competitor signals.
+competitors:
+  - name: Tipalti
+    typical_contract_months: 12
+    migration_story: null
+  - name: Bill.com
+    typical_contract_months: 12
+    migration_story: >
+      Teams outgrow single-entity workflows; Ledgerline handles multi-entity approvals
+      and imports historical vendor data in a week.
+  - name: Coupa
+    typical_contract_months: 36
+    migration_story: null
+
+# Case 12: country -> language and compliance handling.
+regions:
+  IN: {language: en, strict: false}
+  US: {language: en, strict: false}
+  GB: {language: en, strict: false}
+  DE: {language: de, strict: true, opt_out: "Sie können dem Erhalt weiterer E-Mails jederzeit widersprechen."}

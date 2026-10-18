@@ -1,0 +1,26 @@
+# Secrets: this repo is public. Never commit real keys.
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local databases
+*.db
+*.db-journal
+
+# Search cache (recorded fixtures under tests/fixtures/ are committed)
+backend/tests/fixtures/cache/
+
+# Node / Next.js
+node_modules/
+.next/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
