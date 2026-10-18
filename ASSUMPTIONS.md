@@ -16,6 +16,17 @@ Decisions and assumptions made while building Signal. Add to this as you build
 - Committee send order (AP Manager day 0, Controller day 2, CFO day 5) is a starting guess.
 
 ## Technical
+- Zero cost: every service runs on a free tier with no credit card. The LLM is Groq
+  (`openai/gpt-oss-120b` smart, `openai/gpt-oss-20b` fast) with Gemini free tier as
+  fallback, instead of the Claude API the guide first assumed. Search is Tavily's free
+  1,000 credits/month, then DuckDuckGo (`ddgs`, no key), then Exa's free credits.
+- Free-tier limits cap volume at roughly 50-60 prospects a day; fixtures mode keeps tests
+  and rehearsals at zero usage. Drafts from open-weight models are somewhat weaker than
+  frontier paid models; the critic stage and one-hook rule carry most of the quality.
+- All LLM providers go through one OpenAI-compatible client, so a paid model can be
+  swapped in later through config only.
+- Gemini's free tier may use prompts to improve Google's models; acceptable because inputs
+  are public web text plus fictional seller data.
 - Python 3.15 instead of the guide's 3.12: it is what this machine has, and every backend
   dependency ships 3.15 wheels. Pin the version on the backend host at deploy time.
 - Next.js 16.3.8 / React 19.2.
