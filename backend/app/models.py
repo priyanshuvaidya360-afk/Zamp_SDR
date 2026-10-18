@@ -101,6 +101,7 @@ class Run(SQLModel, table=True):
 
     first_name: str
     last_name: str
+    full_name: str | None = None  # fullest known name (middle names kept) for identity search
     company: str | None = None
     title: str | None = None
     domain: str | None = Field(default=None, index=True)

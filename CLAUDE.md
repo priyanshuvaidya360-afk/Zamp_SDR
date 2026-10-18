@@ -28,7 +28,11 @@ T01-T18 are at the end of the guide; do one task per session.
 backend/
   app/
     main.py            FastAPI app; includes routers from routes/
-    routes/batches.py  POST /batches, GET /batches/{id}/preview, PATCH /batches/{id}/mapping
+    routes/batches.py  POST /batches, GET /batches/{id}[/preview|/events], PATCH .../mapping,
+                       POST /batches/{id}/start
+    routes/runs.py     GET /runs, GET /runs/{id}[/events], POST /runs/{id}/resume
+    events.py          in-process pub/sub (topics run:<id>, batch:<id>) + SSE formatting
+    seller.py          loads seller_profile.yaml
     ingest.py          CSV parse, header aliases, cleaning, row checks, in-file dedupe
     config.py          settings from env / backend/.env
     db.py              engine, create_db_and_tables, get_session
@@ -41,7 +45,9 @@ backend/
     fetch.py           httpx + trafilatura page text (blocks linkedin.com)
     fixtures.py        DEMO_MODE record/fixtures store + response cache
     pipeline/
-      runner.py        orchestrates stages, emits events
+      runner.py        Stage / RunContext / StopRun, run_one, run_batch, global
+                       semaphore, per-account shared research, restart recovery
+      stubs.py         stand-in stages (0.3 s each) until T06-T09 replace them
       resolve.py       stage 2: identity
       research.py      stage 3: search + fetch
       extract.py       stage 4: AI-instruction scan + extraction
@@ -70,7 +76,11 @@ docs/GUIDE.md          the spec
 - Backend Python is always `backend/.venv/bin/python`; there is no uv.
 
 ## Conventions
-- Every pipeline stage is `async def run(ctx) -> BaseModel` and returns a Pydantic model.
+- Every pipeline stage is `async def run(ctx) -> BaseModel` and returns a Pydantic model
+  (give it a `message` field: it becomes the stepper's one-line result). To end a run early
+  raise `StopRun(status, reason, payload)`; any other exception fails only that run. Report
+  LLM/search usage with `ctx.add_usage(tokens, credits)`. Company-level research goes
+  through `ctx.batch.company_research(ctx.account_key, factory)` so it runs once per account.
   Code owns the flow; the LLM only makes judgements inside a stage.
 - All LLM calls go through `app/llm.py`. All search and fetch go through `app/search.py`.
   No direct `openai` / `tavily` / `ddgs` / `exa` / `httpx` calls elsewhere.

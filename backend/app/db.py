@@ -17,8 +17,12 @@ def make_engine(url: str) -> Engine:
 engine = make_engine(settings.database_url)
 
 
-def create_db_and_tables(bind: Engine = engine) -> None:
-    SQLModel.metadata.create_all(bind)
+# Callers use `db.engine` / `get_session` at call time (not a captured default), so tests can
+# swap in their own engine.
+
+
+def create_db_and_tables(bind: Engine | None = None) -> None:
+    SQLModel.metadata.create_all(bind or engine)
 
 
 def get_session() -> Iterator[Session]:

@@ -35,6 +35,11 @@ class Settings(BaseSettings):
     fetch_max_chars: int = 20_000
     cache_ttl_hours: float = 24
 
+    # Batch runner (T05). One global cap across all batches keeps us inside free-tier limits.
+    max_concurrent_runs: int = 5
+    stub_stage_delay_s: float = 0.3  # stand-in stages until T06-T09 replace them
+    sse_heartbeat_s: float = 15
+
     database_url: str = f"sqlite:///{BACKEND_DIR / 'signal.db'}"
     # live: real calls. record: real calls + save each response as a fixture.
     # fixtures: replay saved responses only (no network, no keys needed).

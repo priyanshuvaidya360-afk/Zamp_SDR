@@ -17,6 +17,10 @@ Decisions and assumptions made while building Signal. Add to this as you build
   empty; link/email hosts (bit.ly, linktr.ee, gmail.com...) are never a company domain;
   initial-only last names are flagged; the fullest name ("Philipp Wenger Lebron", not just
   first + last) is kept as full_name for identity search; ", MBA"-style suffixes are dropped.
+- Batch runner (T05): at most 5 runs at once across all batches (one global cap, to stay in
+  free-tier rate limits). Only valid rows become runs; invalid and duplicate rows stay in
+  the batch preview. Runs left 'running' by a server restart are marked failed at startup.
+  Background work runs in-process (asyncio), so a restart loses in-flight runs by design.
 - Output is a first-touch email only; no LinkedIn messages, no follow-up sequences.
 - Signals older than 180 days are ignored; weights in the hook score are hand-set.
 - Public web only. No LinkedIn scraping; rep-pasted notes are trusted as rep input.

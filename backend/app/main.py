@@ -8,12 +8,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.db import create_db_and_tables
-from app.routes import batches
+from app.pipeline.runner import recover_interrupted
+from app.routes import batches, runs
 
 
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:
     create_db_and_tables()
+    recover_interrupted()
     yield
 
 
@@ -28,6 +30,7 @@ app.add_middleware(
 
 
 app.include_router(batches.router)
+app.include_router(runs.router)
 
 
 @app.get("/health")
