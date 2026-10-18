@@ -28,8 +28,19 @@ class Settings(BaseSettings):
     gemini_smart_model: str = "gemini-3.6-flash"
     gemini_fast_model: str = "gemini-3.5-flash-lite"
 
+    llm_timeout_s: float = 60
+    # Search: Tavily -> DuckDuckGo (ddgs, no key) -> Exa (only if EXA_API_KEY is set).
+    ddgs_backends: str = "duckduckgo,bing"  # the ddgs engines that proved reliable
+    fetch_timeout_s: float = 10
+    fetch_max_chars: int = 20_000
+    cache_ttl_hours: float = 24
+
     database_url: str = f"sqlite:///{BACKEND_DIR / 'signal.db'}"
+    # live: real calls. record: real calls + save each response as a fixture.
+    # fixtures: replay saved responses only (no network, no keys needed).
     demo_mode: Literal["live", "record", "fixtures"] = "live"
+    fixtures_dir: Path = BACKEND_DIR / "tests" / "fixtures"
+    cache_dir: Path = BACKEND_DIR / "tests" / "fixtures" / "cache"
     cors_origins: list[str] = ["http://localhost:3000"]
     seller_profile_path: Path = REPO_DIR / "seller_profile.yaml"
 

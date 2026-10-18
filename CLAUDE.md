@@ -33,8 +33,11 @@ backend/
     models.py          SQLModel tables + RunStatus enum (Signal/Draft tables are
                        SignalRecord/DraftRecord to avoid clashing with schemas.py)
     schemas.py         Pydantic stage outputs
-    llm.py             Groq/Gemini client, strict JSON-schema output, retries, fallback
-    search.py          Tavily/DuckDuckGo/Exa adapter + cache + DEMO_MODE
+    llm.py             structured(role, system, user, Schema): Groq -> Gemini, strict
+                       JSON schema, retries, one corrective retry on schema errors
+    search.py          search() / extract(): Tavily -> DuckDuckGo -> Exa, 24 h cache
+    fetch.py           httpx + trafilatura page text (blocks linkedin.com)
+    fixtures.py        DEMO_MODE record/fixtures store + response cache
     pipeline/
       runner.py        orchestrates stages, emits events
       resolve.py       stage 2: identity
@@ -59,6 +62,8 @@ docs/GUIDE.md          the spec
 - `make dev-api`: FastAPI on http://localhost:8000 (`GET /health`)
 - `make dev-web`: Next.js on http://localhost:3000
 - `make test`: backend pytest suite
+- `cd backend && .venv/bin/python -m scripts.smoke [--all]`: live check of search, extract
+  and one structured LLM call (about 2 Tavily credits); `--all` tries each provider alone
 - `make seed`: load `seed/context.json` (fake CRM / sequence history) into the database; idempotent
 - Backend Python is always `backend/.venv/bin/python`; there is no uv.
 
@@ -73,7 +78,12 @@ docs/GUIDE.md          the spec
 - Every factual sentence in a draft maps to a signal with a source URL. No source, no claim.
 - The app never sends email.
 - Run statuses come only from the `RunStatus` enum in `app/models.py`.
-- Use `DEMO_MODE=fixtures` for repeated runs so tests do not burn search credits.
+- Use `DEMO_MODE=fixtures` for repeated runs so tests do not burn search credits. Fixtures
+  cover LLM calls too, so a recorded run replays with the network off.
+- Free-tier quirks (measured, keep in mind when writing prompts): Groq rejects replies that
+  break a strict schema with 400 `json_validate_failed` (llm.py retries once with the error);
+  gpt-oss tends to invent enum values, so list allowed values in prompts. ddgs time filters
+  and combined backends are unreliable; search.py tries engines one by one.
 
 ## Git
 - Push to https://github.com/priyanshuvaidya360-afk/Zamp_SDR (`origin`, branch `main`).
