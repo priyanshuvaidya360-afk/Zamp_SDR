@@ -32,11 +32,27 @@ ALIASES: dict[str, list[str]] = {
     "linkedin_url": ["linkedin_url", "linkedin", "profile_url", "person_linkedin_url", "linkedin_profile"],
     "company": ["company", "company_name", "account", "account_name", "organization", "organisation"],
     "title": ["title", "job_title", "role", "position"],
-    "email": ["email", "work_email", "email_address"],
+    "email": ["email", "work_email", "email_address", "valid_emails", "valid_email"],
     "notes": ["notes", "rep_notes", "context"],
     "public_bio": ["public_bio", "bio", "about"],  # untrusted, like scraped web text
 }
 FIELDS = list(ALIASES)
+
+# Exports write these for empty cells (Saleshandy uses " - ").
+PLACEHOLDERS = {"-", "–", "—", "n/a", "null", "#n/a"}
+
+# Hosts that are never a prospect's company domain: link shorteners, link-in-bio pages,
+# free email and social sites. Seen in real exports (e.g. GetResponse -> bit.ly).
+NOT_COMPANY_DOMAINS = {
+    "bit.ly", "linktr.ee", "lnkd.in", "t.co", "tinyurl.com", "carrd.co",
+    "gmail.com", "googlemail.com", "yahoo.com", "hotmail.com", "outlook.com", "icloud.com",
+    "linkedin.com", "facebook.com", "twitter.com", "x.com", "instagram.com", "medium.com",
+}
+
+# Trailing credentials in name fields: "Malini Gujral, MBA", "Jane Doe, PhD, CPA". An explicit
+# list, so a "Raman, Priya" style name never loses its first name.
+_CREDENTIALS = r"MBA|EMBA|Ph\.?D\.?|CPA|CFA|CMA|ACA|FCA|CA|MD|JD|PMP|MSc|BSc|MA|BA|Jr\.?|Sr\.?|II|III|IV"
+CREDENTIALS_RE = re.compile(rf"(,\s*(?:{_CREDENTIALS}))+\s*$")
 
 DOMAIN_RE = re.compile(r"^(?=.{4,253}$)([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$")
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
@@ -171,7 +187,12 @@ def check_mapping(mapping: dict[str, str | None], headers: list[str]) -> None:
 
 
 def _clean(value: str | None) -> str:
-    return re.sub(r"\s+", " ", value or "").strip()
+    value = re.sub(r"\s+", " ", value or "").strip()
+    return "" if value.lower() in PLACEHOLDERS else value
+
+
+def strip_credentials(name: str) -> str:
+    return CREDENTIALS_RE.sub("", _clean(name)).strip()
 
 
 def clean_name(value: str) -> str:
@@ -183,8 +204,8 @@ def clean_name(value: str) -> str:
 
 
 def split_full_name(full: str) -> tuple[str, str]:
-    """Split on the last space: 'Mary Ann Lee' -> ('Mary Ann', 'Lee')."""
-    full = _clean(full)
+    """Split on the last space: 'Mary Ann Lee' -> ('Mary Ann', 'Lee'). Drops ', MBA' etc."""
+    full = strip_credentials(full)
     if " " not in full:
         return full, ""
     first, last = full.rsplit(" ", 1)
@@ -247,7 +268,16 @@ def validate_rows(
             first, last = get(raw, "first_name"), get(raw, "last_name")
         first, last = clean_name(first), clean_name(last)
 
+        # The fullest form of the name, for identity search. Exports often drop middle
+        # names from first/last ("Philipp Wenger Lebron" -> "Philipp" + "Lebron").
+        full_name = clean_name(strip_credentials(get(raw, "full_name")))
+        if not full_name or not use_full_name and last and last.lower() not in full_name.lower():
+            full_name = " ".join(p for p in (first, last) if p)
+
         domain, domain_error = normalise_domain(get(raw, "company_domain"))
+        if domain and any(domain == d or domain.endswith("." + d) for d in NOT_COMPANY_DOMAINS):
+            warnings.append(f"ignored domain '{domain}': it is a link or email host, not the company's site")
+            domain = None
         linkedin, linkedin_error = normalise_linkedin(get(raw, "linkedin_url"))
         email = get(raw, "email").lower() or None
         if email and not EMAIL_RE.match(email):
@@ -269,10 +299,16 @@ def validate_rows(
             problems.append("needs a company domain or LinkedIn URL to identify this person")
         if not company and not problems:
             warnings.append("no company name; it will be derived from the domain or LinkedIn")
+        if not problems and len(last.rstrip(".")) == 1:
+            warnings.append(
+                "last name is only an initial; identity will rely on the "
+                + ("LinkedIn URL" if linkedin else "company domain")
+            )
 
         data = {
             "first_name": first or None,
             "last_name": last or None,
+            "full_name": full_name or None,
             "company": company,
             "title": get(raw, "title") or None,
             "company_domain": domain,

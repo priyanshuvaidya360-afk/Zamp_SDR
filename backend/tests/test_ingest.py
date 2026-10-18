@@ -60,7 +60,7 @@ def test_aliased_headers_from_a_crm_export():
     row = result.rows[0]
     assert row.status == "valid"
     assert row.data == {
-        "first_name": "Priya", "last_name": "Raman", "company": "Acme Fintech",
+        "first_name": "Priya", "last_name": "Raman", "full_name": "Priya Raman", "company": "Acme Fintech",
         "title": "VP Finance", "company_domain": "acmefintech.com", "linkedin_url": None,
         "email": "priya.raman@acmefintech.com", "notes": "warm intro",
         "public_bio": "Loves AP automation",
@@ -166,6 +166,72 @@ def test_malformed_email_is_a_warning_not_an_error():
 def test_missing_company_name_is_only_a_warning():
     row = parse("first_name,last_name,company_domain\nPriya,Raman,acme.com\n").rows[0]
     assert row.status == "valid" and "derived" in row.warnings[0]
+
+
+# --- Real-export quirks (found on a 100-row Saleshandy export) ------------------
+
+SALESHANDY_HEADER = (
+    "Name,First Name,Last Name,Valid Emails,Risky Emails,Job Title,Company Name,"
+    "LinkedIn URL,Company Website,Company Domain,Company LinkedIn URL\n"
+)
+
+
+def test_saleshandy_export_maps_valid_emails_and_ignores_placeholders():
+    text = SALESHANDY_HEADER + (
+        '"Philipp Wenger Lebron","Philipp","Lebron","philipp.wenger@get-sides.de"," - ",'
+        '"Head of Growth","SIDES","https://www.linkedin.com/in/philippwenger",'
+        '"https://www.get-sides.de","get-sides.de","https://www.linkedin.com/company/get-sides"\n'
+        '"Sofia Novak","Sofia","Novak"," - "," - ","Head of Growth","sonarly",'
+        '"https://www.linkedin.com/in/sofia-novak"," - "," - "," - "\n'
+    )
+    result = parse(text)
+    assert result.mapping["email"] == "Valid Emails"
+    assert result.mapping["company_domain"] == "Company Domain"
+    philipp, sofia = result.rows
+    assert philipp.data["email"] == "philipp.wenger@get-sides.de"
+    # " - " means empty: no bogus "invalid domain", no bogus email warning.
+    assert sofia.status == "valid" and sofia.warnings == []
+    assert sofia.data["email"] is None and sofia.data["company_domain"] is None
+
+
+def test_full_name_keeps_middle_names_that_first_and_last_drop():
+    text = SALESHANDY_HEADER + (
+        '"Philipp Wenger Lebron","Philipp","Lebron"," - "," - ","Head of Growth","SIDES",'
+        '"linkedin.com/in/philippwenger"," - ","get-sides.de"," - "\n'
+        '"Malini Gujral, MBA","Malini","Gujral"," - "," - ","CMO","Celebrus",'
+        '"linkedin.com/in/malinigujral"," - ","celebrus.com"," - "\n'
+    )
+    philipp, malini = parse(text).rows
+    assert (philipp.data["last_name"], philipp.data["full_name"]) == ("Lebron", "Philipp Wenger Lebron")
+    assert malini.data["full_name"] == "Malini Gujral"
+
+
+@pytest.mark.parametrize(
+    ("full", "expected"),
+    [("Malini Gujral, MBA", ("Malini", "Gujral")), ("Jane Doe, PhD, CPA", ("Jane", "Doe")),
+     ("Raman, Priya", ("Raman,", "Priya"))],  # not a credential: left for the user to fix
+)
+def test_credentials_are_stripped_before_splitting(full, expected):
+    assert ingest.split_full_name(full) == expected
+
+
+def test_link_shortener_domain_is_ignored_and_linkedin_carries_identity():
+    text = (
+        "first_name,last_name,company,company_domain,linkedin_url\n"
+        "Akil,Natchimuthu,iCare Software,linktr.ee,linkedin.com/in/akil-natchimuthu\n"
+        "Hanna,Andrzejewska,GetResponse,bit.ly,\n"
+    )
+    akil, hanna = parse(text).rows
+    assert akil.status == "valid" and akil.data["company_domain"] is None
+    assert "not the company's site" in akil.warnings[0]
+    assert hanna.status == "invalid"
+    assert hanna.reason == "needs a company domain or LinkedIn URL to identify this person"
+
+
+def test_initial_only_last_name_is_flagged():
+    row = parse("first_name,last_name,company,linkedin_url\nAlice,W,Canny,linkedin.com/in/alice-wong\n").rows[0]
+    assert row.status == "valid"
+    assert row.warnings == ["last name is only an initial; identity will rely on the LinkedIn URL"]
 
 
 # --- File-level rejections -----------------------------------------------------

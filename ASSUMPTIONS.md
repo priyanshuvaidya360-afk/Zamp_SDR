@@ -13,6 +13,10 @@ Decisions and assumptions made while building Signal. Add to this as you build
   1 MB and 50 rows. Row numbers in messages are spreadsheet line numbers (header = line 1).
   A malformed email is dropped with a warning rather than rejecting the row; a missing
   company name is only a warning. Duplicates keep the first valid copy.
+- Tested on a real 100-row Saleshandy export: placeholder cells (" - ", "n/a") count as
+  empty; link/email hosts (bit.ly, linktr.ee, gmail.com...) are never a company domain;
+  initial-only last names are flagged; the fullest name ("Philipp Wenger Lebron", not just
+  first + last) is kept as full_name for identity search; ", MBA"-style suffixes are dropped.
 - Output is a first-touch email only; no LinkedIn messages, no follow-up sequences.
 - Signals older than 180 days are ignored; weights in the hook score are hand-set.
 - Public web only. No LinkedIn scraping; rep-pasted notes are trusted as rep input.
