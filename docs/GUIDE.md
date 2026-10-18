@@ -24,35 +24,42 @@ The CSV is the contract with the user, so validate it before spending a single A
 
 | Column | Required | Accepted header aliases | Used for |
 | --- | --- | --- | --- |
-| `full_name` | Yes (or first + last) | name, prospect, contact, first\_name + last\_name | Identity search |
-| `company` | Yes | company\_name, account, organization | Identity + company signals |
+| `first_name` | Yes | first, firstname, given\_name | Identity search |
+| `last_name` | Yes | last, lastname, surname, family\_name | Identity search |
+| `company_domain` | Yes, unless `linkedin_url` is given | website, domain, company\_url | Exact company match; account grouping |
+| `linkedin_url` | Yes, unless `company_domain` is given | linkedin, profile\_url | Exact person anchor for identity (searched, never scraped) |
+| `company` | Recommended | company\_name, account, organization | Display + search queries; derived from the domain or identity step if missing |
 | `title` | No | job\_title, role, position | Disambiguation, relevance |
-| `linkedin_url` | No | linkedin, profile\_url | Identity hint only (not scraped) |
-| `company_domain` | No | website, domain, company\_url | Exact company match |
 | `email` | No | work\_email | Dedupe key; carried to export |
 | `notes` | No | rep\_notes, context | Rep context, trusted input |
+
+**Why these are mandatory:** first name + last name + a company name alone is not a unique identity. Company names collide ("Acme", "Northwind"), and common names at large companies return several people, which leads to drafts about the wrong person or generic, low-quality output. A company domain pins the company exactly; a LinkedIn URL pins the person exactly. Requiring one of them up front is cheaper than guessing later. If the file only has a single `full_name` column (alias: name, prospect, contact), split it on the last space into first and last name and show the split in the preview so the user can check it.
 
 Sample to build and demo with (the rows map to your happy path and edge cases):
 
 ```csv
-full_name,company,title,company_domain,notes
-Priya Raman,Acme Fintech,VP Finance,acmefintech.com,
-Rahul Sharma,Infosys,,,
-Ananya Iyer,Stealthco Labs,Founder,stealthco.io,met at SaaSBoomi
-David Lee,BigCorp Retail,CFO,bigcorpretail.com,
-Meera Shah,NewCo Payments,Head of Finance Ops,,
-,Acme Fintech,Controller,,
-Priya Raman,Acme Fintech,VP Finance,acmefintech.com,
+first_name,last_name,company,title,company_domain,linkedin_url,notes
+Priya,Raman,Acme Fintech,VP Finance,acmefintech.com,,
+Rahul,Sharma,Infosys,,infosys.com,,
+Ananya,Iyer,Stealthco Labs,Founder,stealthco.io,,met at SaaSBoomi
+David,Lee,BigCorp Retail,CFO,,https://www.linkedin.com/in/davidlee-cfo,
+Meera,Shah,NewCo Payments,Head of Finance Ops,,,
+,,Acme Fintech,Controller,acmefintech.com,,
+Priya,Raman,Acme Fintech,VP Finance,acmefintech.com,,
 ```
 
-**File-level checks** (reject the upload with a clear message): not UTF-8 or not CSV, no rows, no column mappable to name and company, more than 50 rows (a demo-scale cap, stated as an assumption).
+Row by row: Priya is the happy path; Rahul is valid but a common name at a huge company with no title (identity stays ambiguous → `needs_input`); Ananya is thin signal; David is valid on LinkedIn URL alone; Meera is `invalid` (no domain and no LinkedIn URL); the Controller row is `invalid` (no name); the last row is a `skipped` duplicate.
+
+**File-level checks** (reject the upload with a clear message): not UTF-8 or not CSV, no rows, no columns mappable to first name and last name (or a splittable full name), no column mappable to either company domain or LinkedIn URL, more than 50 rows (a demo-scale cap, stated as an assumption).
 
 **Row-level checks** (row gets `invalid` or `skipped`, the rest of the batch runs):
 
-- Missing name or company → `invalid`, with the reason shown on that row.
-- Exact duplicate inside the file (same name + company, or same email) → second copy `skipped` as duplicate.
+- Missing first name or last name → `invalid` ("missing last name").
+- Missing both company domain and LinkedIn URL → `invalid` ("needs a company domain or LinkedIn URL to identify this person").
+- Malformed domain (no dot, contains spaces) or a LinkedIn URL that is not a `linkedin.com/in/...` profile → `invalid` with the reason.
+- Exact duplicate inside the file (same LinkedIn URL, same email, or same first + last name + company domain) → second copy `skipped` as duplicate.
 - Same person run in the last 30 days → `blocked` (stage 1, as before).
-- Trim whitespace, fix casing, strip `www.` and `https://` from domains, split "First Last" if only first/last columns exist.
+- Trim whitespace, fix casing, strip `www.`, `https://` and paths from domains, normalise LinkedIn URLs to `linkedin.com/in/<slug>`, split a single full-name column into first + last.
 
 Before running, show a **preview**: detected column mapping (user can correct it), row count, and how many rows are valid, duplicate or invalid. The user clicks "Run N prospects" to start. This preview is cheap to build and shows judgement in the demo.
 
@@ -121,7 +128,7 @@ Five tables carry everything the dashboard and run view need. Store every stage'
 | Table | Key fields | Used by |
 | --- | --- | --- |
 | `batches` | id, filename, uploaded\_at, row\_count, valid / invalid / duplicate counts, column\_mapping JSON, status (validating / running / done), finished\_at | Dashboard, batch view, export |
-| `runs` | id, batch\_id, row\_number, raw\_row JSON, prospect\_name, company, title, domain, rep\_notes, status, final\_reason, confidence, started\_at, finished\_at, cost\_credits | Batch view rows, filters, metrics |
+| `runs` | id, batch\_id, row\_number, raw\_row JSON, first\_name, last\_name, company, title, domain, linkedin\_url, rep\_notes, status, final\_reason, confidence, started\_at, finished\_at, cost\_credits | Batch view rows, filters, metrics |
 | `stage_events` | run\_id, stage, state (started / done / failed / skipped), message, payload JSON, duration\_ms, ts | Live run view, audit trail |
 | `signals` | run\_id, type, about (person / company), summary, evidence, source\_url, published\_at, scores JSON, selected bool, rejected\_reason | Signals panel, "why this hook" |
 | `drafts` | run\_id, version, subject, body, hook\_signal\_id, critic\_report JSON, reviewer\_action, edited\_body, reviewed\_at | Review queue, export, edit history |
@@ -138,7 +145,7 @@ Run status is a closed set; the pipeline sets it, the reviewer moves it on:
 | `approved` / `rejected` | Reviewer's decision |
 | `failed` | An API or system error the pipeline could not recover from |
 
-Rows that never start a run get one of two CSV-only statuses: `invalid` (missing name or company, reason stored) or `skipped` (duplicate inside the same file). Keep the original row in `raw_row` so the export can return every column the user uploaded.
+Rows that never start a run get one of two CSV-only statuses: `invalid` (missing first/last name, or neither company domain nor LinkedIn URL, reason stored) or `skipped` (duplicate inside the same file). Keep the original row in `raw_row` so the export can return every column the user uploaded.
 
 Core Pydantic schemas (the LLM returns these via JSON-schema tool calls, so output is always parseable):
 
@@ -186,7 +193,8 @@ Eight stages, each a plain async function that takes the run context, returns a 
    - Use the cleaned row from stage 0; add the seller profile and rep notes to the run context.
    - Check `runs` for the same person in the last 30 days. If found, set `blocked` with reason "contacted recently" and link the earlier run.
 2. **Resolve identity** (search + Haiku)
-   - Queries: `"{name}" "{company}"`, `"{name}" {role_hint}`, company domain lookup.
+   - Queries: `"{first_name} {last_name}" site:{company_domain}` and `"{first_name} {last_name}" "{company}"`, `"{first_name} {last_name}" {role_hint}`, plus a search for the LinkedIn URL itself (search-engine results only; the profile page is never fetched). If `company` was blank, derive it here from the domain's homepage title or the LinkedIn search result.
+   - A LinkedIn URL that matches a search result, or a domain that matches the candidate's employer, counts as strong evidence for that candidate.
    - LLM returns candidate people with company, title, evidence URL, and a match confidence 0–1.
    - One candidate ≥ 0.8 → continue. Several plausible, or none ≥ 0.5 → `needs_input` and show the candidates for the rep to pick. Never guess.
 3. **Gather signals** (search + fetch, run in parallel with `asyncio.gather`)
@@ -282,7 +290,7 @@ Each case below lists how it's detected, what the process does, the exact test i
 
 ### Case 3 — Buying committee in the same batch
 
-- **Detect:** in the batch layer, group valid rows by normalised company domain (fallback: normalised company name). Any group of 2+ people becomes an account.
+- **Detect:** in the batch layer, group valid rows by normalised company domain. Rows with only a LinkedIn URL join an account once stage 2 resolves their company domain (fallback: normalised company name). Any group of 2+ people becomes an account.
 - **Do:** run stages 1–5 per person, sharing one set of company research. Then a new **account plan** step (Sonnet) sees every member's title and the pooled signals, and assigns each person a different hook and angle using a persona map from the seller profile: CFO → cost of scaling, Controller → close timeline and accuracy, AP Manager → team workload.
 - **Enforce in code, not the prompt:** no signal is used as an opener twice within an account; a company-wide event (the Series C) may appear as sentence-two context for at most one person. If the LLM's plan breaks a rule, reject it and retry once with the violation named.
 - **Send plan:** recommend staggered send days (e.g. AP Manager day 0, Controller day 2, CFO day 5). State the order as an assumption in the seller profile.
@@ -563,7 +571,8 @@ Done when: make dev-api and make dev-web both start, /health returns 200, make t
 ```text
 Spec: docs/GUIDE.md sections "Data model", "Input: the prospect CSV", "Account context:
 data and tools".
-In app/models.py create SQLModel tables: batches, runs (add account_key and message_type),
+In app/models.py create SQLModel tables: batches, runs (first_name, last_name, linkedin_url as
+in the guide; add account_key and message_type),
 stage_events, signals, drafts, crm_accounts, opportunities, sequence_history. JSON columns
 via SQLAlchemy JSON. RunStatus str-enum: running, needs_input, low_signal, ready_for_review,
 blocked, suppressed, held, approved, rejected, failed, invalid, skipped.
@@ -608,8 +617,12 @@ map headers by the alias table, clean values, run file-level checks (cap 50 rows
 row-level checks (invalid with reason, skipped duplicate within file). Store raw_row.
 Endpoints: POST /batches (multipart file) -> batch_id + preview {mapping, counts, first 20 rows
 with status and reason}; PATCH /batches/{id}/mapping -> re-validate with a corrected mapping.
-Done when: pytest covers clean file, aliased headers, BOM, missing company, in-file duplicate,
-51 rows, and a non-CSV file, each with the expected statuses and messages.
+Required per row: first_name, last_name, and at least one of company_domain / linkedin_url
+(company name is recommended, not required). Split a single full_name column into first + last.
+Validate domain and LinkedIn URL formats; dedupe on LinkedIn URL, email, or first + last + domain.
+Done when: pytest covers clean file, aliased headers, BOM, full_name split, missing last name,
+missing both domain and LinkedIn URL, LinkedIn-only row (valid), malformed LinkedIn URL,
+in-file duplicate, 51 rows, and a non-CSV file, each with the expected statuses and messages.
 ```
 
 ### T05 — Batch runner, account clustering, SSE (plan first)
@@ -621,7 +634,8 @@ app/pipeline/runner.py: a stage is `async def run(ctx) -> BaseModel`. A wrapper 
 started/done/failed events (stage, state, message, payload, duration_ms, tokens, credits)
 into stage_events and an in-process pub/sub (one asyncio.Queue per subscriber).
 POST /batches/{id}/start: create a run per valid row; cluster_batch_by_account sets
-account_key (normalised domain, fallback normalised company name); share company research
+account_key (normalised domain; LinkedIn-only rows get it after stage 2 resolves their domain,
+fallback normalised company name); share company research
 per account_key via a cache on the batch context; asyncio.Semaphore(5); any exception marks
 only that run failed with a plain-English message; emit batch_progress after each run.
 GET /batches/{id}/events and GET /runs/{id}/events: SSE that replays stored events, then
@@ -814,8 +828,8 @@ Spec: docs/GUIDE.md "Input: the prospect CSV" sample, "Edge cases: what to build
 Create seed/demo.csv with: one happy-path row at the crowded-hook company; Northwind CFO,
 Controller and AP Manager; one row whose public_bio holds the flan line and one holding a
 hostile instruction; Priya Raman (warm, not_now); a Contoso Logistics contact (open deal);
-plus messy rows (aliased headers in a second file seed/demo_messy.csv, a missing company,
-an exact duplicate). Write seed/demo_cases.json describing each row's expected status.
+plus messy rows (aliased headers in a second file seed/demo_messy.csv, a row with neither
+company domain nor LinkedIn URL, a row missing a last name, a LinkedIn-only row, an exact duplicate). Write seed/demo_cases.json describing each row's expected status.
 Record fixtures for every row with DEMO_MODE=record, plus the two careers-page snapshots
 (4 roles, then 2) for case 10. Add scripts/check_demo.py that runs both CSVs in fixtures
 mode and asserts each row's status against demo_cases.json.
