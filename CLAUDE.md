@@ -27,7 +27,9 @@ T01-T18 are at the end of the guide; do one task per session.
 ```text
 backend/
   app/
-    main.py            FastAPI routes + SSE
+    main.py            FastAPI app; includes routers from routes/
+    routes/batches.py  POST /batches, GET /batches/{id}/preview, PATCH /batches/{id}/mapping
+    ingest.py          CSV parse, header aliases, cleaning, row checks, in-file dedupe
     config.py          settings from env / backend/.env
     db.py              engine, create_db_and_tables, get_session
     models.py          SQLModel tables + RunStatus enum (Signal/Draft tables are

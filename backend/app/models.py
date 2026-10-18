@@ -85,6 +85,10 @@ class Batch(SQLModel, table=True):
     column_mapping: dict[str, Any] = Field(default_factory=dict, sa_type=JSON)
     status: BatchStatus = BatchStatus.validating
     finished_at: datetime | None = None
+    # Kept until "Run" so the mapping can be corrected and re-validated (T04).
+    headers: list[str] = Field(default_factory=list, sa_type=JSON)
+    source_rows: list[dict[str, Any]] = Field(default_factory=list, sa_type=JSON)
+    rows: list[dict[str, Any]] = Field(default_factory=list, sa_type=JSON)  # ingest.RowResult
 
 
 class Run(SQLModel, table=True):
