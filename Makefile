@@ -1,7 +1,7 @@
 PYTHON ?= python3.15
 VENV := backend/.venv
 
-.PHONY: setup dev-api dev-web test
+.PHONY: setup dev-api dev-web test seed
 
 setup:
 	test -d $(VENV) || $(PYTHON) -m venv $(VENV)
@@ -16,3 +16,6 @@ dev-web:
 
 test:
 	cd backend && .venv/bin/pytest -q
+
+seed:
+	cd backend && .venv/bin/python -m scripts.seed_context

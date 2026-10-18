@@ -1,0 +1,31 @@
+{
+  "_comment": "Fake CRM and sales-engagement data for the account-context rules (docs/GUIDE.md, 'Account context'). Dates are relative to the day the seed script runs, so the demo stays stable. Northwind must stay free of deals: it is the buying-committee demo account.",
+  "crm_accounts": [
+    {"domain": "acmefintech.com", "name": "Acme Fintech", "parent_domain": null, "owner": "Asha Menon"},
+    {"domain": "contosologistics.com", "name": "Contoso Logistics", "parent_domain": null, "owner": "Sam Patel"},
+    {"domain": "globexretail.com", "name": "Globex Retail", "parent_domain": null, "owner": "Asha Menon"}
+  ],
+  "opportunities": [
+    {"account_domain": "contosologistics.com", "stage": 4, "owner": "Sam Patel", "status": "open", "updated_days_ago": 6}
+  ],
+  "sequence_history": [
+    {
+      "email": "priya.raman@acmefintech.com",
+      "domain": "acmefintech.com",
+      "sequence": "Finance leaders Q2",
+      "last_touch_days_ago": 125,
+      "outcome": "not_now",
+      "reply_snippet": "Not a priority this quarter, we're in the middle of an ERP migration. Try me again after it goes live.",
+      "follow_up_after_days_ago": 14
+    },
+    {
+      "email": "tom.becker@globexretail.com",
+      "domain": "globexretail.com",
+      "sequence": "Finance leaders Q2",
+      "last_touch_days_ago": 90,
+      "outcome": "unsubscribed",
+      "reply_snippet": null,
+      "follow_up_after_days_ago": null
+    }
+  ]
+}

@@ -25,7 +25,9 @@ backend/
   app/
     main.py            FastAPI routes + SSE
     config.py          settings from env / backend/.env
-    models.py          SQLModel tables + RunStatus enum
+    db.py              engine, create_db_and_tables, get_session
+    models.py          SQLModel tables + RunStatus enum (Signal/Draft tables are
+                       SignalRecord/DraftRecord to avoid clashing with schemas.py)
     schemas.py         Pydantic stage outputs
     llm.py             Claude client, JSON-schema tool output, retries
     search.py          Tavily/Exa adapter + cache + DEMO_MODE
@@ -42,6 +44,7 @@ frontend/
   app/                 page.tsx = dashboard; batches/, runs/ routes
   components/          shadcn/ui in components/ui
   lib/                 api client, shared types, status colours
+seed/                  context.json (fake CRM data); demo CSVs land here in T17
 seller_profile.yaml    what "we" sell, ICP, tone, personas, competitors, regions
 ASSUMPTIONS.md         every assumption made; add to it as you build
 docs/GUIDE.md          the spec
@@ -52,6 +55,7 @@ docs/GUIDE.md          the spec
 - `make dev-api`: FastAPI on http://localhost:8000 (`GET /health`)
 - `make dev-web`: Next.js on http://localhost:3000
 - `make test`: backend pytest suite
+- `make seed`: load `seed/context.json` (fake CRM / sequence history) into the database; idempotent
 - Backend Python is always `backend/.venv/bin/python`; there is no uv.
 
 ## Conventions
