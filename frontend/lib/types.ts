@@ -275,8 +275,18 @@ export interface DraftRecord {
     final?: boolean;
     confidence?: number;
     confidence_formula?: string;
+    revalidated_from?: number;
   };
   created_at: string;
+  reviewer_action: "approve" | "edit" | "reject" | null;
+  edited_body: string | null;
+  reviewed_at: string | null;
+  review: {
+    edit_diff?: string[];
+    reason?: string | null;
+    revalidation?: { checks: FactCheck[]; checked_at: string };
+    superseded_by?: number;
+  };
 }
 
 export interface RunDetail {
@@ -285,6 +295,30 @@ export interface RunDetail {
   events: StageEvent[];
   signals: SignalRecord[];
   drafts: DraftRecord[];
+  recheck: { facts: number; draft_age_days: number | null };
+}
+
+// Review (T15, case 10). Spec: docs/GUIDE.md case 10 and "UI: three screens".
+export type ReviewAction = "approve" | "edit" | "reject";
+
+export interface FactCheck {
+  signal_id: number;
+  source_url: string;
+  verdict: "unchanged" | "changed" | "gone";
+  reason: string;
+  old_fact: string;
+  new_fact: string | null;
+  sentence_before: string | null;
+  sentence_after: string | null;
+}
+
+export interface ReviewResult {
+  outcome: "approved" | "edited" | "rejected" | "changed" | "gone";
+  message: string;
+  run_status: RunStatus;
+  draft_id: number;
+  checks: FactCheck[];
+  diff: { before: string; after: string } | null;
 }
 
 export interface Candidate {

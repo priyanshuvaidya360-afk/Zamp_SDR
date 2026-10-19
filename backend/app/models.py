@@ -179,6 +179,8 @@ class DraftRecord(SQLModel, table=True):
     reviewer_action: ReviewerAction | None = None
     edited_body: str | None = None
     reviewed_at: datetime | None = None
+    # Review history: edit_diff, reject reason, revalidation report, superseded_by (T15).
+    review: dict[str, Any] = Field(default_factory=dict, sa_type=JSON)
 
 
 # --- Account context (stand-ins for CRM and sales engagement tools) ---------

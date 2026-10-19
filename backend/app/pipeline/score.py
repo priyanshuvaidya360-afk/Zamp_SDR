@@ -200,10 +200,11 @@ def _never_a_hook(signal: ExtractedSignal, ctx: RunContext) -> str | None:
 
 
 def _batch_balance(signal: ExtractedSignal, ctx: RunContext) -> str | None:
-    """Case 9: a re-run ordered by the batch check excludes an over-used hook source."""
-    excluded = (ctx.resume_input or {}).get("exclude_sources") or []
-    if signal.source_url in excluded:
-        return "Batch balance: this source already opens too many drafts in the batch"
+    """Case 9: a re-run ordered by the batch check excludes an over-used hook source. Case 10's
+    re-check uses the same door for a source whose fact is gone (with its own reason)."""
+    resume = ctx.resume_input or {}
+    if signal.source_url in (resume.get("exclude_sources") or []):
+        return resume.get("exclude_reason") or "Batch balance: this source already opens too many drafts in the batch"
     return None
 
 

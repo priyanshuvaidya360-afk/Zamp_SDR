@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { StatusChip } from "@/components/status-chip";
 import { StepIcon } from "@/components/step-icon";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { api, ApiError, streams } from "@/lib/api";
@@ -55,6 +56,7 @@ export function BatchView({ batchId }: { batchId: number }) {
   const { progress } = detail;
   const percent = progress.total ? Math.round((progress.done / progress.total) * 100) : 0;
   const counts = Object.entries(progress.counts).filter(([, n]) => n) as [RunStatus, number][];
+  const waiting = detail.runs.filter((r) => r.status === "ready_for_review").length;
 
   return (
     <div className="space-y-6">
@@ -65,6 +67,21 @@ export function BatchView({ batchId }: { batchId: number }) {
             Batch #{detail.batch.id} · {progress.total} prospect{progress.total === 1 ? "" : "s"}
             {detail.not_run.length > 0 && ` · ${detail.not_run.length} rows not run`}
           </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <Link
+            href={`/batches/${batchId}/review`}
+            className={buttonVariants({ variant: waiting ? "default" : "outline" })}
+            aria-disabled={!waiting}
+          >
+            Review queue{waiting ? ` (${waiting})` : ""}
+          </Link>
+          <a href={api.exportUrl(batchId)} className={buttonVariants({ variant: "outline" })}>
+            Export CSV
+          </a>
+          <a href={api.exportUrl(batchId, true)} className="text-xs text-muted-foreground hover:text-foreground hover:underline">
+            all rows
+          </a>
         </div>
       </div>
 

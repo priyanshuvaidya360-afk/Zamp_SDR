@@ -29,8 +29,11 @@ backend/
   app/
     main.py            FastAPI app; includes routers from routes/
     routes/batches.py  POST /batches, GET /batches/{id}[/preview|/events], PATCH .../mapping,
-                       POST /batches/{id}/start
-    routes/runs.py     GET /runs, GET /runs/{id}[/events], POST /runs/{id}/resume
+                       POST /batches/{id}/start, GET /batches/{id}/export.csv[?all=true]
+    routes/runs.py     GET /runs, GET /runs/{id}[/events], POST /runs/{id}/resume,
+                       POST /runs/{id}/review (approve / edit / reject)
+    routes/dev.py      POST /dev/age-draft/{draft_id}?days=12 (404 when DEMO_MODE=live)
+    review.py          stage 8: review actions, revalidate on approve (case 10), CSV export
     events.py          in-process pub/sub (topics run:<id>, batch:<id>) + SSE formatting
     seller.py          loads seller_profile.yaml
     ingest.py          CSV parse, header aliases, cleaning, row checks, in-file dedupe
@@ -77,8 +80,10 @@ backend/
   scripts/             CLI helpers (smoke tests, seeding, demo checks)
 frontend/
   app/                 page.tsx = dashboard; batches/new (upload + preview + mapping),
-                       batches/[id] (live batch view), runs/[id] (live run view: stepper,
-                       signal cards, cited draft, candidate cards); 'use client' files
+                       batches/[id] (live batch view, export), batches/[id]/review (review
+                       queue, keys a/e/r/j/k), runs/[id] (live run view: stepper, signal
+                       cards, cited draft, review controls, candidate cards)
+  components/review-controls.tsx  approve / edit / reject, "Re-checking N facts", diff modal
   components/          nav, status-chip; shadcn/ui (Base UI flavour) in components/ui
   lib/api.ts           the only place that calls the backend (NEXT_PUBLIC_API_URL,
                        default http://localhost:8000); turns errors into readable messages
@@ -107,6 +112,8 @@ docs/GUIDE.md          the spec
   for tests/extraction_case.py (do this after changing a stage-4 prompt)
 - `cd backend && .venv/bin/python -m scripts.record_pipeline_case`: re-record stages 4-7 on Priya's
   case (after changing a scoring/draft/critic prompt); tests/test_draft.py replays it
+- `cd backend && .venv/bin/python -m scripts.record_crowded_case` / `scripts.record_stale_case`:
+  re-record case 5 (crowded hook) / case 10 (stale draft: re-check, rewrite, export)
 - `make seed`: load `seed/context.json` (fake CRM / sequence history) into the database; idempotent
 - Backend Python is always `backend/.venv/bin/python`; there is no uv.
 - Frontend: after adding a route, run `npx next typegen` (or `make dev-web`) so

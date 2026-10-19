@@ -291,6 +291,9 @@ def _apply(ctx: RunContext, plan: AccountPlan, me: Assignment, scored: ScoreOutp
     effective = scored.model_copy(deep=True)
     by_id = {r.signal_id: r for r in effective.ranked}
     old_hook = scored.hook.signal_id if scored.hook else None
+    if me.opener_id is not None and me.opener_id in by_id and by_id[me.opener_id].excluded:
+        # Re-run with that source excluded (case 9 / case 10): keep this run's own new pick.
+        return scored
     if me.opener_id is not None and me.opener_id in by_id:
         effective.hook = by_id[me.opener_id]
         effective.angle = me.angle or effective.angle

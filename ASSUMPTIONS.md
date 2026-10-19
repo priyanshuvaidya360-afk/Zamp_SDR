@@ -90,6 +90,19 @@ Decisions and assumptions made while building Signal. Add to this as you build
   the event's words (raise, Series B, round, launch, acquired...) or its amount ($40M).
 - The crowded-company test case (Lumen Analytics, Dana Okafor) is fictional, with .example domains.
 
+- T15 review: "edit" means approve with the rep's text (stored with a unified diff); edited text
+  is not re-checked, since a person wrote it. Reject keeps an optional reason. Low-signal runs
+  (role-based drafts) can be reviewed too; the queue steps through ready_for_review only.
+- Revalidation (case 10) runs inside the approve request (a few seconds; the UI shows
+  "Re-checking N facts"). An unreadable page counts as gone. A "changed" verdict is only used
+  if its new evidence is on the page and the rewritten sentence adds no new numbers; otherwise
+  it is treated as gone. Gone re-runs the run from scoring without that source (the same path
+  as case 9), so the runner-up becomes the hook and the run returns to the queue.
+- Any hiring signal with a role count is time-sensitive in code, whatever the model said.
+- Draft age uses the real clock (created_at), not settings.today; /dev/age-draft simulates
+  it in demos, and the demo says so.
+- The stale-draft test case (Kestrel Labs, Omar Haddad) is fictional, with .example domains.
+
 ## Technical
 - Zero cost: every service runs on a free tier with no credit card. The LLM is Groq
   (`openai/gpt-oss-120b` smart, `openai/gpt-oss-20b` fast) with Gemini free tier as

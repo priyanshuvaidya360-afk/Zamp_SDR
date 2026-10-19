@@ -317,6 +317,16 @@ def apply_speaker_rules(signal: ExtractedSignal, prospect: str, last_name: str) 
         signal.note = f"Said by {signal.speaker}, not {prospect}. Attribute it to them."
 
 
+COUNT = re.compile(r"\b(\d+|two|three|four|five|six|seven|eight|nine|ten|dozen)\b", re.I)
+
+
+def mark_time_sensitive(signals: list[ExtractedSignal]) -> None:
+    """Case 10 backstop: open-role counts go stale fast, whatever the model said."""
+    for s in signals:
+        if s.type == "hiring" and COUNT.search(f"{s.summary} {s.evidence}"):
+            s.time_sensitive = True
+
+
 def flag_ghost_jobs(signals: list[ExtractedSignal]) -> None:
     """Case 4: the same title in many locations, or an old posting, may be a ghost job."""
     by_title: dict[str, list[ExtractedSignal]] = defaultdict(list)
@@ -494,6 +504,7 @@ async def run(ctx: RunContext) -> ExtractOutput:
     flag_ghost_jobs(signals)
     signals, merged = cluster_events(signals)
     followed = await _crowded_follow_up(ctx, signals, gathered, today)
+    mark_time_sensitive(signals)
     hits += followed.hits
 
     unsafe = [h for h in hits if h.label != "benign"]

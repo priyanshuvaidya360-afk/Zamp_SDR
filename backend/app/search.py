@@ -11,7 +11,7 @@ response under tests/fixtures/; DEMO_MODE=fixtures replays them with no network 
 import asyncio
 import logging
 from datetime import date, timedelta
-from typing import Literal, Protocol
+from typing import Any, Literal, Protocol
 
 import httpx
 from pydantic import BaseModel
@@ -276,11 +276,14 @@ async def search(
     return response
 
 
-async def extract(urls: list[str]) -> ExtractResponse:
-    """Main text for each URL. URLs one provider cannot read are retried on the next."""
+async def extract(urls: list[str], fresh: bool = False) -> ExtractResponse:
+    """Main text for each URL. URLs one provider cannot read are retried on the next.
+    fresh=True skips the 24 h cache (re-checking a page as it is now, case 10) and is recorded
+    as its own fixture, so a demo can replay 'then' and 'now' versions of the same page."""
     allowed = [u for u in dict.fromkeys(urls) if not is_blocked(u)]
     blocked = [u for u in urls if is_blocked(u)]
-    slug = make_slug("extract", " ".join(allowed)[:60], {"urls": allowed})
+    params: dict[str, Any] = {"urls": allowed} | ({"fresh": True} if fresh else {})
+    slug = make_slug("extract", " ".join(allowed)[:60], params)
     if settings.demo_mode == "fixtures":
         await replay_pause()
         return ExtractResponse(**load_fixture(slug))
@@ -296,7 +299,7 @@ async def extract(urls: list[str]) -> ExtractResponse:
         if not provider.available():
             continue
         cache_key = {"provider": provider.name, "op": "extract", "urls": remaining}
-        if (hit := cache_get(cache_key)) is not None:
+        if not fresh and (hit := cache_get(cache_key)) is not None:
             result = ExtractResponse(**{**hit, "credits": 0})
         else:
             try:

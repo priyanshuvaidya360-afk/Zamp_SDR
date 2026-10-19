@@ -1,0 +1,35 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "hiring",
+        "about": "company",
+        "summary": "Kestrel Labs is hiring four Sales Development Representatives in London.",
+        "evidence": "Kestrel Labs is hiring four Sales Development Representatives to build our first outbound team in London.",
+        "published_at": "2026-10-02",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": {
+          "title": "",
+          "locations": [
+            "London"
+          ],
+          "posted_days_ago": null
+        }
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1062,
+    "completion_tokens": 552,
+    "latency_ms": 1713,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

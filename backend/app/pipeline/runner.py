@@ -241,7 +241,7 @@ def _record(ctx: RunContext, stage: Stage, state: StageState, message: str = "",
     bus.publish(f"batch:{ctx.batch_id}", {**data, "payload": {}})
 
 
-def _publish_status(run: Run) -> None:
+def publish_status(run: Run) -> None:
     event = {
         "type": "run_status",
         "run_id": run.id,
@@ -280,7 +280,7 @@ def _load_context(run_id: int, resume_input: dict[str, Any] | None) -> RunContex
         session.add(run)
         session.commit()
         session.refresh(run)
-        _publish_status(run)
+        publish_status(run)
         row = run.model_dump(include={
             "first_name", "last_name", "full_name", "company", "title", "domain",
             "linkedin_url", "email", "rep_notes", "public_bio",
@@ -361,7 +361,7 @@ async def run_one(run_id: int, start_stage: str | None = None,
             session.add(run)
             session.commit()
             session.refresh(run)
-            _publish_status(run)
+            publish_status(run)
             batch_id = run.batch_id
         _leave_account(ctx)
     finally:

@@ -73,6 +73,8 @@ class Settings(BaseSettings):
     draft_max_words: int = 120
     subject_max_words: int = 6
     genericness_fail_at: int = 3  # 0 = only works for this person, 5 = fully generic
+    # Review (T15, case 10): approving a draft older than this re-checks its time-sensitive facts.
+    revalidate_after_days: int = 3
 
     database_url: str = f"sqlite:///{BACKEND_DIR / 'signal.db'}"
     # live: real calls. record: real calls + save each response as a fixture.

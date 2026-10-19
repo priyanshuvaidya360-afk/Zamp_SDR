@@ -1,0 +1,21 @@
+{
+  "output": {
+    "verdict": "changed",
+    "reason": "The number of open Sales Development Representative roles in London has decreased from four to two.",
+    "new_fact": "Kestrel Labs is hiring two Sales Development Representatives in London.",
+    "new_evidence": "Sales Development Representative, London (2 open roles)"
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 356,
+    "completion_tokens": 73,
+    "latency_ms": 1207,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

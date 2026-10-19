@@ -1,0 +1,9 @@
+{
+  "provider": "tavily",
+  "pages": {
+    "https://kestrellabs.example/careers/sdr-london": "Careers at Kestrel Labs\n\nSales Development Representative, London (2 open roles)\n\nPosted 2 October 2026 · Updated 27 October 2026\n\nKestrel Labs is hiring two Sales Development Representatives to complete our first outbound team in London. You'll research accounts, write your own first-touch emails and book meetings for our account executives selling to finance teams at mid-market software companies.\n\nYou will report to Omar Haddad, VP Sales, and help write the outbound playbook from day one.\n\nWhat we're looking for: a year or more in a customer-facing role, curiosity about how software companies run their finances, and clear writing.\n"
+  },
+  "failed": [],
+  "credits": 1.0,
+  "fallbacks": []
+}

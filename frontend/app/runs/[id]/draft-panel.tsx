@@ -2,12 +2,13 @@ import { Check, X } from "lucide-react";
 
 import type { DraftRecord, SignalRecord } from "@/lib/types";
 
-// Right column: the final draft with every factual sentence underlined and linked to its source,
-// plus the critic's checklist. Review actions (approve / edit / reject) arrive with T15.
+// Right column: the latest draft with every factual sentence underlined and linked to its source,
+// plus the critic's checklist. Review actions live in components/review-controls.tsx (T15).
 export function DraftPanel({ drafts, signals }: { drafts: DraftRecord[]; signals: SignalRecord[] }) {
   if (!drafts.length) return null;
-  const final = drafts.find((d) => d.critic_report.final) ?? drafts[drafts.length - 1];
+  const final = latestDraft(drafts)!;
   const report = final.critic_report;
+  const corrected = report.revalidated_from != null;
   const bySignal = new Map(signals.map((s) => [s.id, s]));
   const warnings = (report.warnings ?? []).filter((w) => w !== report.banner);
 
@@ -19,15 +20,21 @@ export function DraftPanel({ drafts, signals }: { drafts: DraftRecord[]; signals
       <article className="rounded-xl border bg-white p-4">
         <p className="text-xs text-muted-foreground">
           {report.mode === "outline" ? "Outline" : "Draft"} · version {final.version}
-          {final.version > 1 && " (rewritten after the critic's notes)"}
+          {corrected ? " (corrected on re-check)" : final.version > 1 && " (rewritten after the critic's notes)"}
+          {final.reviewer_action === "edit" && " · edited by the reviewer"}
         </p>
         <p className="mt-2 text-sm">
           <span className="text-muted-foreground">Subject: </span>
           <span className="font-medium">{final.subject}</span>
         </p>
         <div className="mt-3 text-sm leading-relaxed whitespace-pre-wrap">
-          <CitedBody body={final.body} claims={final.claims} signals={bySignal} />
+          {final.edited_body ? (
+            final.edited_body
+          ) : (
+            <CitedBody body={final.body} claims={final.claims} signals={bySignal} />
+          )}
         </div>
+        {final.review.reason && <p className="mt-3 text-xs text-muted-foreground">Rejected: {final.review.reason}</p>}
       </article>
 
       {report.checks && (
@@ -73,6 +80,11 @@ export function DraftPanel({ drafts, signals }: { drafts: DraftRecord[]; signals
       )}
     </div>
   );
+}
+
+/** The version the reviewer acts on: the highest one (critic rewrite or re-check correction). */
+export function latestDraft(drafts: DraftRecord[]): DraftRecord | undefined {
+  return drafts.reduce<DraftRecord | undefined>((best, d) => (!best || d.version > best.version ? d : best), undefined);
 }
 
 /** The body with each claimed sentence underlined and linked to the signal it relies on. */

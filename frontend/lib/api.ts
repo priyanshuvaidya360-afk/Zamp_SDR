@@ -1,7 +1,17 @@
 // The only way the frontend talks to the backend. NEXT_PUBLIC_API_URL is baked in at build
 // time; it defaults to the local FastAPI server (make dev-api).
 
-import type { BatchDetail, BatchPreview, Candidate, Mapping, RunDetail, SellerProfile, StartResponse } from "./types";
+import type {
+  BatchDetail,
+  BatchPreview,
+  Candidate,
+  Mapping,
+  ReviewAction,
+  ReviewResult,
+  RunDetail,
+  SellerProfile,
+  StartResponse,
+} from "./types";
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
@@ -55,6 +65,13 @@ export const api = {
   getRun: (runId: number) => request<RunDetail>(`/runs/${runId}`),
   resumeRun: (runId: number, candidate: Candidate) =>
     request<{ run_id: number; status: string }>(`/runs/${runId}/resume`, json("POST", { stage: "resolve", input: { candidate } })),
+  review: (runId: number, action: ReviewAction, opts: { body?: string; reason?: string; draftId?: number } = {}) =>
+    request<ReviewResult>(
+      `/runs/${runId}/review`,
+      json("POST", { action, body: opts.body, reason: opts.reason, draft_id: opts.draftId }),
+    ),
+  /** A plain link: the browser downloads the file. Approved rows only unless `all`. */
+  exportUrl: (batchId: number, all = false) => `${API_URL}/batches/${batchId}/export.csv${all ? "?all=true" : ""}`,
 };
 
 /** SSE endpoints (opened with EventSource by useEventStream). */

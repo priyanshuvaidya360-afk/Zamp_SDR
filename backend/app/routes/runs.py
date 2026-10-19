@@ -9,14 +9,21 @@ from pydantic import BaseModel
 from sqlalchemy import func, or_
 from sqlmodel import Session, select
 
-from app import db
+from app import db, review
 from app.config import settings
 from app.db import get_session
 from app.events import HEARTBEAT, bus, format_sse, sse_response
-from app.models import DraftRecord, Run, RunStatus, SignalRecord, StageEvent
+from app.models import DraftRecord, ReviewerAction, Run, RunStatus, SignalRecord, StageEvent
 from app.pipeline import runner
 
 router = APIRouter(prefix="/runs", tags=["runs"])
+
+
+class ReviewRequest(BaseModel):
+    action: ReviewerAction
+    body: str | None = None  # edit: the rep's final text
+    reason: str | None = None  # reject: why
+    draft_id: int | None = None  # the version the rep was looking at (409 if a newer one exists)
 
 
 class ResumeRequest(BaseModel):
@@ -110,6 +117,7 @@ def get_run(run_id: int, session: Session = Depends(get_session)) -> dict[str, A
         "events": [runner.stage_event_dict(e, run.batch_id) for e in events],
         "signals": [s.model_dump() for s in signals],
         "drafts": [d.model_dump() for d in drafts],
+        "recheck": review.recheck_summary(session, run),
     }
 
 
@@ -176,3 +184,16 @@ async def resume_run(run_id: int, request: ResumeRequest, session: Session = Dep
     session.commit()
     runner.spawn(runner.run_one(run_id, start_stage=request.stage, resume_input=request.input))
     return {"run_id": run_id, "status": "running", "resumed_at": request.stage}
+
+
+@router.post("/{run_id}/review")
+async def review_run(run_id: int, request: ReviewRequest, session: Session = Depends(get_session)) -> dict[str, Any]:
+    """Approve / edit / reject the latest draft. Approving an old draft with time-sensitive facts
+    re-checks them first (case 10): the answer may be a corrected version to approve again."""
+    try:
+        result = await review.review(session, run_id, request.action, request.body, request.reason, request.draft_id)
+    except LookupError as error:
+        raise HTTPException(404, str(error)) from error
+    except review.ReviewError as error:
+        raise HTTPException(409, str(error)) from error
+    return result.model_dump(mode="json")

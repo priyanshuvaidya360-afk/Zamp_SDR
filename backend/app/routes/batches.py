@@ -3,12 +3,12 @@
 import asyncio
 from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException, UploadFile
-from fastapi.responses import StreamingResponse
+from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile
+from fastapi.responses import Response, StreamingResponse
 from pydantic import BaseModel
 from sqlmodel import Session, select
 
-from app import db, ingest
+from app import db, ingest, review
 from app.config import settings
 from app.db import get_session
 from app.events import HEARTBEAT, bus, format_sse, sse_response
@@ -162,3 +162,13 @@ def update_mapping(
     session.commit()
     session.refresh(batch)
     return _preview_response(batch)
+
+
+@router.get("/{batch_id}/export.csv")
+def export_batch(batch_id: int, all: bool = Query(False, description="Every row, not only approved ones"),
+                 session: Session = Depends(get_session)) -> Response:
+    """Original columns plus status, hook, source_url, subject, body. Approved rows only by default."""
+    batch = _get_batch(session, batch_id)
+    stem = (batch.filename or f"batch-{batch_id}").rsplit(".", 1)[0]
+    return Response(review.export_csv(session, batch, everything=all), media_type="text/csv",
+                    headers={"Content-Disposition": f'attachment; filename="{stem}-signal.csv"'})

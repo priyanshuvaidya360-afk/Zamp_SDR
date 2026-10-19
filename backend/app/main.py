@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
 from app.db import create_db_and_tables
 from app.pipeline.runner import recover_interrupted
-from app.routes import batches, runs
+from app.routes import batches, dev, runs
 from app.seller import load_seller_profile
 
 
@@ -33,6 +33,7 @@ app.add_middleware(
 
 app.include_router(batches.router)
 app.include_router(runs.router)
+app.include_router(dev.router)
 
 
 @app.get("/health")

@@ -3,14 +3,15 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { ReviewControls } from "@/components/review-controls";
 import { StatusChip } from "@/components/status-chip";
 import { api, ApiError, streams } from "@/lib/api";
 import { latestByStage, mergeEvents } from "@/lib/stages";
-import type { Candidate, LiveEvent, RunDetail, StageEvent } from "@/lib/types";
+import type { Candidate, LiveEvent, ReviewResult, RunDetail, StageEvent } from "@/lib/types";
 import { useEventStream } from "@/lib/use-event-stream";
 
 import { CandidateCards } from "./candidate-cards";
-import { DraftPanel } from "./draft-panel";
+import { DraftPanel, latestDraft } from "./draft-panel";
 import { SignalList } from "./signal-list";
 import { StageStepper } from "./stage-stepper";
 
@@ -81,6 +82,17 @@ export function RunView({ runId }: { runId: number }) {
   const candidates = (resolve?.payload.candidates ?? []) as Candidate[];
   const angle = ((latest.get("score")?.payload.output ?? {}) as { angle?: string | null }).angle ?? null;
   const running = run.status === "running";
+  const reviewable = run.status === "ready_for_review" || run.status === "low_signal";
+  const draft = latestDraft(detail.drafts);
+
+  function reviewed(result: ReviewResult) {
+    if (result.outcome === "gone") {
+      // Back through scoring with the runner-up hook: follow it live.
+      setDetail((d) => (d ? { ...d, run: { ...d.run, status: "running", final_reason: null } } : d));
+      setStreamFrom(lastId(events));
+    }
+    load(false);
+  }
 
   return (
     <div className="space-y-6">
@@ -126,7 +138,12 @@ export function RunView({ runId }: { runId: number }) {
         <section aria-label="Draft" className="space-y-3 lg:col-start-2 xl:col-start-auto">
           <h2 className="text-sm font-medium tracking-wide text-muted-foreground uppercase">Draft</h2>
           {detail.drafts.length ? (
-            <DraftPanel drafts={detail.drafts} signals={detail.signals} />
+            <>
+              <DraftPanel drafts={detail.drafts} signals={detail.signals} />
+              {reviewable && draft && (
+                <ReviewControls key={draft.id} runId={runId} draft={draft} recheckFacts={detail.recheck.facts} onDone={reviewed} />
+              )}
+            </>
           ) : (
             <p className="rounded-xl border border-dashed bg-white px-4 py-10 text-center text-sm text-muted-foreground">
               {running ? "The draft appears here once the hook is chosen." : "No draft for this run."}
