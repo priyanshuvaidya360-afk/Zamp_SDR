@@ -64,9 +64,14 @@ backend/
   tests/               pytest; tests/fixtures/ holds recorded search results
   scripts/             CLI helpers (smoke tests, seeding, demo checks)
 frontend/
-  app/                 page.tsx = dashboard; batches/, runs/ routes
-  components/          shadcn/ui in components/ui
-  lib/                 api client, shared types, status colours
+  app/                 page.tsx = dashboard; batches/new (upload + preview + mapping),
+                       batches/[id] (batch view); interactive parts are 'use client' files
+  components/          nav, status-chip; shadcn/ui (Base UI flavour) in components/ui
+  lib/api.ts           the only place that calls the backend (NEXT_PUBLIC_API_URL,
+                       default http://localhost:8000); turns errors into readable messages
+  lib/types.ts         TypeScript mirrors of the API responses; update with the backend
+  lib/status.ts        status labels + colours, defined once (guide's Style line)
+  public/              demo.csv ("Use demo CSV"), template.csv (download)
 seed/                  context.json (fake CRM data); demo CSVs land here in T17
 seller_profile.yaml    what "we" sell, ICP, tone, personas, competitors, regions
 ASSUMPTIONS.md         every assumption made; add to it as you build
@@ -88,6 +93,9 @@ docs/GUIDE.md          the spec
   case (after changing a scoring/draft/critic prompt); tests/test_draft.py replays it
 - `make seed`: load `seed/context.json` (fake CRM / sequence history) into the database; idempotent
 - Backend Python is always `backend/.venv/bin/python`; there is no uv.
+- Frontend: after adding a route, run `npx next typegen` (or `make dev-web`) so
+  `PageProps<'/route'>` types exist; `npx tsc --noEmit` and `npm run lint` must pass.
+  Layout grids use `minmax(0,1fr)` so wide tables scroll inside their card, not the page.
 
 ## Conventions
 - Every pipeline stage is `async def run(ctx) -> BaseModel` and returns a Pydantic model

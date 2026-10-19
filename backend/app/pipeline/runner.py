@@ -233,6 +233,8 @@ def plain_error(error: Exception) -> str:
         return "a web service took too long to answer"
     if isinstance(error, httpx.HTTPError):
         return "couldn't reach a web service"
+    if type(error).__name__ == "FixtureMissing":
+        return "no recorded research for this prospect (replay mode is on, so nothing live was called)"
     message = str(error).strip() or type(error).__name__
     return message if len(message) <= 300 else message[:297] + "..."
 
