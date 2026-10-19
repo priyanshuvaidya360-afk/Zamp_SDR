@@ -239,6 +239,12 @@ export interface SignalRecord {
     reasoning?: string;
     adjustments?: ScoreAdjustment[];
     weights?: Record<string, number>;
+    // Case 5 (crowded hook): coverage = outlets, penalty = points taken off, rank it would have had.
+    coverage?: number;
+    crowded?: boolean;
+    penalty?: number;
+    context_only?: string | null;
+    rank_before_penalty?: number | null;
   };
   selected: boolean;
   rejected_reason: string | null;

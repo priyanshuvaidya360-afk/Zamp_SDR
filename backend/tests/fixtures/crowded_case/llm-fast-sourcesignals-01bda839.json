@@ -1,0 +1,29 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Lumen Analytics raised $40M Series B",
+        "evidence": "Lumen Analytics, the product analytics company for mid-market SaaS teams, has raised a $40 million Series B led by Northzone, with participation from existing investors Point Nine and Seedcamp.",
+        "published_at": "2026-10-10",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1118,
+    "completion_tokens": 1062,
+    "latency_ms": 2333,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -20,6 +20,7 @@ from sqlmodel import Session
 from app import db, llm
 from app.config import settings
 from app.models import DraftRecord, RunStatus
+from app.pipeline import crowded
 from app.pipeline.extract import ExtractedSignal, ExtractOutput
 from app.pipeline.intake import IntakeOutput
 from app.pipeline.resolve import display_name
@@ -73,7 +74,8 @@ def _fact_line(s: ExtractedSignal, to_prompt: dict[int, int]) -> str:
 
 
 def pick_facts(ctx: RunContext) -> tuple[ExtractedSignal | None, list[ExtractedSignal]]:
-    """The hook and up to two supporting facts; never an excluded (sensitive / AI-screening) one."""
+    """The hook and up to two supporting facts; never an excluded (sensitive / AI-screening) one.
+    A crowded event (case 5) comes first among the supporting facts: it is the natural context."""
     scored: ScoreOutput = effective_score(ctx)
     extracted: ExtractOutput = ctx.outputs["extract"]
     by_id = {s.id: s for s in extracted.signals}
@@ -81,9 +83,14 @@ def pick_facts(ctx: RunContext) -> tuple[ExtractedSignal | None, list[ExtractedS
     if scored.hook is None:
         return None, []
     hook = by_id[scored.hook.signal_id]
-    preferred = [i for i in scored.runner_up_ids if i in usable] + usable
+    context_only = [r.signal_id for r in scored.ranked if r.excluded is None and r.context_only]
+    preferred = context_only + [i for i in scored.runner_up_ids if i in usable] + usable
     support = [by_id[i] for i in dict.fromkeys(preferred) if i != hook.id][:2]
     return hook, support
+
+
+def _crowded_ids(ctx: RunContext) -> set[int]:
+    return {r.signal_id for r in effective_score(ctx).ranked if r.crowded}
 
 
 def mode_for(ctx: RunContext) -> Mode:
@@ -131,6 +138,12 @@ def build_prompt(ctx: RunContext, mode: Mode) -> str:
             f"Hook: fact [{to_prompt[hook.id]}]. Angle: {angle}",
             f"Facts you may use (the hook first; the others only if they help):\n<untrusted_source>\n{facts}\n</untrusted_source>",
         ]
+        crowded_ids = _crowded_ids(ctx) & {s.id for s in support}
+        if crowded_ids:
+            ids = ", ".join(f"[{to_prompt[i]}]" for i in sorted(crowded_ids, key=to_prompt.get))
+            lines.append(f"CONTEXT ONLY: fact {ids} is news every vendor is already writing to them about. Never "
+                         "mention it in the first sentence; it may appear once, from the second sentence on, as "
+                         "brief context for the hook (e.g. 'with the new funding behind it').")
         if mode == "outline":
             lines.append("This person filters AI-written outreach, so do NOT write an email. Write an outline the "
                          "rep will use to write one by hand: body = exactly 3 short lines starting with '- ' "
@@ -259,7 +272,8 @@ def _first_sentence(body: str) -> str:
 
 
 def code_checks(draft: Draft, mode: Mode, signals: dict[int, ExtractedSignal], excluded: set[int],
-                prospect_last_name: str, banned: list[str]) -> list[Check]:
+                prospect_last_name: str, banned: list[str],
+                crowded_ids: set[int] | None = None) -> list[Check]:
     body, checks = draft.body, []
     words = len(body.split())
     checks.append(Check(name="length", passed=words < settings.draft_max_words,
@@ -315,6 +329,14 @@ def code_checks(draft: Draft, mode: Mode, signals: dict[int, ExtractedSignal], e
         elif (someone_else or s.is_reshare) and YOU_SAID.search(claim.sentence):
             misattributed.append(f"'{claim.sentence[:50]}' presents {s.speaker or 'a reshare'} as the prospect's words")
     checks.append(Check(name="attribution", passed=not misattributed, detail="; ".join(misattributed)))
+
+    # Case 5: a crowded event may be context, never the opener.
+    events = [signals[i] for i in crowded_ids or set() if i in signals]
+    claimed_first = {c.signal_id for c in draft.claims if _in_body(c.sentence, opener) or _in_body(opener, c.sentence)}
+    opened_with = [e for e in events if e.id in claimed_first or crowded.references_event(opener, e)]
+    checks.append(Check(name="crowded_not_opener", passed=not opened_with,
+                        detail=(f"the first sentence references a crowded event ({opened_with[0].summary[:60]}); "
+                                "open with the hook, use the event as context later") if opened_with else ""))
     return checks
 
 
@@ -337,7 +359,7 @@ async def review(ctx: RunContext, draft: Draft, mode: Mode) -> tuple[list[Check]
     signals = {s.id: s for s in extracted.signals if s.type != "ai_screening"}
     excluded = {r.signal_id for r in scored.ranked if r.excluded}
     banned = (ctx.seller.get("tone") or {}).get("banned_phrases") or DEFAULT_BANNED
-    checks = code_checks(draft, mode, signals, excluded, ctx.row["last_name"], banned)
+    checks = code_checks(draft, mode, signals, excluded, ctx.row["last_name"], banned, _crowded_ids(ctx))
     generic = await genericness(ctx, draft) if mode == "hooked" else None
     return checks, generic
 

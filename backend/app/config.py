@@ -64,6 +64,11 @@ class Settings(BaseSettings):
     undated_days: int = 120
     low_signal_below: float = 2.5
     hook_candidates: int = 3
+    # Crowded hook (T14, case 5): a funding / launch / acquisition younger than crowded_max_days
+    # and covered by crowded_min_coverage+ outlets loses crowd_penalty and may only be context.
+    crowd_penalty: float = 1.5
+    crowded_max_days: int = 30
+    crowded_min_coverage: int = 5
     # Draft + critic (T09).
     draft_max_words: int = 120
     subject_max_words: int = 6

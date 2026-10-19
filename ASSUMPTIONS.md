@@ -78,6 +78,18 @@ Decisions and assumptions made while building Signal. Add to this as you build
 - "Recently contacted" is checked against this tool's own history, standing in for a CRM.
 - Committee send order (Head of Growth day 0, VP Sales day 2, CMO day 5) is a starting guess.
 
+- T14 crowded hook (case 5): "covered by N outlets" counts the pages we read plus the other
+  outlets in the same search's results that report the same event (same category, similar
+  headline, dates within 7 days). It costs nothing extra but undercounts: a search returns at
+  most 5-10 results, so 5+ outlets means "everyone is covering this".
+- A crowded event is context only: it can't open any email (also in the account plan), but it is
+  offered to the writer first as sentence-two context. If it is the only signal, the run is
+  low_signal. The follow-up search runs once per account, only when an event is crowded
+  (about 1 extra credit plus up to 2 page reads); results dated before the event are dropped.
+- The critic's crowded check is lexical: a first sentence fails if it is mapped to the event, uses
+  the event's words (raise, Series B, round, launch, acquired...) or its amount ($40M).
+- The crowded-company test case (Lumen Analytics, Dana Okafor) is fictional, with .example domains.
+
 ## Technical
 - Zero cost: every service runs on a free tier with no credit card. The LLM is Groq
   (`openai/gpt-oss-120b` smart, `openai/gpt-oss-20b` fast) with Gemini free tier as

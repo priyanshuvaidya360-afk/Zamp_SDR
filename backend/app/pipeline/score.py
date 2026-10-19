@@ -6,8 +6,8 @@ company > industry). Code computes recency and verifiability, applies the weight
 signals that may never be a hook, and decides low_signal. The smart model then picks from the
 top few and writes the angle.
 
-Hook points for later tasks: SCORE_ADJUSTERS (crowded hooks, T14; competitor rules, T13) and
-HOOK_EXCLUSIONS (signals that may never open an email).
+Hook points: SCORE_ADJUSTERS (score changes, e.g. the crowded penalty), HOOK_EXCLUSIONS
+(signals that may never be used) and CONTEXT_ONLY (signals that may support, but never open).
 """
 
 import math
@@ -22,7 +22,7 @@ from sqlmodel import Session
 from app import db, llm
 from app.config import settings
 from app.models import RunStatus, SignalRecord
-from app.pipeline import competitors
+from app.pipeline import competitors, crowded
 from app.pipeline.extract import ExtractedSignal, ExtractOutput
 from app.pipeline.resolve import display_name
 from app.pipeline.runner import RunContext, StopRun
@@ -62,6 +62,10 @@ class ScoredSignal(BaseModel):
     adjustments: list[Adjustment] = []
     score: float = 0.0
     excluded: str | None = None  # why this signal may never be the hook
+    context_only: str | None = None  # why it may be context but never the opener (case 5)
+    coverage: int = 1  # distinct outlets reporting it
+    crowded: bool = False
+    rank_before_penalty: int | None = None  # where a crowded signal would have ranked without it
 
 
 class ScoreOutput(BaseModel):
@@ -176,9 +180,15 @@ def total(s: ScoredSignal) -> float:
     return round(base + sum(a.delta for a in s.adjustments), 2)
 
 
-# Each returns an Adjustment (or None) for a scored signal. T14 adds the crowdedness penalty,
-# T13 the competitor rule.
-SCORE_ADJUSTERS: list[Callable[[ScoredSignal, ExtractedSignal, RunContext], Adjustment | None]] = []
+def _crowd_penalty(s: ScoredSignal, signal: ExtractedSignal, ctx: RunContext) -> Adjustment | None:
+    """Case 5: everyone is already writing to them about this event."""
+    if not s.crowded:
+        return None
+    return Adjustment(name="crowded", delta=-settings.crowd_penalty, reason=crowded.reason(s.coverage, s.days_old))
+
+
+# Each returns an Adjustment (or None) for a scored signal.
+SCORE_ADJUSTERS: list[Callable[[ScoredSignal, ExtractedSignal, RunContext], Adjustment | None]] = [_crowd_penalty]
 
 
 def _never_a_hook(signal: ExtractedSignal, ctx: RunContext) -> str | None:
@@ -208,6 +218,17 @@ HOOK_EXCLUSIONS: list[Callable[[ExtractedSignal, RunContext], str | None]] = [
     _never_a_hook, _batch_balance, _competitor_mention]
 
 
+def _crowded_event(s: ScoredSignal) -> str | None:
+    if s.crowded:
+        return (f"{crowded.reason(s.coverage, s.days_old)}: every vendor opens with this, "
+                "so it may be context but never the opener")
+    return None
+
+
+# Each returns a reason the signal may support an email but never open it, or None.
+CONTEXT_ONLY: list[Callable[[ScoredSignal], str | None]] = [_crowded_event]
+
+
 def effective_score(ctx: RunContext) -> "ScoreOutput":
     """The hook the draft should use: the account plan's assignment when there is one (case 3),
     otherwise stage 5's own pick."""
@@ -231,14 +252,25 @@ def score_signals(ctx: RunContext, signals: list[ExtractedSignal], ratings: dict
             reasoning=rating.reasoning if rating else "Not rated by the model.",
             days_old=days, recency=round(recency, 2),
             verifiability=verifiability(signal, ctx.row.get("domain")),
+            coverage=signal.coverage,
+            crowded=crowded.is_crowded(signal.type, signal.published_at, signal.coverage, today),
         )
         for adjust in SCORE_ADJUSTERS:
             if adjustment := adjust(s, signal, ctx):
                 s.adjustments.append(adjustment)
         s.excluded = next((reason for rule in HOOK_EXCLUSIONS if (reason := rule(signal, ctx))), None)
+        s.context_only = next((reason for rule in CONTEXT_ONLY if (reason := rule(s))), None)
         s.score = total(s)
         scored.append(s)
-    return sorted(scored, key=lambda s: (s.excluded is not None, -s.score))
+    for s in scored:
+        if s.crowded and s.excluded is None:
+            unpenalised = s.score - sum(a.delta for a in s.adjustments)
+            s.rank_before_penalty = 1 + sum(1 for o in scored if o is not s and o.excluded is None and o.score > unpenalised)
+    return sorted(scored, key=lambda s: (s.excluded is not None, s.context_only is not None, -s.score))
+
+
+def can_open(s: ScoredSignal) -> bool:
+    return s.excluded is None and s.context_only is None
 
 
 # --- Model judgement: hook choice ------------------------------------------------------------
@@ -295,12 +327,15 @@ def _persist(ctx: RunContext, ranked: list[ScoredSignal], hook_id: int | None,
                 continue
             record.scores = s.model_dump(mode="json", include={
                 "relevance", "specificity", "reasoning", "days_old", "recency", "verifiability",
-                "adjustments", "score"}) | {"weights": weights()}
+                "adjustments", "score", "coverage", "crowded", "context_only", "rank_before_penalty",
+            }) | {"weights": weights(), "penalty": -sum(a.delta for a in s.adjustments if a.name == "crowded")}
             record.selected = s.signal_id == hook_id
             if record.selected:
                 record.rejected_reason = None
             elif s.excluded:
                 record.rejected_reason = s.excluded
+            elif s.context_only:
+                record.rejected_reason = s.context_only
             elif s.signal_id in runner_ups or s.signal_id in candidate_ids:
                 record.rejected_reason = f"Runner-up: {why_not}" if why_not else "Runner-up"
             elif hook_id is None:
@@ -351,9 +386,13 @@ async def run(ctx: RunContext) -> ScoreOutput:
     ranked = score_signals(ctx, extracted.signals, ratings, today)
     if (usage := competitors.find_usage(extracted.signals, ctx.seller, today)) is not None:
         return _competitor_rule(ctx, ranked, usage)
-    eligible = [s for s in ranked if s.excluded is None]
+    eligible = [s for s in ranked if can_open(s)]
 
     if not eligible:
+        crowd = [s for s in ranked if s.excluded is None and s.context_only]
+        if crowd:
+            return _low_signal(ctx, ranked, f"Only a crowded event found ({crowd[0].summary[:60]}): "
+                                            "nothing of our own to open with.")
         return _low_signal(ctx, ranked, "No usable signal found: nothing specific to open an email with.")
     best = eligible[0]
     if best.score < settings.low_signal_below:

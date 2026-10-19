@@ -1,0 +1,17 @@
+{
+  "output": {
+    "genericness": 0,
+    "reason": "The email includes company-specific hiring, funding, and location details that cannot be swapped by just changing the name."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 376,
+    "completion_tokens": 373,
+    "latency_ms": 1161,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

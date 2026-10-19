@@ -53,15 +53,19 @@ backend/
                        case 1 (not_now -> follow-up; opted out -> suppressed) and case 2
                        (open deal -> held, routed to the owner)
       competitors.py   case 6: competitor usage (held / displacement) and mentions (never a hook)
+      crowded.py       case 5: outlet coverage from search results, crowded test, the
+                       critic's "first sentence references the event" check
       resolve.py       stage 2: identity; code verifies the model's evidence
-      research.py      stage 3: category searches, relevance gate, page reads
+      research.py      stage 3: category searches, relevance gate, page reads;
+                       second_order(): case 5's one follow-up search after a crowded event
     context_adapter.py CRM / sequence-history lookups (seed tables; swap for HubSpot here)
       extract.py       stage 4: AI-instruction scan (regex + classifier, strip unsafe text),
                        extraction per source, code checks (evidence on page, dates, speaker,
                        duplicate clusters, ghost jobs), stores signals
       score.py         stage 5: model rates relevance/specificity; code adds recency,
-                       verifiability, weights, exclusions (SCORE_ADJUSTERS / HOOK_EXCLUSIONS
-                       are the hook points for T13/T14); smart model picks 1 of top 3
+                       verifiability, weights; SCORE_ADJUSTERS (crowd penalty), HOOK_EXCLUSIONS
+                       (never used) and CONTEXT_ONLY (crowded: context, never the opener);
+                       smart model picks 1 of top 3
       account.py       account plan (case 3), between score and draft: committee barrier
                        (releases its concurrency slot), smart-model plan, rules in code,
                        one retry then code fallback, send days, counterfactual

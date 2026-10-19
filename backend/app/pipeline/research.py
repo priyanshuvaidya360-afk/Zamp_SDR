@@ -8,6 +8,7 @@ only truncated here and stays data; stage 4 scans and extracts it.
 
 import asyncio
 from collections.abc import Callable
+from datetime import date
 from typing import Any, Literal
 
 from pydantic import BaseModel
@@ -64,6 +65,7 @@ class QueryLog(BaseModel):
     provider: str
     results: int
     relevant: int = 0  # results that passed the relevance gate
+    relevant_results: list[dict[str, str]] = []  # url / title / snippet: counts outlets (case 5)
     credits: float
     cached: bool = False
     fallbacks: list[str] = []
@@ -86,11 +88,11 @@ class _Collected(BaseModel):
 
 
 async def _search_and_read(queries: dict[str, tuple[str, str]], about: About, max_urls: int,
-                           relevant_to: Callable[[SearchResult], bool]) -> _Collected:
+                           relevant_to: Callable[[SearchResult], bool], days: int | None = None) -> _Collected:
     """Run the queries in parallel, keep relevant results, read the top 1-2 per category."""
     categories = list(queries)
     responses = await asyncio.gather(*(
-        search.search(queries[c][0], depth="basic", days=settings.signal_window_days,
+        search.search(queries[c][0], depth="basic", days=days or settings.signal_window_days,
                       max_results=5, topic=queries[c][1])
         for c in categories
     ))
@@ -100,7 +102,9 @@ async def _search_and_read(queries: dict[str, tuple[str, str]], about: About, ma
     ]
     logs = [
         QueryLog(category=c, about=about, query=queries[c][0], provider=r.provider, results=len(r.results),
-                 relevant=len(rel), credits=r.credits, cached=r.cached, fallbacks=r.fallbacks)
+                 relevant=len(rel), credits=r.credits, cached=r.cached, fallbacks=r.fallbacks,
+                 relevant_results=[{"url": x.url, "title": x.title, "snippet": x.content[:300],
+                                   "published_date": x.published_date or ""} for x in rel])
         for c, r, rel in zip(categories, responses, relevant)
     ]
 
@@ -184,3 +188,18 @@ async def run(ctx: RunContext) -> GatherOutput:
         extracts=shared.extracts + own.extracts,
         credits=credits,
     )
+
+
+SECOND_ORDER_QUERY = '"{company}" hiring OR expands OR "new market" OR appoints'
+
+
+async def second_order(ctx: RunContext, after: date) -> tuple[list[Source], float]:
+    """Case 5: one extra search for what happened after a crowded event (hiring, new markets,
+    new leaders), limited to the days since it. Returns (pages read, credits)."""
+    company = ctx.row.get("company") or ""
+    terms = company_terms(company, ctx.row.get("domain") or "")
+    today = settings.today or date.today()
+    query = {"second_order": (SECOND_ORDER_QUERY.format(company=company), "general")}
+    collected = await _search_and_read(query, "company", 2, lambda r: is_about_company(r, terms),
+                                       days=max(1, (today - after).days))
+    return collected.sources, collected.credits

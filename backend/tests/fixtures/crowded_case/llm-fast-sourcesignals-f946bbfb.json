@@ -1,0 +1,47 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "hiring",
+        "about": "company",
+        "summary": "Lumen Analytics hires six Sales Development Representatives in Austin.",
+        "evidence": "We’re hiring six Sales Development Representatives to start conversations with product and growth leaders at mid-market SaaS companies.",
+        "published_at": "2026-10-14",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": {
+          "title": "",
+          "locations": [
+            "Austin, TX"
+          ],
+          "posted_days_ago": null
+        }
+      },
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Lumen Analytics recently completed a Series B funding round.",
+        "evidence": "Fresh off our Series B",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1074,
+    "completion_tokens": 1892,
+    "latency_ms": 2971,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

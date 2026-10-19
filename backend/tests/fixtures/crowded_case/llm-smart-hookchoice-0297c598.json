@@ -1,0 +1,21 @@
+{
+  "output": {
+    "signal_id": 3,
+    "angle": "Dana is expanding her SDR team, indicating pressure to generate more pipeline – Halyard can help her meet growth targets without further headcount.",
+    "runners_up": [
+      1
+    ],
+    "why_not_others": "The CRO hire is less directly linked to Dana’s immediate pipeline challenges."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 605,
+    "completion_tokens": 470,
+    "latency_ms": 1537,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

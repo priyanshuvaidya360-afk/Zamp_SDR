@@ -1,0 +1,35 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "New CRO will drive demand for faster pipeline growth."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Series B funding pressures Lumen to scale outbound pipeline quickly."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Hiring six SDRs signals growing outbound workload, underscoring need for pipeline efficiency."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 797,
+    "completion_tokens": 654,
+    "latency_ms": 1742,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

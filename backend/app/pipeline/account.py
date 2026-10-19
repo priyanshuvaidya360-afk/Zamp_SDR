@@ -46,6 +46,7 @@ class PooledSignal(BaseModel):
     owner: int | None = None  # run id, for a person-level signal; None = company-wide
     copies: dict[int, int] = {}  # run id -> that run's own signal record id
     score: float = 0.0
+    context_only: bool = False  # case 5: a crowded event may be context, never an opener
 
 
 class Assignment(BaseModel):
@@ -140,6 +141,7 @@ def pool(members: list[Member]) -> list[PooledSignal]:
                     pid=0, summary=s.summary, type=s.type, about=s.about, source_url=s.source_url,
                     published_at=s.published_at.isoformat() if s.published_at else None, owner=owner)
             entry.copies[member.run_id] = s.id
+            entry.context_only = entry.context_only or scored.context_only is not None
             entry.score = max(entry.score, scored.score)
     ordered = sorted(pooled.values(), key=lambda p: -p.score)
     for i, p in enumerate(ordered, 1):
@@ -176,6 +178,8 @@ def violations(plan: _Plan, members: list[Member], pooled: list[PooledSignal]) -
                 problems.append(f"M{pick.member}'s {field} S{pid} is not a listed signal")
             elif entry.owner is not None and entry.owner != member.run_id:
                 problems.append(f"S{pid} is about another person, so it can't be used for M{pick.member}")
+        if pick.opener is not None and by_pid.get(pick.opener) and by_pid[pick.opener].context_only:
+            problems.append(f"S{pick.opener} is crowded news: it may be context but never M{pick.member}'s opener")
         if pick.opener is not None and pick.opener == pick.context:
             problems.append(f"M{pick.member} uses S{pick.opener} as both opener and context")
     return problems
@@ -188,7 +192,8 @@ def fallback(members: list[Member], pooled: list[PooledSignal]) -> _Plan:
     order = sorted(range(len(members)), key=lambda i: -max((r.score for r in members[i].ranked if not r.excluded), default=0))
     for i in order:
         member = members[i]
-        choice = next((p for p in pooled if p.pid not in used and (p.owner in (None, member.run_id))), None)
+        choice = next((p for p in pooled if p.pid not in used and not p.context_only
+                       and p.owner in (None, member.run_id)), None)
         if choice:
             used.add(choice.pid)
         picks.append(_Pick(member=i + 1, opener=choice.pid if choice else None, angle=member.persona or ""))
@@ -210,7 +215,10 @@ def _prompt(seller: dict[str, Any], company: str, members: list[Member], pooled:
     signals = "\n".join(
         f"S{p.pid} | {p.type} | {'about ' + owners[p.owner] + ' only' if p.owner else 'company-wide'} | "
         f"{p.published_at or 'undated'} | {p.summary} | score {p.score:.2f}"
+        + (" | CONTEXT ONLY (crowded news)" if p.context_only else "")
         for p in pooled)
+    crowded_rule = ("\n- A CONTEXT ONLY signal is news every vendor already writes about: never an opener, only context."
+                    if any(p.context_only for p in pooled) else "")
     return f"""We sell: {offer}
 Company: {company}
 People (each gets their own email):
@@ -222,7 +230,7 @@ Signals:
 Give each person a DIFFERENT opening signal that fits what their role cares about.
 Rules:
 - No signal opens more than one email.
-- A company-wide event may also appear as second-sentence context, but for at most one person.
+- A company-wide event may also appear as second-sentence context, but for at most one person.{crowded_rule}
 - A signal about one person can only be used for that person.
 - Prefer each person's role angle and higher scores.
 - If there are not enough usable signals, give opener = null to the person who should get a role-based email.

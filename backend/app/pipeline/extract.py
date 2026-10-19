@@ -20,6 +20,7 @@ from sqlmodel import Session, select
 from app import db, llm
 from app.config import settings
 from app.models import SignalRecord
+from app.pipeline import research
 from app.pipeline.research import GatherOutput, Source
 from app.pipeline.resolve import display_name
 from app.pipeline.runner import RunContext
@@ -202,6 +203,7 @@ class ExtractOutput(BaseModel):
     sources_scanned: int = 0
     merged: int = 0
     ai_screening: Literal["none", "screening_trap", "hostile"] = "none"
+    crowded_ids: list[int] = []  # case 5: crowded events (a follow-up search ran for them)
 
 
 class _Processed(BaseModel):
@@ -404,6 +406,43 @@ def _store(ctx: RunContext, signals: list[ExtractedSignal]) -> None:
             s.id = record.id
 
 
+class _FollowUp(BaseModel):
+    crowded: list[ExtractedSignal] = []
+    signals: list[ExtractedSignal] = []
+    hits: list[InstructionHit] = []
+
+
+async def _crowded_follow_up(ctx: RunContext, signals: list[ExtractedSignal], gathered: GatherOutput,
+                             today: date) -> _FollowUp:
+    """Case 5: count the outlets behind each big event; if one is crowded, run ONE extra search
+    (once per account) for what followed it, and add the new signals (appended to `signals`)."""
+    from app.pipeline import crowded  # crowded imports this module
+
+    crowded.add_search_coverage(signals, gathered.queries)
+    events = crowded.crowded_events(signals, today)
+    if not events:
+        return _FollowUp()
+    after = min(e.published_at for e in events)
+
+    async def follow_up() -> _Processed:
+        sources, credits = await research.second_order(ctx, after)
+        ctx.add_usage(credits=credits)
+        processed = await process_sources(sources, _context(ctx, False), today)
+        ctx.add_usage(tokens=processed.tokens)
+        return processed
+
+    key = f"{ctx.account_key}#second_order" if ctx.account_key else None
+    processed = await ctx.batch.company_research(key, follow_up)
+    new, _ = cluster_events([s.model_copy(deep=True) for s in processed.signals
+                             if s.published_at is None or s.published_at >= after])
+    new = [s for s in new if not any(s.type == old.type and _overlap(s.summary, old.summary) >= 0.5
+                                     for old in signals)]
+    for s in new:
+        s.category = "second_order"
+    signals += new
+    return _FollowUp(crowded=events, signals=new, hits=processed.hits)
+
+
 # --- 4. The stage -------------------------------------------------------------------------
 
 
@@ -454,6 +493,8 @@ async def run(ctx: RunContext) -> ExtractOutput:
         apply_speaker_rules(s, display_name(ctx.row), ctx.row["last_name"])
     flag_ghost_jobs(signals)
     signals, merged = cluster_events(signals)
+    followed = await _crowded_follow_up(ctx, signals, gathered, today)
+    hits += followed.hits
 
     unsafe = [h for h in hits if h.label != "benign"]
     one_per_source = {(h.source_url, h.label): h for h in unsafe}  # one signal per page and label
@@ -475,6 +516,10 @@ async def run(ctx: RunContext) -> ExtractOutput:
         parts.append(f"{len(dropped)} dropped (unverified or old)")
     if failed:
         parts.append(f"{failed} source(s) couldn't be read by the model")
+    if followed.crowded:
+        event = followed.crowded[0]
+        parts.append(f"crowded {event.type.replace('_', ' ')} ({event.coverage} outlets): 1 follow-up search, "
+                     f"{len(followed.signals)} new signal(s)")
     if screening == "screening_trap":
         parts.append("AI-screening trap found: this person filters AI-written outreach")
     elif screening == "hostile":
@@ -482,5 +527,5 @@ async def run(ctx: RunContext) -> ExtractOutput:
     return ExtractOutput(
         message=" · ".join(parts), signals=signals, instruction_hits=hits, dropped=dropped,
         sources_scanned=len(gathered.sources) + bool(ctx.row.get("public_bio")),
-        merged=merged, ai_screening=screening,
+        merged=merged, ai_screening=screening, crowded_ids=[s.id for s in followed.crowded],
     )

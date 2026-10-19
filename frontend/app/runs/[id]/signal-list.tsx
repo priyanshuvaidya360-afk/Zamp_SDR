@@ -18,8 +18,8 @@ export function SignalList({ signals, angle, waiting }: { signals: SignalRecord[
   );
   return (
     <div className="space-y-3">
-      {ordered.map((signal) => (
-        <SignalCard key={signal.id} signal={signal} angle={signal.selected ? angle : null} />
+      {ordered.map((signal, i) => (
+        <SignalCard key={signal.id} signal={signal} rank={i + 1} angle={signal.selected ? angle : null} />
       ))}
     </div>
   );
@@ -29,8 +29,9 @@ function isExcluded(signal: SignalRecord) {
   return signal.type === "ai_screening" || signal.sensitive;
 }
 
-function SignalCard({ signal, angle }: { signal: SignalRecord; angle: string | null }) {
+function SignalCard({ signal, rank, angle }: { signal: SignalRecord; rank: number; angle: string | null }) {
   const score = signal.scores.score;
+  const crowd = signal.scores.crowded ? signal.scores.adjustments?.find((a) => a.name === "crowded") : undefined;
   const domain = signal.source_url.startsWith("http") ? new URL(signal.source_url).hostname.replace(/^www\./, "") : "uploaded bio";
   return (
     <article
@@ -41,15 +42,29 @@ function SignalCard({ signal, angle }: { signal: SignalRecord; angle: string | n
       )}
     >
       <div className="flex flex-wrap items-center gap-1.5 text-xs">
+        {score != null && !isExcluded(signal) && (
+          <span className="tabular-nums text-muted-foreground" title={crowd ? "Rank before and after the crowd penalty" : "Rank"}>
+            {crowd?.delta && signal.scores.rank_before_penalty && signal.scores.rank_before_penalty !== rank && (
+              <s className="mr-1">#{signal.scores.rank_before_penalty}</s>
+            )}
+            #{rank}
+          </span>
+        )}
         {signal.selected && <span className="rounded-md bg-primary px-1.5 py-0.5 font-medium text-primary-foreground">Hook</span>}
         <span className="rounded-md bg-zinc-100 px-1.5 py-0.5 font-medium text-zinc-700">{signal.type.replace(/_/g, " ")}</span>
         <span className="text-muted-foreground">{signal.about === "person" ? "about them" : "about the company"}</span>
         <span className="text-muted-foreground">· {signal.published_at ?? "undated"}</span>
-        {signal.coverage > 1 && <Badge tone="zinc">reported by {signal.coverage} outlets</Badge>}
+        {signal.coverage > 1 && !crowd && <Badge tone="zinc">reported by {signal.coverage} outlets</Badge>}
+        {crowd && (
+          <Badge tone="amber">
+            {crowd.reason}, {crowd.delta.toString().replace("-", "\u2212")}
+          </Badge>
+        )}
+        {crowd && <Badge tone="zinc">context only</Badge>}
         {signal.ghost_suspect && <Badge tone="amber">possible ghost job</Badge>}
         {signal.sensitive && <Badge tone="red">sensitive</Badge>}
         {signal.type === "ai_screening" && <Badge tone="amber">AI screening</Badge>}
-        {(signal.scores.adjustments ?? []).map((a) => (
+        {(signal.scores.adjustments ?? []).filter((a) => a !== crowd).map((a) => (
           <Badge key={a.name} tone="amber">
             {a.name} {a.delta > 0 ? "+" : ""}
             {a.delta}
