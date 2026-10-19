@@ -88,6 +88,8 @@ export interface RunSummary {
   hook_type: string | null;
   send_day: number | null;
   account_plan: AccountPlan | null;
+  started_at: string;
+  finished_at: string | null;
 }
 
 export interface AccountPlan {
@@ -331,4 +333,42 @@ export interface Candidate {
   evidence_url: string;
   evidence: string;
   confidence: number;
+}
+
+// Dashboard (T16). Spec: docs/GUIDE.md "UI: three screens" > 3 Dashboard.
+export interface Stats {
+  batches_this_week: number;
+  prospects_this_week: number;
+  runs_total: number;
+  runs_finished: number;
+  running: number;
+  reached_review: number;
+  ready_for_review_rate: number | null;
+  waiting_for_review: number;
+  approved: number;
+  rejected: number;
+  approval_rate: number | null;
+  median_run_seconds: number | null;
+  avg_credits_per_prospect: number | null;
+  not_ready: Record<"needs_input" | "low_signal" | "blocked" | "suppressed" | "held" | "failed", number>;
+}
+
+export interface BatchListItem {
+  id: number;
+  filename: string;
+  uploaded_at: string;
+  status: BatchStatus;
+  rows: number;
+  valid: number;
+  invalid: number;
+  duplicates: number;
+  runs: number;
+  done: number;
+  counts: Partial<Record<RunStatus, number>>;
+  diversity_score: number | null;
+}
+
+export interface Page<T> {
+  total: number;
+  items: T[];
 }

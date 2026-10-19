@@ -3,14 +3,19 @@
 
 import type {
   BatchDetail,
+  BatchListItem,
   BatchPreview,
   Candidate,
   Mapping,
   ReviewAction,
   ReviewResult,
+  Page,
   RunDetail,
+  RunStatus,
+  RunSummary,
   SellerProfile,
   StartResponse,
+  Stats,
 } from "./types";
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
@@ -63,6 +68,14 @@ export const api = {
   getBatch: (batchId: number) => request<BatchDetail>(`/batches/${batchId}`),
   getSeller: () => request<SellerProfile>("/seller"),
   getRun: (runId: number) => request<RunDetail>(`/runs/${runId}`),
+  getStats: () => request<Stats>("/stats"),
+  listBatches: (limit: number, offset: number) => request<Page<BatchListItem>>(`/batches?limit=${limit}&offset=${offset}`),
+  listRuns: (opts: { status?: RunStatus | ""; q?: string; limit: number; offset: number }) => {
+    const params = new URLSearchParams({ limit: String(opts.limit), offset: String(opts.offset) });
+    if (opts.status) params.set("status", opts.status);
+    if (opts.q?.trim()) params.set("q", opts.q.trim());
+    return request<Page<RunSummary>>(`/runs?${params}`);
+  },
   resumeRun: (runId: number, candidate: Candidate) =>
     request<{ run_id: number; status: string }>(`/runs/${runId}/resume`, json("POST", { stage: "resolve", input: { candidate } })),
   review: (runId: number, action: ReviewAction, opts: { body?: string; reason?: string; draftId?: number } = {}) =>

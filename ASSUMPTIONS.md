@@ -103,6 +103,13 @@ Decisions and assumptions made while building Signal. Add to this as you build
   it in demos, and the demo says so.
 - The stale-draft test case (Kestrel Labs, Omar Haddad) is fictional, with .example domains.
 
+- T16 dashboard numbers (backend/app/routes/stats.py): "this week" is the last 7 days, not the
+  calendar week. "Ready for review" is the share of finished runs whose draft reached the queue
+  (ready_for_review, approved or rejected), so reviewing a draft doesn't lower it. Approval rate
+  is approved / (approved + rejected); an edit counts as approved. Median run time and credits
+  cover finished runs; a resumed run's time includes the wait for the rep. Status counts are
+  all-time. Fixture replays report 0 credits and near-zero run times.
+
 ## Technical
 - Zero cost: every service runs on a free tier with no credit card. The LLM is Groq
   (`openai/gpt-oss-120b` smart, `openai/gpt-oss-20b` fast) with Gemini free tier as

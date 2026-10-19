@@ -28,9 +28,10 @@ T01-T18 are at the end of the guide; do one task per session.
 backend/
   app/
     main.py            FastAPI app; includes routers from routes/
-    routes/batches.py  POST /batches, GET /batches/{id}[/preview|/events], PATCH .../mapping,
+    routes/batches.py  POST /batches, GET /batches (paginated), GET /batches/{id}[/preview|/events], PATCH .../mapping,
                        POST /batches/{id}/start, GET /batches/{id}/export.csv[?all=true]
-    routes/runs.py     GET /runs, GET /runs/{id}[/events], POST /runs/{id}/resume,
+    routes/stats.py    GET /stats: dashboard numbers (definitions in its docstring)
+    routes/runs.py     GET /runs (status filter, name search, paginated), GET /runs/{id}[/events], POST /runs/{id}/resume,
                        POST /runs/{id}/review (approve / edit / reject)
     routes/dev.py      POST /dev/age-draft/{draft_id}?days=12 (404 when DEMO_MODE=live)
     review.py          stage 8: review actions, revalidate on approve (case 10), CSV export
@@ -79,7 +80,8 @@ backend/
   tests/               pytest; tests/fixtures/ holds recorded search results
   scripts/             CLI helpers (smoke tests, seeding, demo checks)
 frontend/
-  app/                 page.tsx = dashboard; batches/new (upload + preview + mapping),
+  app/                 page.tsx + dashboard.tsx = dashboard (metrics, why-not-ready, batches /
+                       all-runs tabs); batches/new (upload + preview + mapping),
                        batches/[id] (live batch view, export), batches/[id]/review (review
                        queue, keys a/e/r/j/k), runs/[id] (live run view: stepper, signal
                        cards, cited draft, review controls, candidate cards)

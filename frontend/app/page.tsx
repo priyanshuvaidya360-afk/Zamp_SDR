@@ -2,20 +2,24 @@ import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
 
-// The dashboard (metrics, batches, runs) is built in T16; for now, the way in.
+import { Dashboard } from "./dashboard";
+
+// Spec: docs/GUIDE.md "UI: three screens" > 3 Dashboard, and T16.
 export default function Home() {
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Signal</h1>
-        <p className="max-w-2xl text-muted-foreground">
-          Upload your prospect list. Signal researches each person, picks one real, cited reason to reach out,
-          and drafts a short email for you to review. Nothing is ever sent.
-        </p>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
+          <p className="max-w-2xl text-muted-foreground">
+            Every prospect researched, every hook cited, every draft waiting for a person. Nothing is ever sent.
+          </p>
+        </div>
+        <Link href="/batches/new" className={buttonVariants()}>
+          New batch
+        </Link>
       </div>
-      <Link href="/batches/new" className={buttonVariants()}>
-        New batch
-      </Link>
+      <Dashboard />
     </div>
   );
 }

@@ -6,13 +6,14 @@ from typing import Any
 from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile
 from fastapi.responses import Response, StreamingResponse
 from pydantic import BaseModel
+from sqlalchemy import func
 from sqlmodel import Session, select
 
 from app import db, ingest, review
 from app.config import settings
 from app.db import get_session
 from app.events import HEARTBEAT, bus, format_sse, sse_response
-from app.models import Batch, BatchStatus, Run
+from app.models import Batch, BatchStatus, Run, RunStatus
 from app.pipeline import runner
 from app.routes.runs import hook_types, latest_stage_events, run_summary
 
@@ -72,6 +73,31 @@ async def upload_batch(file: UploadFile, session: Session = Depends(get_session)
     session.commit()
     session.refresh(batch)
     return _preview_response(batch)
+
+
+@router.get("")
+def list_batches(limit: int = Query(20, ge=1, le=100), offset: int = Query(0, ge=0),
+                 session: Session = Depends(get_session)) -> dict[str, Any]:
+    """Newest first, for the dashboard: file, uploaded, rows, progress, outcome counts, diversity."""
+    total = session.exec(select(func.count()).select_from(Batch)).one()
+    batches = session.exec(select(Batch).order_by(Batch.id.desc()).offset(offset).limit(limit)).all()
+    ids = [b.id for b in batches]
+    counts: dict[int, dict[str, int]] = {i: {} for i in ids}
+    if ids:
+        for batch_id, status, n in session.exec(select(Run.batch_id, Run.status, func.count())
+                                                .where(Run.batch_id.in_(ids)).group_by(Run.batch_id, Run.status)).all():
+            counts[batch_id][status.value if hasattr(status, "value") else status] = n
+    items = []
+    for b in batches:
+        c = counts[b.id]
+        runs = sum(c.values())
+        items.append({
+            "id": b.id, "filename": b.filename, "uploaded_at": b.uploaded_at, "status": b.status,
+            "rows": b.row_count, "valid": b.valid_count, "invalid": b.invalid_count, "duplicates": b.duplicate_count,
+            "runs": runs, "done": runs - c.get(RunStatus.running.value, 0), "counts": c,
+            "diversity_score": b.diversity_score,
+        })
+    return {"total": total, "items": items}
 
 
 @router.get("/{batch_id}/preview")
