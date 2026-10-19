@@ -47,9 +47,12 @@ backend/
     pipeline/
       runner.py        Stage / RunContext / StopRun, run_one, run_batch, global
                        semaphore, per-account shared research, restart recovery
-      stubs.py         stand-in stages (0.3 s each) until T06-T09 replace them
-      resolve.py       stage 2: identity
-      research.py      stage 3: search + fetch
+      stages.py        the stage list, in order (real stages + remaining stand-ins)
+      stubs.py         stand-in stages (0.3 s each) until T07-T09 replace them
+      intake.py        stage 1: recently-researched block + internal context (no LLM)
+      resolve.py       stage 2: identity; code verifies the model's evidence
+      research.py      stage 3: category searches, relevance gate, page reads
+    context_adapter.py CRM / sequence-history lookups (seed tables; swap for HubSpot here)
       extract.py       stage 4: AI-instruction scan + extraction
       score.py         stage 5: scoring + hook choice
       draft.py         stages 6-7: writer + critic
@@ -72,6 +75,8 @@ docs/GUIDE.md          the spec
 - `make test`: backend pytest suite
 - `cd backend && .venv/bin/python -m scripts.smoke [--all]`: live check of search, extract
   and one structured LLM call (about 2 Tavily credits); `--all` tries each provider alone
+- `cd backend && DEMO_MODE=record .venv/bin/python -m scripts.run_prospects <csv> --names "Amy Asali" --until gather --out x.json`:
+  run chosen rows through the pipeline on a throwaway DB (record, or replay with DEMO_MODE=fixtures)
 - `make seed`: load `seed/context.json` (fake CRM / sequence history) into the database; idempotent
 - Backend Python is always `backend/.venv/bin/python`; there is no uv.
 
@@ -94,8 +99,13 @@ docs/GUIDE.md          the spec
   cover LLM calls too, so a recorded run replays with the network off.
 - Free-tier quirks (measured, keep in mind when writing prompts): Groq rejects replies that
   break a strict schema with 400 `json_validate_failed` (llm.py retries once with the error);
-  gpt-oss tends to invent enum values, so list allowed values in prompts. ddgs time filters
-  and combined backends are unreliable; search.py tries engines one by one.
+  gpt-oss tends to invent enum values, so list allowed values in prompts. gpt-oss-20b
+  sometimes answers in prose (400 `output_parse_failed`, also retried). Optional fields in an
+  LLM schema need `Field(default=None, ...)`: Gemini omits null fields. Groq's per-minute
+  token limit bites with 5 parallel runs; llm.py honours short `retry-after` waits.
+  ddgs time filters and combined backends are unreliable; search.py tries engines one by one.
+- Tests never touch the network: conftest blocks it and uses the stand-in stages by
+  default; mock `search.search` / `search.extract` / `llm.structured` in stage tests.
 
 ## Git
 - Push to https://github.com/priyanshuvaidya360-afk/Zamp_SDR (`origin`, branch `main`).

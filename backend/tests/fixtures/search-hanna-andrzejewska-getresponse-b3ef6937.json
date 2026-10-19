@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Hanna Andrzejewska\" \"GetResponse\"",
+  "results": [
+    {
+      "url": "https://biegwesterplatte.pl/wp-content/uploads/2018/10/wyniki.pdf",
+      "title": "56. Bieg Westerplatte",
+      "content": "2379 3308 SZARMACH OLGA GDYNIA PORT GDYNIA SPORT TEAM POL K30 212 00:28:06 00:56:59 01:01:39 482 2380 2646 PIETRASZEWSKA-JADWISZCZOK AGNIE GDAŃSK POL K30 213 00:28:46 00:57:00 01:04:10 483 2381 3349 SZKÓLNIK OLGA GDAŃSK POL K20 106 00:29:33 00:57:00 01:04:21 483 2382 2275 MIZURA-STENCEL ANETTA STAROGARD GDANSKI POL K40 129 00:28:07 00:57:01 01:01:28 485 2383 731 FIJAŁKOWSKA ANNA GDAŃSL GETRESPONSE WARRIORS POL K20 107 00:27:25 00:57:01 01:01:37 485 2384 4168 BRZESKA MAŁGORZATA KAMELA AKADEMIA [...] 1020 3300 2414 NOWICKA-BIELECKA KORNELIA RUMIA UKS SIÓDEMKA RUMIA POL K40 299 00:33:54 01:08:01 01:15:59 1021 3301 1528 KOPROWSKA HANNA GDAŃSK POL K30 437 00:32:39 01:08:02 01:14:59 1022 3302 3127 SMYKOWSKI ŁUKASZ ZIELONA GÓRA POL M30 834 00:33:38 01:08:03 01:15:25 2280 3303 3964 ZAWARSKI MACIEJ STANISŁAW GRUDZIĄDZ P40B POL M40 766 00:32:23 01:08:10 01:12:38 2281 3304 2132 MARCINKOWSKI JAN GDAŃSK GETRESPONSE WARRIORS POL M20 366 00:33:36 01:08:10 01:14:59 2281 3305 302 BRUSKI DARIUSZ GDAŃSK POL [...] 01:10:56 01:18:41 2307 3374 3290 SZABAT KATARZYNA GDAŃSK POL K20 227 00:33:33 01:10:57 01:17:48 1067 3375 1899 LESNIOWSKA ANNA GDAŃSK POL K30 453 00:34:47 01:11:00 01:18:00 1068 3376 865 GŁAŻEWSKA AGATA ROTMANKA POL K20 228 00:34:18 01:11:04 01:18:36 1069 3377 3976 ZDUŃCZYK PAULINA GDAŃSK GETRESPONSE WARRIORS POL K20 229 00:33:36 01:11:07 01:17:56 1070 3378 2641 PIEPIORA EWA GDAŃSK POL K40 308 00:34:12 01:11:10 01:17:51 1071 3379 1825 KUSIO JAKUB BANINO POL M40 776 00:34:47 01:11:26 01:18:16",
+      "published_date": null,
+      "score": 0.1712139
+    },
+    {
+      "url": "https://zapisy.sts-timing.pl/363/lista.php",
+      "title": "STS-TIMING.PL - REJESTRACJA",
+      "content": "| 335 | 347 | BURY LILIANA | 1981 | REDA | ZMOTYWOWANI | POL |\n| 336 | 348 | BURY PAWEŁ | 1981 | GDYNIA | BIEGAMYRAZEM.PL | POL |\n| 337 | 349 | BURZYŃSKA IGA | 1994 | ŁÓDŹ | LOSZKI MODELKI | POL |\n| 338 | 350 | BURZYŃSKI TOMASZ | 1988 | GDAŃSK | GETRESPONSE WARRIORS | POL |\n| 339 | 351 | BUSŁOWICZ KATARZYNA | 1977 | CHOCZEWO | POL |\n| 340 | 352 | BUSZMAN KRZYSZTOF | 1971 | GDYNIA | POL |\n| 341 | 353 | BUTKIEWICZ KATARZYNA | 1991 | STRASZYN | POL | [...] | 328 | 340 | BUKSIŃSKI MARCIN | 1986 | GDAŃSK | PRAWDZIWY MĘŻCZYZNA ZACZYNA SIĘ POWYŻEJ 100 KG | POL |\n| 329 | 341 | BULATOVA GALYNA | 1987 | GDANSK | GETRESPONSE WARRIORS | POL |\n| 330 | 342 | BULINSKA KAROLINA | 1991 | GDANSK | POL |\n| 331 | 343 | BULIŃSKA ALEKSANDRA | 1986 | GDAŃSK | POL |\n| 332 | 344 | BULOWSKI REMIGIUSZ | 1991 | GDAŃSK | REMIGIUSZ | POL |\n| 333 | 345 | BURA PIOTR | 1980 | GDAŃSK | PORT GDAŃSK | POL |\n| 334 | 346 | BURLIŃSKI PIOTR | 1976 | GDYNIA | POL | [...] | 3964 | 3972 | ZAWORSKI DANIEL | 1974 | ŻELISTRZEWO | FOREST RUN | POL |\n| 3965 | 3973 | ZAZULA AGNIESZKA | 1978 | GDAŃSK | POL |\n| 3966 | 3974 | ZDEB-CZUPRYN KATARZYNA | 1976 | GDAŃSK | HK SPORT TEAM | POL |\n| 3967 | 3975 | ZDUNEK MIROSŁAW | 1975 | GDAŃSK | POL |\n| 3968 | 3976 | ZDUŃCZYK PAULINA | 1993 | GDAŃSK | GETRESPONSE WARRIORS | POL |\n| 3969 | 3977 | ZEBALA DARIUSZ | 1977 | BYTÓW | POL |\n| 3970 | 3978 | ZEGA-BIEGAŃSKA ANNA | 1986 | SŁUPSK | POL |",
+      "published_date": null,
+      "score": 0.15816164
+    },
+    {
+      "url": "https://mocniwhr.pl/uslugi",
+      "title": "Oferta Mocni w HR",
+      "content": "Enprom  \nScanfil  \nPrevac  \nVoestalpine  \nBauer  \nStalgast  \nKopalnia Soli Wieliczka  \nClickmeeting\n\nInfermedica  \nUltimo  \nNKT A/S  \nApptension  \nCapgemini  \nArvato  \nGetresponse  \nFerax\n\nPGE Polska Grupa  Energetyczna  \nCompensa Życie  \nSymfonia  \nArrow  \nNitroerg  \nTen Square Games  \nTVN  \nNagel Group\n\nPKF Polska  \nSaint-Gobain  \nO2  \nPolpharma  \nMoneygram  \nComtegra  \nBrainly  \nMondi\n\nCarlsberg  \nAsgard  \nEQ System  \nH+H International  \nFlexlink  \nWawel  \nWorkservice  \nRoedl [...] ,\n\nCentrum Medyczne Enel-Med S.A\n\nBardzo wartościowe szkolenie. Utwierdziło mnie w przekonaniu, że sposób raportowania jest prawidłowy. Świetnie zaprezentowane narzędzia, które pomogą w codziennej pracy.\n\nWiktoria Kusber\n\n,\n\nFilplast\n\nCiekawe, inne spojrzenie na rotację. Z pewnością do wykorzystania w codziennej pracy.\n\nAlicja Andrzejewska\n\n,\n\nnmc Polska [...] Bardzo przydatne treści, zebrane w \"pigułkę\", bez zbędnego rozwlekania tematu. Przydatna wiedza do natychmiastowego wykorzystania w organizacji.\n\nAda Biedka-Dziubińska\n\n,\n\nLetniskowo sp. z o.o.\n\nBardzo konkretne szkolenie, na pewno dużo gotowej wiedzy do zastosowania w mojej organizacji.\n\nKatarzyna Kaszuba\n\n,\n\nCyfrowe.pl Sp. z o.o.\n\nBarzdo dobre szkolenie. Dzięki niemu wiedza nt rotacji pracowników została uporządkowana. Bardzo dobre wskazówki\n\nMarek Tytko\n\n,\n\nVolvo Sp z o.o",
+      "published_date": null,
+      "score": 0.10692371
+    },
+    {
+      "url": "https://www.imsig.pl/numer/2023/9,Monitor_S%C4%85dowy_i_Gospodarczy_nr_9_2023_%286660%29_z_13_stycznia_2023_r.",
+      "title": "Numer 9/2023 (6660) z 13 stycznia 2023 r. - Internetowy Monitor Sądowy i Gospodarczy",
+      "content": "|  |  |\n --- |\n| Poz. 28389. | CENTRUM BADAŃ I PROMOCJI DZIEDZICTWA KULTUROWEGO |\n| Poz. 28390. | CENTRUM BADAŃ I PROMOCJI DZIEDZICTWA KULTUROWEGO |\n| Poz. 28391. | \"DZIEWANNA - FUNDACJA DOSTĘPNEJ PRZYRODY\" |\n| Poz. 28392. | FUNDACJA \"ANIMATICA\" |\n| Poz. 28393. | FUNDACJA \"ANIMATICA\" |\n| Poz. 28394. | FUNDACJA \"CENTRUM PROMOCJI I ROZWOJU MEDIACJI\" |\n| Poz. 28395. | FUNDACJA \"CENTRUM PROMOCJI I ROZWOJU MEDIACJI\" |\n| Poz. 28396. | FUNDACJA \"GETRESPONSE CARES\" | [...] |  |  |\n --- |\n| Poz. 24935. | 4FI POLAND GMBH & CO. KG SPÓŁKA JAWNA |\n| Poz. 24936. | A. I. INVEST GROUP ANTONI KOKOSZKA SPÓŁKA JAWNA |\n| Poz. 24937. | ABACUS INTERNET SOLUTIONS WIĘCKO SPÓŁKA JAWNA |\n| Poz. 24938. | ABAKUS - E.WARDZYŃSKA, Ł. WARDZYŃSKI SPÓŁKA JAWNA |\n| Poz. 24939. | ABDO HANNA TRABSZYS-ŁUCZEWSKA MACIEJ ŁUCZEWSKI SPÓŁKA JAWNA |\n| Poz. 24940. | ABDO HANNA TRABSZYS-ŁUCZEWSKA MACIEJ ŁUCZEWSKI SPÓŁKA JAWNA | [...] | Poz. 25064. | PRZYCHODNIA LEKARSKA 4 C.KUBOSZEK, G.STACHOWICZ SPÓŁKA JAWNA |\n| Poz. 25065. | PRZYCHODNIA MEDYCYNY RODZINNEJ MALEC SPÓŁKA JAWNA |\n| Poz. 25066. | PRZYCHODNIA MEDYCYNY RODZINNEJ MALEC SPÓŁKA JAWNA |\n| Poz. 25067. | QUALITY DENT ADAMCZAK SPÓŁKA JAWNA |\n| Poz. 25068. | \"REMSIL\" KIZIELEWICZ SPÓŁKA JAWNA |\n| Poz. 25069. | RYSZKA - KROS SPÓŁKA JAWNA |\n| Poz. 25070. | \"SECMED ANDRZEJEWSKA, FILIPIAK, KUŚMIERSKI SPÓŁKA JAWNA\" |\n| Poz. 25071. | SELMET B. J. RUDNICCY SPÓŁKA JAWNA |",
+      "published_date": null,
+      "score": 0.09292641
+    },
+    {
+      "url": "https://pl.linkedin.com/in/agneswjozwiak",
+      "title": "Agnes Józwiak - Product marketing, SaaS growth, GTM ...",
+      "content": "## Experience\n- Senior Product Marketing Manager at Appfire (Jul 2021 to present)\n- Senior Product Marketing Manager at Spartez (Oct 2019 to present)\n- Brand & Communication Director at ClickMeeting (Sep 2016 to Oct 2019)\n- ClickMeeting Brand Manager at ClickMeeting (Jun 2011 to Sep 2016)\n- Product Manager at GetResponse (Jan 2010 to Jun 2011)\n- Project Manager/Account Manager at KonoLabs (Oct 2008 to Dec 2009) [...] # Agnes Józwiak [...] ## Education\n- Technical University of Gdansk, Project Management\n- City, University of London, BEng, Media Communication Systems",
+      "published_date": null,
+      "score": 0.08076994
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": true
+}

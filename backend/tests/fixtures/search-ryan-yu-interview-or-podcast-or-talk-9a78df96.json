@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Ryan Yu\" interview OR podcast OR talk",
+  "results": [
+    {
+      "url": "https://www.facebook.com/ReadyForDuel/videos/ryan-yu-10000000-aura/3212697822451325",
+      "title": "Ryan Yu + 10000000 Aura! | Ready for Duel",
+      "content": "During a Yu-Gi-Oh! tournament interview, a world champion is asked about the performance of his Sky Striker deck. He responds by stating that his success is",
+      "published_date": null,
+      "score": 0.44796792
+    },
+    {
+      "url": "https://x.com/myRoadoftheKing/status/2076514481086329013",
+      "title": "Road of the King on X: \"\"It's not the deck, it's me\" - Ryan Yu ...",
+      "content": "\"It's not the deck, it's me\" - Ryan Yu, after going 18-0 undefeated with Sky Striker to win the North America WCQ 2026.",
+      "published_date": null,
+      "score": 0.29006046
+    },
+    {
+      "url": "https://www.facebook.com/respectygo/posts/its-not-the-deck-its-me-ryan-yu-after-going-18-0-undefeated-in-nawcq-2026na-wcq/1679660467012168",
+      "title": "\"It's not the deck, IT'S ME\" 😏 - Ryan Yu, after going 18-0 ...",
+      "content": "\"It's not the deck, IT'S ME\" 😏\n\n- Ryan Yu, after going 18-0 undefeated in NAWCQ 2026\n\n🎬NA WCQ 2026 Stream",
+      "published_date": null,
+      "score": 0.25586438
+    },
+    {
+      "url": "https://www.reddit.com/r/yugioh/comments/1uvnffm/ryan_yu_with_the_mic_drop_after_winning_the_nawcq",
+      "title": "Ryan Yu with the mic drop after winning the NAWCQ 2026",
+      "content": "He's so good with sky striker I question his sanity for investing that much time into one archetype. The sky striker goat for sure.",
+      "published_date": null,
+      "score": 0.2488585
+    },
+    {
+      "url": "https://www.instagram.com/reel/Dau96erx1-V?hl=en",
+      "title": "Ryan Yu + 10000000 Aura!",
+      "content": "He's not wrong. Sky Striker is a solid deck but only a solid Pilot can use it to it's potential. None of that will matter cause his version will be net",
+      "published_date": null,
+      "score": 0.1478382
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": true
+}

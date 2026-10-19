@@ -1,0 +1,16 @@
+{
+  "provider": "tavily",
+  "query": "\"GetResponse\" launches",
+  "results": [
+    {
+      "url": "https://www.campaignlive.com/article/movers-shakers-chilis-home-agency-jinx/1968558",
+      "title": "Movers & Shakers: Chili’s, Home Agency, Jinx and more | Campaign US",
+      "content": "EightState Studios appointed Elisa Richardson as chief communications officer and Chip Singh as ECD.\n\nErnesta hired Rohit Bagalkot as VP of marketing and Kelly Shah as director of inventory planning.\n\nGetResponse welcomed Michael Leslie as chief technology officer.\n\nGeorge P. Johnson (GPJ) promoted Brian Neville to global COO and Paolo Zeppa to president of GPJ Americas.\n\nGoliath promoted Angela Truhan to VP of global brand marketing and named Liz Grampp VP of North American marketing. [...] Merge announced its acquisition of Brado’sinsight and digital practices.\n\nOdyssey Entertainment Group (OEG) launched Odyssey Originals, a creator studio that aims to help creators develop and publish original content while retaining full ownership of their work.\n\nStrategy-first events agency Sequence Events released Launch Sequence, an eight-week discovery program in which clients’ teams receive guidance on how to seamlessly transition into event planning and production. [...] Movers & Shakers: Chiquita, Gut, Pizza Hut and more\n\nCampaign US Movers & Shakers wordmark\n\nSocial Skinny: AI slowdown debate develops; Meta and Snapchat unveil updated smart glasses\n\nRay-Ban Meta glasses for sale are displayed at a Target store\n\nMovers & Shakers: Goodwipes, Humane World for Animals, Regal and more\n\nCampaign US Movers & Shakers wordmark\n\nMovers & Shakers: Bark, BetterHelp, Checkers & Rally’s and more\n\nCampaign US Movers & Shakers wordmark\n\nLATEST FROM CAMPAIGN",
+      "published_date": "Thu, 27 Aug 2026 00:00:00 GMT",
+      "score": 0.16146593
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

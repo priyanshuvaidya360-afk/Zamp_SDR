@@ -100,8 +100,8 @@ class RunContext:
 
 
 def get_stages() -> list[Stage]:
-    """The pipeline, in order. Stand-ins until T06-T09; tests replace this."""
-    from app.pipeline.stubs import STAGES
+    """The pipeline, in order (app/pipeline/stages.py). Tests replace this."""
+    from app.pipeline.stages import STAGES
 
     return STAGES
 

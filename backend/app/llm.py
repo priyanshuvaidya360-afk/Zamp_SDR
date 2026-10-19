@@ -9,6 +9,7 @@ that has a key: up to 3 tries on transient errors -> on 429 / exhausted retries 
 fall through to the next provider.
 """
 
+import asyncio
 import copy
 import logging
 import time
@@ -137,20 +138,43 @@ def _schema_rejection(error: openai.BadRequestError) -> tuple[str, str] | None:
     """
     body = error.body if isinstance(error.body, dict) else {}
     body = body.get("error", body)
-    if body.get("code") != "json_validate_failed":
+    # json_validate_failed: valid JSON that broke the schema. output_parse_failed: the model
+    # wrote prose (gpt-oss sometimes narrates its reasoning) instead of JSON.
+    if body.get("code") not in ("json_validate_failed", "output_parse_failed"):
         return None
     return body.get("failed_generation", ""), body.get("message", str(error))
 
 
+def _retry_after_s(error: openai.RateLimitError) -> float | None:
+    """Seconds the provider asked us to wait, if it said."""
+    headers = getattr(error.response, "headers", {}) or {}
+    try:
+        return float(headers.get("retry-after"))
+    except (TypeError, ValueError):
+        return None
+
+
 async def _call_with_retry(provider: str, model: str, messages, schema_name, schema):
-    async for attempt in AsyncRetrying(
-        retry=retry_if_exception_type(TRANSIENT_ERRORS),
-        stop=stop_after_attempt(3),
-        wait=RETRY_WAIT,
-        reraise=True,
-    ):
-        with attempt:
-            return await _call(provider, model, messages, schema_name, schema)
+    """Transient errors: 3 tries with backoff. 429 with a short retry-after: wait and try
+    again (free-tier per-minute limits clear quickly), at most rate_limit_waits times."""
+    waits = 0
+    while True:
+        try:
+            async for attempt in AsyncRetrying(
+                retry=retry_if_exception_type(TRANSIENT_ERRORS),
+                stop=stop_after_attempt(3),
+                wait=RETRY_WAIT,
+                reraise=True,
+            ):
+                with attempt:
+                    return await _call(provider, model, messages, schema_name, schema)
+        except openai.RateLimitError as error:
+            delay = _retry_after_s(error)
+            if delay is None or delay > settings.llm_max_rate_limit_wait_s or waits >= settings.llm_rate_limit_waits:
+                raise
+            waits += 1
+            log.info("LLM %s rate limited; waiting %.1fs as asked", provider, delay)
+            await asyncio.sleep(delay)
 
 
 # --- Public API --------------------------------------------------------------

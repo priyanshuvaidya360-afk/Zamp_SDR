@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Abacum\" launches",
+  "results": [
+    {
+      "url": "https://www.prnewswire.com/news-releases/building-on-abacum-intelligence-abacum-launches-modeler-and-brings-agentic-modeling-to-every-finance-team-302907146.html",
+      "title": "Building on Abacum Intelligence, Abacum Launches Modeler and Brings Agentic Modeling to Every Finance Team",
+      "content": "NEW YORK and BARCELONA, Spain, Oct. 13, 2026 /PRNewswire/ -- Abacum, the AI-native FP&A platform, today launched Modeler, an AI agent that brings Agentic Modeling to finance teams. Starting from natural language prompts or existing spreadsheets, Modeler transforms initial inputs into live, fully functional business models instantly ready for execution. [...] Abacum is the AI-native business planning platform. Built first for finance and extended to every department, Abacum holds a company's data, business logic and context in one governed layer, where AI agents and teams plan the business together. Agents own the recurring workflows; people own the judgment. More than 500 customers in over 40 countries run their planning on Abacum, including DISH, ThoughtSpot, Strava, Acorns and Replit. Founded in 2020 and headquartered in New York, with offices in [...] with offices in Toronto, Barcelona, Buenos Aires and the UK, Abacum is backed by more than $100 million from investors including Scale Venture Partners, Atomico and Y Combinator. Abacum is ISO/IEC 27001 certified, SOC 2 Type II and GDPR compliant, and is the first new FP&A platform NetSuite has accepted into its Built for NetSuite program in over a decade. Learn more at",
+      "published_date": "Tue, 13 Oct 2026 13:44:00 GMT",
+      "score": 0.88372874
+    },
+    {
+      "url": "https://ffnews.com/news/accountsiq-and-abacum-partner-to-launch-ai-powered-finance-stack-for-mid-market-businesses",
+      "title": "AccountsIQ and Abacum Partner to Launch AI-Powered Finance Stack for Mid-Market Businesses",
+      "content": "AccountsIQ and Abacum have partnered to launch an AI-powered finance stack for mid-market businesses, integrating cloud accounting with automated FP&A to eliminate manual spreadsheets and improve strategic planning.\n\n   Total Users:35,000+\n   Abacum Funding:$90 million\n   Geographic Reach:85+ countries\n   Partner Integrations:30+\n\nImage 6: Press Release: AccountsIQ and Abacum Partner to Launch AI-Powered Finance Stack for Mid-Market Businesses | Featured Image by FF News\n\nIn this article [...] The integration of AccountsIQ and Abacum addresses the critical need for automated data flows in mid-market organizations. By linking multi-currency cloud accounting directly to an AI-native FP&A platform, finance professionals can transition from simple record-keeping to strategic business planning without the risk of manual entry errors. Key benefits include: [...] integrations, ensuring that financial intelligence is scalable for high-growth companies.",
+      "published_date": "Tue, 04 Aug 2026 08:40:04 GMT",
+      "score": 0.77055156
+    },
+    {
+      "url": "https://pressreleasehub.pa.media/article/abacus-launches-ai-initiative-to-accelerate-enterprise-ai-adoption-for-regulated-industries-83173.html",
+      "title": "Abacus Launches AI³ Initiative to Accelerate Enterprise AI Adoption for Regulated Industries",
+      "content": "# Abacus Launches AI³ Initiative to Accelerate Enterprise AI Adoption for Regulated Industries\n\nContributed by: PR Newswire\n\n## Images\n\n## Tags\n\nAbacus-Launch\n\n## More Like This\n\n## Abacus Ranked No. Three on 2026 MSP 501 List of Global Managed Service Providers\n\n## Abacus Named to the 2026 Inc. 5000 List of America's Fastest-Growing Private Companies\n\n## Abacus Unveils Unified Brand Following 2025 Merger with Medicus IT [...] ## OpenBox AI Launches First Enterprise AI Trust Platform Built for Everyone, Backed by $5M Seed Round\n\n## IBM Unveils Advancements Across Software and Infrastructure to Help Enterprises Operationalize AI\n\n## Abacus Group Opens Abu Dhabi Office to Extend UAE Presence\n\n## Infosys and Anthropic Announce Collaboration to Unlock AI Value across Complex, Regulated Industries\n\n## Meet Trust3 AI: The Next Chapter for Privacera in Data and AI Governance",
+      "published_date": "Mon, 14 Sep 2026 00:00:00 GMT",
+      "score": 0.6241337
+    },
+    {
+      "url": "https://www.afr.com/street-talk/abacus-launches-121m-block-trade-in-storage-king-20260917-p60ye5",
+      "title": "Abacus launches $121m block trade in Storage King",
+      "content": "Abacus launches $121m block trade in Storage King ... Barrenjoey Capital Partners has kicked off a $121 million block trade in Storage King, the self-storage",
+      "published_date": "Sat, 19 Sep 2026 14:00:00 GMT",
+      "score": 0.5968332
+    },
+    {
+      "url": "https://finance.yahoo.com/technology/ai/articles/abacus-ai-releases-free-open-144000066.html",
+      "title": "Abacus AI Releases Free, Open-Source Abacus AI Bot for Developers",
+      "content": "The release is aimed at individual developers, technical professionals, students, and teams who want a versatile, open-source AI agent without mandatory upfront fees. For solo practitioners, it serves as a reliable assistant for automation and research. For organizations and open-source contributors, it delivers an accessible, highly customizable desktop application. [...] Abacus AI is an artificial intelligence company developing AI-powered applications, autonomous agents, AI model access, development tools, creative technologies, APIs, and cloud infrastructure. Its platform brings together conversational AI, research, coding, application development, automation, data analysis, image and video generation, and business workflow capabilities within a unified environment, supporting individuals, developers, and organizations across a wide range of professional and [...] of professional and creative tasks.",
+      "published_date": "Mon, 21 Sep 2026 00:00:00 GMT",
+      "score": 0.2637124
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": true
+}

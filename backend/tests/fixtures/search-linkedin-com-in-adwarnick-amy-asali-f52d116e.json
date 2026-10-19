@@ -1,0 +1,16 @@
+{
+  "provider": "tavily",
+  "query": "\"linkedin.com/in/adwarnick\" Amy Asali",
+  "results": [
+    {
+      "url": "https://www.linkedin.com/in/adwarnick",
+      "title": "Amy Asali (Dwarnick) - Building Full-Funnel Growth ...",
+      "content": "# Amy Asali\n\nHeadline: Head of Growth at Rentable\nCurrent role: Head Of Growth\nSeniority: Head, Marketing\nLocation: New York, New York, United States\nExperience: 13 years 11 months\nLinkedIn:  · 1,201 followers [...] ## Experience\n- Head of Growth at Abacum (Aug 2026 to present)\n- Head of Growth | Rentable, ApartmentIQ, MavenAI at Rentable (Dec 2022 to Apr 2026)\n- Head of Growth at ApartmentIQ (Dec 2022 to Apr 2026)\n- Head of Growth at MavenAI (Dec 2022 to Apr 2026)\n- Associate Director, Growth Marketing at Angi (Aug 2021 to Nov 2022)\n- Senior Growth Marketing Manager at Triplebyte (Mar 2020 to Aug 2021)\n\n## Education\n- Babson College, Bachelor of Science Business Management\n- Wellesley College [...] Courses: Brand Management, Business  Analytics, Business Intelligence, Consumer Behavior, Corporate Financial Management, Marketing Analytics, Marketing Managment, Operations Research, Organizational Psychology, Psychology of Creativity",
+      "published_date": null,
+      "score": 0.7050753
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": true
+}

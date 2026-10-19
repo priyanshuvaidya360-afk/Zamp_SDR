@@ -1,0 +1,29 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Amy Asali",
+        "title": null,
+        "company": "Abacum",
+        "company_domain": "abacum.ai",
+        "location": null,
+        "country": null,
+        "evidence_url": "https://www.linkedin.com/in/adwarnick",
+        "evidence": "Head of Growth at Abacum (Aug 2026 to present)",
+        "confidence": 0.95
+      }
+    ],
+    "reasoning": "LinkedIn URL matches the prospect’s LinkedIn and shows current role at Abacum, giving high confidence."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1429,
+    "completion_tokens": 317,
+    "latency_ms": 587,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

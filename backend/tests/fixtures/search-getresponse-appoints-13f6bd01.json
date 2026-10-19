@@ -1,0 +1,16 @@
+{
+  "provider": "tavily",
+  "query": "\"GetResponse\" appoints",
+  "results": [
+    {
+      "url": "https://www.campaignlive.com/article/movers-shakers-chilis-home-agency-jinx/1968558",
+      "title": "Movers & Shakers: Chili’s, Home Agency, Jinx and more | Campaign US",
+      "content": "EightState Studios appointed Elisa Richardson as chief communications officer and Chip Singh as ECD.\n\nErnesta hired Rohit Bagalkot as VP of marketing and Kelly Shah as director of inventory planning.\n\nGetResponse welcomed Michael Leslie as chief technology officer.\n\nGeorge P. Johnson (GPJ) promoted Brian Neville to global COO and Paolo Zeppa to president of GPJ Americas.\n\nGoliath promoted Angela Truhan to VP of global brand marketing and named Liz Grampp VP of North American marketing. [...] Pennant appointed D’Marco Saunders as growth and marketing manager.\n\nPMG hired Jon Lefferts as head of video and audio.\n\nRethink welcomed Caroline Grayson as MD, New York.\n\nRingoFire named Scott Voege EVP of client success.\n\nSixTwentySix added Jimmy Tatro to its roster of directors.\n\nSuper Nice appointed Tiffany Lynch Kimicata as MD and Raqib Sheikh as chief strategy officer.\n\nThe Social Lights hired Dave Bullen as VP of creative. [...] Trilliad welcomed Jolene Chan as president of data and technology services.\n\nVSA Partners named May Shek associate partner and head of strategy.\n\nVurvey Labs appointed Dustin Williams as field chief technology officer.\n\n### For Good\n\nAd reading MIMA MISSION MEETS ACTION AWARD $100K ONE ORGANIZATION. REAL AGENCY SUPPORT.",
+      "published_date": "Thu, 27 Aug 2026 00:00:00 GMT",
+      "score": 0.6929958
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

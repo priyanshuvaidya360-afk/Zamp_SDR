@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Amy Asali\" interview OR podcast OR talk",
+  "results": [
+    {
+      "url": "https://www.linkedin.com/posts/jorgelluch_one-of-abacum-s-core-pillars-is-customer-activity-7506747351139606528-C6eU",
+      "title": "Abacum customer obsession in action with All City Network",
+      "content": "ALLCITY Network - a fast-growing sports media company running city-based podcast. Amy Asali (Dwarnick) This is exactly what customer obsession looks like in",
+      "published_date": null,
+      "score": 0.44073462
+    },
+    {
+      "url": "https://www.linkedin.com/posts/abacum-ai_today-abacum-is-in-three-rooms-on-two-coasts-activity-7513583928738476032-7PRz",
+      "title": "Abacum's Post",
+      "content": "See the Abacum team - Molly Selin and Amy Asali (Dwarnick). connecting with finance leaders on what's next for planning and reporting. Interview Questions to",
+      "published_date": null,
+      "score": 0.42677602
+    },
+    {
+      "url": "https://calhum.org/california-documentary-project/list-of-california-documentary-project-grants",
+      "title": "List of California Documentary Project Grants - California Humanities",
+      "content": "| BURROCRACY   Project Director: Asali Echols   Sponsor Organization: International Documentary Association         BURROCRACY is a feature documentary telling the story of feral donkeys across California and Nevada, exploring the complexity of human and donkey relations, and ultimately the ethical role of humanity in the management of free animals in open places. | Still from BURROCRACY. | [...] | THE OTHER CALIFORNIA PODCAST Project Director: Alice Daniel Sponsor Organization: Valley Public Radio This seven-part podcast and broadcast series features in-depth audio storytelling about the people and culture of the San Joaquin Valley. Through reported pieces, interviews, and first-person narratives from each of the seven counties served by Valley Public Radio, the series brings listeners stories of life in a part of California that is at times overlooked by other media outlets. The [...] | THE OTHER CALIFORNIA PODCAST Project Director: Alice Daniel Sponsor Organization: Valley Public Radio This seven-part podcast and broadcast series features in-depth audio storytelling about the people and culture of the San Joaquin Valley. Through reported pieces, interviews, and first-person narratives from each of the seven counties served by Valley Public Radio, the series brings listeners stories of life in a part of California that is at times overlooked by other media outlets. The",
+      "published_date": null,
+      "score": 0.051087577
+    },
+    {
+      "url": "https://www.facebook.com/RealEpicShae/posts/now-amy-i-was-rooting-for-you-sis-earlier-this-year-you-came-to-social-media-air/1479476880672883",
+      "title": "EpicShae",
+      "content": "Now AMY… I was ROOTING for you, sis! Earlier this year you came to social media airing out your marriage to Dwight Howard, and now you're saying you",
+      "published_date": null,
+      "score": 0.043208163
+    },
+    {
+      "url": "https://www.afropop.org/audio-programs",
+      "title": "Audio Programs | Afropop Worldwide",
+      "content": "Afropop Classic April 16, 2026\n\n## Dakar Dancing and Casamance Roots: Afropop Returns to Senegal\n\nThe Art of Improvisation, Part 2 \n\nHip Deep April 9, 2026\n\n## The Art of Improvisation, Part 2\n\nThe Art of Improvisation: Part 1 \n\nHip Deep April 2, 2026\n\n## The Art of Improvisation: Part 1\n\nWomen's History Month '26: Umm Kulthum: The Voice of Egypt \n\nAfropop Classic March 26, 2026\n\n## Women's History Month '26: Umm Kulthum: The Voice of Egypt\n\nAfter the Money: Salsa for Love in NYC [...] A Spiritual Journey to Mbanza-Kongo \n\nAfropop Classic May 28, 2026\n\n## A Spiritual Journey to Mbanza-Kongo\n\nHip Deep Angola Part 1: Music and Nation in Luanda \n\nHip Deep May 21, 2026\n\n## Hip Deep Angola Part 1: Music and Nation in Luanda\n\nA Tale of Two Rebellions: How Africans Helped Shape the Future of Islam \n\nHip Deep May 14, 2026\n\n## A Tale of Two Rebellions: How Africans Helped Shape the Future of Islam [...] ## A Remembrance of Leo Sarkisian\n\nSomi on  \n\nCloseup August 18, 2026\n\n## Somi on \"What Does It Take to Bloom\"\n\nBanning Eyre speaks with Somi about her 2026 album, \"What Does It Take to Bloom?\"\n\nWith Feet in Many Worlds \n\nAfropop Classic August 13, 2026\n\n## With Feet in Many Worlds\n\nThis program explores the work of artists who identify with no single culture or country.\n\nCelebrating Georges Collinet \n\nAfropop Classic August 6, 2026\n\n## Celebrating Georges Collinet",
+      "published_date": null,
+      "score": 0.036005974
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": true
+}

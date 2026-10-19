@@ -24,6 +24,7 @@ from app.fixtures import cache_get, cache_put, load_fixture, make_slug, save_fix
 log = logging.getLogger(__name__)
 
 Depth = Literal["basic", "advanced"]
+Topic = Literal["general", "news"]
 TRANSIENT_ERRORS = (httpx.TransportError, TimeoutError, ConnectionError)
 RETRY_WAIT = wait_exponential(multiplier=1, min=1, max=8)  # tests swap this for wait_none()
 
@@ -58,7 +59,8 @@ class SearchProvider(Protocol):
 
     def available(self) -> bool: ...
 
-    async def search(self, query: str, depth: Depth, days: int, max_results: int) -> SearchResponse: ...
+    async def search(self, query: str, depth: Depth, days: int, max_results: int,
+                     topic: Topic = "general") -> SearchResponse: ...
 
     async def extract(self, urls: list[str]) -> ExtractResponse: ...
 
@@ -78,9 +80,10 @@ class TavilyProvider:
 
         return AsyncTavilyClient(api_key=settings.tavily_api_key)
 
-    async def search(self, query, depth, days, max_results):
+    async def search(self, query, depth, days, max_results, topic="general"):
         data = await self._client().search(
             query,
+            topic=topic,
             search_depth=depth,
             start_date=_start_date(days),
             max_results=max_results,
@@ -158,7 +161,7 @@ class DuckDuckGoProvider:
             raise last_error
         return []
 
-    async def search(self, query, depth, days, max_results):
+    async def search(self, query, depth, days, max_results, topic="general"):
         rows = await asyncio.to_thread(self._text, query, days, max_results)
         results = [
             SearchResult(url=r["href"], title=r.get("title") or "", content=r.get("body") or "")
@@ -183,7 +186,7 @@ class ExaProvider:
 
         return Exa(api_key=settings.exa_api_key)
 
-    async def search(self, query, depth, days, max_results):
+    async def search(self, query, depth, days, max_results, topic="general"):
         response = await asyncio.to_thread(
             self._client().search,
             query,
@@ -233,10 +236,13 @@ async def _with_retry(fn, *args):
 
 
 async def search(
-    query: str, depth: Depth = "basic", days: int = 180, max_results: int = 5
+    query: str, depth: Depth = "basic", days: int = 180, max_results: int = 5,
+    topic: Topic = "general",
 ) -> SearchResponse:
     """Search the web, newest `days` only. Empty results are a valid answer (thin signal)."""
     params = {"query": query, "depth": depth, "days": days, "max_results": max_results}
+    if topic != "general":  # keeps slugs and cache keys of existing recordings unchanged
+        params["topic"] = topic
     slug = make_slug("search", query, params)
     if settings.demo_mode == "fixtures":
         return SearchResponse(**load_fixture(slug))
@@ -251,7 +257,7 @@ async def search(
             response = SearchResponse(**{**hit, "credits": 0, "cached": True})
             break
         try:
-            result = await _with_retry(provider.search, query, depth, days, max_results)
+            result = await _with_retry(provider.search, query, depth, days, max_results, topic)
         except Exception as error:  # provider down, out of credits, bad key...
             skipped.append(f"{provider.name}: {type(error).__name__}")
             log.warning("search via %s failed: %s", provider.name, error)

@@ -1,0 +1,11 @@
+{
+  "provider": "none",
+  "query": "\"Ryan Yu\" site:protopie.io",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [
+    "tavily: no results",
+    "duckduckgo: no results"
+  ],
+  "cached": false
+}

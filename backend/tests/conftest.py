@@ -10,7 +10,7 @@ from app import db, llm, search
 from app.config import settings
 from app.db import create_db_and_tables
 from app.main import app
-from app.pipeline import runner
+from app.pipeline import runner, stubs
 
 
 @pytest.fixture
@@ -39,12 +39,23 @@ def client(engine) -> Iterator[TestClient]:
 
 @pytest.fixture(autouse=True)
 def isolated_settings(tmp_path, monkeypatch):
-    """Tests never read real fixtures, write the real cache, or wait between retries."""
+    """Tests never touch the network, read real fixtures, write the real cache, or wait
+    between retries. Runs use the stand-in stages unless a test opts into real ones."""
     monkeypatch.setattr(settings, "demo_mode", "live")
     monkeypatch.setattr(settings, "fixtures_dir", tmp_path / "fixtures")
     monkeypatch.setattr(settings, "cache_dir", tmp_path / "cache")
     monkeypatch.setattr(settings, "groq_api_key", "test-groq")
     monkeypatch.setattr(settings, "gemini_api_key", "test-gemini")
+    monkeypatch.setattr(settings, "tavily_api_key", "")
+    monkeypatch.setattr(settings, "exa_api_key", "")
+    monkeypatch.setattr(runner, "get_stages", lambda: stubs.STAGES)
+
+    async def no_network(*args, **kwargs):
+        raise AssertionError("a test tried to use the network; mock search/llm instead")
+
+    monkeypatch.setattr(llm, "_call", no_network)
+    monkeypatch.setattr(search.DuckDuckGoProvider, "search", no_network)
+    monkeypatch.setattr(search, "fetch_many", no_network)
     monkeypatch.setattr(settings, "stub_stage_delay_s", 0.01)
     monkeypatch.setattr(llm, "RETRY_WAIT", wait_none())
     monkeypatch.setattr(search, "RETRY_WAIT", wait_none())

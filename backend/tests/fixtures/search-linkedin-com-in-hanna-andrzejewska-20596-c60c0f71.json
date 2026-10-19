@@ -1,0 +1,11 @@
+{
+  "provider": "none",
+  "query": "\"linkedin.com/in/hanna-andrzejewska-20596041\" Hanna Andrzejewska",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [
+    "tavily: no results",
+    "duckduckgo: no results"
+  ],
+  "cached": false
+}

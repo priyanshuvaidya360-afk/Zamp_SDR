@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "Ryan Yu Head of Growth ProtoPie",
+  "results": [
+    {
+      "url": "https://biblio.udb.edu.sv/biblioteca/contenido/pdf/ca/18-2023.pdf",
+      "title": "[PDF] COMMUNICATION ARTS INTERACTIVE ANNUAL 29",
+      "content": "view of the seats powered by AR technology.” What software did you use for the project? “We used Miro for brainstorming and research analysis and Sigma for UI design and quick prototyping. Previously, we had done a large majority of our proto- typing using Sigma, but we were introduced to ProtoPie and used it for high-fidelity prototyping. We also took advantage of other online resources such as Lottie Files to enhance our project. It was a great way to insert microinteractions and make us [...] INTERACTIVE ANNUAL 29: MOBILE Andrea Por, art director Christina Roche, writer Damian Simev, user experience designer Zoe Kim, designer Jeff Watkins, design director Andrea Por/Christina Roche, associate creative directors Christina Yu/Stephanie Yung, executive creative directors Zak Mroueh, chief creative officer Sean Bell/Patrick Henderson/Spencer MacEachern/Adrian Ver, strategic planners Kyle Collins/Jake Edwards/Ariana Emond, developers Ian Boddy, Pirate Music, engineer Jay Baker/Felipe [...] 94 w Wachtel, Jaime 102 Wade, Stuart 68 Wakabayashi, Lindsay 70 Walker-Wells, Steph 118 Wall, Katie 76 Wang, Kai-Li 134 Watkins, Jeff 100 We Are Royale 70 Webb, Jason 98 Wendake Tourism 110 West, Alyson 72 Whitehead, Kaitlyn 102 Widlic, Christian 72 Wong, Mandy 76 WONGDOODY 86 Wood, John 70 Work & Co 84 Wunderman Thompson 96 y Yan, Yan 120, 128, 132 Yang, Shu-Chin 134 Yi, Anicka 66 Yu, Christina 100 Yung, Stephanie 100 YWCA Metro Vancouver 106 z Zadorozhna, Natalia 76 Zancanelli, Mikayla 114",
+      "published_date": null,
+      "score": 0.22777018
+    },
+    {
+      "url": "https://www.linkedin.com/in/denis-somar",
+      "title": "Denis Somar - Product Design at DualEntry",
+      "content": "## Education\n- Hamilton College, Bachelor of Science - BS Economics\n- LaGuardia High School of Music, Art and Perfoming Arts, Bachelor of Arts (BA) equivalent Art/Art Studies, General\n- Hamilton College, Bachelor of Arts Economics\n\n## Skills\ndesigns, b2b/b2c, cto, software design, led, attention to detail, research methods, product manager, partnering, mortar, identity management, director, b2b, protopie, technology [...] little friction as possible.I'm always interested in expanding my network and meeting new people. Let's connect.Specialties:AI Design in high-risk and compliance industries, Design Systems, The System of Design, PM, UX, UI, UXRSkills &amp; Tools:Languages: JS, HTML, CSS, PHP, SQL, FileMaker, AppleScript, RubyProject Management: Pivotal Tracker, JIRA, Target Process, Basecamp, ConnectWise, Asana, SlackWireframing: Sketch, Balsamiq, Figma, Omnigraffle, LucidChart, Photoshop, Illustrator, [...] Illustrator, InvisionAnalytics: Google Analytics, Optimizely, SQL, Excel",
+      "published_date": null,
+      "score": 0.12433016
+    },
+    {
+      "url": "https://www.auto-ui.org/26/proceedings-2",
+      "title": "Proceedings – AutoUI '26",
+      "content": "phase testing are still not explored enough. The proposed method is implemented in Unreal Engine (UE). It showcases the workflow for integrating User Interface (UI) prototypes developed on external platforms like ProtoPie and Figma into the UE platform, thus not only representing the UI visually but also integrating the UI prototype’s interaction logic with the simulation environment bi-directionally. This UI prototype simulation is coupled with the adjustable seating buck to evaluate ergonomic [...] ### Left at the kerb: A Systematic Review of eHMI Evaluations for Underrepresented VRUs — Children, Older Adults, and People with Disabilities\n\n Benjamin Wj Kwok\n Thomas Goodge\n Ryan Y. H. Sim\n Kan Chen\n Jeannie S.A. Lee [...] ### From Roadways to Shared Spaces: Extending Vehicle eHMI Research to Public Mobile Robots\n\n Suhwan Jung\n Young Woo Kim\n Xinyan Yu\n Callum Parker\n Byungju Kim\n Joel Fredericks",
+      "published_date": null,
+      "score": 0.108274005
+    },
+    {
+      "url": "https://www.facebook.com/insider/posts/whats-changed-a-lot-is-that-ai-has-made-it-possible-to-prototype-your-ideas-in-r/1390820399572226",
+      "title": "Insider - \"What's changed a lot is that AI has made it...",
+      "content": "## Insider's Post\n\n### Insider\n\nJuly 16  ·\n\n\"What's changed a lot is that AI has made it possible to prototype your ideas in record time without technical knowledge and detail,\" Noah Levin said about expecting candidates to show him high-quality mock-ups. \n\nFigma's design lead said he expects more work, not less, from job candidates in the age of AI\n\nbusinessinsider.com\n\nFigma's design lead said he expects more work, not less, from job candidates in the age of AI",
+      "published_date": null,
+      "score": 0.04428663
+    },
+    {
+      "url": "https://ux-design-awards.com/winners?year=2024",
+      "title": "Winners",
+      "content": "++ Spring Awards 2027: Enter Now! ++ How to Design for Human Care: Deep Dive Oct. 28\n\n++ Spring Awards 2027: Enter Now! ++ How to Design for Human Care: Deep Dive Oct. 28\n\n# Proudly presenting all UX Design Awards winners and nominees!\n\n Projects\n Awards\n Category\n Year\n Application\n Industry\n\n### Unfortunately, there is no project that matches the selected search terms/filters.",
+      "published_date": null,
+      "score": 0.014482684
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": true
+}

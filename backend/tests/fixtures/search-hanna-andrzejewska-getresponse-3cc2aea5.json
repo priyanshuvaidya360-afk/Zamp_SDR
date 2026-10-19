@@ -1,0 +1,18 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Hanna Andrzejewska\" \"GetResponse\"",
+  "results": [
+    {
+      "url": "https://www.bing.com/aclick?ld=e8qr4zaSvQvRT-3i6Rt97hCDVUCUzU4Yvm0y7xcuj2GoId6kdxFMXSIYXAt5nxVT90pTbvLX-kA7_EBcDsvnxiBffJoqqSs9ch23qxxiuNvJ3arzCHh3FIbjr7abfGsi8R-RpQQ5HuGtWvHMrfDK5lkB8Mo2-lEiolkQBLEeSj5xXKlHtTEzQv6J5z7Tyv-34lCD3YxMXCyDe0R097khevSxBZcPg&u=aHR0cHMlM2ElMmYlMmZ3d3cuZ2V0cmVzcG9uc2UuY29tJTNmdXRtX2NhbXBhaWduJTNkV29ybGRfT3RoZXJfU2VhcmNoX0JyYW5kJTI2dXRtX3Rlcm0lM2RnZXRyZXNwb25zZS5jb20lMjZ1dG1fc291cmNlJTNkYmluZyUyNnV0bV9tZWRpdW0lM2RjcGMlMjZ1dG1faWQlM2Q1MDYwMTM3NTglMjZoc2FfYWNjJTNkOTc5NTY1JTI2aHNhX2NhbSUzZDUwNjAxMzc1OCUyNmhzYV9ncnAlM2QxMjc2NTMzOTg3NjQ3MDcxJTI2aHNhX2FkJTNkNzk3ODM1MTQ1NjE2MjMlMjZoc2Ffa3clM2RnZXRyZXNwb25zZS5jb20lMjZoc2FfbXQlM2RwJTI2aHNhX3NyYyUzZG8lMjZoc2FfdGd0JTNka3dkLTc5NzgzODk3MTE1ODUxJTI2aHNhX25ldCUzZGJpbmclMjZoc2FfdmVyJTNkMyUyNmNhbXAlM2RXb3JsZF9PdGhlcl9TZWFyY2hfQnJhbmQlMjZrdyUzZGdldHJlc3BvbnNlLmNvbSUyNnR5cGUlM2RwJTI2Y3J0biUzZEJyYW5kX1dXVyUyNm1zY2xraWQlM2QyMDE5ZTJlOWRhZjgxNGY3Yjg3Mjg4M2ZmYzYwYjY3Mw&rlid=2019e2e9daf814f7b872883ffc60b673",
+      "title": "GetResponse Official Website - Try GetResponse Free",
+      "content": "Email marketing, autoresponders, landing pages and more - complete email marketing suite! Personalized marketing tools for who you are. Helping you to achieve your business goals. Types: Free Trial, Basic, Plus, Professional, Max",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [
+    "tavily: no results"
+  ],
+  "cached": false
+}

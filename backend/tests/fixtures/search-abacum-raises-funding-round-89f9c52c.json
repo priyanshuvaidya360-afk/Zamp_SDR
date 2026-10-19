@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Abacum\" raises funding round",
+  "results": [
+    {
+      "url": "https://www.abacum.ai/blog/best-scenario-planning-software-pricing-hiring-decisions",
+      "title": "Best Scenario Planning Software: Pricing + Hiring (2026)",
+      "content": "The Abacum planning product is designed for the specific workflow that finance teams at enterprise companies with 500 to 5,000 employees face: rapid iteration on scenarios, collaboration with non-finance stakeholders, and presentation to boards that expect clear trade-off analysis. You can model how raising prices by 15% funds an accelerated hiring plan, or how delaying Q3 hires by 60 days extends your runway, and see both scenarios side by side with full P&L and cash flow implications. [...] Our scenario planning use case page showcases how companies like yours use Abacum to answer the questions that matter most: What happens to our margin if we hire aggressively and prices stay flat? How does a pricing increase change our break-even timeline? What's the minimum revenue growth we need to fund our hiring plan?\n\nThese aren't hypothetical questions. They're the questions your board will ask at your next meeting. Abacum ensures you have the answers ready. [...] Abacum enables FP&A teams to build connected pricing and headcount scenarios that are ready for board presentation without additional formatting or manual reconciliation. The platform's unified data model ensures that every pricing assumption flows directly into your workforce budget, and every hiring decision reflects back into your revenue capacity projections.",
+      "published_date": "Wed, 14 Oct 2026 00:00:00 GMT",
+      "score": 0.5035894
+    },
+    {
+      "url": "https://startupintros.com/orgs/fog-ventures",
+      "title": "FOG Ventures: Funding, Team & Investors | Startup Intros",
+      "content": "Founded in 2020 by Casey Woo and led by CEO Jeff Goodwin, FOG Ventures is a San Francisco, California-based venture capital firm connecting early-stage founders with highly active operator investors. Operating primarily through AngelList, the firm pools capital from over 500 executives to invest in innovative artificial intelligence tools and financial platforms like portfolio company Abacum. The organization facilitates typical investments of $232,400 across an expected 12 deals annually, [...] includes building a network of world-class operators from Silicon Valley powerhouses, with investments starting in tools like those for FP&A (e.g., Abacum) and expanding to 26 deals, including recent ones like Jericho Security's $15M Series A in April 2025. [...] CoreWeave, Replit) favoring FOG's picks. It influences the ecosystem by democratizing operator networks, boosting GTM for portfolio companies, and signaling credibility—e.g., Abacum's selection over competitors validates product strength while amplifying growth alongside Y Combinator and Scale.",
+      "published_date": "Mon, 13 Jul 2026 08:16:48 GMT",
+      "score": 0.42749292
+    },
+    {
+      "url": "https://getparallel.com/blog/best-forecasting-tools-for-founders-cash-runway-burn-rate-management",
+      "title": "10 Tools That Track Runway and Burn Automatically (2026) | Parallel",
+      "content": "Early-stage founders → Parallel for live cash-runway insight that updates as your numbers do. It scales with you from seed through your series rounds, helping you raise confidently and spend intelligently.\n Cash-flow tracking → Float or LiveFlow for day-to-day visibility if you're not ready for a full FP&A stack.\n Scaling finance teams → Planful, Vena, Abacum, or Cube for multi-department control, versioning, and advanced forecasting. [...] Short answer: the tools that forecast cash runway and burn automatically are the ones that connect to your accounting system and rebuild the model when your actuals change, instead of waiting for you to update a spreadsheet. For seed to Series A founders, Parallel does this out of the box (QuickBooks Online or Puzzle) and lets you model a hire, a pricing change, or a fundraise against runway in the same view. Finmark and Float are the closest alternatives for small teams. Abacum, Cube, Planful, [...] | Tool | Best for | Core strength | Live accounting sync |\n ---  --- |\n| Parallel | Early-stage founders | Live runway & burn model, built from your accounting | Yes (QBO, Puzzle, Xero) |\n| Finmark (by BILL) | Solo founders, small teams | Runway and fundraising scenarios | Yes |\n| Float | Cash-focused early teams | Day-to-day cash visibility | Yes |\n| Abacum | Mid-market-bound startups | Collaborative, cross-functional FP&A | Yes, finance-team setup |",
+      "published_date": "Tue, 01 Sep 2026 00:00:00 GMT",
+      "score": 0.32488886
+    },
+    {
+      "url": "https://fundraiseinsider.com/blog/funded-startups-united-states",
+      "title": "List of Recently Funded Startups in the USA (2026) - Fundraise Insider",
+      "content": "## Series A Funded US Companies Looking for Lead Generation\n\nSeries A Funded US Companies Looking for Lead Generation means US startups that just closed a Series A round and now have to turn early traction into predictable pipeline, which makes them active buyers of outbound, lead data and marketing services. The companies below raised Series A rounds recently and appear in the list above. [...] Image 5Image 6\n\n#1 Sales Prospecting Tool (lifetime deal)\n\nWe track companies right after they raise and share the decision-makers who are actually reachable at that momentImage 7: 👇\n\nSign-Up Now\n\n lifetime deal promotion ends soon!\n\n## Recently Funded Startups By Funding Round\n\n### Pre-Seed Round\n\n   Pre-Seed startups\n\n### Seed Round\n\n   Seed stage startups\n\n### Series A\n\n   Series A startups\n\n### Series B\n\n   Series B startups\n\n### Series C\n\n   Series C startups\n\n### Series D [...] High activity is seen in SaaS, FinTech, digital health, biotech, clean energy, artificial intelligence, logistics, and consumer technology. Each sector presents unique opportunities for service providers.\n\n### 3. When is the best time to reach out to a funded startup?\n\nThe first 1 to 3 weeks after a funding round is the ideal window. This is when leadership is making decisions about new investments, vendor partnerships, and go to market strategies.",
+      "published_date": "Wed, 30 Sep 2026 09:01:28 GMT",
+      "score": 0.07359648
+    },
+    {
+      "url": "https://www.newcomer.co/p/market-map-89-vc-backed-startups",
+      "title": "MARKET MAP: 89 VC-Backed Startups Changing Finance, Audits, Banking & Compliance",
+      "content": "Many startups have popped up to help investment bankers research stocks and draft memos around deals. One buzzy company in this space, Rogo, raised quick up rounds between January and April this year from investors including Kleiner Perkins and Sequoia. [...] Private fund administration tools have drawn less attention than CFO tools over the past two years, but lately have been heating up. Multiple investors mentioned Hanover Park as an upstart AI-native fund admin platform to watch, competing with private incumbent Carta.\n\nHanover Park raised a $27 million Series A round from Emergence, Lux Capital, and Susa Ventures in March, and took on Conviction as a customer, the company announced last week. [...] Compliance has its own special risks, as highlighted in the recent case of Delve, which isn’t in the financial sector but rather automates security compliance. The company was accused of fraudulent SOC-2 approvals by a whistleblower in March this year, after raising $32 million in Series A funding at a $300 million valuation. The company put out a statement denying the bulk of the whistleblower’s claims.\n\n#### Fund Administration",
+      "published_date": "Wed, 16 Sep 2026 00:00:00 GMT",
+      "score": 0.06708697
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": true
+}

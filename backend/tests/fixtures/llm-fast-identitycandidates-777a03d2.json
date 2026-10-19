@@ -1,0 +1,29 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Hanna Andrzejewska",
+        "title": null,
+        "company": "GetResponse",
+        "company_domain": "getresponse.com",
+        "location": "Gdańsk, PL",
+        "country": "PL",
+        "evidence_url": "https://rocketreach.co/hanna-andrzejewska-email_11333444",
+        "evidence": "Hanna Andrzejewska, based in Gdańsk, PL, is currently a Head of Product Growth at GetResponse.",
+        "confidence": 0.95
+      }
+    ],
+    "reasoning": "The search result lists Hanna Andrzejewska as Head of Product Growth at GetResponse, matching the prospect's name and company."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1915,
+    "completion_tokens": 1096,
+    "latency_ms": 1866,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

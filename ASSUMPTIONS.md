@@ -21,6 +21,13 @@ Decisions and assumptions made while building Signal. Add to this as you build
   free-tier rate limits). Only valid rows become runs; invalid and duplicate rows stay in
   the batch preview. Runs left 'running' by a server restart are marked failed at startup.
   Background work runs in-process (asyncio), so a restart loses in-flight runs by design.
+- Stages 1-3 (T06): "researched recently" means the same person (LinkedIn URL, email, or
+  name + domain) in another batch within 30 days, failed runs excluded. Identity: the
+  model's confidence is checked by code (evidence URL must be a real search result and
+  must name the person and company, else capped at 0.5 / 0.75); accept only >= 0.8 with no
+  rival >= 0.5. Gather: 5 company + 2 person searches; a company source must name the
+  company in its title or URL, a person source must contain the full name and the company;
+  page text is cut to 6,000 characters before extraction (free-tier token limits).
 - Output is a first-touch email only; no LinkedIn messages, no follow-up sequences.
 - Signals older than 180 days are ignored; weights in the hook score are hand-set.
 - Public web only. No LinkedIn scraping; rep-pasted notes are trusted as rep input.

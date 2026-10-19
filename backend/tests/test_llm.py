@@ -68,6 +68,51 @@ async def test_rate_limit_falls_back_to_gemini(monkeypatch):
     assert usage.fallbacks == ["groq: rate limited"]
 
 
+def rate_limited(retry_after: str | None):
+    headers = {"retry-after": retry_after} if retry_after else {}
+    return openai.RateLimitError("slow down", response=httpx.Response(429, request=REQUEST, headers=headers), body=None)
+
+
+async def test_short_retry_after_waits_and_stays_on_groq(monkeypatch):
+    slept = []
+
+    async def fake_sleep(seconds):
+        slept.append(seconds)
+
+    monkeypatch.setattr(llm.asyncio, "sleep", fake_sleep)
+    fake = FakeCall(rate_limited("2"), rate_limited("3"), json.dumps(HOOK))
+    monkeypatch.setattr(llm, "_call", fake)
+    _, usage = await llm.structured("smart", "sys", "user", HookChoice)
+    assert usage.provider == "groq" and slept == [2.0, 3.0]
+
+
+async def test_long_retry_after_or_too_many_waits_fall_back(monkeypatch):
+    async def fake_sleep(seconds):
+        pass
+
+    monkeypatch.setattr(llm.asyncio, "sleep", fake_sleep)
+    fake = FakeCall(rate_limited("120"), json.dumps(HOOK))
+    monkeypatch.setattr(llm, "_call", fake)
+    assert (await llm.structured("smart", "sys", "user", HookChoice))[1].provider == "gemini"
+
+    fake = FakeCall(rate_limited("1"), rate_limited("1"), rate_limited("1"), json.dumps(HOOK))
+    monkeypatch.setattr(llm, "_call", fake)
+    assert (await llm.structured("smart", "sys", "user", HookChoice))[1].provider == "gemini"
+
+
+async def test_groq_prose_instead_of_json_gets_the_corrective_retry(monkeypatch):
+    prose = "We need to output JSON object with signal_id..."
+    parse_failed = openai.BadRequestError(
+        "output_parse_failed", response=httpx.Response(400, request=REQUEST),
+        body={"error": {"code": "output_parse_failed", "failed_generation": prose,
+                        "message": "Parsing failed."}},
+    )
+    fake = FakeCall(parse_failed, json.dumps(HOOK))
+    monkeypatch.setattr(llm, "_call", fake)
+    _, usage = await llm.structured("smart", "sys", "user", HookChoice)
+    assert usage.provider == "groq" and fake.calls[1]["messages"][-2]["content"] == prose
+
+
 async def test_exhausted_retries_fall_back(monkeypatch):
     err = api_error(openai.InternalServerError, 503)
     fake = FakeCall(err, err, err, json.dumps(HOOK))

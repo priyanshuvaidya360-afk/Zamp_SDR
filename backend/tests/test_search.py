@@ -20,7 +20,7 @@ class FakeProvider:
     def available(self):
         return self._available
 
-    async def search(self, query, depth, days, max_results):
+    async def search(self, query, depth, days, max_results, topic="general"):
         self.search_calls += 1
         if self._error:
             raise self._error
