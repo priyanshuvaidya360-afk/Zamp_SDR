@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 2,
+    "angle": "GetResponse just launched an AI Email Generator, showing Hanna’s focus on automating email creation – our engine can complement that by automatically identifying buying‑signal accounts and drafting personalized first‑touch emails, helping her grow pipeline without adding SDR headcount.",
+    "runners_up": [
+      1,
+      4
+    ],
+    "why_not_others": "The other launches focus on broader product features rather than directly addressing email outreach automation that aligns with our solution."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 612,
+    "completion_tokens": 379,
+    "latency_ms": 1293,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

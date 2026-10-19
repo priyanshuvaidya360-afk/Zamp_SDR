@@ -9,19 +9,19 @@
         "location": null,
         "country": null,
         "evidence_url": "https://www.linkedin.com/in/adwarnick",
-        "evidence": "Head of Growth at Abacum (Aug 2026 to present)",
+        "evidence": "Head of Growth at Abacum",
         "confidence": 0.95
       }
     ],
-    "reasoning": "LinkedIn URL matches prospect’s LinkedIn and shows current role at Abacum, matching company."
+    "reasoning": "The LinkedIn profile URL exactly matches the prospect’s LinkedIn URL and lists the current position as Head of Growth at Abacum, providing strong evidence of identity."
   },
   "usage": {
     "provider": "groq",
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 1429,
-    "completion_tokens": 501,
-    "latency_ms": 1654,
+    "completion_tokens": 438,
+    "latency_ms": 20293,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

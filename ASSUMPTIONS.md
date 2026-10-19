@@ -4,8 +4,11 @@ Decisions and assumptions made while building Signal. Add to this as you build
 (see docs/GUIDE.md, "Assumptions and interview talking points").
 
 ## Product
-- The seller is fictional but specific: Ledgerline, an AP automation platform selling to
-  finance leaders (`seller_profile.yaml`). Relevance scoring depends on it.
+- The seller is fictional but specific: Halyard, an outbound pipeline engine sold to growth,
+  marketing and sales leaders at B2B SaaS companies (`seller_profile.yaml`). It replaced an
+  AP-automation seller (Ledgerline) on 2026-10-19 because the real prospect list we demo
+  with is Heads of Growth and CMOs; against an AP seller most rows correctly scored
+  low_signal. Relevance scoring, hiring searches and personas all read this file.
 - Input is a CSV of up to 50 prospects per upload; larger files and CRM import are next steps.
 - Each prospect needs first name, last name, and a company domain or LinkedIn URL. Company
   name alone is not a unique identity.
@@ -46,7 +49,7 @@ Decisions and assumptions made while building Signal. Add to this as you build
 - Signals older than 180 days are ignored; weights in the hook score are hand-set.
 - Public web only. No LinkedIn scraping; rep-pasted notes are trusted as rep input.
 - "Recently contacted" is checked against this tool's own history, standing in for a CRM.
-- Committee send order (AP Manager day 0, Controller day 2, CFO day 5) is a starting guess.
+- Committee send order (Head of Growth day 0, VP Sales day 2, CMO day 5) is a starting guess.
 
 ## Technical
 - Zero cost: every service runs on a free tier with no credit card. The LLM is Groq

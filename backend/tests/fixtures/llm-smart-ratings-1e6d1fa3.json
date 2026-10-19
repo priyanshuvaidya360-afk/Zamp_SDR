@@ -1,0 +1,29 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 8,
+        "relevance": 4,
+        "specificity": 4,
+        "reasoning": "The partnership expands Abacum's offering, likely increasing the need for outbound pipeline generation."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 4,
+        "specificity": 4,
+        "reasoning": "The launch of a new AI product creates demand for fresh outbound outreach to drive pipeline."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 784,
+    "completion_tokens": 618,
+    "latency_ms": 1495,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

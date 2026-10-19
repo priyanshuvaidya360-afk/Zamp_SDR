@@ -4,7 +4,7 @@
       {
         "type": "partnership",
         "about": "company",
-        "summary": "Abacum partnered with AccountsIQ to launch an AI-powered finance stack for mid-market businesses.",
+        "summary": "AccountsIQ and Abacum partner to launch an AI-powered finance stack for mid-market businesses",
         "evidence": "AccountsIQ and Abacum have partnered to launch an AI-powered finance stack for mid-market businesses",
         "published_at": "2026-08-04",
         "sensitive": false,
@@ -16,16 +16,14 @@
     ]
   },
   "usage": {
-    "provider": "gemini",
-    "model": "gemini-3.5-flash-lite",
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
     "role": "fast",
-    "prompt_tokens": 1749,
-    "completion_tokens": 147,
-    "latency_ms": 1772,
+    "prompt_tokens": 2168,
+    "completion_tokens": 431,
+    "latency_ms": 35675,
     "cost_usd": 0.0,
-    "fallbacks": [
-      "groq: rate limited"
-    ],
+    "fallbacks": [],
     "from_fixture": false
   }
 }

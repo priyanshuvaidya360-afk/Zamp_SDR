@@ -294,10 +294,10 @@ Each case below lists how it's detected, what the process does, the exact test i
 ### Case 3 — Buying committee in the same batch
 
 - **Detect:** in the batch layer, group valid rows by normalised company domain. Rows with only a LinkedIn URL join an account once stage 2 resolves their company domain (fallback: normalised company name). Any group of 2+ people becomes an account.
-- **Do:** run stages 1–5 per person, sharing one set of company research. Then a new **account plan** step (smart model) sees every member's title and the pooled signals, and assigns each person a different hook and angle using a persona map from the seller profile: CFO → cost of scaling, Controller → close timeline and accuracy, AP Manager → team workload.
+- **Do:** run stages 1–5 per person, sharing one set of company research. Then a new **account plan** step (smart model) sees every member's title and the pooled signals, and assigns each person a different hook and angle using a persona map from the seller profile: CMO → pipeline targets and cost per opportunity, Head of Growth → channel performance and outbound experiments without more headcount, VP Sales → rep productivity and meetings booked.
 - **Enforce in code, not the prompt:** no signal is used as an opener twice within an account; a company-wide event (the Series C) may appear as sentence-two context for at most one person. If the LLM's plan breaks a rule, reject it and retry once with the violation named.
-- **Send plan:** recommend staggered send days (e.g. AP Manager day 0, Controller day 2, CFO day 5). State the order as an assumption in the seller profile.
-- **Test input:** three Northwind rows in the demo CSV (CFO, Controller, AP Manager) with saved fixtures for Northwind's signals.
+- **Send plan:** recommend staggered send days (e.g. Head of Growth day 0, VP Sales day 2, CMO day 5). State the order as an assumption in the seller profile.
+- **Test input:** three Northwind rows in the demo CSV (CMO, Head of Growth, VP Sales) with saved fixtures for Northwind's signals.
 - **On screen:** an account card in the batch view with the three people side by side, each one's hook chip, a green "no reused openers" check, and the send days. Also show the counterfactual: "Without the account plan, all three would have opened with the Series C."
 
 ### Case 5 — The crowded hook
@@ -312,7 +312,7 @@ Each case below lists how it's detected, what the process does, the exact test i
 - **Detect:** extraction marks signals `time_sensitive` (open-role counts, prices, "this week" events). Each draft claim already points to its signal. On approve, if the draft is older than 3 days and any claim uses a time-sensitive signal, run `revalidate_on_approve`.
 - **Do:** re-fetch those source URLs, have the fast model compare old vs new fact → unchanged, changed or gone. Unchanged → export. Changed → rewrite only the affected sentence and show a diff for re-approval. Gone → the hook is invalid; send the run back to review with the runner-up hook.
 - **Prevent part of it:** drafting rule "use absolute dates, never 'last week'" removes one whole class of staleness.
-- **Test input:** you can't wait 12 days live, so seed one draft with `created_at` 12 days ago and two fixtures of the same careers page (4 AP roles then, 2 now). Say openly that the clock is simulated.
+- **Test input:** you can't wait 12 days live, so seed one draft with `created_at` 12 days ago and two fixtures of the same careers page (4 open SDR roles then, 2 now). Say openly that the clock is simulated.
 - **On screen:** click Approve → a "Re-checking 2 time-sensitive facts" step → a red/green diff ("four roles" → "two roles") → Approve again.
 
 ### Case 11 — Prospect is screening for AI outreach
@@ -399,7 +399,7 @@ Happy path end-to-end by the end of Day 3, edge cases on Days 4–5, polish and 
 
 - [ ] Email the coordinator: "ASA Case Study — Shivam — PS-3"
 - [ ] Draw the process map on paper (stages, decisions, statuses)
-- [ ] Write `seller_profile.yaml`: pick a believable seller (e.g. an AP automation tool selling to finance leaders) so relevance scoring means something
+- [ ] Write `seller_profile.yaml`: pick a believable seller that fits the prospects you demo with (here: Halyard, an outbound pipeline engine sold to growth, marketing and sales leaders at B2B SaaS companies) so relevance scoring means something
 - [ ] Get free API keys (no credit card): Groq, Gemini, Tavily, optionally Exa; start `ASSUMPTIONS.md`
 
 **Day 2 — Backend skeleton + research**
@@ -835,8 +835,8 @@ hand.
 ```text
 Spec: docs/GUIDE.md "Input: the prospect CSV" sample, "Edge cases: what to build", and
 "The four demo cases in full".
-Create seed/demo.csv with: one happy-path row at the crowded-hook company; Northwind CFO,
-Controller and AP Manager; one row whose public_bio holds the flan line and one holding a
+Create seed/demo.csv with: one happy-path row at the crowded-hook company; Northwind CMO,
+Head of Growth and VP Sales; one row whose public_bio holds the flan line and one holding a
 hostile instruction; Priya Raman (warm, not_now); a Contoso Logistics contact (open deal);
 plus messy rows (aliased headers in a second file seed/demo_messy.csv, a row with neither
 company domain nor LinkedIn URL, a row missing a last name, a LinkedIn-only row, an exact duplicate). Write seed/demo_cases.json describing each row's expected status.

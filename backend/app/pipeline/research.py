@@ -24,7 +24,7 @@ About = Literal["company", "person"]
 # boards and listicles. "news" makes Tavily return articles for event-type categories.
 COMPANY_QUERIES = {
     "funding": ('"{company}" raises funding round', "news"),
-    "hiring": ('"{company}" hiring finance team', "general"),
+    "hiring": ('"{company}" hiring {hiring_focus}', "general"),  # roles the seller cares about
     "product_launch": ('"{company}" launches', "news"),
     "leadership_change": ('"{company}" appoints', "news"),
     "expansion": ('"{company}" expansion partnership', "news"),
@@ -143,7 +143,8 @@ async def run(ctx: RunContext) -> GatherOutput:
     person = resolved.person if resolved else None
     company = ctx.row.get("company") or (person.company if person else "") or ""
     domain = ctx.row.get("domain") or ""
-    values = {"company": company, "domain": domain, "name": display_name(ctx.row)}
+    values = {"company": company, "domain": domain, "name": display_name(ctx.row),
+              "hiring_focus": ctx.seller.get("hiring_focus", "")}
 
     person_queries = _fill(PERSON_QUERIES, values)
     company_budget = max(0, settings.gather_max_searches - len(person_queries))

@@ -1,30 +1,37 @@
 # What "we" sell. Relevance scoring, hook choice and drafting all read this file.
-# The seller is fictional (see ASSUMPTIONS.md).
+# The seller is fictional (see ASSUMPTIONS.md). It is chosen to fit the prospects we demo
+# with: growth, marketing and sales leaders at B2B software companies.
 
-company: Ledgerline
+company: Halyard
 rep:
   name: Shivam Shukla
   title: Account Executive
 
 offer: >
-  Ledgerline is an accounts-payable automation platform. It captures invoices from email
-  and PDFs, matches them to POs and receipts, routes approvals, and pays vendors, so
-  finance teams close faster without adding AP headcount.
+  Halyard is an outbound pipeline engine for B2B SaaS teams. It spots accounts showing
+  buying signals, finds the right contacts, and drafts researched, cited first-touch emails
+  that reps review before sending, so growth teams build pipeline without adding SDR
+  headcount or blasting generic sequences.
 
 problem_solved: >
-  manual invoice processing that slows the month-end close and forces AP teams to hire
-  as invoice volume grows
+  outbound pipeline that only grows by hiring more SDRs, while generic sequences get
+  falling reply rates and burn through the target market
 
 icp:
-  industries: [fintech, SaaS, e-commerce, logistics, retail]
-  company_size: 200-5,000 employees
-  regions: [India, US, UK]
-  buyer_titles: [CFO, VP Finance, Controller, Head of Finance Ops, AP Manager]
+  industries: [B2B SaaS, developer tools, fintech software, martech, HR tech]
+  company_size: 20-2,000 employees
+  regions: [US, UK, EU, India, Australia]
+  buyer_titles: [CMO, VP Marketing, Head of Growth, Head of Demand Generation, VP Sales,
+                 Head of Sales Development, RevOps lead]
   triggers:
-    - funding round or rapid growth (invoice volume rises)
-    - hiring AP clerks or accountants
-    - ERP migration or new finance leadership
-    - expansion into new entities or countries
+    - funding round (a board that now expects pipeline to grow fast)
+    - hiring SDRs, BDRs, account executives or growth marketers
+    - a new CMO, VP Marketing, VP Sales or Head of Growth
+    - launching a new product, plan or market that needs pipeline from scratch
+    - a product-led company adding a sales-led motion
+
+# What the gather stage looks for in each prospect company's job posts.
+hiring_focus: SDR BDR sales development account executive growth marketing
 
 tone:
   voice: plain, specific, peer-to-peer; no hype
@@ -38,34 +45,41 @@ tone:
 
 # Case 3: title patterns -> the angle each persona cares about.
 personas:
-  - match: [CFO, Chief Financial Officer, VP Finance]
-    angle: cost of scaling finance operations as the company grows
-  - match: [Controller, Head of Accounting, Finance Ops]
-    angle: close timeline and accuracy
-  - match: [AP Manager, Accounts Payable, Payables]
-    angle: team workload and invoice backlog
+  - match: [CMO, Chief Marketing Officer, VP Marketing]
+    angle: pipeline targets and cost per opportunity
+  - match: [Head of Growth, Growth, Demand Generation, Demand Gen]
+    angle: channel performance and running more outbound experiments without more headcount
+  - match: [VP Sales, Head of Sales, Sales Development, SDR Manager, BDR]
+    angle: rep productivity and meetings booked per rep
+  - match: [RevOps, Revenue Operations, Sales Operations]
+    angle: clean data and fewer tools to stitch together
 
 # Case 3: staggered send days within one account (assumption).
 send_order:
-  - persona: AP Manager
+  - persona: Head of Growth
     day: 0
-  - persona: Controller
+  - persona: VP Sales
     day: 2
-  - persona: CFO
+  - persona: CMO
     day: 5
 
 # Case 6: competitor signals.
 competitors:
-  - name: Tipalti
-    typical_contract_months: 12
-    migration_story: null
-  - name: Bill.com
+  - name: Apollo
     typical_contract_months: 12
     migration_story: >
-      Teams outgrow single-entity workflows; Ledgerline handles multi-entity approvals
-      and imports historical vendor data in a week.
-  - name: Coupa
-    typical_contract_months: 36
+      Teams keep Apollo's database but stop sending its generic sequences; Halyard writes
+      the first touch from a real, cited signal and plugs into the same CRM.
+  - name: Clay
+    typical_contract_months: 12
+    migration_story: null
+  - name: 6sense
+    typical_contract_months: 24
+    migration_story: >
+      6sense says which accounts are in market; Halyard turns that into a researched email a
+      rep can send the same day, without a separate ops build.
+  - name: ZoomInfo
+    typical_contract_months: 12
     migration_story: null
 
 # Case 12: country -> language and compliance handling.
@@ -73,4 +87,5 @@ regions:
   IN: {language: en, strict: false}
   US: {language: en, strict: false}
   GB: {language: en, strict: false}
+  AU: {language: en, strict: false}
   DE: {language: de, strict: true, opt_out: "Sie können dem Erhalt weiterer E-Mails jederzeit widersprechen."}

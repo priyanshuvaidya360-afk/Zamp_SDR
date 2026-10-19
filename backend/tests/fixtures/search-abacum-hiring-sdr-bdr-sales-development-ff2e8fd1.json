@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Abacum\" hiring SDR BDR sales development account executive growth marketing",
+  "results": [
+    {
+      "url": "https://revopscareers.com/job/xtremepush-sales-development-representative-new-york-new-york-united-states",
+      "title": "Sales Development Representative",
+      "content": "We are looking for an enthusiastic, energetic and driven Sales Development Representative (SDR) to join our New Business Sales team.",
+      "published_date": null,
+      "score": 0.5948579
+    },
+    {
+      "url": "https://www.ycombinator.com/companies/cargo/jobs/dIqe5jd-sales-development-representative",
+      "title": "Sales Development Representative at Cargo | Y Combinator",
+      "content": "📈 A real track to AE. This role has a defined growth path. Strong performance means you're building toward carrying your own pipeline and quota, not stuck doing SDR work indefinitely.\n\n## Key Responsibilities [...] ## What We're Looking For\n\nExperience & Skills\n\n Prior outbound B2B sales experience (SDR/BDR or equivalent), with a track record of booking qualified meetings.\n Comfortable operating and iterating on AI-assisted sales tools and automation. You don't need to have built these systems, but you know how to run and tune one.\n Not afraid to pick up the phone. Calling still works when done right, and you know how to break through the noise.\n Strong written and verbal communication skills in English. [...] RevenueCat\n\nRevenueCat\n\nHead of Sales\n\nPolymath Robotics\n\nPolymath Robotics\n\nCommercial Solutions Associate\n\nFreebuff\n\nFreebuff\n\nFounding Account Executive\n\nDiligenceSquared\n\nDiligenceSquared\n\nBusiness Lead\n\nCamber\n\nCamber\n\nDirector of Enterprise Revenue\n\nnao Labs\n\nnao Labs\n\nGTM intern\n\nHypercubic\n\nHypercubic\n\nFounding Enteprise Sales\n\nMason\n\nMason\n\nAccount Manager - Hardware/Physical Devices\n\nCogram\n\nCogram\n\nAccount Executive (Full-cycle)\n\nCallab AI\n\nCallab AI\n\nHead of SDR\n\nSocratix AI",
+      "published_date": null,
+      "score": 0.26461646
+    },
+    {
+      "url": "https://ca.linkedin.com/jobs/view/bilingual-sales-development-representative-at-sage-4455981369",
+      "title": "Bilingual Sales Development Representative - Sage",
+      "content": "Job Description Get your foot in the door to the software sales industry as a Bilingual Sales Development Representative (SDR) at Sage.",
+      "published_date": null,
+      "score": 0.2358296
+    },
+    {
+      "url": "https://www.ycombinator.com/companies/golinks/jobs/Bzikyvg-sales-development-representative-hybrid",
+      "title": "Sales Development Representative (Hybrid) at GoLinks",
+      "content": "In this role, you'll partner closely with Account Executives (AEs) to source and close SMB, mid-market, and enterprise SaaS opportunities. You'll own the early",
+      "published_date": null,
+      "score": 0.12599827
+    },
+    {
+      "url": "https://jobtoday.com/us/jobs-hubspot/mo_independence",
+      "title": "43 Best hubspot Jobs in Independence, Missouri (October 2026) | JOB TODAY",
+      "content": "New york, ny\n Las vegas, nv\n St louis, mo\n Milwaukee, wi\n Seattle, wa\n Los angeles, ca\n Orlando, fl\n Nashville, tn\n Denver, co\n Providence, ri\n Jacksonville, fl\n Kansas city, mo\n Omaha, ne\n Minneapolis, mn\n Indianapolis, in\n Rochester, ny\n Baltimore, md\n Tempe, az\n Fort lauderdale, fl\n Mesa, az\n Portland, or\n San francisco, ca\n West palm beach, fl\n Detroit, mi\n Chandler, az\n Vancouver, wa\n Chula vista, ca\n Jersey city, nj\n Glendale, az\n Anaheim, ca\n North las vegas, nv\n Edison, nj\n Irving, tx [...] JOB TODAY logo\n\n Hire staff\n\nDriver & Delivery jobs Driver & Delivery\n\nKitchen Porter jobs Kitchen Porter\n\nChef & Cook jobs Chef & Cook\n\nConstruction & Trades jobs Construction & Trades\n\nQuick Service jobs Quick Service\n\nSalon & Beauty jobs Salon & Beauty\n\nOffice & Admin jobs Office & Admin\n\nSales & Marketing jobs Sales & Marketing\n\nCustomer Service jobs Customer Service\n\nHost & Hostess jobs Host & Hostess\n\nAccounting & Finance jobs Accounting & Finance\n\nAnimal Care jobs Animal Care [...] Irving, tx\n Glendale, ca\n Arlington, va\n Alexandria, va\n Provo, ut\n Santa ana, ca\n Bellevue, wa\n Newark, nj\n Hollywood, fl\n Yonkers, ny\n Bayonne, nj\n Pomona, ca\n Westminster, co\n Fullerton, ca\n Orange, ca\n White plains, ny",
+      "published_date": null,
+      "score": 0.029426433
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

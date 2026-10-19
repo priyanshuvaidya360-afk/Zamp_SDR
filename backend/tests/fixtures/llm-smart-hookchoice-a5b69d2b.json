@@ -1,0 +1,21 @@
+{
+  "output": {
+    "signal_id": 9,
+    "angle": "Abacum just launched Modeler, an AI agent for finance teams, meaning Amy’s growth initiatives will need to target new user segments and accelerate adoption—a perfect moment to boost pipeline with Halyard’s outbound engine.",
+    "runners_up": [
+      8
+    ],
+    "why_not_others": "The partnership signal is older and less directly linked to immediate growth opportunities."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 641,
+    "completion_tokens": 347,
+    "latency_ms": 1172,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

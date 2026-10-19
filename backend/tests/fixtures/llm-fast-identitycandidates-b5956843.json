@@ -6,22 +6,22 @@
         "title": null,
         "company": "ProtoPie",
         "company_domain": "protopie.io",
-        "location": "강남구, Seoul",
+        "location": "Gangnam-gu, Seoul",
         "country": "KR",
-        "evidence_url": "https://community.protopie.io/c/announcements/big-news-protopioneers",
-        "evidence": "Big News, ProtoPioneers! 🎉 RY Ryan Yu ProtoPie Team",
+        "evidence_url": "https://kr.linkedin.com/pub/dir/Ryan/+/kr-7715-%EC%84%9C%EC%9A%B8-%EC%9D%B8%EC%B2%9C-%EC%A7%90%EC%97%AD",
+        "evidence": "ProtoPie, 더 보기",
         "confidence": 0.9
       }
     ],
-    "reasoning": "The search results show posts by the ProtoPie team mentioning “RY Ryan Yu” and a LinkedIn directory listing a Ryan Yu associated with ProtoPie. The company matches the prospect’s domain, giving high confidence."
+    "reasoning": "The LinkedIn search result lists a Ryan Yu affiliated with ProtoPie in Seoul, matching the prospect’s name and employer domain, giving high confidence."
   },
   "usage": {
     "provider": "groq",
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 1817,
-    "completion_tokens": 689,
-    "latency_ms": 4324,
+    "completion_tokens": 674,
+    "latency_ms": 1542,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

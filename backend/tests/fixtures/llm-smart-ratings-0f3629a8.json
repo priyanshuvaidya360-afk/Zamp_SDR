@@ -1,0 +1,59 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "A new creator monetization platform creates fresh outbound selling opportunities."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Launching an AI Email Generator introduces a product that will need fresh pipeline outreach."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Acquiring an AI recommendation startup signals upcoming product expansion that may increase outbound demand."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "AI Product Recommendations are a new feature that will require targeted prospecting."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "An enhanced ecommerce automation solution opens new market segments needing outbound lead generation."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Revamping an affiliate program is a channel shift, not a direct driver of outbound pipeline needs."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "An AI email writing assistant launch creates a fresh selling story for outbound outreach."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 906,
+    "completion_tokens": 803,
+    "latency_ms": 2006,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}
