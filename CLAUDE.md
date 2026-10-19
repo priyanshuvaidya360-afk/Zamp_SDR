@@ -53,7 +53,9 @@ backend/
       resolve.py       stage 2: identity; code verifies the model's evidence
       research.py      stage 3: category searches, relevance gate, page reads
     context_adapter.py CRM / sequence-history lookups (seed tables; swap for HubSpot here)
-      extract.py       stage 4: AI-instruction scan + extraction
+      extract.py       stage 4: AI-instruction scan (regex + classifier, strip unsafe text),
+                       extraction per source, code checks (evidence on page, dates, speaker,
+                       duplicate clusters, ghost jobs), stores signals
       score.py         stage 5: scoring + hook choice
       draft.py         stages 6-7: writer + critic
   tests/               pytest; tests/fixtures/ holds recorded search results
@@ -77,6 +79,8 @@ docs/GUIDE.md          the spec
   and one structured LLM call (about 2 Tavily credits); `--all` tries each provider alone
 - `cd backend && DEMO_MODE=record .venv/bin/python -m scripts.run_prospects <csv> --names "Amy Asali" --until gather --out x.json`:
   run chosen rows through the pipeline on a throwaway DB (record, or replay with DEMO_MODE=fixtures)
+- `cd backend && .venv/bin/python -m scripts.record_extraction`: re-record the real model's answers
+  for tests/extraction_case.py (do this after changing a stage-4 prompt)
 - `make seed`: load `seed/context.json` (fake CRM / sequence history) into the database; idempotent
 - Backend Python is always `backend/.venv/bin/python`; there is no uv.
 
@@ -104,6 +108,8 @@ docs/GUIDE.md          the spec
   LLM schema need `Field(default=None, ...)`: Gemini omits null fields. Groq's per-minute
   token limit bites with 5 parallel runs; llm.py honours short `retry-after` waits.
   ddgs time filters and combined backends are unreliable; search.py tries engines one by one.
+- Any date the model or pipeline relies on comes from `settings.today or date.today()`, and
+  never goes into a prompt (recordings must replay on any later day).
 - Tests never touch the network: conftest blocks it and uses the stand-in stages by
   default; mock `search.search` / `search.extract` / `llm.structured` in stage tests.
 

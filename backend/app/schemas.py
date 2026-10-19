@@ -7,7 +7,7 @@ fields used by cases 4, 5, 7 and 10.
 from datetime import date
 from typing import Literal
 
-from pydantic import BaseModel, Field, HttpUrl
+from pydantic import BaseModel, Field
 
 SignalType = Literal[
     "funding",
@@ -30,7 +30,9 @@ class Signal(BaseModel):
     about: Literal["person", "company"]
     summary: str = Field(description="One line, in our words")
     evidence: str = Field(description="Short snippet from the source")
-    source_url: HttpUrl
+    # Set by code from the page the signal came from, never by the model ("csv:public_bio" for
+    # a finding in the uploaded bio). Every claim in a draft traces back to it.
+    source_url: str
     published_at: date | None = None
     sensitive: bool = Field(description="Layoffs, lawsuits, deaths, breaches, scandals")
     speaker: str | None = Field(default=None, description="Who said it (case 7)")

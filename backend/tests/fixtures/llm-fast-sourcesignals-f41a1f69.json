@@ -1,0 +1,31 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "hiring",
+        "about": "company",
+        "summary": "ProtoPie is hiring and lists open roles on its careers page.",
+        "evidence": "We're hiring. Join us to build the future of interactive prototyping!",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1141,
+    "completion_tokens": 125,
+    "latency_ms": 11035,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

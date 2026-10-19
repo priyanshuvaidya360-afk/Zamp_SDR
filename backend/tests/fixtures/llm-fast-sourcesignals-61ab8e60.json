@@ -1,0 +1,29 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "GetResponse highlights its AI-powered email marketing tools in a guide.",
+        "evidence": "We will also highlight how GetResponse’s AI-powered email marketing tools can streamline your efforts by giving you a platform to build emails, landing pages, and signup forms that capture attention and convert visitors into loyal customers.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1987,
+    "completion_tokens": 759,
+    "latency_ms": 23647,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

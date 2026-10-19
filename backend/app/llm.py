@@ -237,9 +237,9 @@ async def structured(
                         f"{problem}\nReturn corrected JSON only, using only allowed values."
                     )},
                 ]
-        except openai.RateLimitError:
+        except openai.RateLimitError as error:
             skipped.append(f"{provider}: rate limited")
-            log.warning("LLM %s rate limited, falling back", provider)
+            log.warning("LLM %s rate limited (retry-after %s), falling back", provider, _retry_after_s(error))
             continue
         except (openai.APIError, ValidationError) as error:
             skipped.append(f"{provider}: {type(error).__name__}")

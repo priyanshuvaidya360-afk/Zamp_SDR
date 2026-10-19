@@ -1,0 +1,115 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "GetResponse launched an all-in-one creator monetization platform.",
+        "evidence": "Email Marketing Giant GetResponse Launches All-In-One Creator Monetization Platform",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "GetResponse introduced an AI Email Generator powered by OpenAI's GPT technology.",
+        "evidence": "GetResponse introduces AI Email Generator powered by OpenAI’s GPT tech",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "acquisition",
+        "about": "company",
+        "summary": "GetResponse acquired Recostream, an AI-driven personal recommendation engine.",
+        "evidence": "Email marketing outfit GetResponse acquires Recostream, an AI-driven personal recommendation engine",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "GetResponse introduced AI Product Recommendations to help businesses boost sales.",
+        "evidence": "GetResponse Introduces AI Product Recommendations to Help Businesses Boost Their Sales",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "GetResponse unveiled an enhanced ecommerce marketing automation solution.",
+        "evidence": "GetResponse unveils enhanced ecommerce marketing automation solution",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "GetResponse relaunched its Affiliate Program with enhanced commissions and a new partnership platform.",
+        "evidence": "GetResponse Relaunches Affiliate Program with Enhanced Commissions and a New Partnership Platform",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "GetResponse launched the GetResponse Content Monetization Platform for creators.",
+        "evidence": "GetResponse Launches Content Monetization Platform Empowering Creators to Turn Expertise into Income",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "GetResponse launched an AI email writing assistant as part of its AI-powered solution suite.",
+        "evidence": "GetResponse launches AI email writing assistant: latest addition to its AI-powered solution suite",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1862,
+    "completion_tokens": 913,
+    "latency_ms": 19355,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

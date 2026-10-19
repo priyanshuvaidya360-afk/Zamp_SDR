@@ -1,0 +1,29 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Ryan Yu",
+        "title": null,
+        "company": "ProtoPie",
+        "company_domain": "protopie.io",
+        "location": "강남구, 서울, 대한민국",
+        "country": "KR",
+        "evidence_url": "https://community.protopie.io/c/announcements/big-news-protopioneers",
+        "evidence": "\"RY Ryan Yu\" ProtoPie Team",
+        "confidence": 0.95
+      }
+    ],
+    "reasoning": "The search results contain ProtoPie community posts where the user \"RY Ryan Yu\" is identified as a member of the ProtoPie team, and a Korean LinkedIn profile lists a Ryan Yu based in Seoul working at ProtoPie. The employer domain matches the prospect’s company, providing high confidence."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1817,
+    "completion_tokens": 875,
+    "latency_ms": 2823,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

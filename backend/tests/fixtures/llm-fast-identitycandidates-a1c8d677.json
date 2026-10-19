@@ -13,15 +13,15 @@
         "confidence": 0.95
       }
     ],
-    "reasoning": "LinkedIn URL matches the prospect’s LinkedIn and shows current role at Abacum, giving high confidence."
+    "reasoning": "The LinkedIn URL in the prospect data matches the search result URL exactly, and the profile lists Head of Growth at Abacum, aligning with the prospect’s company and role."
   },
   "usage": {
     "provider": "groq",
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 1429,
-    "completion_tokens": 317,
-    "latency_ms": 587,
+    "completion_tokens": 523,
+    "latency_ms": 25566,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

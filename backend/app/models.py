@@ -152,6 +152,8 @@ class SignalRecord(SQLModel, table=True):
     time_sensitive: bool = False
     coverage: int = 1
     ghost_suspect: bool = False
+    note: str | None = None  # e.g. "said by the CFO, not the prospect", "hard to fill" angle
+    cluster_urls: list[str] = Field(default_factory=list, sa_type=JSON)  # same event, other outlets
     scores: dict[str, Any] = Field(default_factory=dict, sa_type=JSON)
     selected: bool = False
     rejected_reason: str | None = None

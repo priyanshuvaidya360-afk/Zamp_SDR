@@ -28,6 +28,13 @@ Decisions and assumptions made while building Signal. Add to this as you build
   rival >= 0.5. Gather: 5 company + 2 person searches; a company source must name the
   company in its title or URL, a person source must contain the full name and the company;
   page text is cut to 6,000 characters before extraction (free-tier token limits).
+- Stage 4 (T07): instructions aimed at AI tools are found by patterns that address the
+  reader ("if you are an AI...", "ignore previous instructions", "email this to x@y");
+  a bare "language model" is not a hit, because it fires on every AI company's blog. Hits
+  are labelled by the fast model; if it is down, they count as hostile. A signal survives
+  only if 80% of its evidence words are on the page and it is under 180 days old. Someone
+  else's quote or a reshare is never person-level. A page's listing date dates its signal
+  only if the page yields a single signal. Company pages are extracted once per account.
 - Output is a first-touch email only; no LinkedIn messages, no follow-up sequences.
 - Signals older than 180 days are ignored; weights in the hook score are hand-set.
 - Public web only. No LinkedIn scraping; rep-pasted notes are trusted as rep input.

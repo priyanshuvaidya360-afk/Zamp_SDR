@@ -1,11 +1,46 @@
 {
-  "provider": "none",
+  "provider": "duckduckgo",
   "query": "\"Ryan Yu\" site:protopie.io",
-  "results": [],
+  "results": [
+    {
+      "url": "https://community.protopie.io/c/announcements/big-news-protopioneers",
+      "title": "Big News, ProtoPioneers! | ProtoPioneers",
+      "content": "Back to News & Events Big News, ProtoPioneers! 🎉 RY Ryan Yu ProtoPie Team Nov 2, 2025 ProtoPie Self Serve Team",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://community.protopie.io/c/product-updates/",
+      "title": "Updates & Roadmap | ProtoPioneers",
+      "content": "ProtoPie AI is now live in Beta 🎉 Share RY Ryan Yu ProtoPie Team Feb 8 ProtoPie Self Serve Team",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://community.protopie.io/c/bugs/ai-agent-doesn-t-turn-layers-into-components-when-asked",
+      "title": "AI agent doesn’t turn layers into components when asked",
+      "content": "Ryan Yu Is it possible to subscribe to that future feature? Seems like a very interesting one. To get a notification when it arrives. (Even if it is being planned or in progress.) Also considering components could have different flavours depending on who’s creating them / what type of logic/structure will be in the scope. Depending on on ...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://community.protopie.io/c/bugs/multi-line-text-bubble-with-blinking-cursor",
+      "title": "[ Solved] Multi line text bubble with blinking cursor",
+      "content": "Ryan Yu Hi Ryan and thanks for forwarding the issue. I like that hidden width trick, as the main reason here is to use auto height so that i don’t have to code or make any more conditions / detect other than linking the text height to the BG fill height.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://community.protopie.io/c/bugs/black-screen-on-all-newly-created-pies-on-android-player",
+      "title": "[In Progress] Black Screen on some landscape pies on Android ...",
+      "content": "Since yesterday, some landscape pies cannot be open on Android. I tried on multiple smartphones and i have a black screen. Vertical ones work fine. I tried going via the web browser (where it’s displayed fine), tapping open in ‘Protopie Player’ or sca...",
+      "published_date": null,
+      "score": null
+    }
+  ],
   "credits": 0.0,
   "fallbacks": [
-    "tavily: no results",
-    "duckduckgo: no results"
+    "tavily: no results"
   ],
   "cached": false
 }

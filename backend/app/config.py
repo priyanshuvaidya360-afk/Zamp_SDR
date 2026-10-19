@@ -1,5 +1,6 @@
 """Runtime settings, read from environment variables and backend/.env."""
 
+from datetime import date
 from pathlib import Path
 from typing import Literal
 
@@ -49,6 +50,10 @@ class Settings(BaseSettings):
     gather_max_extracts: int = 10
     signal_window_days: int = 180
     source_max_chars: int = 6_000  # per page passed on to extraction (free-tier token limits)
+    today: date | None = None  # pin "today" for tests and demos; None = the real date
+    extract_concurrency: int = 3  # extraction LLM calls in flight per run
+    ghost_min_locations: int = 3  # same job title in this many locations -> ghost suspect
+    ghost_min_days: int = 30  # or posted at least this long ago
 
     database_url: str = f"sqlite:///{BACKEND_DIR / 'signal.db'}"
     # live: real calls. record: real calls + save each response as a fixture.

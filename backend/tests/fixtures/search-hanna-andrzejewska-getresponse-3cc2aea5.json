@@ -14,5 +14,5 @@
   "fallbacks": [
     "tavily: no results"
   ],
-  "cached": false
+  "cached": true
 }
