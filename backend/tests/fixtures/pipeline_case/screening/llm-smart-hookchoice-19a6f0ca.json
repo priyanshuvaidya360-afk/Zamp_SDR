@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 2,
+    "angle": "Priya just secured a $40M Series C, so she’ll be focused on deploying that capital efficiently; Halyard lets her grow pipeline without adding costly SDR headcount, maximizing ROI on the new funds.",
+    "runners_up": [
+      1,
+      7
+    ],
+    "why_not_others": "The funding signal directly ties to her finance responsibilities, whereas the product launch and expansion are less personal and less linked to cost‑efficient pipeline generation."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 682,
+    "completion_tokens": 477,
+    "latency_ms": 2344,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

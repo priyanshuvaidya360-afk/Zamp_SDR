@@ -460,8 +460,10 @@ async def run(ctx: RunContext) -> ExtractOutput:
     signals += [screening_signal(h) for h in one_per_source.values()]
     screening = ("screening_trap" if any(h.label == "screening_trap" for h in unsafe)
                  else "hostile" if unsafe else "none")
-    if screening != "none" and ctx.confidence is not None:
-        ctx.confidence = round(ctx.confidence * 0.5, 2)  # case 11: confidence drops
+    if screening == "screening_trap" and ctx.confidence is not None:
+        # Case 11: the prospect filters AI outreach. (A hostile injection on a company page is
+        # flagged and removed, but says nothing about how this person reads email.)
+        ctx.confidence = round(ctx.confidence * 0.5, 2)
     _store(ctx, signals)
 
     usable = [s for s in signals if s.type != "ai_screening"]

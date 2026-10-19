@@ -1,0 +1,55 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Acme Fintech raised $40 million in a Series C round led by Lightspeed.",
+        "evidence": "Acme Fintech has raised $40 million in a Series C round led by Lightspeed, with participation from existing investors Sequoia and Accel.",
+        "published_at": "2026-10-02",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Acme Fintech plans to expand into Southeast Asia over the next 12 months.",
+        "evidence": "The company said it will use the funds to double its engineering team and expand into Southeast Asia over the next 12 months.",
+        "published_at": "2026-10-02",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "hiring",
+        "about": "company",
+        "summary": "Acme Fintech plans to double its engineering team.",
+        "evidence": "The company said it will use the funds to double its engineering team and expand into Southeast Asia over the next 12 months.",
+        "published_at": "2026-10-02",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 597,
+    "completion_tokens": 421,
+    "latency_ms": 9659,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

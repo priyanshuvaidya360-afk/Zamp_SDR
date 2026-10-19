@@ -48,7 +48,7 @@ backend/
       runner.py        Stage / RunContext / StopRun, run_one, run_batch, global
                        semaphore, per-account shared research, restart recovery
       stages.py        the stage list, in order (real stages + remaining stand-ins)
-      stubs.py         stand-in stages (0.3 s each) until T07-T09 replace them
+      stubs.py         stand-in stages (0.3 s each), used by runner/API tests only
       intake.py        stage 1: recently-researched block + internal context (no LLM)
       resolve.py       stage 2: identity; code verifies the model's evidence
       research.py      stage 3: category searches, relevance gate, page reads
@@ -59,7 +59,8 @@ backend/
       score.py         stage 5: model rates relevance/specificity; code adds recency,
                        verifiability, weights, exclusions (SCORE_ADJUSTERS / HOOK_EXCLUSIONS
                        are the hook points for T13/T14); smart model picks 1 of top 3
-      draft.py         stages 6-7: writer + critic
+      draft.py         stages 6-7: smart-model draft (hooked / role_based / outline), critic
+                       code checks + fast-model genericness, one rewrite, warnings kept
   tests/               pytest; tests/fixtures/ holds recorded search results
   scripts/             CLI helpers (smoke tests, seeding, demo checks)
 frontend/
@@ -83,6 +84,8 @@ docs/GUIDE.md          the spec
   run chosen rows through the pipeline on a throwaway DB (record, or replay with DEMO_MODE=fixtures)
 - `cd backend && .venv/bin/python -m scripts.record_extraction`: re-record the real model's answers
   for tests/extraction_case.py (do this after changing a stage-4 prompt)
+- `cd backend && .venv/bin/python -m scripts.record_pipeline_case`: re-record stages 4-7 on Priya's
+  case (after changing a scoring/draft/critic prompt); tests/test_draft.py replays it
 - `make seed`: load `seed/context.json` (fake CRM / sequence history) into the database; idempotent
 - Backend Python is always `backend/.venv/bin/python`; there is no uv.
 
@@ -112,6 +115,9 @@ docs/GUIDE.md          the spec
   ddgs time filters and combined backends are unreliable; search.py tries engines one by one.
 - Any date the model or pipeline relies on comes from `settings.today or date.today()`, and
   never goes into a prompt (recordings must replay on any later day).
+- Recording fixtures: record each scenario in a fresh database (prompts carry signal ids) and
+  its own fixtures folder (identical prompts would overwrite each other). Failed model calls
+  are recorded too and replay as failures.
 - Tests never touch the network: conftest blocks it and uses the stand-in stages by
   default; mock `search.search` / `search.extract` / `llm.structured` in stage tests.
 

@@ -1,0 +1,65 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "New product launch creates need for fresh outbound pipeline."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Series C funding raises growth expectations, increasing demand for pipeline."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Geographic expansion adds new markets that require outbound prospecting."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Expansion into Southeast Asia creates additional outbound pipeline opportunities."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Engineering team growth does not directly drive outbound sales pipeline needs."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 1,
+        "specificity": 4,
+        "reasoning": "Finance workflow project is unrelated to outbound pipeline generation."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Opening a Singapore office opens a new market requiring outbound outreach."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Hiring an Accounts Payable Specialist does not affect outbound pipeline needs."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1124,
+    "completion_tokens": 1124,
+    "latency_ms": 2768,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

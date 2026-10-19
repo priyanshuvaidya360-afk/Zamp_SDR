@@ -45,6 +45,14 @@ Decisions and assumptions made while building Signal. Add to this as you build
   from the top 3 (it may prefer #2 or #3 and must say why); a pick outside them is
   overridden by the top score. Best score < 2.5, or the model finding no link to what we
   sell, ends the run low_signal (the draft stage offers a labelled role-based draft).
+- Stages 6-7 (T09): drafts are under 120 words, cite every factual sentence, use absolute
+  dates, and put no day or date in the ask (the rep may send days later). The critic's
+  code checks: length, subject, banned phrases, flattery opener, relative dates, emoji,
+  claims known / safe / present, every number traceable to a signal, borrowed words name
+  their author. Genericness >= 3/5 fails. One rewrite; a second failure goes to review
+  with warnings shown. No hook -> labelled role-based draft (run stays low_signal);
+  screening trap -> 3-line outline + banner. Confidence = identity x (hook score / 5) x
+  0.8 if warnings remain.
 - Output is a first-touch email only; no LinkedIn messages, no follow-up sequences.
 - Signals older than 180 days are ignored; weights in the hook score are hand-set.
 - Public web only. No LinkedIn scraping; rep-pasted notes are trusted as rep input.

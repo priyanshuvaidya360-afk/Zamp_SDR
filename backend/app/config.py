@@ -30,8 +30,8 @@ class Settings(BaseSettings):
     gemini_fast_model: str = "gemini-3.5-flash-lite"
 
     llm_timeout_s: float = 60
-    llm_max_rate_limit_wait_s: float = 20  # honour a 429 retry-after up to this long...
-    llm_rate_limit_waits: int = 2  # ...this many times, before falling back to the next provider
+    llm_max_rate_limit_wait_s: float = 30  # honour a 429 retry-after up to this long...
+    llm_rate_limit_waits: int = 3  # ...this many times, before falling back to the next provider
     # Search: Tavily -> DuckDuckGo (ddgs, no key) -> Exa (only if EXA_API_KEY is set).
     ddgs_backends: str = "duckduckgo,bing"  # the ddgs engines that proved reliable
     fetch_timeout_s: float = 10
@@ -64,6 +64,10 @@ class Settings(BaseSettings):
     undated_days: int = 120
     low_signal_below: float = 2.5
     hook_candidates: int = 3
+    # Draft + critic (T09).
+    draft_max_words: int = 120
+    subject_max_words: int = 6
+    genericness_fail_at: int = 3  # 0 = only works for this person, 5 = fully generic
 
     database_url: str = f"sqlite:///{BACKEND_DIR / 'signal.db'}"
     # live: real calls. record: real calls + save each response as a fixture.

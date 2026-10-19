@@ -3,14 +3,16 @@
     "signals": []
   },
   "usage": {
-    "provider": "groq",
-    "model": "openai/gpt-oss-20b",
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
     "role": "fast",
-    "prompt_tokens": 2055,
-    "completion_tokens": 296,
-    "latency_ms": 14807,
+    "prompt_tokens": 1617,
+    "completion_tokens": 5,
+    "latency_ms": 1468,
     "cost_usd": 0.0,
-    "fallbacks": [],
+    "fallbacks": [
+      "groq: rate limited"
+    ],
     "from_fixture": false
   }
 }

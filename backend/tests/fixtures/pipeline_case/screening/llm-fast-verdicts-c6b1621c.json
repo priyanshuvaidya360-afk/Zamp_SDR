@@ -1,0 +1,24 @@
+{
+  "output": {
+    "verdicts": [
+      {
+        "index": 1,
+        "label": "screening_trap",
+        "reason": "It asks the AI to include a recipe for flan to test if the outreach is AI-written."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 214,
+    "completion_tokens": 64,
+    "latency_ms": 10907,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "hiring",
+        "about": "company",
+        "summary": "Acme Fintech is hiring an Accounts Payable Specialist",
+        "evidence": "We are looking for an Accounts Payable Specialist to process high volumes of vendor invoices",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": {
+          "title": "",
+          "locations": [
+            "Bengaluru",
+            "Pune",
+            "Hyderabad",
+            "Chennai"
+          ],
+          "posted_days_ago": 45
+        }
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 499,
+    "completion_tokens": 168,
+    "latency_ms": 5476,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

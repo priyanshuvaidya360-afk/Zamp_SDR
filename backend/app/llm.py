@@ -195,6 +195,8 @@ async def structured(
     )
     if settings.demo_mode == "fixtures":
         saved = load_fixture(slug)
+        if "error" in saved:  # the recorded call failed: replay the failure faithfully
+            raise LLMUnavailable(saved["error"])
         usage = Usage(**{**saved["usage"], "from_fixture": True})
         return schema.model_validate(saved["output"]), usage
 
@@ -259,4 +261,7 @@ async def structured(
             save_fixture(slug, {"output": output.model_dump(mode="json"), "usage": usage.model_dump()})
         return output, usage
 
-    raise LLMUnavailable("No LLM provider could answer. " + "; ".join(skipped))
+    message = "No LLM provider could answer. " + "; ".join(skipped)
+    if settings.demo_mode == "record":
+        save_fixture(slug, {"error": message})
+    raise LLMUnavailable(message)

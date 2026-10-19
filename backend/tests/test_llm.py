@@ -95,7 +95,7 @@ async def test_long_retry_after_or_too_many_waits_fall_back(monkeypatch):
     monkeypatch.setattr(llm, "_call", fake)
     assert (await llm.structured("smart", "sys", "user", HookChoice))[1].provider == "gemini"
 
-    fake = FakeCall(rate_limited("1"), rate_limited("1"), rate_limited("1"), json.dumps(HOOK))
+    fake = FakeCall(*[rate_limited("1")] * (settings.llm_rate_limit_waits + 1), json.dumps(HOOK))
     monkeypatch.setattr(llm, "_call", fake)
     assert (await llm.structured("smart", "sys", "user", HookChoice))[1].provider == "gemini"
 
@@ -187,6 +187,16 @@ async def test_record_then_replay_fixture_without_network(monkeypatch):
 
     with pytest.raises(FixtureMissing, match="llm-smart-hookchoice-"):
         await llm.structured("smart", "sys", "a prompt never recorded", HookChoice)
+
+
+async def test_a_failed_call_is_recorded_and_replayed_as_a_failure(monkeypatch):
+    monkeypatch.setattr(settings, "demo_mode", "record")
+    monkeypatch.setattr(llm, "_call", FakeCall(api_error(openai.RateLimitError, 429), api_error(openai.RateLimitError, 429)))
+    with pytest.raises(llm.LLMUnavailable):
+        await llm.structured("fast", "sys", "user", HookChoice)
+    monkeypatch.setattr(settings, "demo_mode", "fixtures")
+    with pytest.raises(llm.LLMUnavailable, match="groq: rate limited"):
+        await llm.structured("fast", "sys", "user", HookChoice)
 
 
 def test_strict_schema_is_provider_safe():

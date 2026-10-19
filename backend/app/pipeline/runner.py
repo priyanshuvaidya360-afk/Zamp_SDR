@@ -80,6 +80,7 @@ class RunContext:
     account_key: str | None = None
     outputs: dict[str, BaseModel] = field(default_factory=dict)  # stage name -> result
     resume_input: dict[str, Any] | None = None  # what the rep supplied for needs_input
+    message_type: str = "cold"  # "follow_up" when the prospect replied 'not now' before (T13)
     final_status: RunStatus = RunStatus.ready_for_review
     final_reason: str | None = None
     confidence: float | None = None
@@ -257,6 +258,7 @@ def _load_context(run_id: int, resume_input: dict[str, Any] | None) -> RunContex
         return RunContext(
             run_id=run.id, batch_id=run.batch_id, row=row, seller=load_seller_profile(),
             batch=batch_context(run.batch_id), account_key=run.account_key,
+            message_type=run.message_type.value if hasattr(run.message_type, "value") else run.message_type,
             resume_input=resume_input,
         )
 

@@ -2,7 +2,7 @@
   "output": {
     "candidates": [
       {
-        "name": "Amy Asali",
+        "name": "Amy Asali (Dwarnick)",
         "title": null,
         "company": "Abacum",
         "company_domain": "abacum.ai",
@@ -13,17 +13,19 @@
         "confidence": 0.95
       }
     ],
-    "reasoning": "The LinkedIn profile URL exactly matches the prospect’s LinkedIn URL and lists the current position as Head of Growth at Abacum, providing strong evidence of identity."
+    "reasoning": "The LinkedIn URL in the search results matches the prospect's LinkedIn URL and lists the correct current company (Abacum) and role (Head of Growth)."
   },
   "usage": {
-    "provider": "groq",
-    "model": "openai/gpt-oss-20b",
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
     "role": "fast",
-    "prompt_tokens": 1429,
-    "completion_tokens": 438,
-    "latency_ms": 20293,
+    "prompt_tokens": 1166,
+    "completion_tokens": 151,
+    "latency_ms": 1527,
     "cost_usd": 0.0,
-    "fallbacks": [],
+    "fallbacks": [
+      "groq: rate limited"
+    ],
     "from_fixture": false
   }
 }

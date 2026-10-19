@@ -27,6 +27,11 @@ from app.routes.batches import _store
 
 DATA = Path(__file__).parent / "data"
 FIXTURES = Path(__file__).parent / "fixtures" / "extraction"
+PIPELINE_FIXTURES = Path(__file__).parent / "fixtures" / "pipeline_case"
+
+
+def variant_dir(with_bio: bool) -> Path:
+    return PIPELINE_FIXTURES / ("screening" if with_bio else "clean")
 TODAY = date(2026, 10, 19)
 
 # (file, url, search category, about, title, listed date)
@@ -57,19 +62,38 @@ def gather_output() -> GatherOutput:
     return GatherOutput(message="fixture", sources=sources, searches=7, extracts=len(sources))
 
 
-def make_context(session: Session) -> runner.RunContext:
-    """A stored batch + run for Priya, with stages 1-3 already 'done'."""
+def make_batch(session: Session, with_bio: bool = True) -> list[int]:
+    """Store Priya's CSV row as a batch and create her run. Returns the run ids."""
     buffer = io.StringIO()
     writer = csv.writer(buffer)
     writer.writerow(["first_name", "last_name", "company", "title", "company_domain", "email", "public_bio"])
+    bio = (DATA / "flan_bio.txt").read_text().strip() if with_bio else ""
     writer.writerow(["Priya", "Raman", "Acme Fintech", "VP Finance", "acmefintech.com",
-                     "priya.raman@acmefintech.com", (DATA / "flan_bio.txt").read_text().strip()])
+                     "priya.raman@acmefintech.com", bio])
     batch = Batch(filename="extraction_case.csv")
     _store(batch, ingest.parse_upload(buffer.getvalue().encode()))
     session.add(batch)
     session.commit()
-    [run_id] = runner.create_runs(session, batch)
+    return runner.create_runs(session, batch)
+
+
+def make_context(session: Session, with_bio: bool = True) -> runner.RunContext:
+    """A stored batch + run for Priya, with stages 1-3 already 'done'."""
+    [run_id] = make_batch(session, with_bio)
     ctx = runner._load_context(run_id, None)
     ctx.outputs["gather"] = gather_output()
     ctx.confidence = 0.9
     return ctx
+
+
+async def _fixture_gather(ctx: runner.RunContext) -> GatherOutput:
+    ctx.confidence = 0.9  # stands in for stage 2's identity confidence
+    return gather_output()
+
+
+def pipeline_stages() -> list[runner.Stage]:
+    """Stages 4-7 for real, behind a stand-in gather that returns the fixture pages."""
+    from app.pipeline.stages import STAGES
+
+    return [runner.Stage("gather", "Gather signals", _fixture_gather, GatherOutput),
+            *[s for s in STAGES if s.name in {"extract", "score", "draft", "critic"}]]

@@ -1,7 +1,5 @@
-"""Stand-in stages so the runner, events and UI can be built before the real stages exist.
-
-Each one waits settings.stub_stage_delay_s and returns a dummy result. T06-T09 replace them
-one by one (docs/GUIDE.md, "Pipeline stages in detail").
+"""Stand-in stages for runner and API tests: each waits settings.stub_stage_delay_s and
+returns a dummy result, so the flow can be tested without models or search.
 """
 
 import asyncio

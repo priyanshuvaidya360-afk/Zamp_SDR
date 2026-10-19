@@ -1,0 +1,55 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Acme Fintech raised $40 million in a Series C funding round led by Lightspeed.",
+        "evidence": "Bengaluru-based Acme Fintech has raised $40 million in a Series C round led by Lightspeed",
+        "published_at": "2026-10-02",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Acme Fintech plans to expand into Southeast Asia over the next 12 months.",
+        "evidence": "expand into Southeast Asia over the next 12 months",
+        "published_at": "2026-10-02",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": null
+      },
+      {
+        "type": "person_content",
+        "about": "company",
+        "summary": "Arjun Mehta discussed how finance teams at mid-sized companies are still running on spreadsheets.",
+        "evidence": "Finance teams at mid-sized companies are still running on spreadsheets",
+        "published_at": "2026-10-02",
+        "sensitive": false,
+        "speaker": "Arjun Mehta",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 597,
+    "completion_tokens": 273,
+    "latency_ms": 4443,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

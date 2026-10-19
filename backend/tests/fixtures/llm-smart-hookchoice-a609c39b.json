@@ -1,0 +1,21 @@
+{
+  "output": {
+    "signal_id": 2,
+    "angle": "With the recent launch of Modeler, Amy as Head of Growth likely needs fresh pipeline to drive adoption of this AI finance agent, and Halyard can deliver qualified buying signals without expanding SDR headcount.",
+    "runners_up": [
+      1
+    ],
+    "why_not_others": "The partnership signal, while relevant, is older and less directly tied to a new revenue‑generating product launch."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 642,
+    "completion_tokens": 506,
+    "latency_ms": 1387,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Acme Fintech opened its Singapore office, its first outside India.",
+        "evidence": "Big news: we just opened our Singapore office, our first outside India.",
+        "published_at": "2026-10-10",
+        "sensitive": false,
+        "speaker": "Arjun Mehta",
+        "is_reshare": true,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 500,
+    "completion_tokens": 137,
+    "latency_ms": 9253,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

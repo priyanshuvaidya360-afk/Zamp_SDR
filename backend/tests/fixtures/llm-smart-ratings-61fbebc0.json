@@ -1,0 +1,29 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "New partnership expands addressable mid‑market accounts, likely increasing the growth team’s need for outbound pipeline."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Launching an AI‑driven product creates fresh buying signals, prompting the need for more targeted outreach."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 785,
+    "completion_tokens": 389,
+    "latency_ms": 1498,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}
