@@ -21,7 +21,7 @@ from pydantic import BaseModel, ValidationError
 from tenacity import AsyncRetrying, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 from app.config import settings
-from app.fixtures import load_fixture, make_slug, save_fixture
+from app.fixtures import load_fixture, make_slug, replay_pause, save_fixture
 
 log = logging.getLogger(__name__)
 
@@ -194,6 +194,7 @@ async def structured(
         {"role": role, "system": system, "user": user, "schema": schema.__name__},
     )
     if settings.demo_mode == "fixtures":
+        await replay_pause()
         saved = load_fixture(slug)
         if "error" in saved:  # the recorded call failed: replay the failure faithfully
             raise LLMUnavailable(saved["error"])

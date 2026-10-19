@@ -1,7 +1,7 @@
 // The only way the frontend talks to the backend. NEXT_PUBLIC_API_URL is baked in at build
 // time; it defaults to the local FastAPI server (make dev-api).
 
-import type { BatchDetail, BatchPreview, Mapping, SellerProfile, StartResponse } from "./types";
+import type { BatchDetail, BatchPreview, Candidate, Mapping, RunDetail, SellerProfile, StartResponse } from "./types";
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
@@ -52,4 +52,13 @@ export const api = {
   startBatch: (batchId: number) => request<StartResponse>(`/batches/${batchId}/start`, { method: "POST" }),
   getBatch: (batchId: number) => request<BatchDetail>(`/batches/${batchId}`),
   getSeller: () => request<SellerProfile>("/seller"),
+  getRun: (runId: number) => request<RunDetail>(`/runs/${runId}`),
+  resumeRun: (runId: number, candidate: Candidate) =>
+    request<{ run_id: number; status: string }>(`/runs/${runId}/resume`, json("POST", { stage: "resolve", input: { candidate } })),
+};
+
+/** SSE endpoints (opened with EventSource by useEventStream). */
+export const streams = {
+  batch: (batchId: number) => `${API_URL}/batches/${batchId}/events`,
+  run: (runId: number, after = 0) => `${API_URL}/runs/${runId}/events?after=${after}`,
 };

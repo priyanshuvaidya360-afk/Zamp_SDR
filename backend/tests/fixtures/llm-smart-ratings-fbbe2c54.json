@@ -1,0 +1,29 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "A new product launch creates demand for fresh outbound pipeline to reach target accounts."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Launching a new player for a niche OS likely requires additional outbound outreach to generate pipeline."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 769,
+    "completion_tokens": 391,
+    "latency_ms": 2095,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

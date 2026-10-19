@@ -65,12 +65,16 @@ backend/
   scripts/             CLI helpers (smoke tests, seeding, demo checks)
 frontend/
   app/                 page.tsx = dashboard; batches/new (upload + preview + mapping),
-                       batches/[id] (batch view); interactive parts are 'use client' files
+                       batches/[id] (live batch view), runs/[id] (live run view: stepper,
+                       signal cards, cited draft, candidate cards); 'use client' files
   components/          nav, status-chip; shadcn/ui (Base UI flavour) in components/ui
   lib/api.ts           the only place that calls the backend (NEXT_PUBLIC_API_URL,
                        default http://localhost:8000); turns errors into readable messages
   lib/types.ts         TypeScript mirrors of the API responses; update with the backend
   lib/status.ts        status labels + colours, defined once (guide's Style line)
+  lib/use-event-stream.ts  SSE hook: load stored state first, then stream from the last
+                       event id; reconnects; closes on `end`
+  lib/stages.ts        stepper state from events (done / warning / failed...)
   public/              demo.csv ("Use demo CSV"), template.csv (download)
 seed/                  context.json (fake CRM data); demo CSVs land here in T17
 seller_profile.yaml    what "we" sell, ICP, tone, personas, competitors, regions
@@ -123,6 +127,10 @@ docs/GUIDE.md          the spec
   ddgs time filters and combined backends are unreliable; search.py tries engines one by one.
 - Any date the model or pipeline relies on comes from `settings.today or date.today()`, and
   never goes into a prompt (recordings must replay on any later day).
+- Prompts number signals 1..n per run (score.prompt_ids), never by database id: ids depend on
+  what else ran concurrently, and such a prompt could not replay from a recording.
+- New model fields need no migration: db.add_missing_columns adds them on startup (additive
+  only). Set FIXTURE_DELAY_S (e.g. 1.5) to make a fixtures-mode batch stream like a live one.
 - Recording fixtures: record each scenario in a fresh database (prompts carry signal ids) and
   its own fixtures folder (identical prompts would overwrite each other). Failed model calls
   are recorded too and replay as failures.

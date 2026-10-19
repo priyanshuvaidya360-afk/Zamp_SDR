@@ -1,0 +1,18 @@
+{
+  "output": {
+    "signals": []
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 520,
+    "completion_tokens": 5,
+    "latency_ms": 3495,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

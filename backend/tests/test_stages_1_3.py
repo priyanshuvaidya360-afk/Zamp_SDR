@@ -169,6 +169,20 @@ async def test_two_plausible_people_ask_the_rep(session, fake_search, monkeypatc
     assert len(stop.value.payload["candidates"]) == 2
 
 
+async def test_the_same_person_found_twice_is_not_a_rival(session, fake_search, monkeypatch):
+    # Her LinkedIn and a RocketReach page: one person, two sources (the Hanna case from a real run).
+    fake_identity(monkeypatch, person(confidence=0.95),
+                  person("Priya Raman (Acme)", confidence=0.85, evidence_url="https://acmefintech.com/team"))
+    out = await resolve.run(make_ctx(session, PRIYA))
+    assert out.person.confidence == 0.95 and len(out.candidates) == 1
+
+
+def test_same_name_at_different_companies_stays_ambiguous():
+    a = Candidate(**person())
+    b = Candidate(**person(company="Other Co", company_domain="other.co"))
+    assert len(resolve.merge_same_person([a, b])) == 2
+
+
 @pytest.mark.parametrize(("candidates", "reason"), [
     ([], "Couldn't find this person in public search results. Confirm who they are."),
     ([person(confidence=0.6)], "Best match is only 0.60 confident. Confirm it's the right person."),

@@ -1,0 +1,19 @@
+{
+  "output": {
+    "genericness": 1,
+    "reason": "The email specifically references ProtoPie Player supporting HarmonyOS and launching on the Huawei AppGallery."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 182,
+    "completion_tokens": 36,
+    "latency_ms": 1238,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

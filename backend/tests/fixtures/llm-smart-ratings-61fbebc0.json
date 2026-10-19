@@ -5,13 +5,13 @@
         "signal_id": 1,
         "relevance": 3,
         "specificity": 3,
-        "reasoning": "New partnership expands addressable mid‑market accounts, likely increasing the growth team’s need for outbound pipeline."
+        "reasoning": "The new AI‑powered finance stack opens a fresh market segment, likely driving the need for outbound prospecting to build pipeline."
       },
       {
         "signal_id": 2,
         "relevance": 3,
         "specificity": 3,
-        "reasoning": "Launching an AI‑driven product creates fresh buying signals, prompting the need for more targeted outreach."
+        "reasoning": "Launching Modeler adds a new product line, increasing demand for targeted outreach to generate pipeline."
       }
     ]
   },
@@ -20,8 +20,8 @@
     "model": "openai/gpt-oss-120b",
     "role": "smart",
     "prompt_tokens": 785,
-    "completion_tokens": 389,
-    "latency_ms": 1498,
+    "completion_tokens": 518,
+    "latency_ms": 1650,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

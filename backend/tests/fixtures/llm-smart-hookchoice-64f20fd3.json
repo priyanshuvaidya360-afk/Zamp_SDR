@@ -1,0 +1,21 @@
+{
+  "output": {
+    "signal_id": 2,
+    "angle": "ProtoPie's launch of the Player for HarmonyOS signals a push into a new market segment, creating fresh growth opportunities that Ryan needs to capitalize on with qualified leads; Halyard can surface the right contacts and craft personalized outreach to accelerate adoption.",
+    "runners_up": [
+      1
+    ],
+    "why_not_others": "The earlier MCP beta launch is older and less tied to immediate growth initiatives compared to the fresh HarmonyOS expansion."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 626,
+    "completion_tokens": 340,
+    "latency_ms": 1339,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

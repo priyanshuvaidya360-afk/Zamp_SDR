@@ -73,6 +73,7 @@ class Settings(BaseSettings):
     # live: real calls. record: real calls + save each response as a fixture.
     # fixtures: replay saved responses only (no network, no keys needed).
     demo_mode: Literal["live", "record", "fixtures"] = "live"
+    fixture_delay_s: float = 0  # pause per replayed call, so a fixtures-mode batch streams like a live one
     fixtures_dir: Path = BACKEND_DIR / "tests" / "fixtures"
     cache_dir: Path = BACKEND_DIR / "tests" / "fixtures" / "cache"
     cors_origins: list[str] = ["http://localhost:3000"]

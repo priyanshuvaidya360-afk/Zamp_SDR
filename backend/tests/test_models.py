@@ -112,3 +112,27 @@ def test_schemas_validate_llm_output():
 
     draft = Draft(subject="hi", body="Body.", claims=[{"sentence": "Body.", "signal_id": 3}])
     assert draft.claims[0].signal_id == 3
+
+
+def test_old_database_gains_new_columns_with_defaults(tmp_path):
+    """A dev database created before a model grew new fields keeps working (no 'no such column')."""
+    from sqlalchemy import create_engine, inspect, text
+
+    from app.db import create_db_and_tables
+
+    engine = create_engine(f"sqlite:///{tmp_path / 'old.db'}")
+    with engine.begin() as c:  # the signals table as it was before T07 added note / cluster_urls
+        c.execute(text("CREATE TABLE signals (id INTEGER PRIMARY KEY, run_id INTEGER, type VARCHAR, about VARCHAR, "
+                       "summary VARCHAR, evidence VARCHAR, source_url VARCHAR, published_at DATE, sensitive BOOLEAN, "
+                       "speaker VARCHAR, is_reshare BOOLEAN, time_sensitive BOOLEAN, coverage INTEGER, "
+                       "ghost_suspect BOOLEAN, scores JSON, selected BOOLEAN, rejected_reason VARCHAR)"))
+        c.execute(text("INSERT INTO signals (id, run_id, type, about, summary, evidence, source_url, sensitive, speaker, "
+                       "is_reshare, time_sensitive, coverage, ghost_suspect, scores, selected) VALUES "
+                       "(1, 1, 'funding', 'company', 's', 'e', 'https://x.io', 0, NULL, 0, 0, 1, 0, '{}', 0)"))
+    create_db_and_tables(engine)
+    columns = {c["name"] for c in inspect(engine).get_columns("signals")}
+    assert {"note", "cluster_urls"} <= columns
+    with Session(engine) as session:
+        old = session.exec(select(SignalRecord)).one()
+        assert old.cluster_urls == [] and old.note is None  # the existing row loads with defaults
+    create_db_and_tables(engine)  # running again changes nothing

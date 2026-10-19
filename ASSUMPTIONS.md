@@ -53,6 +53,10 @@ Decisions and assumptions made while building Signal. Add to this as you build
   with warnings shown. No hook -> labelled role-based draft (run stays low_signal);
   screening trap -> 3-line outline + banner. Confidence = identity x (hook score / 5) x
   0.8 if warnings remain.
+- T11: identity candidates with the same name and the same employer are one person found in
+  several places (LinkedIn + RocketReach), not rivals; same name at different employers still
+  asks the rep. Schema changes are applied by adding missing columns at startup (no
+  destructive migrations at demo scale).
 - Output is a first-touch email only; no LinkedIn messages, no follow-up sequences.
 - Signals older than 180 days are ignored; weights in the hook score are hand-set.
 - Public web only. No LinkedIn scraping; rep-pasted notes are trusted as rep input.

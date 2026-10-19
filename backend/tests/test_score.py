@@ -151,11 +151,13 @@ async def test_model_pick_outside_the_candidates_is_overridden(setup):
     assert out.hook.summary == "Acme raised a $40M Series C" and "overridden" in out.message
 
 
-async def test_model_saying_nothing_links_ends_low_signal(setup):
+async def test_model_saying_nothing_links_ends_low_signal(setup, session):
     ctx = setup([signal("Acme raised a $40M Series C", coverage=3)], {"Acme raised a $40M Series C": (4, 3)},
                 pick=lambda ids, by: None)
     out = await score.run(ctx)
     assert out.low_signal and ctx.final_status == RunStatus.low_signal
+    reason = stored(session, ctx)["Acme raised a $40M Series C"].rejected_reason
+    assert reason.startswith("Hook review: no link") and "Too weak" not in reason
 
 
 async def test_no_usable_signals_skips_the_model(setup):

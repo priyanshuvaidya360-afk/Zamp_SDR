@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 4,
+    "angle": "GetResponse just launched AI Product Recommendations, a tool that personalises offers to boost sales – a clear growth priority you’ll need a steady pipeline of qualified prospects to maximise adoption.",
+    "runners_up": [
+      1,
+      5
+    ],
+    "why_not_others": "The other launches are broader product updates and don’t directly signal an immediate growth‑focused need for more pipeline."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 607,
+    "completion_tokens": 390,
+    "latency_ms": 1002,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

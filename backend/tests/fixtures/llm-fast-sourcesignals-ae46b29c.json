@@ -21,7 +21,7 @@
     "role": "fast",
     "prompt_tokens": 1749,
     "completion_tokens": 164,
-    "latency_ms": 7786,
+    "latency_ms": 1644,
     "cost_usd": 0.0,
     "fallbacks": [
       "groq: rate limited"

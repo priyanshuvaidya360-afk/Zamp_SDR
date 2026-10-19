@@ -33,7 +33,16 @@ def latest_stage_events(session: Session, run_ids: list[int]) -> dict[int, Stage
     return {e.run_id: e for e in events}
 
 
-def run_summary(run: Run, latest: StageEvent | None = None) -> dict[str, Any]:
+def hook_types(session: Session, run_ids: list[int]) -> dict[int, str]:
+    """Each run's chosen hook type (the selected signal), for list views."""
+    if not run_ids:
+        return {}
+    rows = session.exec(select(SignalRecord.run_id, SignalRecord.type)
+                        .where(SignalRecord.run_id.in_(run_ids), SignalRecord.selected)).all()
+    return {run_id: type_ for run_id, type_ in rows}
+
+
+def run_summary(run: Run, latest: StageEvent | None = None, hook_type: str | None = None) -> dict[str, Any]:
     return {
         "id": run.id,
         "batch_id": run.batch_id,
@@ -48,6 +57,7 @@ def run_summary(run: Run, latest: StageEvent | None = None) -> dict[str, Any]:
         "cost_credits": run.cost_credits,
         "current_stage": latest.stage if latest else None,
         "current_state": latest.state if latest else None,
+        "hook_type": hook_type,
         "started_at": run.started_at,
         "finished_at": run.finished_at,
     }
@@ -80,8 +90,9 @@ def list_runs(
                                 Run.last_name.ilike(like), Run.company.ilike(like)))
     total = session.exec(select(func.count()).select_from(query.subquery())).one()
     runs = session.exec(query.order_by(Run.id.desc()).offset(offset).limit(limit)).all()
-    latest = latest_stage_events(session, [r.id for r in runs])
-    return {"total": total, "items": [run_summary(r, latest.get(r.id)) for r in runs]}
+    ids = [r.id for r in runs]
+    latest, hooks = latest_stage_events(session, ids), hook_types(session, ids)
+    return {"total": total, "items": [run_summary(r, latest.get(r.id), hooks.get(r.id)) for r in runs]}
 
 
 @router.get("/{run_id}")

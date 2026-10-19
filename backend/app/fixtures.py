@@ -4,6 +4,7 @@ Spec: docs/GUIDE.md T03. Fixtures are committed so the demo and tests run with t
 off; the cache is git-ignored and only saves credits during development.
 """
 
+import asyncio
 import hashlib
 import json
 import re
@@ -33,6 +34,12 @@ def make_slug(kind: str, label: str, payload: Any) -> str:
     """Readable, stable file name: '<kind>-<label words>-<hash of the full request>'."""
     words = re.sub(r"[^a-z0-9]+", "-", label.lower()).strip("-")[:40].strip("-")
     return f"{kind}-{words or 'request'}-{_digest(payload)[:8]}"
+
+
+async def replay_pause() -> None:
+    """Make a replayed call take a moment, like a real one (settings.fixture_delay_s)."""
+    if settings.fixture_delay_s > 0:
+        await asyncio.sleep(settings.fixture_delay_s)
 
 
 def load_fixture(slug: str) -> Any:

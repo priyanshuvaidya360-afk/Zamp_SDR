@@ -7,6 +7,7 @@ LinkedIn is only ever searched for, never fetched.
 """
 
 import asyncio
+import re
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -129,6 +130,29 @@ def verify_candidates(candidates: list[Candidate], row: dict[str, Any],
     return notes
 
 
+def _person_key(c: Candidate) -> tuple[str, str] | None:
+    name = re.sub(r"\(.*?\)", "", c.name).lower()
+    name = " ".join(re.sub(r"[^\w\s]", " ", name).split())
+    employer = (c.company_domain or c.company or "").lower().strip()
+    return (name, employer) if name and employer else None
+
+
+def merge_same_person(candidates: list[Candidate]) -> list[Candidate]:
+    """Several results about ONE person (their LinkedIn, a RocketReach page, a team page) are
+    not rivals: same name + same employer = same person, keep the best-evidenced entry.
+    Without this, strong evidence from two sources would wrongly look ambiguous."""
+    best: dict[tuple[str, str], Candidate] = {}
+    merged: list[Candidate] = []
+    for c in sorted(candidates, key=lambda c: c.confidence, reverse=True):
+        key = _person_key(c)
+        if key is None:
+            merged.append(c)  # unknown employer: can't tell, keep it as its own person
+        elif key not in best:
+            best[key] = c
+            merged.append(c)
+    return merged
+
+
 def decide(candidates: list[Candidate]) -> tuple[Candidate | None, str]:
     """(accepted person or None, reason). Pure code; the thresholds live in settings."""
     ranked = sorted(candidates, key=lambda c: c.confidence, reverse=True)
@@ -214,7 +238,7 @@ async def run(ctx: RunContext) -> ResolveOutput:
 
     candidates = list(found.candidates)
     checks = verify_candidates(candidates, row, responses)
-    candidates.sort(key=lambda c: c.confidence, reverse=True)
+    candidates = merge_same_person(candidates)
     person, reason = decide(candidates)
     if person is None:
         raise StopRun(RunStatus.needs_input, reason, {

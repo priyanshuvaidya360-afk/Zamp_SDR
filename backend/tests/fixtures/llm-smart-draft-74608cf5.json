@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "new market, fresh leads",
+    "body": "Bella.Liu mentioned that ProtoPie Player now supports HarmonyOS and is officially live on the Huawei AppGallery!\nThat expansion into a new market means you need qualified leads, but building outbound pipelines often requires adding SDR headcount or relies on generic sequences that see falling reply rates.\nWould you be open to a short 15‑minute call to explore how Halyard can surface the right contacts and draft researched, cited first‑touch emails for this segment?",
+    "claims": [
+      {
+        "sentence": "Bella.Liu mentioned that ProtoPie Player now supports HarmonyOS and is officially live on the Huawei AppGallery!",
+        "signal_id": 2
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 901,
+    "completion_tokens": 1182,
+    "latency_ms": 3295,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

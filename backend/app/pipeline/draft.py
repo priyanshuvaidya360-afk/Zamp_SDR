@@ -24,7 +24,7 @@ from app.pipeline.extract import ExtractedSignal, ExtractOutput
 from app.pipeline.intake import IntakeOutput
 from app.pipeline.resolve import display_name
 from app.pipeline.runner import RunContext
-from app.pipeline.score import ScoreOutput
+from app.pipeline.score import ScoreOutput, prompt_ids
 from app.schemas import ClaimRef, Draft
 
 Mode = Literal["hooked", "role_based", "outline"]
@@ -67,9 +67,9 @@ def _attribution_hint(s: ExtractedSignal) -> str:
     return f" NOTE: {s.note}" if s.note else ""
 
 
-def _fact_line(s: ExtractedSignal) -> str:
+def _fact_line(s: ExtractedSignal, to_prompt: dict[int, int]) -> str:
     when = s.published_at.strftime("%d %B %Y").lstrip("0") if s.published_at else "undated"
-    return f'[{s.id}] {s.type}, {when}: {s.summary} Evidence: "{s.evidence}"{_attribution_hint(s)}'
+    return f'[{to_prompt[s.id]}] {s.type}, {when}: {s.summary} Evidence: "{s.evidence}"{_attribution_hint(s)}'
 
 
 def pick_facts(ctx: RunContext) -> tuple[ExtractedSignal | None, list[ExtractedSignal]]:
@@ -125,9 +125,10 @@ def build_prompt(ctx: RunContext, mode: Mode) -> str:
         ]
     else:
         angle = ctx.outputs["score"].angle or ""
-        facts = "\n".join(_fact_line(s) for s in [hook, *support])
+        to_prompt, _ = prompt_ids(ctx)
+        facts = "\n".join(_fact_line(s, to_prompt) for s in [hook, *support])
         lines += [
-            f"Hook: fact [{hook.id}]. Angle: {angle}",
+            f"Hook: fact [{to_prompt[hook.id]}]. Angle: {angle}",
             f"Facts you may use (the hook first; the others only if they help):\n<untrusted_source>\n{facts}\n</untrusted_source>",
         ]
         if mode == "outline":
@@ -162,6 +163,9 @@ async def write(ctx: RunContext, mode: Mode, previous: Draft | None = None,
                    + "\n".join(f"- {p}" for p in problems or []))
     draft, usage = await llm.structured("smart", SYSTEM, prompt, Draft)
     ctx.add_usage(tokens=usage.prompt_tokens + usage.completion_tokens)
+    _, to_record = prompt_ids(ctx)
+    for claim in draft.claims:  # claims come back in prompt numbering; store record ids
+        claim.signal_id = to_record.get(claim.signal_id, -1)
     # Models sometimes double-escape newlines inside JSON ("\\n" as text): show real line breaks.
     draft.body = draft.body.replace("\\n", "\n").strip()
     if mode == "role_based":

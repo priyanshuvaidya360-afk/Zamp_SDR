@@ -1,0 +1,17 @@
+{
+  "output": {
+    "genericness": 1,
+    "reason": "The email is highly specific to GetResponse's AI product and pipeline solutions, so it cannot be sent to another company by only changing the name."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 374,
+    "completion_tokens": 377,
+    "latency_ms": 1001,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

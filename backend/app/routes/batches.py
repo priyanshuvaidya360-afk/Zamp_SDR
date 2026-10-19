@@ -14,7 +14,7 @@ from app.db import get_session
 from app.events import HEARTBEAT, bus, format_sse, sse_response
 from app.models import Batch, BatchStatus, Run
 from app.pipeline import runner
-from app.routes.runs import latest_stage_events, run_summary
+from app.routes.runs import hook_types, latest_stage_events, run_summary
 
 router = APIRouter(prefix="/batches", tags=["batches"])
 
@@ -97,11 +97,13 @@ def get_batch(batch_id: int, session: Session = Depends(get_session)) -> dict[st
     """The batch, its runs (with each run's latest stage), and rows that never became runs."""
     batch = _get_batch(session, batch_id)
     runs = session.exec(select(Run).where(Run.batch_id == batch_id).order_by(Run.row_number)).all()
-    latest = latest_stage_events(session, [r.id for r in runs])
+    ids = [r.id for r in runs]
+    latest, hooks = latest_stage_events(session, ids), hook_types(session, ids)
     return {
         "batch": batch.model_dump(exclude={"source_rows", "rows", "headers"}),
         "progress": runner.batch_progress(session, batch_id),
-        "runs": [run_summary(r, latest.get(r.id)) for r in runs],
+        "stages": [{"name": s.name, "label": s.label} for s in runner.get_stages()],
+        "runs": [run_summary(r, latest.get(r.id), hooks.get(r.id)) for r in runs],
         "not_run": [
             {"row_number": r["row_number"], "status": r["status"], "reason": r["reason"],
              "name": " ".join(filter(None, (r["data"].get("first_name"), r["data"].get("last_name"))))}

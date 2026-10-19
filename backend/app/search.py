@@ -19,7 +19,7 @@ from tenacity import AsyncRetrying, retry_if_exception_type, stop_after_attempt,
 
 from app.config import settings
 from app.fetch import fetch_many, is_blocked
-from app.fixtures import cache_get, cache_put, load_fixture, make_slug, save_fixture
+from app.fixtures import cache_get, cache_put, load_fixture, make_slug, replay_pause, save_fixture
 
 log = logging.getLogger(__name__)
 
@@ -245,6 +245,7 @@ async def search(
         params["topic"] = topic
     slug = make_slug("search", query, params)
     if settings.demo_mode == "fixtures":
+        await replay_pause()
         return SearchResponse(**load_fixture(slug))
 
     skipped: list[str] = []
@@ -281,6 +282,7 @@ async def extract(urls: list[str]) -> ExtractResponse:
     blocked = [u for u in urls if is_blocked(u)]
     slug = make_slug("extract", " ".join(allowed)[:60], {"urls": allowed})
     if settings.demo_mode == "fixtures":
+        await replay_pause()
         return ExtractResponse(**load_fixture(slug))
 
     pages: dict[str, str] = {}

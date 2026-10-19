@@ -9,30 +9,19 @@
         "location": "Gdańsk",
         "country": "PL",
         "evidence_url": "https://pl.linkedin.com/in/hanna-andrzejewska-20596041",
-        "evidence": "Hanna Andrzejewska - Product & program manager | Growth ... LinkedIn profile matching the prospect URL.",
+        "evidence": "Hanna Andrzejewska - Product & program manager | Growth ...",
         "confidence": 1.0
-      },
-      {
-        "name": "Hanna Andrzejewska",
-        "title": null,
-        "company": "GetResponse",
-        "company_domain": "getresponse.com",
-        "location": "Gdańsk",
-        "country": "PL",
-        "evidence_url": "https://rocketreach.co/hanna-andrzejewska-email_11333444",
-        "evidence": "Hanna Andrzejewska, based in Gdańsk, PL, is currently a Head of Product Growth at GetResponse.",
-        "confidence": 0.95
       }
     ],
-    "reasoning": "The search results include a direct LinkedIn URL match for Hanna Andrzejewska at GetResponse, as well as a RocketReach profile confirming her role as Head of Product Growth at GetResponse in Gdańsk, Poland."
+    "reasoning": "The search results contain a LinkedIn profile that precisely matches the prospect's LinkedIn URL, name, and company (GetResponse)."
   },
   "usage": {
     "provider": "gemini",
     "model": "gemini-3.5-flash-lite",
     "role": "fast",
     "prompt_tokens": 1840,
-    "completion_tokens": 317,
-    "latency_ms": 2519,
+    "completion_tokens": 163,
+    "latency_ms": 1589,
     "cost_usd": 0.0,
     "fallbacks": [
       "groq: rate limited"
