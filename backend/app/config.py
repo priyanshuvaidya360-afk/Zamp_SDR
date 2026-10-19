@@ -54,6 +54,16 @@ class Settings(BaseSettings):
     extract_concurrency: int = 3  # extraction LLM calls in flight per run
     ghost_min_locations: int = 3  # same job title in this many locations -> ghost suspect
     ghost_min_days: int = 30  # or posted at least this long ago
+    # Hook score (T08): 0.35 R + 0.25 S + 0.25 * 5e^(-d/60) + 0.15 * 5V. Starting guesses, to be
+    # tuned on reply-rate data; the UI shows them.
+    weight_relevance: float = 0.35
+    weight_specificity: float = 0.25
+    weight_recency: float = 0.25
+    weight_verifiability: float = 0.15
+    recency_scale_days: float = 60
+    undated_days: int = 120
+    low_signal_below: float = 2.5
+    hook_candidates: int = 3
 
     database_url: str = f"sqlite:///{BACKEND_DIR / 'signal.db'}"
     # live: real calls. record: real calls + save each response as a fixture.

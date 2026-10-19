@@ -4,8 +4,8 @@
       {
         "type": "product_launch",
         "about": "company",
-        "summary": "ProtoPie launched ProtoPie MCP, a new feature bringing native Model Context Protocol support into ProtoPie.",
-        "evidence": "ProtoPie MCP brings native Model Context Protocol (MCP) support directly into ProtoPie, allowing AI agents like Claude Code, Cursor, Codex, VS Code, and others to interact directly with your prototypes.",
+        "summary": "ProtoPie launched ProtoPie MCP in beta, bringing Model Context Protocol support to connect AI agents with prototypes.",
+        "evidence": "ProtoPie MCP brings native Model Context Protocol (MCP) support directly into ProtoPie, allowing AI agents like Claude Code, Cursor, Codex, VS Code, and others to interact directly with your prototypes. It’s available in beta at no additional cost for all Pro and Enterprise users.",
         "published_at": "2026-07-20",
         "sensitive": false,
         "speaker": null,
@@ -20,8 +20,8 @@
     "model": "gemini-3.5-flash-lite",
     "role": "fast",
     "prompt_tokens": 1742,
-    "completion_tokens": 168,
-    "latency_ms": 19181,
+    "completion_tokens": 186,
+    "latency_ms": 1899,
     "cost_usd": 0.0,
     "fallbacks": [
       "groq: rate limited"

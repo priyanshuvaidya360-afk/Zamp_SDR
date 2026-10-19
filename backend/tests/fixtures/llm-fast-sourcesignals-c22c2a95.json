@@ -1,41 +1,18 @@
 {
   "output": {
-    "signals": [
-      {
-        "type": "partnership",
-        "about": "company",
-        "summary": "GetResponse collaborates with TechSoup on this guide",
-        "evidence": "This article is a content collaboration between marketing experts at GetResponse – an email marketing platform and nonprofit organization tech consultants at TechSoup – a nonprofit tech marketplace.",
-        "published_at": null,
-        "sensitive": false,
-        "speaker": null,
-        "is_reshare": false,
-        "time_sensitive": false,
-        "job_posting": null
-      },
-      {
-        "type": "other",
-        "about": "company",
-        "summary": "GetResponse offers a 50% discount to nonprofits",
-        "evidence": "As a nonprofit, you are eligible for a 50% discount on email marketing services.",
-        "published_at": null,
-        "sensitive": false,
-        "speaker": null,
-        "is_reshare": false,
-        "time_sensitive": false,
-        "job_posting": null
-      }
-    ]
+    "signals": []
   },
   "usage": {
-    "provider": "groq",
-    "model": "openai/gpt-oss-20b",
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
     "role": "fast",
-    "prompt_tokens": 2114,
-    "completion_tokens": 914,
-    "latency_ms": 2264,
+    "prompt_tokens": 1712,
+    "completion_tokens": 9,
+    "latency_ms": 1185,
     "cost_usd": 0.0,
-    "fallbacks": [],
+    "fallbacks": [
+      "groq: rate limited"
+    ],
     "from_fixture": false
   }
 }

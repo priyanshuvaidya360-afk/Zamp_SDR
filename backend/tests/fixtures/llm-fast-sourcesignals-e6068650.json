@@ -29,7 +29,7 @@
         "type": "acquisition",
         "about": "company",
         "summary": "GetResponse acquired Recostream, an AI-driven personal recommendation engine.",
-        "evidence": "Email marketing outfit GetResponse acquires Recostream, an AI-driven personal recommendation engine",
+        "evidence": "GetResponse Acquires Recostream",
         "published_at": null,
         "sensitive": false,
         "speaker": null,
@@ -40,8 +40,8 @@
       {
         "type": "product_launch",
         "about": "company",
-        "summary": "GetResponse introduced AI Product Recommendations to help businesses boost sales.",
-        "evidence": "GetResponse Introduces AI Product Recommendations to Help Businesses Boost Their Sales",
+        "summary": "GetResponse introduced AI Product Recommendations.",
+        "evidence": "GetResponse Introduces AI Product Recommendations",
         "published_at": null,
         "sensitive": false,
         "speaker": null,
@@ -72,30 +72,6 @@
         "is_reshare": false,
         "time_sensitive": false,
         "job_posting": null
-      },
-      {
-        "type": "product_launch",
-        "about": "company",
-        "summary": "GetResponse launched the GetResponse Content Monetization Platform for creators.",
-        "evidence": "GetResponse Launches Content Monetization Platform Empowering Creators to Turn Expertise into Income",
-        "published_at": null,
-        "sensitive": false,
-        "speaker": null,
-        "is_reshare": false,
-        "time_sensitive": false,
-        "job_posting": null
-      },
-      {
-        "type": "product_launch",
-        "about": "company",
-        "summary": "GetResponse launched an AI email writing assistant as part of its AI-powered solution suite.",
-        "evidence": "GetResponse launches AI email writing assistant: latest addition to its AI-powered solution suite",
-        "published_at": null,
-        "sensitive": false,
-        "speaker": null,
-        "is_reshare": false,
-        "time_sensitive": false,
-        "job_posting": null
       }
     ]
   },
@@ -104,8 +80,8 @@
     "model": "gemini-3.5-flash-lite",
     "role": "fast",
     "prompt_tokens": 1862,
-    "completion_tokens": 913,
-    "latency_ms": 19355,
+    "completion_tokens": 658,
+    "latency_ms": 2425,
     "cost_usd": 0.0,
     "fallbacks": [
       "groq: rate limited"

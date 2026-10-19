@@ -4,8 +4,8 @@
       {
         "type": "hiring",
         "about": "company",
-        "summary": "GetResponse is hiring an Engineering Manager in Poland.",
-        "evidence": "Please note that to qualify for this role, you must be located in Poland and hold a valid work permit.",
+        "summary": "GetResponse is hiring an Engineering Manager",
+        "evidence": "Engineering Manager who brings together three key areas: people leadership, delivery and engineering processes, and contribution to the wider IT organization and knows how to turn them into real impact.",
         "published_at": null,
         "sensitive": false,
         "speaker": null,
@@ -22,16 +22,14 @@
     ]
   },
   "usage": {
-    "provider": "gemini",
-    "model": "gemini-3.5-flash-lite",
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
     "role": "fast",
-    "prompt_tokens": 1469,
-    "completion_tokens": 155,
-    "latency_ms": 17415,
+    "prompt_tokens": 1893,
+    "completion_tokens": 559,
+    "latency_ms": 30476,
     "cost_usd": 0.0,
-    "fallbacks": [
-      "groq: rate limited"
-    ],
+    "fallbacks": [],
     "from_fixture": false
   }
 }

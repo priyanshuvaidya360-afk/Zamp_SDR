@@ -7,8 +7,8 @@
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 990,
-    "completion_tokens": 79,
-    "latency_ms": 12723,
+    "completion_tokens": 147,
+    "latency_ms": 11835,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

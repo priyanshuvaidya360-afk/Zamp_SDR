@@ -56,7 +56,9 @@ backend/
       extract.py       stage 4: AI-instruction scan (regex + classifier, strip unsafe text),
                        extraction per source, code checks (evidence on page, dates, speaker,
                        duplicate clusters, ghost jobs), stores signals
-      score.py         stage 5: scoring + hook choice
+      score.py         stage 5: model rates relevance/specificity; code adds recency,
+                       verifiability, weights, exclusions (SCORE_ADJUSTERS / HOOK_EXCLUSIONS
+                       are the hook points for T13/T14); smart model picks 1 of top 3
       draft.py         stages 6-7: writer + critic
   tests/               pytest; tests/fixtures/ holds recorded search results
   scripts/             CLI helpers (smoke tests, seeding, demo checks)

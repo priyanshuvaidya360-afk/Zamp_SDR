@@ -4,8 +4,8 @@
       {
         "type": "partnership",
         "about": "company",
-        "summary": "Abacum listed as a Profit& software partner",
-        "evidence": "Profit& White Logo Software Partners + ANAPLAN + ABACUM + JEDOX",
+        "summary": "Abacum is listed as a software partner by Profit&.",
+        "evidence": "Software Partners + ABACUM",
         "published_at": null,
         "sensitive": false,
         "speaker": null,
@@ -20,8 +20,8 @@
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 2032,
-    "completion_tokens": 361,
-    "latency_ms": 9376,
+    "completion_tokens": 431,
+    "latency_ms": 28085,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

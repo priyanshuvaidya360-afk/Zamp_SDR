@@ -1,11 +1,18 @@
 {
-  "provider": "none",
+  "provider": "duckduckgo",
   "query": "\"linkedin.com/in/hanna-andrzejewska-20596041\" Hanna Andrzejewska",
-  "results": [],
+  "results": [
+    {
+      "url": "https://pl.linkedin.com/in/hanna-andrzejewska-20596041",
+      "title": "Hanna Andrzejewska - Product & program manager | Growth ...",
+      "content": "For over 14 years, thinking, building, and growing products and product teams. User-oriented and data-focused, I help shaping B2B SaaS tools that help businesses scale and users reach their goals...",
+      "published_date": null,
+      "score": null
+    }
+  ],
   "credits": 0.0,
   "fallbacks": [
-    "tavily: no results",
-    "duckduckgo: no results"
+    "tavily: no results"
   ],
   "cached": false
 }

@@ -1,0 +1,31 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Hanna Andrzejewska",
+        "title": null,
+        "company": "GetResponse",
+        "company_domain": "getresponse.com",
+        "location": "Gdańsk",
+        "country": "PL",
+        "evidence_url": "https://pl.linkedin.com/in/hanna-andrzejewska-20596041",
+        "evidence": "Hanna Andrzejewska - Product & program manager | Growth ... LinkedIn profile matches prospect's LinkedIn URL.",
+        "confidence": 0.99
+      }
+    ],
+    "reasoning": "The search results contain a LinkedIn profile for Hanna Andrzejewska that matches the prospect's exact LinkedIn URL and company (GetResponse)."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1840,
+    "completion_tokens": 174,
+    "latency_ms": 1381,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

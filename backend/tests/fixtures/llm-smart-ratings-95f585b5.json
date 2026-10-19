@@ -1,0 +1,35 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "New product may boost sales and invoice volume, but the link to AP workload is indirect."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Launching a new player could increase revenue streams, modestly raising invoice processing needs."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Generic hiring announcement with no indication of finance or AP hiring."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 737,
+    "completion_tokens": 450,
+    "latency_ms": 1445,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}
