@@ -14,7 +14,7 @@ from sqlmodel import Session, select
 from app import db
 from app.config import settings
 from app.context_adapter import AccountInfo, OpenOpportunity, Touch, get_context_adapter
-from app.models import Run, RunStatus, utcnow
+from app.models import MessageType, Run, RunStatus, SequenceOutcome, utcnow
 from app.pipeline.runner import RunContext, StopRun
 
 
@@ -50,6 +50,36 @@ def find_recent_run(ctx: RunContext) -> Run | None:
         ).first()
 
 
+OPTED_OUT = {SequenceOutcome.not_interested.value: "said not interested",
+             SequenceOutcome.unsubscribed.value: "unsubscribed"}
+
+
+def apply_rules(ctx: RunContext, output: IntakeOutput) -> None:
+    """Cases 1 and 2 (docs/GUIDE.md "Account context", the cheap rules). Opting out wins over
+    everything; then an open deal holds the run; then a 'not now' turns it into a follow-up.
+    Only this person's own replies count; a colleague's reply says nothing about them."""
+    own = [t for t in output.reply_outcomes if t.same_person]  # newest first
+    latest = own[0] if own else None
+    if latest and latest.outcome in OPTED_OUT:
+        raise StopRun(RunStatus.suppressed,
+                      f"Opted out: {OPTED_OUT[latest.outcome]} on {latest.last_touch_at:%Y-%m-%d} "
+                      f"({latest.sequence}). Do not contact.",
+                      {"outcome": latest.outcome, "sequence": latest.sequence})
+    if output.open_opportunities:
+        deal = max(output.open_opportunities, key=lambda o: o.stage)
+        raise StopRun(RunStatus.held,
+                      f"Open opportunity with {deal.owner}, stage {deal.stage}. Draft held and routed to "
+                      f"{deal.owner}.",
+                      {"deal_owner": deal.owner, "deal_stage": deal.stage, "routed_to": deal.owner})
+    if latest and latest.outcome == SequenceOutcome.not_now.value:
+        ctx.message_type = MessageType.follow_up.value
+        with Session(db.engine) as session:
+            run = session.get(Run, ctx.run_id)
+            run.message_type = MessageType.follow_up
+            session.add(run)
+            session.commit()
+
+
 async def run(ctx: RunContext) -> IntakeOutput:
     earlier = find_recent_run(ctx)
     if earlier:
@@ -70,10 +100,13 @@ async def run(ctx: RunContext) -> IntakeOutput:
         rep_notes=ctx.row.get("rep_notes"),
     )
 
+    apply_rules(ctx, output)
+
     parts = ["No recent run"]
     own = [t for t in output.reply_outcomes if t.same_person]
     if own:
-        parts.append(f"replied '{own[0].outcome}' on {own[0].last_touch_at:%Y-%m-%d}")
+        parts.append(f"replied '{own[0].outcome}' on {own[0].last_touch_at:%Y-%m-%d}"
+                     + (" → follow-up" if ctx.message_type == MessageType.follow_up.value else ""))
     elif output.touches:
         parts.append(f"{len(output.touches)} past touch(es) at this company")
     else:

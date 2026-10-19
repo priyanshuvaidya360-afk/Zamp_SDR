@@ -49,7 +49,10 @@ backend/
                        semaphore, per-account shared research, restart recovery
       stages.py        the stage list, in order (real stages + remaining stand-ins)
       stubs.py         stand-in stages (0.3 s each), used by runner/API tests only
-      intake.py        stage 1: recently-researched block + internal context (no LLM)
+      intake.py        stage 1: recently-researched block, internal context, rules for
+                       case 1 (not_now -> follow-up; opted out -> suppressed) and case 2
+                       (open deal -> held, routed to the owner)
+      competitors.py   case 6: competitor usage (held / displacement) and mentions (never a hook)
       resolve.py       stage 2: identity; code verifies the model's evidence
       research.py      stage 3: category searches, relevance gate, page reads
     context_adapter.py CRM / sequence-history lookups (seed tables; swap for HubSpot here)

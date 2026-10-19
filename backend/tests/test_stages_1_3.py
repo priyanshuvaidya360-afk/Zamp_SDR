@@ -91,15 +91,12 @@ async def test_intake_with_no_history(session):
     assert out.touches == [] and out.open_opportunities == []
 
 
-async def test_intake_collects_reply_outcome_and_open_deal(session):
+async def test_intake_collects_reply_outcome_and_crm_owner(session):
     seed(session)
     out = await intake.run(make_ctx(session, PRIYA))
     assert out.reply_outcomes[0].outcome == "not_now" and out.reply_outcomes[0].same_person
     assert "replied 'not_now'" in out.message and out.crm_account.owner == "Asha Menon"
-
-    deal = await intake.run(make_ctx(session, "Sam,Lee,,Contoso,Controller,contosologistics.com,,"))
-    assert deal.open_opportunities[0].owner == "Sam Patel"
-    assert "open deal (stage 4, Sam Patel)" in deal.message
+    # The rules that act on this context (follow-up, suppressed, held) are in tests/test_rules.py.
 
 
 async def test_intake_blocks_a_person_researched_recently(session):

@@ -65,6 +65,13 @@ Decisions and assumptions made while building Signal. Add to this as you build
 - T12 batch similarity (case 9): 'hook source' = the hook signal's source page; the cap is
   max(1, floor(20% of drafts)); overflow runs (lowest hook score first) re-run from stage 5
   with that source excluded, once. Pairs above 0.8 TF-IDF cosine are flagged on both drafts.
+- T13 rules: only the prospect's own reply counts (a colleague's opt-out doesn't suppress
+  them); the newest reply wins; opting out beats an open deal, which beats 'not now'. An
+  open deal holds the run before research (no credits spent); the guide's optional AE brief
+  is not built. Competitor 'usage' = the signal names a seller_profile competitor plus an
+  adoption word (adopted, selected, uses, rolled out...); usage within 12 months is held with
+  a renewal reminder at purchase + contract length - 90 days; undated or older usage with a
+  migration story becomes a displacement hook; a mere mention is never the opener.
 - Output is a first-touch email only; no LinkedIn messages, no follow-up sequences.
 - Signals older than 180 days are ignored; weights in the hook score are hand-set.
 - Public web only. No LinkedIn scraping; rep-pasted notes are trusted as rep input.

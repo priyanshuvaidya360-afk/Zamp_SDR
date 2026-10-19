@@ -22,9 +22,10 @@ from sqlmodel import Session
 from app import db, llm
 from app.config import settings
 from app.models import RunStatus, SignalRecord
+from app.pipeline import competitors
 from app.pipeline.extract import ExtractedSignal, ExtractOutput
 from app.pipeline.resolve import display_name
-from app.pipeline.runner import RunContext
+from app.pipeline.runner import RunContext, StopRun
 from app.schemas import HookChoice
 
 # Outlets whose reporting counts as reputable (verifiability 1). The company's own site and
@@ -196,8 +197,15 @@ def _batch_balance(signal: ExtractedSignal, ctx: RunContext) -> str | None:
     return None
 
 
+def _competitor_mention(signal: ExtractedSignal, ctx: RunContext) -> str | None:
+    """Case 6: news about a competitor (their funding, a comparison) is never our opener."""
+    name = competitors.mentions_competitor(signal, ctx.seller)
+    return f"Names a competitor ({name}): never the opener" if name else None
+
+
 # Each returns a reason the signal may never open the email, or None.
-HOOK_EXCLUSIONS: list[Callable[[ExtractedSignal, RunContext], str | None]] = [_never_a_hook, _batch_balance]
+HOOK_EXCLUSIONS: list[Callable[[ExtractedSignal, RunContext], str | None]] = [
+    _never_a_hook, _batch_balance, _competitor_mention]
 
 
 def effective_score(ctx: RunContext) -> "ScoreOutput":
@@ -312,12 +320,37 @@ def _low_signal(ctx: RunContext, ranked: list[ScoredSignal], reason: str,
     return ScoreOutput(message=reason, ranked=ranked, weights=weights(), low_signal=True)
 
 
+def _competitor_rule(ctx: RunContext, ranked: list[ScoredSignal], usage: competitors.CompetitorFinding) -> ScoreOutput:
+    """Case 6: they use a competitor. Recent purchase or no migration story -> held; otherwise the
+    usage itself becomes the hook with a displacement angle."""
+    when = f" on {usage.adopted_at}" if usage.adopted_at else ""
+    payload = {"competitor": usage.model_dump(mode="json")}
+    if usage.recent:
+        _persist(ctx, ranked, None, [], None, [], f"Held: they adopted {usage.competitor} recently")
+        raise StopRun(RunStatus.held,
+                      f"Adopted {usage.competitor}{when}, within 12 months: a new contract won't be replaced. "
+                      f"Held; renewal reminder {usage.renewal_reminder}.", payload)
+    if not usage.migration_story:
+        _persist(ctx, ranked, None, [], None, [], f"Held: established {usage.competitor} user")
+        raise StopRun(RunStatus.held,
+                      f"Established {usage.competitor} user and we have no migration story for it: held.", payload)
+    hook = next(r for r in ranked if r.signal_id == usage.signal_id).model_copy(update={"excluded": None})
+    ranked = [hook if r.signal_id == hook.signal_id else r for r in ranked]
+    angle = f"Displacement: they use {usage.competitor}. {usage.migration_story}"
+    _persist(ctx, ranked, hook.signal_id, [], "The competitor displacement angle comes first", [])
+    return ScoreOutput(message=f"Displacement angle: they use {usage.competitor}{when}", hook=hook, angle=angle,
+                       why_not_others="They already use a competitor; the displacement angle comes first.",
+                       ranked=ranked, weights=weights())
+
+
 async def run(ctx: RunContext) -> ScoreOutput:
     extracted: ExtractOutput = ctx.outputs["extract"]
     today = settings.today or date.today()
     scorable = [s for s in extracted.signals if s.type != "ai_screening"]
     ratings = await rate(ctx, scorable) if scorable else {}
     ranked = score_signals(ctx, extracted.signals, ratings, today)
+    if (usage := competitors.find_usage(extracted.signals, ctx.seller, today)) is not None:
+        return _competitor_rule(ctx, ranked, usage)
     eligible = [s for s in ranked if s.excluded is None]
 
     if not eligible:
