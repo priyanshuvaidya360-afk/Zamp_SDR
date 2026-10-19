@@ -89,6 +89,9 @@ class Batch(SQLModel, table=True):
     headers: list[str] = Field(default_factory=list, sa_type=JSON)
     source_rows: list[dict[str, Any]] = Field(default_factory=list, sa_type=JSON)
     rows: list[dict[str, Any]] = Field(default_factory=list, sa_type=JSON)  # ingest.RowResult
+    # Case 9 (T12): 1 - mean pairwise draft similarity, flagged pairs, hook-source cap actions.
+    diversity_score: float | None = None
+    similarity: dict[str, Any] = Field(default_factory=dict, sa_type=JSON)
 
 
 class Run(SQLModel, table=True):
@@ -112,6 +115,8 @@ class Run(SQLModel, table=True):
 
     account_key: str | None = Field(default=None, index=True)
     message_type: MessageType = MessageType.cold
+    send_day: int | None = None  # case 3: recommended send day within a buying committee
+    account_plan: dict[str, Any] = Field(default_factory=dict, sa_type=JSON)  # the committee's plan
     status: RunStatus = Field(default=RunStatus.running, index=True)
     final_reason: str | None = None
     confidence: float | None = None

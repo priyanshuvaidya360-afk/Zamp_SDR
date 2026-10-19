@@ -58,6 +58,8 @@ def run_summary(run: Run, latest: StageEvent | None = None, hook_type: str | Non
         "current_stage": latest.stage if latest else None,
         "current_state": latest.state if latest else None,
         "hook_type": hook_type,
+        "send_day": run.send_day,
+        "account_plan": run.account_plan or None,
         "started_at": run.started_at,
         "finished_at": run.finished_at,
     }

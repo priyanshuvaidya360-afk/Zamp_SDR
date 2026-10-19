@@ -57,6 +57,14 @@ Decisions and assumptions made while building Signal. Add to this as you build
   several places (LinkedIn + RocketReach), not rivals; same name at different employers still
   asks the rep. Schema changes are applied by adding missing columns at startup (no
   destructive migrations at demo scale).
+- T12 account plan (case 3): runs at a company with 2+ people still running wait after
+  scoring; colleagues who stop earlier leave the group, a colleague resumed later is planned
+  alone. Pooled company signals are de-duplicated; person-level signals stay with their
+  owner. A low_signal colleague can be rescued by a pooled signal. Persona and send day come
+  from seller_profile personas / send_order (title match); no match = no recommended day.
+- T12 batch similarity (case 9): 'hook source' = the hook signal's source page; the cap is
+  max(1, floor(20% of drafts)); overflow runs (lowest hook score first) re-run from stage 5
+  with that source excluded, once. Pairs above 0.8 TF-IDF cosine are flagged on both drafts.
 - Output is a first-touch email only; no LinkedIn messages, no follow-up sequences.
 - Signals older than 180 days are ignored; weights in the hook score are hand-set.
 - Public web only. No LinkedIn scraping; rep-pasted notes are trusted as rep input.

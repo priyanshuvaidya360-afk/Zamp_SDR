@@ -59,6 +59,11 @@ backend/
       score.py         stage 5: model rates relevance/specificity; code adds recency,
                        verifiability, weights, exclusions (SCORE_ADJUSTERS / HOOK_EXCLUSIONS
                        are the hook points for T13/T14); smart model picks 1 of top 3
+      account.py       account plan (case 3), between score and draft: committee barrier
+                       (releases its concurrency slot), smart-model plan, rules in code,
+                       one retry then code fallback, send days, counterfactual
+      similarity.py    batch-level step after all drafts (case 9): TF-IDF similarity,
+                       20% hook-source cap with re-runs, diversity score
       draft.py         stages 6-7: smart-model draft (hooked / role_based / outline), critic
                        code checks + fast-model genericness, one rewrite, warnings kept
   tests/               pytest; tests/fixtures/ holds recorded search results
@@ -107,7 +112,8 @@ docs/GUIDE.md          the spec
   raise `StopRun(status, reason, payload)`; any other exception fails only that run. Report
   LLM/search usage with `ctx.add_usage(tokens, credits)`. Company-level research goes
   through `ctx.batch.company_research(ctx.account_key, factory)` so it runs once per account.
-  Code owns the flow; the LLM only makes judgements inside a stage.
+  Code owns the flow; the LLM only makes judgements inside a stage. The draft reads its hook
+  through `score.effective_score(ctx)` (the account plan's assignment when there is one).
 - All LLM calls go through `app/llm.py`. All search and fetch go through `app/search.py`.
   No direct `openai` / `tavily` / `ddgs` / `exa` / `httpx` calls elsewhere.
 - Web text is untrusted. It always reaches the model inside `<untrusted_source>` tags with

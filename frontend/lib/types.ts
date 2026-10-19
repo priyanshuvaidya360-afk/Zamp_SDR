@@ -86,6 +86,37 @@ export interface RunSummary {
   current_stage: string | null;
   current_state: StageState | null;
   hook_type: string | null;
+  send_day: number | null;
+  account_plan: AccountPlan | null;
+}
+
+export interface AccountPlan {
+  account_key: string;
+  company: string | null;
+  assignments: {
+    run_id: number;
+    name: string;
+    title: string | null;
+    persona: string | null;
+    send_day: number | null;
+    opener_type: string | null;
+    opener_summary: string | null;
+    context_summary: string | null;
+    angle: string;
+    solo_hook_summary: string | null;
+  }[];
+  checks: { name: string; passed: boolean; detail: string }[];
+  counterfactual: string;
+  fallback: boolean;
+  attempts: number;
+}
+
+export interface BatchSimilarity {
+  drafts?: number;
+  similar_pairs?: { run_ids: number[]; names: string[]; similarity: number }[];
+  source_cap?: number;
+  rebalanced?: { run_id: number; excluded_source: string }[];
+  diversity?: number | null;
 }
 
 export interface StageInfo {
@@ -94,7 +125,15 @@ export interface StageInfo {
 }
 
 export interface BatchDetail {
-  batch: { id: number; filename: string; status: BatchStatus; row_count: number; uploaded_at: string };
+  batch: {
+    id: number;
+    filename: string;
+    status: BatchStatus;
+    row_count: number;
+    uploaded_at: string;
+    diversity_score: number | null;
+    similarity: BatchSimilarity;
+  };
   progress: BatchProgress;
   stages: StageInfo[];
   runs: RunSummary[];

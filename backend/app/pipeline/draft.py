@@ -24,7 +24,7 @@ from app.pipeline.extract import ExtractedSignal, ExtractOutput
 from app.pipeline.intake import IntakeOutput
 from app.pipeline.resolve import display_name
 from app.pipeline.runner import RunContext
-from app.pipeline.score import ScoreOutput, prompt_ids
+from app.pipeline.score import ScoreOutput, effective_score, prompt_ids
 from app.schemas import ClaimRef, Draft
 
 Mode = Literal["hooked", "role_based", "outline"]
@@ -74,7 +74,7 @@ def _fact_line(s: ExtractedSignal, to_prompt: dict[int, int]) -> str:
 
 def pick_facts(ctx: RunContext) -> tuple[ExtractedSignal | None, list[ExtractedSignal]]:
     """The hook and up to two supporting facts; never an excluded (sensitive / AI-screening) one."""
-    scored: ScoreOutput = ctx.outputs["score"]
+    scored: ScoreOutput = effective_score(ctx)
     extracted: ExtractOutput = ctx.outputs["extract"]
     by_id = {s.id: s for s in extracted.signals}
     usable = [r.signal_id for r in scored.ranked if r.excluded is None]
@@ -89,7 +89,7 @@ def pick_facts(ctx: RunContext) -> tuple[ExtractedSignal | None, list[ExtractedS
 def mode_for(ctx: RunContext) -> Mode:
     if ctx.outputs["extract"].ai_screening == "screening_trap":
         return "outline"
-    return "role_based" if ctx.outputs["score"].hook is None else "hooked"
+    return "role_based" if effective_score(ctx).hook is None else "hooked"
 
 
 def _reply_snippet(ctx: RunContext) -> str | None:
@@ -124,7 +124,7 @@ def build_prompt(ctx: RunContext, mode: Mode) -> str:
             "company. claims must be an empty list.",
         ]
     else:
-        angle = ctx.outputs["score"].angle or ""
+        angle = effective_score(ctx).angle or ""
         to_prompt, _ = prompt_ids(ctx)
         facts = "\n".join(_fact_line(s, to_prompt) for s in [hook, *support])
         lines += [
@@ -333,7 +333,7 @@ async def genericness(ctx: RunContext, draft: Draft) -> _Genericness:
 
 async def review(ctx: RunContext, draft: Draft, mode: Mode) -> tuple[list[Check], _Genericness | None]:
     extracted: ExtractOutput = ctx.outputs["extract"]
-    scored: ScoreOutput = ctx.outputs["score"]
+    scored: ScoreOutput = effective_score(ctx)
     signals = {s.id: s for s in extracted.signals if s.type != "ai_screening"}
     excluded = {r.signal_id for r in scored.ranked if r.excluded}
     banned = (ctx.seller.get("tone") or {}).get("banned_phrases") or DEFAULT_BANNED
@@ -351,7 +351,7 @@ def _problems(checks: list[Check], generic: _Genericness | None) -> list[str]:
 
 def _confidence(ctx: RunContext, mode: Mode, warnings: list[str]) -> tuple[float | None, str]:
     identity = ctx.confidence if ctx.confidence is not None else 0.5
-    scored: ScoreOutput = ctx.outputs["score"]
+    scored: ScoreOutput = effective_score(ctx)
     hook = min(1.0, scored.hook.score / 5) if scored.hook else 0.3
     penalty = 0.8 if warnings else 1.0
     value = round(identity * hook * penalty, 2)

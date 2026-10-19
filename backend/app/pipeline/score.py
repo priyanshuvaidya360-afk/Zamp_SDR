@@ -188,8 +188,23 @@ def _never_a_hook(signal: ExtractedSignal, ctx: RunContext) -> str | None:
     return None
 
 
+def _batch_balance(signal: ExtractedSignal, ctx: RunContext) -> str | None:
+    """Case 9: a re-run ordered by the batch check excludes an over-used hook source."""
+    excluded = (ctx.resume_input or {}).get("exclude_sources") or []
+    if signal.source_url in excluded:
+        return "Batch balance: this source already opens too many drafts in the batch"
+    return None
+
+
 # Each returns a reason the signal may never open the email, or None.
-HOOK_EXCLUSIONS: list[Callable[[ExtractedSignal, RunContext], str | None]] = [_never_a_hook]
+HOOK_EXCLUSIONS: list[Callable[[ExtractedSignal, RunContext], str | None]] = [_never_a_hook, _batch_balance]
+
+
+def effective_score(ctx: RunContext) -> "ScoreOutput":
+    """The hook the draft should use: the account plan's assignment when there is one (case 3),
+    otherwise stage 5's own pick."""
+    plan = ctx.outputs.get("account_plan")
+    return plan.score if plan is not None and getattr(plan, "score", None) is not None else ctx.outputs["score"]
 
 
 def score_signals(ctx: RunContext, signals: list[ExtractedSignal], ratings: dict[int, _Rating],

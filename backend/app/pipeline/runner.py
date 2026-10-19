@@ -46,6 +46,7 @@ class Stage:
     label: str  # shown in the stepper and in failure messages
     fn: Callable[["RunContext"], Awaitable[BaseModel]]
     output: type[BaseModel]  # used to rebuild this stage's result when a run resumes
+    releases_slot: bool = False  # waits on other runs (account plan): give up the concurrency slot
 
 
 class BatchContext:
@@ -54,6 +55,8 @@ class BatchContext:
     def __init__(self, batch_id: int):
         self.batch_id = batch_id
         self._research: dict[str, asyncio.Future] = {}
+        self.accounts: dict[str, AccountGroup] = {}
+        self.running_batch = False  # True while run_batch runs: the batch is not "done" until its batch-level step
 
     async def company_research(self, account_key: str | None, factory: Callable[[], Awaitable[Any]]) -> Any:
         """Run `factory` once per account. Concurrent callers wait for the same result."""
@@ -68,6 +71,31 @@ class BatchContext:
             )
             self._research[account_key] = task
         return await asyncio.shield(self._research[account_key])
+
+
+class AccountGroup:
+    """Barrier for a buying committee (case 3): everyone at one company who is still running
+    waits here until each colleague has arrived or stopped earlier (needs_input, held...)."""
+
+    def __init__(self, expected: set[int]):
+        self.expected = expected
+        self.arrived: dict[int, Any] = {}
+        self.left: set[int] = set()
+        self.complete = asyncio.Event()
+        self._check()
+
+    def arrive(self, run_id: int, payload: Any) -> None:
+        self.arrived[run_id] = payload
+        self._check()
+
+    def leave(self, run_id: int) -> None:
+        if run_id not in self.arrived:
+            self.left.add(run_id)
+            self._check()
+
+    def _check(self) -> None:
+        if self.expected <= set(self.arrived) | self.left:
+            self.complete.set()
 
 
 @dataclass
@@ -283,7 +311,9 @@ async def run_one(run_id: int, start_stage: str | None = None,
                   resume_input: dict[str, Any] | None = None) -> None:
     """Run one prospect through the stages. Never raises: failures become run statuses."""
     stages = get_stages()
-    async with _semaphore():
+    slot = _semaphore()
+    await slot.acquire()
+    try:
         ctx = _load_context(run_id, resume_input)
         start = 0
         if start_stage:
@@ -297,7 +327,7 @@ async def run_one(run_id: int, start_stage: str | None = None,
             ctx._stage_tokens, ctx._stage_credits = 0, 0.0
             began = time.perf_counter()
             try:
-                output = await stage.fn(ctx)
+                output = await _call_stage(stage, ctx, slot)
             except StopRun as stop:
                 status, reason = stop.status, stop.reason
                 _record(ctx, stage, StageState.done, stop.reason,
@@ -333,7 +363,27 @@ async def run_one(run_id: int, start_stage: str | None = None,
             session.refresh(run)
             _publish_status(run)
             batch_id = run.batch_id
+        _leave_account(ctx)
+    finally:
+        slot.release()
     update_batch_progress(batch_id)
+
+
+async def _call_stage(stage: Stage, ctx: RunContext, slot: asyncio.Semaphore) -> BaseModel:
+    if not stage.releases_slot:
+        return await stage.fn(ctx)
+    slot.release()  # waiting on colleagues must not block runs that are queued for a slot
+    try:
+        return await stage.fn(ctx)
+    finally:
+        await slot.acquire()
+
+
+def _leave_account(ctx: RunContext) -> None:
+    """A run that ends without reaching its account's barrier must not keep colleagues waiting."""
+    group = ctx.batch.accounts.get(ctx.account_key or "")
+    if group is not None:
+        group.leave(ctx.run_id)
 
 
 def _usage(ctx: RunContext) -> dict[str, Any]:
@@ -357,11 +407,14 @@ def batch_progress(session: Session, batch_id: int) -> dict[str, Any]:
 
 
 def update_batch_progress(batch_id: int) -> None:
-    """Publish progress; mark the batch done once no run is still running."""
+    """Publish progress; mark the batch done once no run is still running (and, during a batch
+    run, only after its batch-level step: the similarity check)."""
     with Session(db.engine) as session:
         progress = batch_progress(session, batch_id)
         bus.publish(f"batch:{batch_id}", progress)
         batch = session.get(Batch, batch_id)
+        if batch_context(batch_id).running_batch:
+            return
         if progress["done"] == progress["total"] and batch.status != BatchStatus.done:
             batch.status = BatchStatus.done
             batch.finished_at = utcnow()
@@ -371,7 +424,24 @@ def update_batch_progress(batch_id: int) -> None:
 
 
 async def run_batch(run_ids: list[int]) -> None:
-    await asyncio.gather(*(run_one(run_id) for run_id in run_ids), return_exceptions=True)
+    """Run every prospect, then the batch-level step (case 9: similarity + hook-source cap)."""
+    from app.pipeline.similarity import check_batch
+
+    if not run_ids:
+        return
+    with Session(db.engine) as session:
+        batch_id = session.get(Run, run_ids[0]).batch_id
+    context = batch_context(batch_id)
+    context.running_batch = True
+    try:
+        await asyncio.gather(*(run_one(run_id) for run_id in run_ids), return_exceptions=True)
+        try:
+            await check_batch(batch_id)
+        except Exception:  # never leave a batch stuck "running" because of the batch-level step
+            log.exception("similarity check failed for batch %s", batch_id)
+    finally:
+        context.running_batch = False
+        update_batch_progress(batch_id)
 
 
 def recover_interrupted() -> int:
