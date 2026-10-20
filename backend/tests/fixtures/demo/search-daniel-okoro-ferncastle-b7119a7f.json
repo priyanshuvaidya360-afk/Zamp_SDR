@@ -1,0 +1,16 @@
+{
+  "provider": "simweb",
+  "query": "\"Daniel Okoro\" \"Ferncastle\"",
+  "results": [
+    {
+      "url": "https://ferncastle.example/about",
+      "title": "About Ferncastle",
+      "content": "Ferncastle sells procurement software to construction firms in the United States.\nLeadership: Ellen Price, CEO; Daniel Okoro, VP Sales (Austin); Raj Patel, CTO.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

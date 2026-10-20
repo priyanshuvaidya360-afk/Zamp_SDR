@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "boosting pipeline for singapore launch",
+    "body": "Arjun Mehta announced that Acme Fintech opened its Singapore office, your first location outside India (you reshared it). Scaling that expansion without adding SDR headcount is challenging, as outbound pipeline often only grows by hiring more reps while generic sequences see falling reply rates. Would you be open to a 15‑minute call to explore how Halyard can help your team build pipeline without extra SDRs?\n\nShivam",
+    "claims": [
+      {
+        "sentence": "Arjun Mehta announced that Acme Fintech opened its Singapore office, your first location outside India (you reshared it).",
+        "signal_id": 6
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 984,
+    "completion_tokens": 665,
+    "latency_ms": 2051,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

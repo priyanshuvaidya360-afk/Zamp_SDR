@@ -1,0 +1,35 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "CRO hire signals focus on scaling revenue and pipeline"
+      },
+      {
+        "signal_id": 2,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Series B funding creates pressure to quickly build pipeline"
+      },
+      {
+        "signal_id": 3,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Hiring six SDRs shows need for more outbound capacity"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 809,
+    "completion_tokens": 731,
+    "latency_ms": 1850,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

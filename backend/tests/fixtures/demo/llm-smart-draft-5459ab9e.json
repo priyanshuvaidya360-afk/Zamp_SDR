@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "outbound bottleneck solution",
+    "body": "- \"We test one new outbound angle a week, but writing research-backed first emails by hand is the bottleneck. Two people can't personalise four hundred accounts,\" you said on 30 September.\n- Our outbound pipeline engine automatically spots buying signals and drafts researched, cited first‑touch emails, so your team can run more experiments without hiring more SDRs.\n- Would you be open to a 15‑minute call to explore a demo? — Shivam",
+    "claims": [
+      {
+        "sentence": "- \"We test one new outbound angle a week, but writing research-backed first emails by hand is the bottleneck. Two people can't personalise four hundred accounts,\" you said on 30 September.",
+        "signal_id": 1
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 962,
+    "completion_tokens": 1321,
+    "latency_ms": 3212,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

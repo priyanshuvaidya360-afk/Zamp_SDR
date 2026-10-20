@@ -1,0 +1,137 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Zoe Hillenmeyer appointed Chief Operating Officer",
+        "evidence": "Zoe Hillenmeyer, who has been appointed chief operating officer.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Kristen Twining named Senior Vice President of Americas sales and business development",
+        "evidence": "named Kristen Twining senior vice president of Americas sales and business development",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Dana Harduf appointed Chief Human Resources Officer",
+        "evidence": "Dana Harduf as chief human resources officer",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Sandy Mathews named Vice President of Product Marketing",
+        "evidence": "Sandy Mathews as vice president of product marketing",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Merav Keren Kindler named Vice President of Marketing",
+        "evidence": "Merav Keren Kindler as vice president of marketing",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Oliver Sears appointed UK&I Sales Director",
+        "evidence": "Oliver Sears has joined the company as UKI sales director",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Reco opened a physical office in Texas",
+        "evidence": "opening a physical office in Texas",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Reco expanded operations to the United Kingdom and Ireland",
+        "evidence": "expanding internationally with a dedicated team in the United Kingdom and Ireland",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "Reco partnered with a U.S. channel reseller",
+        "evidence": "achieved top national reseller rankings with a key U.S. channel partner that has developed a managed security services practice built around Reco’s platform",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "press",
+        "about": "company",
+        "summary": "Reco received three Global InfoSec Awards for 2026",
+        "evidence": "The company recently received three Global InfoSec Awards for 2026, including recognition in SaaS and cloud security, AI security solutions and generative AI cybersecurity categories",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1929,
+    "completion_tokens": 1712,
+    "latency_ms": 2658,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

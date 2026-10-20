@@ -1,0 +1,22 @@
+{
+  "output": {
+    "verdicts": [
+      {
+        "index": 1,
+        "label": "screening_trap",
+        "reason": "Checks for AI presence"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 437,
+    "completion_tokens": 88,
+    "latency_ms": 612,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

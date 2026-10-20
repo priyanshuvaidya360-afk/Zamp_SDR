@@ -1,0 +1,17 @@
+{
+  "output": {
+    "genericness": 1,
+    "reason": "The email references specific company details, a migration date, and product features that are tailored to Acme Fintech, making it non-generic."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 373,
+    "completion_tokens": 594,
+    "latency_ms": 1289,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

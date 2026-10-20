@@ -1,0 +1,37 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "hiring",
+        "about": "company",
+        "summary": "Acme Fintech is hiring three Sales Development Representatives in London.",
+        "evidence": "Acme Fintech is hiring three Sales Development Representatives in London to start conversations with finance teams at mid-market companies.",
+        "published_at": "2026-10-01",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": {
+          "title": "",
+          "locations": [
+            "London"
+          ],
+          "posted_days_ago": null
+        }
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 503,
+    "completion_tokens": 169,
+    "latency_ms": 1163,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

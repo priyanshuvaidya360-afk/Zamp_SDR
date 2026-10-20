@@ -1,0 +1,18 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Merav Keren Kindler\" site:reco.ai",
+  "results": [
+    {
+      "url": "https://www.reco.ai/blog/reco-expands-executive-team-in-enterprise-ai-agent-security",
+      "title": "Reco Expands Executive Team in Enterprise AI Agent Security",
+      "content": "Jun 11, 2026 · Additional executive appointments include Dana Harduf as Chief Human Resources Officer, Sandy Mathews as Vice President of Product Marketing, David Triazona SVP of Customer Success, and Merav Keren Kindler as Vice President of Marketing.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [
+    "tavily: no results"
+  ],
+  "cached": false
+}

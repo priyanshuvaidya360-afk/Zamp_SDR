@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "pipeline for HarmonyOS launch",
+    "body": "Bella.Liu mentioned that ProtoPie Player now supports HarmonyOS and is officially live on the Huawei AppGallery.\nAs you look to drive enterprise adoption of this new market, many growth teams find their outbound pipelines only expand by hiring more SDRs while generic sequences see declining reply rates.\nHalyard surfaces buying‑signal accounts and drafts researched, cited first‑touch emails, letting your team build pipeline without adding SDR headcount.\nWould you be open to a brief 15‑minute call to explore how this could accelerate your HarmonyOS launch?\nShivam",
+    "claims": [
+      {
+        "sentence": "Bella.Liu mentioned that ProtoPie Player now supports HarmonyOS and is officially live on the Huawei AppGallery.",
+        "signal_id": 2
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 954,
+    "completion_tokens": 1033,
+    "latency_ms": 2636,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

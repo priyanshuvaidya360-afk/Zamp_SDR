@@ -4,7 +4,7 @@
       {
         "type": "hiring",
         "about": "company",
-        "summary": "Kestrel Labs is hiring four Sales Development Representatives in London.",
+        "summary": "Kestrel Labs hires four Sales Development Representatives for London.",
         "evidence": "Kestrel Labs is hiring four Sales Development Representatives to build our first outbound team in London.",
         "published_at": "2026-10-02",
         "sensitive": false,
@@ -26,8 +26,8 @@
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 1062,
-    "completion_tokens": 552,
-    "latency_ms": 1713,
+    "completion_tokens": 549,
+    "latency_ms": 19578,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

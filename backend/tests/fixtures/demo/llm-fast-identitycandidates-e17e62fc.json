@@ -1,0 +1,31 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Merav Keren Kindler",
+        "title": null,
+        "company": "Reco",
+        "company_domain": "reco.ai",
+        "location": "Israel",
+        "country": "IL",
+        "evidence_url": "https://il.linkedin.com/in/merav-keren-kindler",
+        "evidence": "VP Marketing at Reco (Feb 2026 to present)",
+        "confidence": 0.99
+      }
+    ],
+    "reasoning": "The search results include a direct LinkedIn profile match and multiple company press releases confirming Merav Keren Kindler as the Vice President of Marketing at Reco."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1428,
+    "completion_tokens": 164,
+    "latency_ms": 1978,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

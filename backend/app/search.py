@@ -19,7 +19,7 @@ from tenacity import AsyncRetrying, retry_if_exception_type, stop_after_attempt,
 
 from app.config import settings
 from app.fetch import fetch_many, is_blocked
-from app.fixtures import cache_get, cache_put, load_fixture, make_slug, replay_pause, save_fixture
+from app.fixtures import cache_get, cache_put, load_fixture, make_slug, replay_pause, reusable, save_fixture
 
 log = logging.getLogger(__name__)
 
@@ -217,8 +217,12 @@ class ExaProvider:
 
 
 def get_providers() -> list[SearchProvider]:
-    """Providers in fallback order. Tests replace this."""
-    return [TavilyProvider(), DuckDuckGoProvider(), ExaProvider()]
+    """Providers in fallback order. Tests replace this. The simulated web (demo recording only)
+    goes first and answers only for fictional demo companies."""
+    from app.simweb import SimulatedWebProvider
+
+    real: list[SearchProvider] = [TavilyProvider(), DuckDuckGoProvider(), ExaProvider()]
+    return [SimulatedWebProvider(), *real] if settings.sim_web_dir else real
 
 
 async def _with_retry(fn, *args):
@@ -247,14 +251,17 @@ async def search(
     if settings.demo_mode == "fixtures":
         await replay_pause()
         return SearchResponse(**load_fixture(slug))
+    if (saved := reusable(slug)) is not None:
+        return SearchResponse(**saved)
 
     skipped: list[str] = []
     response = SearchResponse(provider="none", query=query, results=[])
     for provider in get_providers():
         if not provider.available():
             continue
+        authoritative = getattr(provider, "authoritative", False)
         cache_key = {"provider": provider.name, "op": "search", **params}
-        if (hit := cache_get(cache_key)) is not None:
+        if not authoritative and (hit := cache_get(cache_key)) is not None:
             response = SearchResponse(**{**hit, "credits": 0, "cached": True})
             break
         try:
@@ -263,10 +270,13 @@ async def search(
             skipped.append(f"{provider.name}: {type(error).__name__}")
             log.warning("search via %s failed: %s", provider.name, error)
             continue
-        if not result.results:
+        if result is None:  # not this provider's query (the simulated web)
+            continue
+        if not result.results and not authoritative:
             skipped.append(f"{provider.name}: no results")
             continue
-        cache_put(cache_key, result.model_dump())
+        if not authoritative:
+            cache_put(cache_key, result.model_dump())
         response = result
         break
 
@@ -287,6 +297,8 @@ async def extract(urls: list[str], fresh: bool = False) -> ExtractResponse:
     if settings.demo_mode == "fixtures":
         await replay_pause()
         return ExtractResponse(**load_fixture(slug))
+    if (saved := reusable(slug)) is not None:
+        return ExtractResponse(**saved)
 
     pages: dict[str, str] = {}
     credits = 0.0
@@ -298,8 +310,9 @@ async def extract(urls: list[str], fresh: bool = False) -> ExtractResponse:
             break
         if not provider.available():
             continue
+        authoritative = getattr(provider, "authoritative", False)
         cache_key = {"provider": provider.name, "op": "extract", "urls": remaining}
-        if not fresh and (hit := cache_get(cache_key)) is not None:
+        if not fresh and not authoritative and (hit := cache_get(cache_key)) is not None:
             result = ExtractResponse(**{**hit, "credits": 0})
         else:
             try:
@@ -308,7 +321,8 @@ async def extract(urls: list[str], fresh: bool = False) -> ExtractResponse:
                 skipped.append(f"{provider.name}: {type(error).__name__}")
                 log.warning("extract via %s failed: %s", provider.name, error)
                 continue
-            cache_put(cache_key, result.model_dump())
+            if not authoritative:
+                cache_put(cache_key, result.model_dump())
         if result.pages:
             used.append(provider.name)
         pages.update(result.pages)

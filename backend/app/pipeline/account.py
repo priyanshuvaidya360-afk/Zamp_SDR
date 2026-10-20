@@ -233,6 +233,7 @@ Rules:
 - A company-wide event may also appear as second-sentence context, but for at most one person.{crowded_rule}
 - A signal about one person can only be used for that person.
 - Prefer each person's role angle and higher scores.
+- In angles, refer to people by name or as "they"; never guess anyone's gender.
 - If there are not enough usable signals, give opener = null to the person who should get a role-based email.
 Return picks (member, opener, context, angle) and a short reasoning."""
 

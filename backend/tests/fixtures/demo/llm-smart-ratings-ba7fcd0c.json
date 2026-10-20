@@ -1,0 +1,89 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "A new COO may prioritize growth but the role is not directly tied to outbound pipeline generation."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "The SVP of Americas Sales and Business Development will likely expand sales efforts, increasing need for scalable outbound pipeline."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Opening offices in new regions signals expansion, creating demand for more outbound lead generation."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 0,
+        "specificity": 3,
+        "reasoning": "Award recognitions do not directly affect pipeline needs."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 0,
+        "specificity": 3,
+        "reasoning": "A new CHRO focuses on people ops, unrelated to outbound sales pipeline."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 3,
+        "specificity": 4,
+        "reasoning": "Sandy Mathews becoming VP of Product Marketing will drive demand programs that need a reliable outbound pipeline."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 3,
+        "specificity": 4,
+        "reasoning": "A new UK&I Sales Director will push regional sales, raising outbound lead requirements."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Partnering with a U.S. channel reseller expands market reach, increasing outbound prospecting needs."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 3,
+        "specificity": 5,
+        "reasoning": "Sandy Mathews personally joining as VP of Product Marketing signals immediate responsibility for growth initiatives requiring pipeline."
+      },
+      {
+        "signal_id": 10,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "A continuing‑education course launch is unrelated to B2B SaaS sales, offering minimal impact on outbound pipeline."
+      },
+      {
+        "signal_id": 11,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "A $55 M funding round creates pressure to scale revenue quickly, strongly driving the need for more outbound pipeline."
+      },
+      {
+        "signal_id": 12,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Joining Microsoft for Startups Pegasus program expands enterprise exposure, likely boosting outbound lead demand."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1459,
+    "completion_tokens": 1260,
+    "latency_ms": 4738,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

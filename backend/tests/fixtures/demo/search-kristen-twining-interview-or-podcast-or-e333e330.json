@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Kristen Twining\" interview OR podcast OR talk",
+  "results": [
+    {
+      "url": "https://cybergtmtalk.com/episode/stop-treating-agentic-cybersecurity-gtm-like-a-sales-project-kristen-twining-svp-sales-reco",
+      "title": "Stop Treating Agentic Cybersecurity GTM Like a Sales Project: Kristen Twining SVP Sales @ Reco | Cyber GTM Talk - the source for cybersecurity go-to-market teams to learn how to grow sales faster",
+      "content": "About the guest\n\nKristen Twining is SVP Sales at Reco, which she joined in January 2026 after running Americas sales at FireMon, global sales at Illusive, ITDR sales at Proofpoint and a long run at HPE. She also hosts the podcast My Stilettos Hurt.\n\nNotable quotes [...] [00:02:35] [SPEAKER\\_00] She talks about her favorite interview question for BDRs and AEs to guess the heart of how they think about AI. And by the way, her dad, who's in his seventies, would have probably aced the interview based on how he thinks about AI. So it's interesting learning right there. And we also talk about the hire that she didn't think she even needed a year ago or two years ago, didn't know existed. It was going to be part of the equation. [...] [00:03:04] [SPEAKER\\_00] In fact, it was so new that she had to run through the job description three or four times before we got to one that the team thought was the right one to go higher. So we cover all these things and a lot more in this episode. Here's Kristen. All right, Kristen, welcome to the podcast.\n\n[00:03:31] [SPEAKER\\_01] Thank you so much for having me.",
+      "published_date": null,
+      "score": 0.7140107
+    },
+    {
+      "url": "https://www.linkedin.com/posts/andrewmonaghan_kristen-twining-is-the-svp-sales-at-reco-activity-7513965190162362368-VYxf",
+      "title": "Andrew Monaghan's Post",
+      "content": "Kristen Twining is the SVP Sales at Reco. They secure AI and agents. certainly not on a podcast. New episode with Kristen is up. Why cybersecurity is like golf",
+      "published_date": null,
+      "score": 0.57035583
+    },
+    {
+      "url": "https://www.tiktok.com/@mystilettoshurt/video/7690220318962584863",
+      "title": "Honest Moment of the Week💭 Maybe motherhood isn't ...",
+      "content": "TikTok video from Kristen Twining | MSH Podcast (@mystilettoshurt): “Honest Moment of the Week Maybe motherhood isn't about doing it all, but about loving",
+      "published_date": null,
+      "score": 0.39950758
+    },
+    {
+      "url": "https://www.linkedin.com/posts/kristen-twining-4796b25_ai-agents-are-moving-into-the-enterprise-activity-7495649332507996160-YmVx",
+      "title": "AI Agent Security in the Enterprise | Kristen Twining posted ...",
+      "content": "AI agents are moving into the enterprise faster than most organizations can see them, let alone secure them. And we're only at the beginning.",
+      "published_date": null,
+      "score": 0.28156903
+    },
+    {
+      "url": "https://www.instagram.com/p/Dd3wTcvP7bg",
+      "title": "Sometimes you just have to Say The Thing💋 🎙️NEW ...",
+      "content": "In this week's episode of Do It My Way, I'm breaking down how to turn your own journey into a personal brand and coaching program, Listen now wherever you get",
+      "published_date": null,
+      "score": 0.03330229
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

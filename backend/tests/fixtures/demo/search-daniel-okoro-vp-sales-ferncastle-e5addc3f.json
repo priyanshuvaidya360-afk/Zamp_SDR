@@ -1,0 +1,23 @@
+{
+  "provider": "simweb",
+  "query": "Daniel Okoro VP Sales Ferncastle",
+  "results": [
+    {
+      "url": "https://ferncastle.example/about",
+      "title": "About Ferncastle",
+      "content": "Ferncastle sells procurement software to construction firms in the United States.\nLeadership: Ellen Price, CEO; Daniel Okoro, VP Sales (Austin); Raj Patel, CTO.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://ferncastle.example/careers/sdr-austin",
+      "title": "SDR, Austin (5 roles) - Ferncastle Careers",
+      "content": "Posted 5 October 2026. Ferncastle is hiring five Sales Development Representatives for our new\nAustin office. You will book first meetings with operations leaders at construction firms.",
+      "published_date": "2026-10-05",
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

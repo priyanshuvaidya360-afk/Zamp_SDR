@@ -1,0 +1,16 @@
+{
+  "output": {
+    "sentence": "Kestrel Labs is hiring two Sales Development Representatives to build your first outbound team in London."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 315,
+    "completion_tokens": 245,
+    "latency_ms": 955,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

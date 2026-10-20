@@ -1,0 +1,55 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Reco announced several leadership appointments including Zoe Hillenmeyer as COO, Kristen Twining as SVP of Americas sales, Dana Harduf as CHRO, Sandy Mathews as VP of product marketing, and Merav Keren Kindler as VP of marketing.",
+        "evidence": "Reco, which provides an AI security platform focused on discovering, governing and securing AI agents, identities and SaaS connections, announced several leadership appointments alongside new operations in Texas and the United Kingdom and Ireland.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Reco is opening a physical office in Texas and expanding internationally with a dedicated team in the United Kingdom and Ireland.",
+        "evidence": "To support customer growth, Reco is opening a physical office in Texas, where it already maintains employees and serves enterprise customers.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "press",
+        "about": "company",
+        "summary": "Reco received three Global InfoSec Awards for 2026.",
+        "evidence": "The company recently received three Global InfoSec Awards for 2026, including recognition in SaaS and cloud security, AI security solutions and generative AI cybersecurity categories.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1475,
+    "completion_tokens": 478,
+    "latency_ms": 17208,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

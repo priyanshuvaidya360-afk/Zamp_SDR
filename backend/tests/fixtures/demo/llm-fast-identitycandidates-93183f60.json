@@ -1,0 +1,31 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Daniel Okoro",
+        "title": null,
+        "company": "Ferncastle",
+        "company_domain": "ferncastle.example",
+        "location": "Austin",
+        "country": "US",
+        "evidence_url": "https://ferncastle.example/about",
+        "evidence": "Leadership: Ellen Price, CEO; Daniel Okoro, VP Sales (Austin); Raj Patel, CTO.",
+        "confidence": 0.95
+      }
+    ],
+    "reasoning": "The search result from the company's website explicitly lists Daniel Okoro as VP Sales at Ferncastle, matching the prospect's name, title, and company domain."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 373,
+    "completion_tokens": 161,
+    "latency_ms": 1434,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

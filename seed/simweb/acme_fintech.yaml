@@ -1,0 +1,29 @@
+# Fictional (case 1, warm follow-up). Priya replied "not now: CRM migration" 125 days ago (seed/context.json).
+company: Acme Fintech
+terms: [acme fintech, acmefintech.com, priya raman]
+pages:
+  - url: https://acmefintech.com/about/team
+    title: Our team - Acme Fintech
+    match: [team, appoints, leadership]
+    people: [priya raman]
+    text: |
+      Acme Fintech builds spend management for mid-market companies in the UK and India.
+      Leadership: Rohan Gupta, Chief Executive Officer. Priya Raman, VP Marketing, leads
+      marketing and demand generation from our London office. Anil Shah, VP Sales.
+  - url: https://acmefintech.com/blog/we-moved-to-hubspot
+    title: We moved our whole revenue team to HubSpot
+    published: 2026-10-06
+    match: [launches, hubspot, migration, crm]
+    people: [priya raman]
+    text: |
+      6 October 2026. Our CRM migration is done: as of this week every Acme Fintech marketer and
+      seller works in HubSpot. "Moving off three tools took us two quarters," said Priya Raman,
+      VP Marketing. "Now we want outbound that uses the clean data, not more spreadsheets."
+  - url: https://acmefintech.com/careers/sdr
+    title: Sales Development Representatives (3 roles) - Acme Fintech Careers
+    published: 2026-10-01
+    match: [hiring, careers, sdr, bdr, sales, development]
+    text: |
+      Posted 1 October 2026. Acme Fintech is hiring three Sales Development Representatives in
+      London to start conversations with finance teams at mid-market companies. You will work with
+      our VP Marketing on outbound campaigns.

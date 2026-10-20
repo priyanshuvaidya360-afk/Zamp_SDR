@@ -1,0 +1,16 @@
+{
+  "provider": "tavily",
+  "query": "\"Abacum\" expansion partnership",
+  "results": [
+    {
+      "url": "https://ffnews.com/news/accountsiq-and-abacum-partner-to-launch-ai-powered-finance-stack-for-mid-market-businesses",
+      "title": "AccountsIQ and Abacum Partner to Launch AI-Powered Finance Stack for Mid-Market Businesses",
+      "content": "## Quick Summary\n\nAccountsIQ and Abacum have formed a strategic partnership to provide mid-market businesses with an integrated AI-powered finance stack. By combining cloud accounting with advanced FP&A tools, the collaboration eliminates manual spreadsheets, enabling automated real-time financial forecasting and multi-entity consolidation for over 35,000 global users.\n\n## How Does the AccountsIQ and Abacum Partnership Benefit Finance Teams? [...] AccountsIQ and Abacum have partnered to launch an AI-powered finance stack for mid-market businesses, integrating cloud accounting with automated FP&A to eliminate manual spreadsheets and improve strategic planning.\n\n   Total Users:35,000+\n   Abacum Funding:$90 million\n   Geographic Reach:85+ countries\n   Partner Integrations:30+\n\nImage 6: Press Release: AccountsIQ and Abacum Partner to Launch AI-Powered Finance Stack for Mid-Market Businesses | Featured Image by FF News\n\nIn this article [...] This partnership definitely moves the needle for the mid-market. While enterprise-level firms have long enjoyed integrated AI-powered finance stack solutions, mid-market players have often been stuck between basic accounting software and manual spreadsheets. By bridging the gap between cloud accounting and sophisticated FP&A, AccountsIQ and Abacum are democratizing high-end financial intelligence, making real-time financial forecasting a standard requirement rather than a luxury for growing",
+      "published_date": "Tue, 04 Aug 2026 08:40:04 GMT",
+      "score": 0.68090034
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

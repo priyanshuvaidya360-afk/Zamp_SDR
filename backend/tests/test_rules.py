@@ -39,7 +39,7 @@ async def test_not_now_becomes_a_follow_up_with_the_reply_verbatim(session):
     ctx.outputs["extract"] = ExtractOutput(message="", signals=[])
     ctx.outputs["score"] = score.ScoreOutput(message="")
     prompt = draft.build_prompt(ctx, "role_based")
-    snippet = "Not a priority this quarter, we're in the middle of an ERP migration. Try me again after it goes live."
+    snippet = "Not a priority this quarter, we're in the middle of a CRM migration. Try me again after it goes live."
     assert "follow-up email" in prompt and f'"{snippet}"' in prompt
 
 

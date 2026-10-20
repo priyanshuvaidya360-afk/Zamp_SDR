@@ -84,7 +84,14 @@ def pick_facts(ctx: RunContext) -> tuple[ExtractedSignal | None, list[ExtractedS
         return None, []
     hook = by_id[scored.hook.signal_id]
     context_only = [r.signal_id for r in scored.ranked if r.excluded is None and r.context_only]
-    preferred = context_only + [i for i in scored.runner_up_ids if i in usable] + usable
+    plan = ctx.outputs.get("account_plan")
+    if plan is not None and getattr(plan, "plan", None) is not None:
+        # Case 3: the account plan hands out company-wide context (each event to one person at most),
+        # so besides the planned context only this person's own facts may support the hook.
+        own = [i for i in usable if by_id[i].about == "person"]
+        preferred = [i for i in scored.runner_up_ids if i in usable] + own
+    else:
+        preferred = context_only + [i for i in scored.runner_up_ids if i in usable] + usable
     support = [by_id[i] for i in dict.fromkeys(preferred) if i != hook.id][:2]
     return hook, support
 
@@ -159,6 +166,9 @@ def build_prompt(ctx: RunContext, mode: Mode) -> str:
         "- Follow every ATTRIBUTION line exactly: name whoever said or posted it; never present someone else's "
         "words or a reshare as the prospect's own.",
         "- Address the prospect as 'you'. Never refer to them by name in the third person.",
+        f"- Their company's own pages speak in their voice ('we', 'our team'). Restate those facts about them "
+        f"('your team', '{ctx.row.get('company') or 'their company'}'s first outbound team'); 'we' and 'our' "
+        f"only ever mean {seller.get('company')}.",
         f"- Plain text, no emoji, no links. Sign off with {str(rep.get('name', '')).split(' ')[0] or 'the rep'}.",
         f"- Never use these phrases: {'; '.join(banned)}.",
         "Return: subject, body, and claims: one entry per factual sentence in the body, with that exact "
@@ -263,6 +273,11 @@ def _numbers_in(text: str) -> set[str]:
     return {re.sub(r"[^\d.]", "", m.group()).rstrip(".") for m in NUMBER.finditer(text)} - {""}
 
 
+# Our own signal-type names must never reach a prospect ("(person_content, 8 October)").
+INTERNAL_LABEL = re.compile(r"\b(?:person_content|product_launch|leadership_change|negative_event|ai_screening|"
+                            r"person_news|second_order|signal_id)\b")
+
+
 def _first_sentence(body: str) -> str:
     lines = [l for l in body.strip().splitlines() if l.strip()]
     # Skip a greeting line ("Hi Amy,") to judge the actual opener.
@@ -273,7 +288,7 @@ def _first_sentence(body: str) -> str:
 
 def code_checks(draft: Draft, mode: Mode, signals: dict[int, ExtractedSignal], excluded: set[int],
                 prospect_last_name: str, banned: list[str],
-                crowded_ids: set[int] | None = None) -> list[Check]:
+                crowded_ids: set[int] | None = None, prospect_name: str | None = None) -> list[Check]:
     body, checks = draft.body, []
     words = len(body.split())
     checks.append(Check(name="length", passed=words < settings.draft_max_words,
@@ -290,6 +305,12 @@ def code_checks(draft: Draft, mode: Mode, signals: dict[int, ExtractedSignal], e
     checks.append(Check(name="absolute_dates", passed=not relative,
                         detail=f"relative date: {', '.join(relative)}" if relative else ""))
     checks.append(Check(name="no_emoji", passed=not EMOJI.search(body)))
+    named = bool(prospect_name) and len(prospect_name.split()) > 1 and prospect_name.lower() in body.lower()
+    checks.append(Check(name="addressed_as_you", passed=not named,
+                        detail=f"calls the prospect '{prospect_name}' in the third person; write 'you'" if named else ""))
+    labels = sorted(set(INTERNAL_LABEL.findall(body)))
+    checks.append(Check(name="no_internal_labels", passed=not labels,
+                        detail=f"pipeline labels in the email: {', '.join(labels)}" if labels else ""))
 
     if mode == "role_based":
         checks.append(Check(name="no_claims", passed=not draft.claims,
@@ -359,7 +380,8 @@ async def review(ctx: RunContext, draft: Draft, mode: Mode) -> tuple[list[Check]
     signals = {s.id: s for s in extracted.signals if s.type != "ai_screening"}
     excluded = {r.signal_id for r in scored.ranked if r.excluded}
     banned = (ctx.seller.get("tone") or {}).get("banned_phrases") or DEFAULT_BANNED
-    checks = code_checks(draft, mode, signals, excluded, ctx.row["last_name"], banned, _crowded_ids(ctx))
+    checks = code_checks(draft, mode, signals, excluded, ctx.row["last_name"], banned, _crowded_ids(ctx),
+                         display_name(ctx.row))
     generic = await genericness(ctx, draft) if mode == "hooked" else None
     return checks, generic
 

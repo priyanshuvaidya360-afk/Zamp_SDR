@@ -1,0 +1,16 @@
+{
+  "provider": "simweb",
+  "query": "\"Acme Fintech\" launches",
+  "results": [
+    {
+      "url": "https://acmefintech.com/blog/we-moved-to-hubspot",
+      "title": "We moved our whole revenue team to HubSpot",
+      "content": "6 October 2026. Our CRM migration is done: as of this week every Acme Fintech marketer and\nseller works in HubSpot. \"Moving off three tools took us two quarters,\" said Priya Raman,\nVP Marketing. \"Now we want outbound that uses the clean data, not more spreadsheets.\"",
+      "published_date": "2026-10-06",
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

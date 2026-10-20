@@ -42,11 +42,35 @@ async def replay_pause() -> None:
         await asyncio.sleep(settings.fixture_delay_s)
 
 
+used: set[str] = set()  # slugs replayed in this process (scripts/record_demo.py prunes the rest)
+
+
 def load_fixture(slug: str) -> Any:
+    used.add(slug)
     path = settings.fixtures_dir / f"{slug}.json"
     if not path.exists():
         raise FixtureMissing(slug)
     return json.loads(path.read_text())
+
+
+def reusable(slug: str) -> Any | None:
+    """Record mode with settings.record_reuse: a successful earlier recording of the same request
+    (here or in settings.record_reuse_dirs) instead of a new live call. Makes a long recording
+    resumable after a rate limit, and keeps yesterday's live-web answers when today's differ.
+    Recorded failures and empty search results are never reused: those calls are tried again."""
+    if settings.demo_mode != "record" or not settings.record_reuse:
+        return None
+    for directory in [settings.fixtures_dir, *settings.record_reuse_dirs]:
+        path = directory / f"{slug}.json"
+        if not path.exists():
+            continue
+        data = json.loads(path.read_text())
+        if "error" in data or data.get("results") == [] or data.get("pages") == {}:
+            continue
+        if directory != settings.fixtures_dir:
+            save_fixture(slug, data)
+        return data
+    return None
 
 
 def save_fixture(slug: str, data: Any) -> Path:

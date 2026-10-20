@@ -350,22 +350,48 @@ def _domain(url: str) -> str:
     return host.removeprefix("www.")
 
 
+def amounts(text: str) -> set[float]:
+    """Money amounts in millions: '$55M', '$55 million' and 'USD 55m' are the same raise."""
+    found = set()
+    for m in re.finditer(r"(?:[$€£₹]|usd|eur|gbp)\s?(\d[\d.,]*)\s?(m|mn|million|b|bn|billion)?\b"
+                         r"|\b(\d[\d.,]*)\s?(m|mn|million|b|bn|billion)\b", text, re.I):
+        number, unit = (m.group(1), m.group(2)) if m.group(1) else (m.group(3), m.group(4))
+        try:
+            value = float(number.replace(",", ""))
+        except ValueError:
+            continue
+        unit = (unit or "").lower()
+        found.add(round(value * 1000 if unit.startswith("b") else value if unit else value / 1e6, 2))
+    return found - {0.0}
+
+
 def _overlap(a: str, b: str) -> float:
     wa, wb = set(_words(a)), set(_words(b))
     return len(wa & wb) / min(len(wa), len(wb)) if wa and wb else 0.0
 
 
+AMOUNT_EVENTS = {"funding", "acquisition"}  # events an amount identifies
+
+
+def same_event(a: ExtractedSignal, b: ExtractedSignal) -> bool:
+    """Same type and subject, and either a similar summary within 7 days or (a raise or deal) the
+    same amount within the crowded window ("$55 million" = "$55M")."""
+    if a.type != b.type or a.about != b.about:
+        return False
+    gap = 0 if a.published_at is None or b.published_at is None else abs((a.published_at - b.published_at).days)
+    if gap <= 7 and _overlap(a.summary, b.summary) >= 0.5:
+        return True
+    return (gap < settings.crowded_max_days and a.type in AMOUNT_EVENTS
+            and bool(amounts(a.summary) & amounts(b.summary)))
+
+
 def cluster_events(signals: list[ExtractedSignal]) -> tuple[list[ExtractedSignal], int]:
-    """Merge the same event reported by several outlets: same type and subject, similar
-    summary, dates within 7 days. coverage = distinct outlet domains. Returns (kept, merged)."""
+    """Merge the same event reported by several outlets (same_event). coverage = distinct outlet
+    domains. Returns (kept, merged)."""
     groups: list[list[ExtractedSignal]] = []
     for s in sorted(signals, key=lambda s: (s.published_at is None, s.published_at or date.max)):
         for group in groups:
-            first = group[0]
-            close = (first.published_at is None or s.published_at is None
-                     or abs((first.published_at - s.published_at).days) <= 7)
-            if (first.type == s.type and first.about == s.about and close
-                    and _overlap(first.summary, s.summary) >= 0.5):
+            if same_event(group[0], s):
                 group.append(s)
                 break
         else:
@@ -445,8 +471,7 @@ async def _crowded_follow_up(ctx: RunContext, signals: list[ExtractedSignal], ga
     processed = await ctx.batch.company_research(key, follow_up)
     new, _ = cluster_events([s.model_copy(deep=True) for s in processed.signals
                              if s.published_at is None or s.published_at >= after])
-    new = [s for s in new if not any(s.type == old.type and _overlap(s.summary, old.summary) >= 0.5
-                                     for old in signals)]
+    new = [s for s in new if not any(same_event(s, old) for old in signals)]  # already known
     for s in new:
         s.category = "second_order"
     signals += new

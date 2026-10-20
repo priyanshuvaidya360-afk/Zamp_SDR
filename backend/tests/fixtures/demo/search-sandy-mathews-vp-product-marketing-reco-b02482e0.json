@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "Sandy Mathews VP Product Marketing Reco",
+  "results": [
+    {
+      "url": "https://www.prnewswire.com/news-releases/reco-expands-executive-team-and-global-footprint-to-accelerate-leadership-in-enterprise-ai-agent-security-302793841.html",
+      "title": "Reco Expands Executive Team and Global Footprint to Accelerate Leadership in Enterprise AI Agent Security",
+      "content": "Additional executive appointments include Dana Harduf as Chief Human Resources Officer, Sandy Mathews as Vice President of Product Marketing, and Merav Keren Kindler as Vice President of Marketing. [...] \"I joined Reco because the company is solving the right problem at exactly the right moment. Agent governance is where identity security and AI risk converge, and most enterprises do not yet have the infrastructure to manage it. Every organization I have talked to is at a different stage: some are governing a handful of agents, some have hundreds operating across their environment without full visibility. My focus at Reco is building the go-to-market infrastructure to meet them where they are [...] \"AI agent security is no longer a planning-cycle conversation for Fortune 100 security teams. It is an active deployment challenge. We built Reco to be the platform security leaders reach for when they need to know what every agent in their environment can access, what it is doing, and whether it is operating within policy. The executive hires, the geographic expansion, and the channel build are strategically intentional. We are positioning Reco to lead this category as it becomes standard",
+      "published_date": null,
+      "score": 0.82220376
+    },
+    {
+      "url": "https://www.citybiz.co/article/856966/reco-expands-leadership-team-and-global-operations-as-enterprise-ai-governance-demand-grows",
+      "title": "Reco Expands Leadership Team and Global Operations as Enterprise AI Governance Demand Grows | citybiz",
+      "content": "Additional appointments include Dana Harduf as chief human resources officer, Sandy Mathews as vice president of product marketing and Merav Keren Kindler as vice president of marketing. [...] Reco, which provides an AI security platform focused on discovering, governing and securing AI agents, identities and SaaS connections, announced several leadership appointments alongside new operations in Texas and the United Kingdom and Ireland. The company said the moves reflect accelerating demand from large enterprises seeking governance infrastructure for AI deployments. [...] Reco is also expanding internationally with a dedicated team in the United Kingdom and Ireland. The company said demand has increased as European organizations prepare for compliance requirements associated with the European Union’s AI regulatory framework. Oliver Sears has joined the company as UKI sales director and will lead enterprise sales efforts across the region.",
+      "published_date": null,
+      "score": 0.798643
+    },
+    {
+      "url": "https://swana.org/docs/default-source/default-document-library/rcon-registrations_11-1-2025.pdf?sfvrsn=e0149038_7",
+      "title": "RCon 2025 Registrant List",
+      "content": "President Tulsa Oklahoma United States Juliana Kannengieser CurbWaste New York New York United States Amanda Karapas QED Environmental Systems Senior Category Marketing Manager Dexter Michigan United States Jeff Karlson Seek Thermal VP, Product and Marketing Goleta California United States Ashpreet Kaur Stony Brook University Chandigarh Chandigarh India Tyler Kawalec BEL Environmental Engineering LLC Natasha Kawasaki Hydrolec Inc. [...] Board Member Narvon Pennsylvania United States Tony Simon Organics Management Corozal Puerto Rico United States Dave Simpson QED Environmental Systems Product Marketing Manager Dexter Michigan United States Ramona Simpson Town of Queen Creek Environmental Programs Manager Queen Creek Arizona United States Melinda Sims LoCI Controls Engineer Seattle Washington United States Sarah Sims City of San Diego (CA) Deputy Director San Diego California United States Emily Sisk HDR (HQ) Project Manager [...] SignalFire Wireless Telemetry VP of Sales & Marketing Marlborough Massachusetts United States Teresa Espy Diamond Scientific Cocoa Florida United States Rob Estep Blue Flame Crew, LLC Ashley Evans WM Director - Engineering Clearwater Florida United States Eric Evans New Way Trucks Chief Product Officer Scranton Iowa United States Katie Evans National Waste & Recycling Association Arlington Virginia United States Matt Evans Burns & McDonnell Solid Waste Engineer Bloomington Minnesota United",
+      "published_date": null,
+      "score": 0.0926305
+    },
+    {
+      "url": "https://www.cn.ca/en/about-cn/executives",
+      "title": "Executives | cn.ca",
+      "content": "Throughout his career, Matthew has led large, geographically diverse teams and overseen complex capital and maintenance programs. He is recognized for his strong focus on safety, reliability, and operational excellence. [...] Sandra Ellis was appointed Vice-President, Bulk in December 2022. She is responsible for driving CN’s market expansion and sales activities in the grain, fertilizers, sulphur, coal and petroleum coke businesses to help maximize our contribution to our Bulk customers’ growth and success. [...] Sandra has worked in the rail sector for over 20 years. Prior to joining CN, she was Director Commercial Development NGL Processing at Inter Pipeline Ltd., where she drove the negotiation of multi-million-dollar railcar purchase and lease agreements, and implemented a new rail/truck transportation team for natural gas liquids (NGLs). She also held several Sales and Marketing management roles at CP for more than 15 years.\n\nSandra has a Bachelor of Commerce from the University of Saskatchewan.",
+      "published_date": null,
+      "score": 0.08614665
+    },
+    {
+      "url": "https://www.hfsinclair.com/about-us/leadership/default.aspx",
+      "title": "HF Sinclair Corporation | About Us - Leadership",
+      "content": "Mr. Matthews has served as the Chair of the Board of Directors of REH Advisors Inc. (“REH Advisors”, and together\nwith its subsidiary, REH Company, LLC, “REH”) since April 2025. He previously served as the Chief Operating Officer\nof REH from March 2022 until April 2025 and served as the Chairman and Chief Executive Officer of Sinclair Oil LLC\n(formerly known as Sinclair Oil Corporation), which was comprised of the refining, marketing and renewables business [...] U.S., including direct and distributor channels and product terminal operations. [...] search\nHomepage\nabout-us\n\n### Franklin Myers , , , Chief Executive Officer and President",
+      "published_date": null,
+      "score": 0.06393101
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

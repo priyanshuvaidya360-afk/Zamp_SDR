@@ -1,0 +1,27 @@
+{
+  "output": {
+    "subject": "new outbound pipeline for london",
+    "body": "I saw that Kestrel Labs is hiring four Sales Development Representatives for London. Aoife Byrne mentioned that half of your pipeline already comes from the UK and that opening the London office lets you meet those customers in person. Scaling outbound capacity without adding more SDR headcount is tough as generic sequences see falling reply rates. Would you be open to a brief 15‑minute call to explore how our pipeline engine could supplement your new team?\n\nShivam",
+    "claims": [
+      {
+        "sentence": "I saw that Kestrel Labs is hiring four Sales Development Representatives for London.",
+        "signal_id": 2
+      },
+      {
+        "sentence": "Aoife Byrne mentioned that half of your pipeline already comes from the UK and that opening the London office lets you meet those customers in person.",
+        "signal_id": 1
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 893,
+    "completion_tokens": 1063,
+    "latency_ms": 2917,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

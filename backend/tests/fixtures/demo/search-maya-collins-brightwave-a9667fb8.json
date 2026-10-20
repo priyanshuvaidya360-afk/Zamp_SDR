@@ -1,0 +1,23 @@
+{
+  "provider": "simweb",
+  "query": "\"Maya Collins\" \"Brightwave\"",
+  "results": [
+    {
+      "url": "https://brightwave.example/company",
+      "title": "About Brightwave",
+      "content": "Brightwave makes scheduling software for clinics in the UK and Ireland. Our leadership team:\nBen Hart, CEO; Maya Collins, Head of Growth (London); Sara Ng, VP Customer Success.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://growthpod.example/episodes/57",
+      "title": "Episode 57: Maya Collins on outbound experiments with a two-person team",
+      "content": "30 September 2026. Maya Collins, Head of Growth at Brightwave, on running outbound with a\nsmall team. Maya Collins: \"We test one new outbound angle a week, but writing research-backed\nfirst emails by hand is the bottleneck. Two people can't personalise four hundred accounts.\"",
+      "published_date": "2026-09-30",
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

@@ -12,10 +12,10 @@
     {
       "email": "priya.raman@acmefintech.com",
       "domain": "acmefintech.com",
-      "sequence": "Finance leaders Q2",
+      "sequence": "Marketing leaders Q2",
       "last_touch_days_ago": 125,
       "outcome": "not_now",
-      "reply_snippet": "Not a priority this quarter, we're in the middle of an ERP migration. Try me again after it goes live.",
+      "reply_snippet": "Not a priority this quarter, we're in the middle of a CRM migration. Try me again after it goes live.",
       "follow_up_after_days_ago": 14
     },
     {

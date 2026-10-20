@@ -1,0 +1,16 @@
+{
+  "provider": "simweb",
+  "query": "\"Ferncastle\" expansion partnership",
+  "results": [
+    {
+      "url": "https://ferncastle.example/news/austin-office",
+      "title": "Ferncastle opens Austin sales office",
+      "content": "25 September 2026. Ferncastle has opened a sales office in Austin, Texas, its first outside\nChicago. The office will house a new sales development team led by VP Sales Daniel Okoro.",
+      "published_date": "2026-09-25",
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

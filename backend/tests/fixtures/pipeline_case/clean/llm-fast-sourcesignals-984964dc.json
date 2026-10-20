@@ -2,13 +2,25 @@
   "output": {
     "signals": [
       {
-        "type": "person_content",
-        "about": "person",
-        "summary": "Priya Raman is leading a project to rebuild approval workflows before the next audit.",
-        "evidence": "VP Finance Priya Raman is leading a project to rebuild their approval workflows before the next audit.",
+        "type": "hiring",
+        "about": "company",
+        "summary": "Acme Fintech doubled its AP team to keep up with invoicing volume",
+        "evidence": "\"We are drowning in invoices. Our accounts payable volume tripled this year and we had to double the AP team just to keep up.\"",
         "published_at": "2026-10-08",
         "sensitive": false,
         "speaker": "Rohan Gupta",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "other",
+        "about": "company",
+        "summary": "Priya Raman is leading a project to rebuild approval workflows before the next audit",
+        "evidence": "Rohan also mentions that VP Finance Priya Raman is leading a project to rebuild their approval workflows before the next audit.",
+        "published_at": "2026-10-08",
+        "sensitive": false,
+        "speaker": null,
         "is_reshare": false,
         "time_sensitive": false,
         "job_posting": null
@@ -16,16 +28,14 @@
     ]
   },
   "usage": {
-    "provider": "gemini",
-    "model": "gemini-3.5-flash-lite",
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
     "role": "fast",
-    "prompt_tokens": 542,
-    "completion_tokens": 145,
-    "latency_ms": 6233,
+    "prompt_tokens": 1027,
+    "completion_tokens": 1529,
+    "latency_ms": 24320,
     "cost_usd": 0.0,
-    "fallbacks": [
-      "groq: rate limited"
-    ],
+    "fallbacks": [],
     "from_fixture": false
   }
 }

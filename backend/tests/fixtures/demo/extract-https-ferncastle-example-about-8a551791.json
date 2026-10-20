@@ -1,0 +1,9 @@
+{
+  "provider": "simweb",
+  "pages": {
+    "https://ferncastle.example/about": "Ferncastle sells procurement software to construction firms in the United States.\nLeadership: Ellen Price, CEO; Daniel Okoro, VP Sales (Austin); Raj Patel, CTO."
+  },
+  "failed": [],
+  "credits": 0.0,
+  "fallbacks": []
+}

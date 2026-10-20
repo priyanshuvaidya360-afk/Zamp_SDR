@@ -1,0 +1,31 @@
+# Fictional (case 10, stale draft). The careers page lists four roles when the draft is written and
+# two after the simulated twelve days (later_text, served when settings.sim_web_later is on).
+company: Kestrel Labs
+terms: [kestrel labs, kestrellabs.example, omar haddad]
+pages:
+  - url: https://kestrellabs.example/team
+    title: Team - Kestrel Labs
+    match: [team, appoints, leadership]
+    people: [omar haddad]
+    text: |
+      Kestrel Labs makes close-management software for finance teams. Leadership: Aoife Byrne, CEO
+      (Dublin); Omar Haddad, VP Sales (London); Niall Walsh, CTO.
+  - url: https://kestrellabs.example/careers/sdr-london
+    title: Sales Development Representative, London - Kestrel Labs Careers
+    published: 2026-10-02
+    match: [hiring, careers, sdr, bdr, sales, development]
+    text: |
+      Posted 2 October 2026. Kestrel Labs is hiring four Sales Development Representatives to build
+      our first outbound team in London. You will report to Omar Haddad, VP Sales, and help write the
+      outbound playbook from day one.
+    later_text: |
+      Posted 2 October 2026. Updated 27 October 2026. Kestrel Labs is hiring two Sales Development
+      Representatives to complete our first outbound team in London. You will report to Omar Haddad,
+      VP Sales, and help write the outbound playbook from day one.
+  - url: https://kestrellabs.example/blog/london-office
+    title: Kestrel Labs opens its first London office
+    published: 2026-09-22
+    match: [expansion, office, partnership, opens]
+    text: |
+      22 September 2026. Kestrel Labs has opened its first office outside Dublin, in London. "Half of
+      our pipeline already comes from the UK," said chief executive Aoife Byrne.

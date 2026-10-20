@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "Merav Keren Kindler Vice President of Marketing Reco",
+  "results": [
+    {
+      "url": "https://www.prnewswire.com/news-releases/reco-expands-executive-team-and-global-footprint-to-accelerate-leadership-in-enterprise-ai-agent-security-302793841.html",
+      "title": "Reco Expands Executive Team and Global Footprint to Accelerate Leadership in Enterprise AI Agent Security",
+      "content": "Additional executive appointments include Dana Harduf as Chief Human Resources Officer, Sandy Mathews as Vice President of Product Marketing, and Merav Keren Kindler as Vice President of Marketing. [...] \"I joined Reco because the company is solving the right problem at exactly the right moment. Agent governance is where identity security and AI risk converge, and most enterprises do not yet have the infrastructure to manage it. Every organization I have talked to is at a different stage: some are governing a handful of agents, some have hundreds operating across their environment without full visibility. My focus at Reco is building the go-to-market infrastructure to meet them where they are [...] Reco has appointed Kristen Twining as Senior Vice President of Americas Sales and Business Development. Twining joins from FireMon, where as Senior Vice President of Sales Americas she drove and closed enterprise cybersecurity deals across the $1B to $3B segment. At Reco, she will own the full Americas sales motion with responsibility for pipeline growth, enterprise close, and expanding the company's mid-market presence.",
+      "published_date": null,
+      "score": 0.8405867
+    },
+    {
+      "url": "https://www.citybiz.co/article/856966/reco-expands-leadership-team-and-global-operations-as-enterprise-ai-governance-demand-grows",
+      "title": "Reco Expands Leadership Team and Global Operations as Enterprise AI Governance Demand Grows | citybiz",
+      "content": "Additional appointments include Dana Harduf as chief human resources officer, Sandy Mathews as vice president of product marketing and Merav Keren Kindler as vice president of marketing. [...] The company also named Kristen Twining senior vice president of Americas sales and business development. Twining previously served as senior vice president of sales for the Americas at FireMon, where she focused on enterprise cybersecurity engagements. Her responsibilities at Reco include overseeing sales operations across the Americas, driving pipeline growth and expanding the company’s presence in the mid-market segment. [...] Among the leadership additions is Zoe Hillenmeyer, who has been appointed chief operating officer. Hillenmeyer joins Reco from Protect AI, where she led commercial and marketing functions focused on AI security. Her previous experience also includes leadership roles at AWS, IBM and Peak AI. At Reco, she will oversee go-to-market execution, operational scaling and cross-functional alignment as the company expands its enterprise presence.",
+      "published_date": null,
+      "score": 0.8058924
+    },
+    {
+      "url": "https://il.linkedin.com/in/merav-keren-kindler",
+      "title": "‏Merav Keren Kindler‏ - ‏VP Marketing | Builder, Growth ...",
+      "content": "## Experience\n- VP Marketing at Reco (Feb 2026 to present)\n- VP, Corporate Marketing at Cato Networks (Jul 2023 to Mar 2026)\n- Sr. Director of Marketing at Cato Networks at Cato Networks (Jan 2022 to Jul 2023)\n- Marketing Director at Cato Networks (Apr 2018 to Jan 2022)\n- Head of Digital and Demand Generation at Clicktale (Jun 2017 to Apr 2018)\n- Senior Digital Manager at Clicktale (Mar 2016 to Jun 2017) [...] Headline: Vice President, Corporate & Field Marketing at Cato Networks\nCurrent role: VP Marketing\nSeniority: President/Vice President, Marketing\nLocation: Israel\nExperience: 19 years 2 months\nLinkedIn:  · 2,368 followers [...] # Merav Keren Kindler",
+      "published_date": null,
+      "score": 0.7610953
+    },
+    {
+      "url": "https://www.linkedin.com/posts/julia-polisuk_excited-to-share-that-im-starting-a-new-activity-7495055902761361409-jyUY",
+      "title": "Julia Polisuk's Post",
+      "content": "Excited to share that I'm starting a new role as Head of Marketing at Reco ... And a special one to Merav Keren Kindler - my manager, mentor, and someone I",
+      "published_date": null,
+      "score": 0.5148644
+    },
+    {
+      "url": "https://www.linkedin.com/posts/krystn-andersons-8409244_newbeginnings-cybersecurity-aisecurity-activity-7484959661474086912-IMru",
+      "title": "Krystn Andersons' Post",
+      "content": "I am excited to announce that I have joined Reco as Senior Field & Channel Marketing Manager. I am grateful for the opportunity to be part of such an",
+      "published_date": null,
+      "score": 0.18444444
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

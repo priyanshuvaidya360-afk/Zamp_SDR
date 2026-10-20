@@ -1,0 +1,31 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Reco raised $55 million in a strategic funding round led by AT&T Ventures, bringing its total raised to $140 million.",
+        "evidence": "Agentic cybersecurity firm Reco today announced raising $55 million in a strategic funding round that brings the total raised by the company to $140 million.",
+        "published_at": "2026-09-29",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1800,
+    "completion_tokens": 168,
+    "latency_ms": 1799,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

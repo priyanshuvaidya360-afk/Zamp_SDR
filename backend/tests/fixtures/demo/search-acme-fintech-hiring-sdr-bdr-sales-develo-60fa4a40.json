@@ -1,0 +1,16 @@
+{
+  "provider": "simweb",
+  "query": "\"Acme Fintech\" hiring SDR BDR sales development account executive growth marketing",
+  "results": [
+    {
+      "url": "https://acmefintech.com/careers/sdr",
+      "title": "Sales Development Representatives (3 roles) - Acme Fintech Careers",
+      "content": "Posted 1 October 2026. Acme Fintech is hiring three Sales Development Representatives in\nLondon to start conversations with finance teams at mid-market companies. You will work with\nour VP Marketing on outbound campaigns.",
+      "published_date": "2026-10-01",
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

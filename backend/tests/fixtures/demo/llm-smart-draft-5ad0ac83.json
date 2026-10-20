@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "scaling outbound without extra sdrs",
+    "body": "Kestrel Labs is hiring four Sales Development Representatives to build your first outbound team in London. As you scale outbound, adding headcount is the typical way to grow pipeline, but generic sequences see falling reply rates and burn the market. Halyard’s outbound pipeline engine surfaces buying signals, finds the right contacts, and drafts researched, cited first‑touch emails that your reps review, so you can generate pipeline without adding more SDRs. Would you be open to a 15‑minute call to explore this?",
+    "claims": [
+      {
+        "sentence": "Kestrel Labs is hiring four Sales Development Representatives to build your first outbound team in London.",
+        "signal_id": 2
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 882,
+    "completion_tokens": 948,
+    "latency_ms": 7448,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 9,
+    "angle": "Merav Keren Kindler just stepped into the VP of Marketing role, so she’s likely focused on quickly building a qualified pipeline without expanding SDR headcount, making Halyard’s outbound engine a timely solution.",
+    "runners_up": [
+      12,
+      2
+    ],
+    "why_not_others": "The other signals concern company‑wide partnerships or appointments unrelated to her immediate marketing pipeline needs."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 726,
+    "completion_tokens": 542,
+    "latency_ms": 1836,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

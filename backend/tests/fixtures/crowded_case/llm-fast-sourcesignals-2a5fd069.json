@@ -4,8 +4,8 @@
       {
         "type": "leadership_change",
         "about": "company",
-        "summary": "Lumen Analytics hires Daniel Reyes as its first Chief Revenue Officer.",
-        "evidence": "We're excited to welcome Daniel Reyes as Lumen Analytics' first Chief Revenue Officer.",
+        "summary": "Lumen Analytics hires Daniel Reyes as first Chief Revenue Officer",
+        "evidence": "We're excited to welcome Daniel Reyes as Lumen Analytics' first Chief Revenue Officer",
         "published_at": "2026-08-18",
         "sensitive": false,
         "speaker": "Daniel Reyes",
@@ -20,8 +20,8 @@
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 1058,
-    "completion_tokens": 551,
-    "latency_ms": 1625,
+    "completion_tokens": 441,
+    "latency_ms": 20364,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

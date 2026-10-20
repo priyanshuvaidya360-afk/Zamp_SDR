@@ -1,0 +1,35 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 3,
+        "specificity": 5,
+        "reasoning": "Maya mentions outbound experiment issues, suggesting pipeline challenges."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Brightwave’s new self‑serve plan may create demand for outbound outreach."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 0,
+        "specificity": 5,
+        "reasoning": "Confirms Maya’s role but provides no trigger."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 743,
+    "completion_tokens": 491,
+    "latency_ms": 1574,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

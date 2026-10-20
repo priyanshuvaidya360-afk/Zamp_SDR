@@ -1,0 +1,29 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Opening a London office creates a need for new outbound pipeline in that region."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 4,
+        "specificity": 4,
+        "reasoning": "Hiring four SDRs signals a push to scale outbound pipeline, indicating a need for efficient prospecting."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 743,
+    "completion_tokens": 526,
+    "latency_ms": 6411,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

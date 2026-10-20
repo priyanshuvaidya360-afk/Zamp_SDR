@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "pipeline boost for modeler launch",
+    "body": "I saw that Abacum launched Modeler, an AI agent that brings Agentic Modeling to finance teams on 13 October. Scaling a targeted outbound pipeline for Modeler without adding SDR headcount is a common challenge we help solve. Would you be open to a brief 15‑minute call to explore how Halyard can surface buying signals and draft personalized outreach for your growth team? Shivam",
+    "claims": [
+      {
+        "sentence": "I saw that Abacum launched Modeler, an AI agent that brings Agentic Modeling to finance teams on 13 October.",
+        "signal_id": 4
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 937,
+    "completion_tokens": 1107,
+    "latency_ms": 2832,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

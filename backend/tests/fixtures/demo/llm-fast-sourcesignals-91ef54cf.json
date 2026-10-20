@@ -1,0 +1,29 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "Brightwave launches self-serve plan for small clinics",
+        "evidence": "Brightwave today launched a self-serve plan, so clinics with fewer than ten staff can sign up without talking to sales.",
+        "published_at": "2026-10-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 990,
+    "completion_tokens": 503,
+    "latency_ms": 1134,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

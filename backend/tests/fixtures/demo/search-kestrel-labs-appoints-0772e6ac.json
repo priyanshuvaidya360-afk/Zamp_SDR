@@ -1,0 +1,16 @@
+{
+  "provider": "simweb",
+  "query": "\"Kestrel Labs\" appoints",
+  "results": [
+    {
+      "url": "https://kestrellabs.example/team",
+      "title": "Team - Kestrel Labs",
+      "content": "Kestrel Labs makes close-management software for finance teams. Leadership: Aoife Byrne, CEO\n(Dublin); Omar Haddad, VP Sales (London); Niall Walsh, CTO.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

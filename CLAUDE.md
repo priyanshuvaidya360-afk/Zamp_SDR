@@ -47,7 +47,10 @@ backend/
                        JSON schema, retries, one corrective retry on schema errors
     search.py          search() / extract(): Tavily -> DuckDuckGo -> Exa, 24 h cache
     fetch.py           httpx + trafilatura page text (blocks linkedin.com)
-    fixtures.py        DEMO_MODE record/fixtures store + response cache
+    fixtures.py        DEMO_MODE record/fixtures store + response cache; record_reuse makes a
+                       recording resumable (successful calls reused, failures retried)
+    simweb.py          simulated web for the fictional demo companies (seed/simweb/*.yaml);
+                       only on while recording (SIM_WEB_DIR), never asked about real companies
     pipeline/
       runner.py        Stage / RunContext / StopRun, run_one, run_batch, global
                        semaphore, per-account shared research, restart recovery
@@ -95,7 +98,8 @@ frontend/
                        event id; reconnects; closes on `end`
   lib/stages.ts        stepper state from events (done / warning / failed...)
   public/              demo.csv ("Use demo CSV"), template.csv (download)
-seed/                  context.json (fake CRM data); demo CSVs land here in T17
+seed/                  context.json (fake CRM data); demo.csv + demo_messy.csv (the demo);
+                       demo_cases.json (each row's expected outcome); simweb/ (fictional pages)
 seller_profile.yaml    what "we" sell, ICP, tone, personas, competitors, regions
 ASSUMPTIONS.md         every assumption made; add to it as you build
 docs/GUIDE.md          the spec
@@ -116,6 +120,11 @@ docs/GUIDE.md          the spec
   case (after changing a scoring/draft/critic prompt); tests/test_draft.py replays it
 - `cd backend && .venv/bin/python -m scripts.record_crowded_case` / `scripts.record_stale_case`:
   re-record case 5 (crowded hook) / case 10 (stale draft: re-check, rewrite, export)
+- `cd backend && .venv/bin/python -m scripts.record_demo [--fresh]`: record the demo (both CSVs,
+  live web for real companies + simulated web, then case 10) into tests/fixtures/demo/. Resumable:
+  after a free-tier rate limit, run it again until no row fails; it then prunes unused recordings
+- `cd backend && .venv/bin/python -m scripts.check_demo`: replay the demo with the network off and
+  check every row against seed/demo_cases.json (exit 0 = pass)
 - `make seed`: load `seed/context.json` (fake CRM / sequence history) into the database; idempotent
 - Backend Python is always `backend/.venv/bin/python`; there is no uv.
 - Frontend: after adding a route, run `npx next typegen` (or `make dev-web`) so

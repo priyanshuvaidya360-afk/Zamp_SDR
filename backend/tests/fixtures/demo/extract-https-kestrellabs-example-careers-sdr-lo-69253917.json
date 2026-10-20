@@ -1,0 +1,11 @@
+{
+  "provider": "simweb",
+  "pages": {
+    "https://kestrellabs.example/careers/sdr-london": "Posted 2 October 2026. Kestrel Labs is hiring four Sales Development Representatives to build\nour first outbound team in London. You will report to Omar Haddad, VP Sales, and help write the\noutbound playbook from day one.",
+    "https://kestrellabs.example/team": "Kestrel Labs makes close-management software for finance teams. Leadership: Aoife Byrne, CEO\n(Dublin); Omar Haddad, VP Sales (London); Niall Walsh, CTO.",
+    "https://kestrellabs.example/blog/london-office": "22 September 2026. Kestrel Labs has opened its first office outside Dublin, in London. \"Half of\nour pipeline already comes from the UK,\" said chief executive Aoife Byrne."
+  },
+  "failed": [],
+  "credits": 0.0,
+  "fallbacks": []
+}

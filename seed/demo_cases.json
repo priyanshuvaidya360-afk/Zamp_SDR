@@ -1,0 +1,20 @@
+{
+  "_comment": "Expected outcome of every demo row (docs/GUIDE.md T17). scripts/check_demo.py replays both CSVs from tests/fixtures/demo/ with the network off and checks each row. Real companies (ProtoPie, Reco, GetResponse, Abacum) were researched on the live web on 19 Oct 2026; fictional ones (.example domains, Acme Fintech) on the simulated web in seed/simweb/.",
+  "rows": [
+    {"file": "demo.csv", "row": 2, "name": "Ryan Yu", "status": "ready_for_review", "case": "happy path (real web)", "expect": {"message_type": "cold", "draft_mode": "hooked"}},
+    {"file": "demo.csv", "row": 3, "name": "Merav Keren Kindler", "status": "ready_for_review", "case": "3 committee + 5 crowded raise (real web)", "expect": {"crowded": ["funding"], "hook_type_not": ["funding"], "send_day": 5}},
+    {"file": "demo.csv", "row": 4, "name": "Sandy Mathews", "status": "ready_for_review", "case": "3 committee + 5 crowded raise (real web)", "expect": {"crowded": ["funding"], "hook_type_not": ["funding"]}},
+    {"file": "demo.csv", "row": 5, "name": "Kristen Twining", "status": "ready_for_review", "case": "3 committee + 5 crowded raise (real web)", "expect": {"crowded": ["funding"], "hook_type_not": ["funding"], "send_day": 2}},
+    {"file": "demo.csv", "row": 6, "name": "Maya Collins", "status": "ready_for_review", "case": "11 screening trap in bio: outline, not an email", "expect": {"draft_mode": "outline", "screening": ["Filters AI-written outreach"]}},
+    {"file": "demo.csv", "row": 7, "name": "Daniel Okoro", "status": "ready_for_review", "case": "11 hostile instruction in bio: flagged and removed", "expect": {"draft_mode": "hooked", "screening": ["Injection attempt aimed at AI tools"]}},
+    {"file": "demo.csv", "row": 8, "name": "Priya Raman", "status": "ready_for_review", "case": "1 warm 'not now' reply: follow-up", "expect": {"message_type": "follow_up"}},
+    {"file": "demo.csv", "row": 9, "name": "Sam Lee", "status": "held", "case": "2 open deal: routed to the owner", "reason_contains": "Open opportunity with Sam Patel, stage 4"},
+    {"file": "demo.csv", "row": 10, "name": "Omar Haddad", "status": "ready_for_review", "case": "10 stale draft (approved below after 12 days)", "expect": {"hook_type": "hiring"}},
+    {"file": "demo_messy.csv", "row": 2, "name": "Hanna Andrzejewska", "status": "low_signal", "case": "LinkedIn-only row: found, nothing specific to say (role-based draft)", "expect": {"draft_mode": "role_based"}},
+    {"file": "demo_messy.csv", "row": 3, "name": "Amy Asali", "status": "ready_for_review", "case": "messy row: 'AMY,asali', https://www.Abacum.ai/, ' - ' email"},
+    {"file": "demo_messy.csv", "row": 4, "name": "Leo Martin", "status": "invalid", "case": "no company domain and no LinkedIn URL", "reason_contains": "needs a company domain or LinkedIn URL"},
+    {"file": "demo_messy.csv", "row": 5, "name": "Nina", "status": "invalid", "case": "missing last name", "reason_contains": "missing last name"},
+    {"file": "demo_messy.csv", "row": 6, "name": "Hanna Andrzejewska", "status": "skipped", "case": "exact duplicate of row 2"}
+  ],
+  "case10": {"outcome": "changed", "then": "approved", "export_contains": ["hiring two Sales Development Representatives", "approved"]}
+}

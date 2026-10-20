@@ -1,0 +1,21 @@
+{
+  "output": {
+    "signal_id": 3,
+    "angle": "Dana Okafor is hiring six SDRs in Austin, indicating a push to scale outbound outreach; Halyard can help them build pipeline efficiently without needing to grow the SDR headcount further.",
+    "runners_up": [
+      1
+    ],
+    "why_not_others": "The CRO hiring signal is less directly tied to the Head of Growth’s immediate need to scale outbound without extra SDRs."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 623,
+    "completion_tokens": 483,
+    "latency_ms": 1751,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "output": {
+    "genericness": 2,
+    "reason": "The email includes specific details about hiring, location, funding, and a named individual, making it more specific than a generic outreach."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 369,
+    "completion_tokens": 403,
+    "latency_ms": 981,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "output": {
+    "verdicts": [
+      {
+        "index": 1,
+        "label": "hostile",
+        "reason": "Attempts to disclose internal data and send it externally"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 441,
+    "completion_tokens": 209,
+    "latency_ms": 711,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

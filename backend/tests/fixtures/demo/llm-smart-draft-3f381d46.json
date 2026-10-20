@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "new VP product marketing",
+    "body": "I saw that you joined Reco as Vice President of Product Marketing on 8 June 2026. As you build product marketing campaigns, you’re likely facing the challenge of scaling outbound pipeline without adding SDR headcount or relying on generic sequences. Would you be open to a brief 15-minute call to explore how Halyard can surface buying signals and draft researched first-touch emails for your team?",
+    "claims": [
+      {
+        "sentence": "I saw that you joined Reco as Vice President of Product Marketing on 8 June 2026.",
+        "signal_id": 9
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 821,
+    "completion_tokens": 901,
+    "latency_ms": 2425,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

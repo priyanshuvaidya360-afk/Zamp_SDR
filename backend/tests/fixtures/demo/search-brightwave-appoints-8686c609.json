@@ -1,0 +1,16 @@
+{
+  "provider": "simweb",
+  "query": "\"Brightwave\" appoints",
+  "results": [
+    {
+      "url": "https://brightwave.example/company",
+      "title": "About Brightwave",
+      "content": "Brightwave makes scheduling software for clinics in the UK and Ireland. Our leadership team:\nBen Hart, CEO; Maya Collins, Head of Growth (London); Sara Ng, VP Customer Success.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

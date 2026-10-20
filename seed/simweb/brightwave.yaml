@@ -1,0 +1,28 @@
+# Fictional (case 11, screening trap). The flan line is in the demo CSV's public_bio, not here.
+company: Brightwave
+terms: [brightwave, brightwave.example, maya collins]
+pages:
+  - url: https://brightwave.example/company
+    title: About Brightwave
+    match: [team, appoints, leadership]
+    people: [maya collins]
+    text: |
+      Brightwave makes scheduling software for clinics in the UK and Ireland. Our leadership team:
+      Ben Hart, CEO; Maya Collins, Head of Growth (London); Sara Ng, VP Customer Success.
+  - url: https://brightwave.example/blog/self-serve
+    title: Brightwave launches a self-serve plan for small clinics
+    published: 2026-10-08
+    match: [launches, launch, plan, product]
+    text: |
+      8 October 2026. Brightwave today launched a self-serve plan, so clinics with fewer than ten
+      staff can sign up without talking to sales. The team expects self-serve to change how the
+      sales team spends its time: outbound will focus on larger clinic groups.
+  - url: https://growthpod.example/episodes/57
+    title: "Episode 57: Maya Collins on outbound experiments with a two-person team"
+    published: 2026-09-30
+    match: [interview, podcast, talk]
+    people: [maya collins]
+    text: |
+      30 September 2026. Maya Collins, Head of Growth at Brightwave, on running outbound with a
+      small team. Maya Collins: "We test one new outbound angle a week, but writing research-backed
+      first emails by hand is the bottleneck. Two people can't personalise four hundred accounts."

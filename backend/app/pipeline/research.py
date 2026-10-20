@@ -7,6 +7,7 @@ only truncated here and stays data; stage 4 scans and extracts it.
 """
 
 import asyncio
+import re
 from collections.abc import Callable
 from datetime import date
 from typing import Any, Literal
@@ -37,9 +38,10 @@ PERSON_QUERIES = {
 
 
 def is_about_company(result: SearchResult, terms: list[str]) -> bool:
-    """The company is in the title or URL, not just named once inside a listicle."""
+    """The company is in the title or URL, not just named once inside a listicle. Whole words
+    only: "Reco" must not match ReconAfrica or "recognition"."""
     headline = f"{result.url} {result.title}".lower()
-    return any(term in headline for term in terms)
+    return any(re.search(rf"(?<![a-z0-9]){re.escape(term)}(?![a-z0-9])", headline) for term in terms)
 
 
 def is_about_person(result: SearchResult, name: str, terms: list[str]) -> bool:

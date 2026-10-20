@@ -1,0 +1,9 @@
+{
+  "provider": "simweb",
+  "pages": {
+    "https://kestrellabs.example/careers/sdr-london": "Posted 2 October 2026. Updated 27 October 2026. Kestrel Labs is hiring two Sales Development\nRepresentatives to complete our first outbound team in London. You will report to Omar Haddad,\nVP Sales, and help write the outbound playbook from day one."
+  },
+  "failed": [],
+  "credits": 0.0,
+  "fallbacks": []
+}

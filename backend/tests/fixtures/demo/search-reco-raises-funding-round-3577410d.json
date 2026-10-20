@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Reco\" raises funding round",
+  "results": [
+    {
+      "url": "https://www.securityweek.com/reco-raises-55-million-for-agentic-security",
+      "title": "Reco Raises $55 Million for Agentic Security - SecurityWeek",
+      "content": "### Artificial Intelligence\n\n# Reco Raises $55 Million for Agentic Security\n\nThe company will use the funds to expand its sales, partnerships, channels, and customer support teams.\n\nBy\n\nIonut Arghire\n\n|\n\n + Flipboard + Reddit + Whatsapp + Whatsapp + Email\n\nCybersecurity funding\n\nAgentic cybersecurity firm Reco today announced raising $55 million in a strategic funding round that brings the total raised by the company to $140 million. [...] The investment round was led by AT&T Ventures, with additional support from new investors Forestay and Quadrille Capital.\n\nFounded in 2020, New York-based Reco provides organizations with an overview of the agents that are active in their environments and the risks they pose.\n\nThe company shows security teams which identities the AI agents use, their permissions, what data and which systems they reach, and the workflows they can initiate.",
+      "published_date": "Tue, 29 Sep 2026 13:20:53 GMT",
+      "score": 0.9020676
+    },
+    {
+      "url": "https://mezha.net/eng/news/5759b1f2_reco_raises_-55",
+      "title": "Reco Raises $55 Million to Help Companies Secure AI Agents | Межа",
+      "content": "Reco raised $55 million in a financing round that extended its $30 million Series B, announced in February. Investors include customer AT&T, through its venture arm, as well as Forestay and Quadrille Capital. The startup has raised $140 million in total.\n\nKlein said Reco’s valuation more than doubled after the previous round was announced. He did not disclose the company’s exact valuation. [...] Reco’s round comes amid growth in the AI agent security market: companies are increasingly adopting these systems, while startups compete to help businesses detect agents and control their access and actions.\n\nRelated news for you:\n\n Autonomous AI agents accessed real systems during security tests, exposing risks linked to internet access, stolen credentials, weak isolation, and excessive permissions.\n\nMezha in YouTube Subscribe\n\n Add Mezha as a preferred source on Google [...] Reco has more than 100 customers, with financial services companies accounting for about 40% of its business, and generates tens of millions of dollars in annual recurring revenue. The company plans to triple that figure. Its platform supports more than 280 applications, and the new funding will go toward hiring, sales, partnerships, and customer support.",
+      "published_date": "Tue, 29 Sep 2026 13:03:03 GMT",
+      "score": 0.8987045
+    },
+    {
+      "url": "https://securitybrief.co.uk/story/reco-raises-usd-55-million-with-at-t-ventures-backing",
+      "title": "Reco raises USD $55 million with AT&T Ventures backing",
+      "content": "Reco has raised an additional USD $55 million, with participation from AT&T Ventures, bringing the security software company's total funding to USD $140 million.\n\nThe round also includes backing from Forestay and Quadrille Capital. Reco will use the funding to expand sales, partnerships, channels and customer support as large companies broaden their use of AI agents across internal systems and business applications. [...] Reco's latest funding round underlines how quickly governance and oversight tools are becoming part of enterprise AI spending as companies move from limited trials to broader deployment of agents across their operations.\n\n## Explore with AI\n\nChatGPT  \n\nKey takeaways   Explain why it matters   Create action plan   Future watch\n\n   Claude  \n\nKey takeaways   Explain why it matters   Create action plan   Future watch\n\n   Perplexity [...] Related stories\n\nReco raises USD $55 million in AT&T Ventures-backed round Reco raises USD $55 million as AI agent security grows AI security incidents expose new criminal tradeoffs TechForce joins Anthropic's Claude partner network Cyera launches tools to secure enterprise AI agents\n\nTop stories",
+      "published_date": "Thu, 15 Oct 2026 07:30:00 GMT",
+      "score": 0.89030397
+    },
+    {
+      "url": "https://finance.biggo.com/news/5130b06b-556e-4932-9117-77efba3ab02b",
+      "title": "US-based Reco raises $55 million to monitor AI agents, with strategic investment from AT&T — BigGo Finance",
+      "content": "The backdrop to Reco's latest funding round is the rapid proliferation of AI agents in enterprises. In its press release, the company cited a Gartner forecast that the average number of agents used by Fortune 500 companies globally will grow from fewer than 15 in 2025 to more than 150,000 by 2028. It also referenced Grand View Research data projecting that the agentic AI security market will expand from $1.3 billion (approximately ¥204 billion) in 2025 to $17.8 billion (approximately ¥2.79 [...] Reco completed a $30 million (approximately ¥4.7 billion) Series B round in February, and this latest raise is positioned as an extension of that round. AT&T is both a customer and an investor, which Klein views as validation of market demand. Rich Baich, CISO of AT&T, said: \"Reco is helping AT&T strengthen governance across our entire enterprise application and AI ecosystem.\" [...] US-based Reco announced on September 29, 2026 that it has raised an additional $55 million (approximately ¥8.6 billion) to expand its AI agent security business. AT&T Ventures made a strategic investment, with Forestay and Quadrille Capital joining as new investors. Total funding has now reached $140 million. The company's platform provides visibility into AI agents operating within enterprises, identifying risks related to permissions and connections. It integrates with more than 280",
+      "published_date": "Tue, 29 Sep 2026 14:55:29 GMT",
+      "score": 0.8745175
+    },
+    {
+      "url": "https://theaiinsider.tech/2026/09/30/reco-announces-55m-in-funding-to-tackle-ai-agent-sprawl-across-enterprises",
+      "title": "Reco Announces $55M in Funding to Tackle AI Agent Sprawl Across Enterprises",
+      "content": "AI security startup Reco has raised $55 million, extending a $30 million Series B from February, with participation from AT&T’s venture arm, Forestay and Quadrille Capital. The funding brings its total raised to $140 million.",
+      "published_date": "Wed, 30 Sep 2026 15:01:51 GMT",
+      "score": 0.87113565
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

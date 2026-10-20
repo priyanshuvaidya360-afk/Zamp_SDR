@@ -4,20 +4,8 @@
       {
         "type": "funding",
         "about": "company",
-        "summary": "Acme Fintech secured $40 million in Series C funding led by Lightspeed Venture Partners.",
+        "summary": "Acme Fintech raises $40M Series C funding",
         "evidence": "Acme Fintech on Wednesday said it has secured $40 million in Series C funding led by Lightspeed Venture Partners.",
-        "published_at": "2026-10-01",
-        "sensitive": false,
-        "speaker": null,
-        "is_reshare": false,
-        "time_sensitive": true,
-        "job_posting": null
-      },
-      {
-        "type": "expansion",
-        "about": "company",
-        "summary": "Acme Fintech plans to expand to Singapore and Indonesia.",
-        "evidence": "The startup plans to expand to Singapore and Indonesia.",
         "published_at": "2026-10-01",
         "sensitive": false,
         "speaker": null,
@@ -28,16 +16,14 @@
     ]
   },
   "usage": {
-    "provider": "gemini",
-    "model": "gemini-3.5-flash-lite",
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
     "role": "fast",
-    "prompt_tokens": 541,
-    "completion_tokens": 264,
-    "latency_ms": 4094,
+    "prompt_tokens": 1021,
+    "completion_tokens": 360,
+    "latency_ms": 1122,
     "cost_usd": 0.0,
-    "fallbacks": [
-      "groq: rate limited"
-    ],
+    "fallbacks": [],
     "from_fixture": false
   }
 }

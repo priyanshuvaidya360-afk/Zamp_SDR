@@ -203,10 +203,18 @@ def test_ghost_jobs_by_age_and_cluster_date_window():
     extract.flag_ghost_jobs([old, fresh])
     assert old.ghost_suspect and "posted 40 days ago" in old.note and not fresh.ghost_suspect
 
-    a = ExtractedSignal(**sig(published_at="2026-10-01"), source_url="https://a.example/1")
-    b = ExtractedSignal(**sig(published_at="2026-10-20"), source_url="https://b.example/1")
+    a = ExtractedSignal(**sig(type="product_launch", published_at="2026-10-01"), source_url="https://a.example/1")
+    b = ExtractedSignal(**sig(type="product_launch", published_at="2026-10-20"), source_url="https://b.example/1")
     kept, merged = extract.cluster_events([a, b])
-    assert merged == 0 and len(kept) == 2  # same story, 19 days apart: two events
+    assert merged == 0 and len(kept) == 2  # similar story, 19 days apart: two events
+
+    # A raise is identified by its amount: different wording, same $55M, 16 days apart -> one event.
+    first = ExtractedSignal(**sig(summary="Reco raised $55 million led by AT&T Ventures", published_at="2026-09-29"),
+                            source_url="https://securityweek.example/reco")
+    later = ExtractedSignal(**sig(summary="Reco announces $55M from Forestay and Quadrille", published_at="2026-10-15"),
+                            source_url="https://other.example/reco")
+    kept, merged = extract.cluster_events([first, later])
+    assert merged == 1 and kept[0].coverage == 2
 
 
 async def test_company_extraction_runs_once_per_account(session, monkeypatch):

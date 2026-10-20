@@ -1,0 +1,31 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Hanna Andrzejewska",
+        "title": null,
+        "company": null,
+        "company_domain": null,
+        "location": null,
+        "country": "PL",
+        "evidence_url": "https://pl.linkedin.com/in/hanna-andrzejewska-20596041",
+        "evidence": "Hanna Andrzejewska - Product & program manager | Growth ...",
+        "confidence": 0.95
+      }
+    ],
+    "reasoning": "The search result provides a LinkedIn URL that exactly matches the prospect's LinkedIn URL, confirming the identity with high confidence."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 348,
+    "completion_tokens": 125,
+    "latency_ms": 1045,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

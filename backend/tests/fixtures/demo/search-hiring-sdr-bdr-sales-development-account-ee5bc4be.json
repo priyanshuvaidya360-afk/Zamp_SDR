@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"\" hiring SDR BDR sales development account executive growth marketing",
+  "results": [
+    {
+      "url": "https://careers.box.com/en/jobs/7966544/sales-development-representative",
+      "title": "Sales Development Representative, London | Box",
+      "content": "WHY BOX NEEDS YOU\n\nAs a Sales Development Representative, you'll work closely with our Account Executives and Marketing department to ensure leads are effectively managed across teams in order to attract great clients. Our SDRs play a crucial role in the company, and we'll provide you with the necessary tools, training, mentorship, and leadership as you collaborate with companies to identify their challenges and how Box can help solve them.\n\nWHAT YOU'LL DO [...] Apply now\n\n## Designed to support you\n\nFinancial benefits\n\nAt Box, you’re an owner. New hires receive equity, can join our stock plan, and benefit from fair, transparent, performance-based pay — because your impact should be rewarded.\n\nGenerous time off\n\nBox offers flexible time off, birthday holidays, VTO, and a sabbatical after seven years, so you can recharge, give back, and focus on what matters most, you!\n\nGrowth [...] At Box, we believe unique and diverse experiences benefit our culture, our products, our customers, our company, and our world. We aim to recruit a passionate, high-performing workforce that reflects the world we live in.If you are head-over-heels about this role but unsure if you meet all the requirements, we encourage you to apply!\n\nBENEFITS",
+      "published_date": null,
+      "score": 0.6685563
+    },
+    {
+      "url": "https://smithdigital.io/blog/what-is-bdr-vs-sdr",
+      "title": "SDR vs BDR: Roles, Responsibilities & Key Differences",
+      "content": "SDR (Sales Development Representative) handles inbound leads — prospects who have already shown interest in your product or service.\n BDR (Business Development Representative) focuses on outbound prospecting — proactively reaching out to new potential customers who haven't engaged yet.\n Both roles sit at the top of the sales funnel and are responsible for qualifying leads before passing them to an account executive. [...] Outsourced BDR and SDR teams can accelerate early growth but may sacrifice quality in complex or enterprise sales contexts.\n Career paths for both roles typically lead toward account executive positions or strategic sales roles.\n Understanding the difference between the two is the first step toward building a sales team structure that actually scales. [...] That situation is common during growth periods. A sales team launches a new service line, moves into a different market, or realizes account executives are spending too much time prospecting instead of managing active deals. Leadership wants more outbound activity, but hiring and training internally may take months before results start showing up.\n\nAn outsourced team can sometimes close that gap faster.",
+      "published_date": null,
+      "score": 0.6455898
+    },
+    {
+      "url": "https://builtin.com/job/sales-development-representative/11340529",
+      "title": "Sales Development Representative - Cedar | Built In",
+      "content": "As some of Cedar’s first SDR hires, you’ll have the opportunity to help shape how the function operates from the ground up. You’ll work closely with Marketing and Sales to test new approaches, identify what converts, and help establish the processes, messaging, and best practices that can scale with the team [...] This role will sit within Cedar’s Demand Generation team, part of the broader Marketing organization, and partner closely with Sales, Product Marketing, and Revenue Operations. SDRs will be responsible for engaging priority accounts, following up on high intent signals, and turning marketing and outbound activity into qualified sales conversations. [...] This is a high impact role for someone who is curious, persistent, and comfortable building relationships with senior healthcare leaders. The ideal candidate can research accounts, personalize outreach across email, phone, and LinkedIn, and connect Cedar’s value proposition to the priorities of healthcare organizations.\n\nSDRs will play a key role in helping Cedar build a repeatable outbound motion, generate qualified pipeline, and strengthen coordination between Marketing and Sales.",
+      "published_date": null,
+      "score": 0.58237284
+    },
+    {
+      "url": "https://remotegrowthpartners.com/blog/what-does-a-sales-development-representative-actually-do-in-2026-and-why-offshore-sdrs-are-now-doing-it-better",
+      "title": "What Does a Sales Development Representative Do in 2026?",
+      "content": "If most of those are true, you're ready. If you're still figuring out your ICP and messaging, build that first, an SDR of any kind will struggle without it.\n\nTo see the full range of offshore roles we place, Remote Growth Partners also places BDRs, Account Executives, and marketing staff for US-based teams.\n\n### How to Onboard and Manage an Offshore SDR for Maximum ROI [...] > Quick Answer: A sales development representative (SDR) is a top-of-funnel sales role focused on prospecting, outbound outreach, and qualifying leads before passing them to an Account Executive. In 2026, US-based SDRs cost $80,000–$100,000+ per year in total employer costs. Offshore SDRs performing the same functions cost 60–70% less, with no meaningful drop in output quality when hired through a rigorous vetting process. [...] A sales development representative (SDR) is a top-of-funnel sales role responsible for outbound prospecting, lead qualification, and booking meetings for Account Executives using tools like Salesforce, LinkedIn Sales Navigator, and Salesloft. In 2026, the total first-year cost of a US-based SDR exceeds $100,000 when employer taxes, benefits, recruiting fees, and ramp time are included. Offshore SDRs in Latin America and the Philippines perform the same core functions at 60–70% lower cost, with",
+      "published_date": null,
+      "score": 0.5806618
+    },
+    {
+      "url": "https://www.t2d3.pro/learn/sdr-vs-bdr-definition",
+      "title": "SDR vs BDR: Definitions, Marketing Roles, and How to Set Them Up for Success | T2D3 OS",
+      "content": "SDR (Sales Development Representatives) are in charge of qualifying all the inbound leads. This is an entry-level position newly hired employees commonly apply for. After 12 months, Salesforce promotes them to the BDR (Business Development Representatives) organization. Their primary duty will switch from handling inbound leads to making outbound sales calls.\n The SDR usually handles SMBs while the BDR organization commonly contacts prospects from commercial and enterprise segments. [...] #### TreeLine\n\n The BDR focuses on inbound leads. They are filtering and qualifying those leads for the Account Executives.\n The SDR focuses on outbound activity to find net-new prospects. Their job is to gather information, ask qualifying questions and deliver the lead to their prospective Account Executive.\n\n## What's next?\n\nRead next\n\n#### How to build and manage an incentive plan for your B2B SaaS sales team\n\nREAD ARTICLE\n\n## Join the conversation [...] 1. Your existing sales executives and Account Managers find new business with existing customers and existing relations who sometimes switch employers, or provide a referral.\n2. Get “hand-raisers” from your Content funnel and Brand Awareness (i.e. your website)\n3. Prospecting (knocking on doors) of people who have never heard about your brand.\n\nAll three, when done correctly, can lead to the type of growth that scales startups and breaks the plateaus of established organizations.",
+      "published_date": null,
+      "score": 0.57780564
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

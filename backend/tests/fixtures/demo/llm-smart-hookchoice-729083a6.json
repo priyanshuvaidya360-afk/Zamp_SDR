@@ -1,0 +1,21 @@
+{
+  "output": {
+    "signal_id": 2,
+    "angle": "Daniel Okoro is hiring five SDRs for the new Austin office, meaning his team will need to quickly generate pipeline for those reps; Halyard can deliver ready‑made, research‑backed outreach to fill their pipeline without adding extra SDR headcount.",
+    "runners_up": [
+      1
+    ],
+    "why_not_others": "The expansion news is less directly tied to his immediate need to staff and enable new SDRs."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 598,
+    "completion_tokens": 539,
+    "latency_ms": 1486,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

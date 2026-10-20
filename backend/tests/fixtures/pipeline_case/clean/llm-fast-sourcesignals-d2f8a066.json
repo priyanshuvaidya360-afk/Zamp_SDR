@@ -4,7 +4,7 @@
       {
         "type": "funding",
         "about": "company",
-        "summary": "Acme Fintech raised $40 million in a Series C funding round led by Lightspeed.",
+        "summary": "Acme Fintech raised $40 million in a Series C round led by Lightspeed.",
         "evidence": "Acme Fintech, which builds finance automation software, has raised $40 million in its Series C round led by Lightspeed.",
         "published_at": "2026-10-03",
         "sensitive": false,
@@ -32,8 +32,8 @@
     "model": "gemini-3.5-flash-lite",
     "role": "fast",
     "prompt_tokens": 534,
-    "completion_tokens": 276,
-    "latency_ms": 4395,
+    "completion_tokens": 275,
+    "latency_ms": 2494,
     "cost_usd": 0.0,
     "fallbacks": [
       "groq: rate limited"

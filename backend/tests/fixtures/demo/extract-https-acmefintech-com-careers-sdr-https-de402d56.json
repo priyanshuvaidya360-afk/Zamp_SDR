@@ -1,0 +1,11 @@
+{
+  "provider": "simweb",
+  "pages": {
+    "https://acmefintech.com/careers/sdr": "Posted 1 October 2026. Acme Fintech is hiring three Sales Development Representatives in\nLondon to start conversations with finance teams at mid-market companies. You will work with\nour VP Marketing on outbound campaigns.",
+    "https://acmefintech.com/blog/we-moved-to-hubspot": "6 October 2026. Our CRM migration is done: as of this week every Acme Fintech marketer and\nseller works in HubSpot. \"Moving off three tools took us two quarters,\" said Priya Raman,\nVP Marketing. \"Now we want outbound that uses the clean data, not more spreadsheets.\"",
+    "https://acmefintech.com/about/team": "Acme Fintech builds spend management for mid-market companies in the UK and India.\nLeadership: Rohan Gupta, Chief Executive Officer. Priya Raman, VP Marketing, leads\nmarketing and demand generation from our London office. Anil Shah, VP Sales."
+  },
+  "failed": [],
+  "credits": 0.0,
+  "fallbacks": []
+}

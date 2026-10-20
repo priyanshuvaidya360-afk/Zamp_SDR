@@ -110,6 +110,21 @@ Decisions and assumptions made while building Signal. Add to this as you build
   cover finished runs; a resumed run's time includes the wait for the rep. Status counts are
   all-time. Fixture replays report 0 credits and near-zero run times.
 
+- T17 demo data: real companies (ProtoPie, Reco, GetResponse, Abacum) were researched on the live
+  web on 19 Oct 2026; the people are from the rep's own prospect export or the company's own press
+  release (Reco's executive team). Rows whose case needs invented content (a flan or hostile line
+  in a bio, a "not now" reply, a careers page that changes) use fictional companies served by a
+  simulated web (seed/simweb/), so nothing invented is ever attached to a real person. The demo
+  says so; the case-10 clock is simulated too.
+- Live web answers drift (the same query found Ryan Yu on 18 Oct and nothing on 19 Oct), so the
+  demo recording reuses earlier successful live recordings of identical requests.
+- Reco (not Northwind) is the buying-committee account: the case-3 committee and the case-5 crowded
+  raise are shown on one real company. Northwind stays in the unit tests.
+- Outlets count as covering the same raise when they state the same amount within the crowded
+  window (30 days), even if their headline wording differs.
+- Follow-ups tell the hook model what the person replied (trusted CRM data), so it prefers a signal
+  that answers it. The critic rejects internal labels such as "person_content" in an email.
+
 ## Technical
 - Zero cost: every service runs on a free tier with no credit card. The LLM is Groq
   (`openai/gpt-oss-120b` smart, `openai/gpt-oss-20b` fast) with Gemini free tier as

@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Hanna Andrzejewska\" interview OR podcast OR talk",
+  "results": [
+    {
+      "url": "https://amanha.com.br/pessoas/1635877-jadwiga-andrzejewska",
+      "title": "Jadwiga Andrzejewska",
+      "content": "Há 40 anos conectando líderes do Paraná, Santa Catarina e Rio Grande do Sul.",
+      "published_date": null,
+      "score": 0.12458555
+    },
+    {
+      "url": "https://pl.linkedin.com/in/joanna-andrzejewska-4b59641",
+      "title": "Joanna Andrzejewska – Warszawa, Woj. Mazowieckie ...",
+      "content": "- Anna Jenkins: “I have had a great pleasure to work with Joanna for the past 4 years. In her position as a Account Manager at TBWA PR in Warsaw, Joanna has shown her skills not only in PR but also in branding. She is creative, determined, client- as well as business oriented. Joanna’s social skills have made the... [...] - Shared: W tym roku nie mogło zabraknąć nowej odsłony Freedom. Kolekcji, która odniosła największy komercyjny sukces w historii W.KRUK. Freedom...\n- Shared: W jubileuszowym roku W.KRUK tylko duże newsy! W.KRUK S.A. nabywa markę Lilou Z dumą informujemy, że w jubileuszowym roku 185-lecia W.KRUK,...\n- Shared: Dziękuję Katarzyna Dębek , Agnieszka Filipiak oraz Anna Dygasiewicz-Piwko Forbes Women Polska za zaproszenie do dyskusji o Kodeksie dobrych... [...] ## Recent Activity\n- Shared: Moja ulubiona impreza 2025. 185-lecie W.KRUK, to był intensywny rok. Pełen wyzwań, intensywnej pracy , upadków i wzlotów, sPEŁNIA/onych...\n- Shared: Z dumą witamy w W.KRUK nową Ambasadorkę - Katarzynę Nosowską. Za nami rok pracy nad autorską kolekcją biżuterii i kampanią PEŁNIA. NOSOWSKA...\n- Shared: Praca marzeń czeka na utalentowaną osobę! ✨ Dołącz do W.KRUK jako PROJEKTANT/KA biżuterii! 📍 Warszawa Rozwijaj swoją karierę w najstarszej...",
+      "published_date": null,
+      "score": 0.106421195
+    },
+    {
+      "url": "https://www.facebook.com/100005107625419/videos/dzi%C5%9B-razem-z-robertem-odwiedzili%C5%9Bmy-studio-tvn-i-zasiedli%C5%9Bmy-przed-mikrofonami-%EF%B8%8F/1131269042909097",
+      "title": "Dziś razem z Robertem odwiedziliśmy studio TVN i ...",
+      "content": "🎙️❤️ Były emocje, szczera rozmowa i trochę uśmiechu. Bardzo się cieszymy, że mogliśmy wziąć udział w tym nagraniu! Podcast z naszym udziałem już wkrótce.",
+      "published_date": null,
+      "score": 0.08744704
+    },
+    {
+      "url": "https://faculty.mdanderson.org/profiles/kunal_rai.html",
+      "title": "Kunal Rai | UT MD Anderson",
+      "content": "63. Oleksiewicz U, Gladych M, Raman AT, Heyn H, Mereu E, Chlebanowska P, Andrzejewska A, Sozanska B, Samant N, Fak K, Auguscik P, Kosinski M, Wróblewska JP, Tomczak K, Kulcenty K, Ploski R, Biecek P, Esteller M, Shah PK, Rai K, Wiznerowicz M. TRIM28 and Interacting KRAB-ZNFs Control Self-Renewal of Human Pluripotent Stem Cells through Epigenetic Repression of Pro-differentiation Genes. Stem Cell Reports 9(6):2065-2080, 2017. e-Pub 2017. PMID: 29198826. [...] 2016 - Present\n\nGSBS Program in Quantitative Sciences\n\n2015 - Present\n\nGSBS Genetics and Epigenetics Program\n\n2015 - Present\n\nAACR\n\n2008 - Present\n\n### Selected Presentations & Talks\n\n#### Local Presentations [...] 1. 2026. Gut Microbiome as an Epigenetic Rheostat During Fasting-Mediated Intestinal Regeneration. Invited. Gut Microbiome and Probiotics - Impact from Cradle to Centenarians. New Delhi, IN.\n2. 2026. Precision Epigenome Engineering to Improve T Cell Therapy. Poster. Keystone Symposia - Emerging Cell Therapies. Banff, CA.\n3. 2025. Precision Epigenetic Engineering to Improve T Cell Therapy. Invited. EpiCypher 2025: Biological and Clinical Frontiers in Epigenetics. Cancun, MX.",
+      "published_date": null,
+      "score": 0.08688758
+    },
+    {
+      "url": "https://www.facebook.com/ghoulishoficial/posts/esp-una-sonrisa-que-ha-sobrevivido-al-paso-del-tiempola-m%C3%A1scara-calavera-creada-/1673943611397948",
+      "title": "ESP 🇲🇽 Una sonrisa que ha sobrevivido al paso del ...",
+      "content": "ESP Una sonrisa que ha sobrevivido al paso del tiempo. La máscara Calavera, creada en 1998, es un clásico que demuestra que una buena sonrisa nunca",
+      "published_date": null,
+      "score": 0.02590068
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": true
+}

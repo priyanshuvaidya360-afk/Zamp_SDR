@@ -45,11 +45,12 @@ tone:
 
 # Case 3: title patterns -> the angle each persona cares about.
 personas:
-  - match: [CMO, Chief Marketing Officer, VP Marketing]
+  - match: [CMO, Chief Marketing Officer, VP Marketing, Vice President of Marketing]
     angle: pipeline targets and cost per opportunity
   - match: [Head of Growth, Growth, Demand Generation, Demand Gen]
     angle: channel performance and running more outbound experiments without more headcount
-  - match: [VP Sales, Head of Sales, Sales Development, SDR Manager, BDR]
+  - match: [VP Sales, Vice President of Sales, SVP Sales, Americas Sales, Head of Sales, Sales Development,
+           SDR Manager, BDR]
     angle: rep productivity and meetings booked per rep
   - match: [RevOps, Revenue Operations, Sales Operations]
     angle: clean data and fewer tools to stitch together

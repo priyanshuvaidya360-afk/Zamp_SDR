@@ -1,0 +1,10 @@
+{
+  "provider": "simweb",
+  "pages": {
+    "https://brightwave.example/blog/self-serve": "8 October 2026. Brightwave today launched a self-serve plan, so clinics with fewer than ten\nstaff can sign up without talking to sales. The team expects self-serve to change how the\nsales team spends its time: outbound will focus on larger clinic groups.",
+    "https://brightwave.example/company": "Brightwave makes scheduling software for clinics in the UK and Ireland. Our leadership team:\nBen Hart, CEO; Maya Collins, Head of Growth (London); Sara Ng, VP Customer Success."
+  },
+  "failed": [],
+  "credits": 0.0,
+  "fallbacks": []
+}

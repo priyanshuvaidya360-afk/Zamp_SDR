@@ -1,0 +1,16 @@
+{
+  "provider": "simweb",
+  "query": "\"Kestrel Labs\" hiring SDR BDR sales development account executive growth marketing",
+  "results": [
+    {
+      "url": "https://kestrellabs.example/careers/sdr-london",
+      "title": "Sales Development Representative, London - Kestrel Labs Careers",
+      "content": "Posted 2 October 2026. Kestrel Labs is hiring four Sales Development Representatives to build\nour first outbound team in London. You will report to Omar Haddad, VP Sales, and help write the\noutbound playbook from day one.",
+      "published_date": "2026-10-02",
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

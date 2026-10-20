@@ -1,0 +1,18 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Kristen Twining\" site:reco.ai",
+  "results": [
+    {
+      "url": "https://www.reco.ai/blog/reco-expands-executive-team-in-enterprise-ai-agent-security",
+      "title": "Reco Expands Executive Team in Enterprise AI Agent Security",
+      "content": "Jun 11, 2026 · Reco has appointed Kristen Twining as Senior Vice President of Americas Sales and Business Development. Twining joins from FireMon, where as Senior Vice President of Sales Americas she drove and closed enterprise cybersecurity deals across the $1B to $3B segment.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [
+    "tavily: no results"
+  ],
+  "cached": false
+}

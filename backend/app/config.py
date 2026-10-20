@@ -80,6 +80,11 @@ class Settings(BaseSettings):
     # live: real calls. record: real calls + save each response as a fixture.
     # fixtures: replay saved responses only (no network, no keys needed).
     demo_mode: Literal["live", "record", "fixtures"] = "live"
+    # Demo recording only (T17): fictional companies' pages, served instead of the live web.
+    sim_web_dir: Path | None = None
+    sim_web_later: bool = False
+    record_reuse: bool = False  # record mode: reuse successful recordings (fixtures.reusable)
+    record_reuse_dirs: list[Path] = []  # serve each page's later_text (case 10's "twelve days later")
     fixture_delay_s: float = 0  # pause per replayed call, so a fixtures-mode batch streams like a live one
     fixtures_dir: Path = BACKEND_DIR / "tests" / "fixtures"
     cache_dir: Path = BACKEND_DIR / "tests" / "fixtures" / "cache"

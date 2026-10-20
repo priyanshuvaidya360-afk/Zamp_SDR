@@ -4,8 +4,8 @@
       {
         "type": "hiring",
         "about": "company",
-        "summary": "Acme Fintech is hiring an Accounts Payable Specialist.",
-        "evidence": "We are looking for an Accounts Payable Specialist to process high volumes of vendor invoices",
+        "summary": "Acme Fintech posted a role for Accounts Payable Specialist.",
+        "evidence": "We are looking for an Accounts Payable Specialist to process high volumes of vendor invoices, match them to purchase orders and manage payment runs.",
         "published_at": null,
         "sensitive": false,
         "speaker": null,
@@ -25,16 +25,14 @@
     ]
   },
   "usage": {
-    "provider": "gemini",
-    "model": "gemini-3.5-flash-lite",
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
     "role": "fast",
-    "prompt_tokens": 499,
-    "completion_tokens": 168,
-    "latency_ms": 10117,
+    "prompt_tokens": 990,
+    "completion_tokens": 652,
+    "latency_ms": 24632,
     "cost_usd": 0.0,
-    "fallbacks": [
-      "groq: rate limited"
-    ],
+    "fallbacks": [],
     "from_fixture": false
   }
 }

@@ -14,7 +14,7 @@ from datetime import date
 from urllib.parse import urlparse
 
 from app.config import settings
-from app.pipeline.extract import ExtractedSignal, _overlap, parse_date
+from app.pipeline.extract import ExtractedSignal, _overlap, amounts, parse_date
 from app.pipeline.research import QueryLog
 
 CROWDED_TYPES = {"funding", "product_launch", "acquisition"}
@@ -37,19 +37,25 @@ def _domain(url: str) -> str:
 
 def add_search_coverage(signals: list[ExtractedSignal], queries: list[QueryLog]) -> None:
     """Count outlets in the search results that report the same event as an extracted signal
-    (same search category, similar headline, dates within a week). Adds them to cluster_urls."""
+    (same search category, and either a similar headline within a week or the same amount, e.g.
+    "$55 million" in the summary and "$55M" in a headline, within the crowded window).
+    Adds them to cluster_urls."""
     for s in signals:
         if s.type not in CROWDED_TYPES or s.about != "company":
             continue
         urls = list(dict.fromkeys([s.source_url, *s.cluster_urls]))
+        money = amounts(s.summary)
         for log in queries:
             if log.category != s.category:
                 continue
             for result in log.relevant_results:
                 when = parse_date(result.get("published_date"))
-                if when and s.published_at and abs((when - s.published_at).days) > SAME_EVENT_DAYS:
-                    continue
-                if _overlap(s.summary, f"{result.get('title', '')} {result.get('snippet', '')}") >= SAME_EVENT_OVERLAP:
+                gap = abs((when - s.published_at).days) if when and s.published_at else 0
+                headline = f"{result.get('title', '')} {result.get('snippet', '')}"
+                similar = gap <= SAME_EVENT_DAYS and _overlap(s.summary, headline) >= SAME_EVENT_OVERLAP
+                # The same amount from the same company is the same raise, even in a later write-up.
+                same_amount = gap < settings.crowded_max_days and bool(money & amounts(headline))
+                if similar or same_amount:
                     urls.append(result["url"])
         urls = list(dict.fromkeys(urls))
         s.cluster_urls = [u for u in urls if u != s.source_url]

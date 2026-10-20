@@ -1,0 +1,21 @@
+{
+  "output": {
+    "signal_id": 2,
+    "angle": "The recent launch of ProtoPie Player for HarmonyOS on Huawei’s AppGallery opens a new market, and as Head of Growth you’ll need to quickly build a pipeline of interested enterprises; Halyard can surface buying‑signal accounts and draft personalized outreach to accelerate adoption.",
+    "runners_up": [
+      1
+    ],
+    "why_not_others": "Signal 1 is also a product launch but focuses on a beta feature rather than a market expansion, making it a less compelling hook."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 646,
+    "completion_tokens": 589,
+    "latency_ms": 1571,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

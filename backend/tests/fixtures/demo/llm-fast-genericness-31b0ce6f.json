@@ -1,0 +1,17 @@
+{
+  "output": {
+    "genericness": 0,
+    "reason": "The email references a specific person, company, podcast, and date, making it heavily tailored and not transferable by name change alone."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 352,
+    "completion_tokens": 590,
+    "latency_ms": 1141,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

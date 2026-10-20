@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Amy Asali\" \"Abacum\"",
+  "results": [
+    {
+      "url": "https://www.linkedin.com/posts/abacum-ai_today-abacum-is-in-three-rooms-on-two-coasts-activity-7513583928738476032-7PRz",
+      "title": "Abacum's Post",
+      "content": "See the Abacum team - Molly Selin and Amy Asali (Dwarnick). Amy Asali (Dwarnick) FIF Collective for a fun night painting and connecting!",
+      "published_date": null,
+      "score": 0.6803909
+    },
+    {
+      "url": "https://www.linkedin.com/posts/adwarnick_lifecycle-marketing-manager-activity-7506707391028269056-TUqk",
+      "title": "Amy Asali (Dwarnick)'s Post - Lifecycle Marketing Manager",
+      "content": "Amy Asali (Dwarnick)'s. I'm hiring for a lifecycle marketing manager. A month in at Abacum, the momentum is hard to miss. This is the first person here to own",
+      "published_date": null,
+      "score": 0.6388584
+    },
+    {
+      "url": "https://www.linkedin.com/in/adwarnick",
+      "title": "Amy Asali (Dwarnick) - Building Full-Funnel Growth ...",
+      "content": "## Experience\n- Head of Growth at Abacum (Aug 2026 to present)\n- Head of Growth | Rentable, ApartmentIQ, MavenAI at Rentable (Dec 2022 to Apr 2026)\n- Head of Growth at ApartmentIQ (Dec 2022 to Apr 2026)\n- Head of Growth at MavenAI (Dec 2022 to Apr 2026)\n- Associate Director, Growth Marketing at Angi (Aug 2021 to Nov 2022)\n- Senior Growth Marketing Manager at Triplebyte (Mar 2020 to Aug 2021)\n\n## Education\n- Babson College, Bachelor of Science Business Management\n- Wellesley College [...] # Amy Asali\n\nHeadline: Head of Growth at Rentable\nCurrent role: Head Of Growth\nSeniority: Head, Marketing\nLocation: New York, New York, United States\nExperience: 13 years 11 months\nLinkedIn:  · 1,201 followers [...] Courses: Brand Management, Business  Analytics, Business Intelligence, Consumer Behavior, Corporate Financial Management, Marketing Analytics, Marketing Managment, Operations Research, Organizational Psychology, Psychology of Creativity",
+      "published_date": null,
+      "score": 0.63125396
+    },
+    {
+      "url": "https://www.linkedin.com/posts/adwarnick_marketing-manager-lifecycle-activity-7506707391028269056-crk2",
+      "title": "Amy Asali (Dwarnick)'s Post - Marketing Manager, Lifecycle",
+      "content": "Amy Asali (Dwarnick) I'm hiring for a lifecycle marketing manager. A month in at Abacum, the momentum is hard to miss. Record breaking deals, new hires, own",
+      "published_date": null,
+      "score": 0.63098115
+    },
+    {
+      "url": "https://www.linkedin.com/posts/adwarnick_day-one-at-abacum-im-joining-as-head-of-activity-7493416391346307073-uDNq",
+      "title": "Amy Asali (Dwarnick)'s Post",
+      "content": "Day one at Abacum. I'm joining as Head of Growth to build a predictable inbound engine for the AI-native FP&A platform finance teams can actually run.",
+      "published_date": null,
+      "score": 0.5973971
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

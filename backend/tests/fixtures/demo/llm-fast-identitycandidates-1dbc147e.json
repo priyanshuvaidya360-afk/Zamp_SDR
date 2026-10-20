@@ -1,0 +1,31 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Sandy Mathews",
+        "title": null,
+        "company": "Reco",
+        "company_domain": "reco.ai",
+        "location": null,
+        "country": null,
+        "evidence_url": "https://www.reco.ai/blog/reco-expands-executive-team-in-enterprise-ai-agent-security",
+        "evidence": "Additional executive appointments include Dana Harduf as Chief Human Resources Officer, Sandy Mathews as Vice President of Product Marketing",
+        "confidence": 0.95
+      }
+    ],
+    "reasoning": "Search results explicitly confirm Sandy Mathews was appointed as Vice President of Product Marketing at Reco (reco.ai), matching the prospect's company and role details."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1638,
+    "completion_tokens": 179,
+    "latency_ms": 1788,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

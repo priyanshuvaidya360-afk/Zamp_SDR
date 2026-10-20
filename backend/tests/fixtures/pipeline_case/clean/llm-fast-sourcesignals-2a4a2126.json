@@ -4,8 +4,8 @@
       {
         "type": "product_launch",
         "about": "company",
-        "summary": "Acme Fintech launched Acme Close, a new product for month-end financial close automation.",
-        "evidence": "Today we are launching Acme Close, a new product that automates bank reconciliation and accruals",
+        "summary": "Acme Fintech launches Acme Close, a new product to automate bank reconciliation and accelerate month-end close.",
+        "evidence": "Today we are launching Acme Close, a new product that automates bank reconciliation and accruals so finance teams can finish the month-end close in three days instead of ten.",
         "published_at": "2026-09-24",
         "sensitive": false,
         "speaker": null,
@@ -16,16 +16,14 @@
     ]
   },
   "usage": {
-    "provider": "gemini",
-    "model": "gemini-3.5-flash-lite",
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
     "role": "fast",
-    "prompt_tokens": 537,
-    "completion_tokens": 145,
-    "latency_ms": 4803,
+    "prompt_tokens": 1020,
+    "completion_tokens": 873,
+    "latency_ms": 1387,
     "cost_usd": 0.0,
-    "fallbacks": [
-      "groq: rate limited"
-    ],
+    "fallbacks": [],
     "from_fixture": false
   }
 }

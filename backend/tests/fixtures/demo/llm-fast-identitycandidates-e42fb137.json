@@ -1,0 +1,31 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Amy Asali",
+        "title": null,
+        "company": "Abacum",
+        "company_domain": "abacum.ai",
+        "location": null,
+        "country": null,
+        "evidence_url": "https://www.linkedin.com/in/adwarnick",
+        "evidence": "Head of Growth at Abacum",
+        "confidence": 0.95
+      }
+    ],
+    "reasoning": "The LinkedIn result clearly links Amy Asali (Dwarnick) to the role of Head of Growth at Abacum, matching the prospect's company and title."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1153,
+    "completion_tokens": 149,
+    "latency_ms": 1251,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

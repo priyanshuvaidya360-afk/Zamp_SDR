@@ -1,0 +1,95 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "COO appointment signals overall growth but not directly tied to outbound pipeline needs."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 5,
+        "reasoning": "New SVP of Americas Sales will immediately need scalable pipeline without adding SDR headcount."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 3,
+        "specificity": 2,
+        "reasoning": "Geographic expansion creates new market territories that require fresh outbound pipeline."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Award recognition does not drive a need for more outbound pipeline."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "HR leadership change is unrelated to sales pipeline generation."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "VP of Product Marketing may affect demand gen but has limited impact on outbound pipeline demand."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 3,
+        "specificity": 4,
+        "reasoning": "New UK&I Sales Director will need regional pipeline, prompting outbound effort."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "Channel reseller partnership could increase sales opportunities, modestly raising pipeline needs."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 5,
+        "specificity": 5,
+        "reasoning": "Kristen Twining’s appointment as SVP of Sales directly creates a need for scalable outbound pipeline."
+      },
+      {
+        "signal_id": 10,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Education‑course launch is unrelated to B2B SaaS outbound pipeline requirements."
+      },
+      {
+        "signal_id": 11,
+        "relevance": 5,
+        "specificity": 2,
+        "reasoning": "$55M funding round signals board pressure for rapid pipeline growth."
+      },
+      {
+        "signal_id": 12,
+        "relevance": 3,
+        "specificity": 2,
+        "reasoning": "Microsoft for Startups partnership may accelerate market reach, increasing outbound pipeline demand."
+      },
+      {
+        "signal_id": 13,
+        "relevance": 4,
+        "specificity": 5,
+        "reasoning": "Twining’s podcast on AI‑forward sales shows focus on scaling sales, implying pipeline urgency."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1545,
+    "completion_tokens": 1367,
+    "latency_ms": 28772,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

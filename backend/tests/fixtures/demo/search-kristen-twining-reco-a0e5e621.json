@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Kristen Twining\" \"Reco\"",
+  "results": [
+    {
+      "url": "https://www.linkedin.com/posts/andrewmonaghan_kristen-twining-is-the-svp-sales-at-reco-activity-7513965190162362368-VYxf",
+      "title": "Andrew Monaghan's Post",
+      "content": "Kristen Twining is the SVP Sales at Reco. They secure AI and agents. She took the traditional tech stack away from her reps. Marketing and RevOps are in it,",
+      "published_date": null,
+      "score": 0.8627572
+    },
+    {
+      "url": "https://www.prnewswire.com/news-releases/reco-expands-executive-team-and-global-footprint-to-accelerate-leadership-in-enterprise-ai-agent-security-302793841.html",
+      "title": "Reco Expands Executive Team and Global Footprint to Accelerate Leadership in Enterprise AI Agent Security",
+      "content": "Reco has appointed Kristen Twining as Senior Vice President of Americas Sales and Business Development. Twining joins from FireMon, where as Senior Vice President of Sales Americas she drove and closed enterprise cybersecurity deals across the $1B to $3B segment. At Reco, she will own the full Americas sales motion with responsibility for pipeline growth, enterprise close, and expanding the company's mid-market presence. [...] \"I joined Reco because the company is solving the right problem at exactly the right moment. Agent governance is where identity security and AI risk converge, and most enterprises do not yet have the infrastructure to manage it. Every organization I have talked to is at a different stage: some are governing a handful of agents, some have hundreds operating across their environment without full visibility. My focus at Reco is building the go-to-market infrastructure to meet them where they are [...] \"AI agent security is no longer a planning-cycle conversation for Fortune 100 security teams. It is an active deployment challenge. We built Reco to be the platform security leaders reach for when they need to know what every agent in their environment can access, what it is doing, and whether it is operating within policy. The executive hires, the geographic expansion, and the channel build are strategically intentional. We are positioning Reco to lead this category as it becomes standard",
+      "published_date": null,
+      "score": 0.8482825
+    },
+    {
+      "url": "https://cybergtmtalk.com/episode/stop-treating-agentic-cybersecurity-gtm-like-a-sales-project-kristen-twining-svp-sales-reco",
+      "title": "Stop Treating Agentic Cybersecurity GTM Like a Sales Project: Kristen Twining SVP Sales @ Reco | Cyber GTM Talk - the source for cybersecurity go-to-market teams to learn how to grow sales faster",
+      "content": "Kristen Twining is the SVP of Sales at Reco, a company that secures AI and agents, and she's rebuilding its go-to-market to be AI forward. Her argument is that agentic GTM can't be a sales project. She explains why marketing and RevOps have to be in it from the start, what she told her reps when she pulled their tech stack, and the go-to-market engineer hire nobody knew existed a year ago.\n\nIn this episode [...] About the guest\n\nKristen Twining is SVP Sales at Reco, which she joined in January 2026 after running Americas sales at FireMon, global sales at Illusive, ITDR sales at Proofpoint and a long run at HPE. She also hosts the podcast My Stilettos Hurt.\n\nNotable quotes [...] [00:02:35] [SPEAKER\\_00] She talks about her favorite interview question for BDRs and AEs to guess the heart of how they think about AI. And by the way, her dad, who's in his seventies, would have probably aced the interview based on how he thinks about AI. So it's interesting learning right there. And we also talk about the hire that she didn't think she even needed a year ago or two years ago, didn't know existed. It was going to be part of the equation.",
+      "published_date": null,
+      "score": 0.78963995
+    },
+    {
+      "url": "https://www.linkedin.com/posts/kristen-twining-4796b25_job-opportunity-business-development-representative-activity-7440790545448288256-1arW",
+      "title": "Kristen Twining's Post - Job opportunity",
+      "content": "Congrats on scaling the BDR team, Kristen! The AI-focused approach at Reco is exciting, and I love seeing a leader prioritize culture during growth.",
+      "published_date": null,
+      "score": 0.6826801
+    },
+    {
+      "url": "https://www.linkedin.com/posts/kristen-twining-4796b25_i-joined-reco-because-i-saw-the-shift-happening-activity-7437325870417104896-LlME",
+      "title": "Kristen Twining's Post",
+      "content": "I joined Reco because I saw the shift happening in real time. Organizations are adopting AI agents and SaaS faster than traditional security models were",
+      "published_date": null,
+      "score": 0.54855317
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

@@ -1,0 +1,16 @@
+{
+  "provider": "simweb",
+  "query": "\"Acme Fintech\" appoints",
+  "results": [
+    {
+      "url": "https://acmefintech.com/about/team",
+      "title": "Our team - Acme Fintech",
+      "content": "Acme Fintech builds spend management for mid-market companies in the UK and India.\nLeadership: Rohan Gupta, Chief Executive Officer. Priya Raman, VP Marketing, leads\nmarketing and demand generation from our London office. Anil Shah, VP Sales.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

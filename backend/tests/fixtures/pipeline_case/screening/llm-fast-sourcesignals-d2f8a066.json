@@ -10,7 +10,7 @@
         "sensitive": false,
         "speaker": null,
         "is_reshare": false,
-        "time_sensitive": true,
+        "time_sensitive": false,
         "job_posting": null
       },
       {
@@ -22,7 +22,7 @@
         "sensitive": false,
         "speaker": "Arjun Mehta",
         "is_reshare": false,
-        "time_sensitive": true,
+        "time_sensitive": false,
         "job_posting": null
       }
     ]
@@ -33,7 +33,7 @@
     "role": "fast",
     "prompt_tokens": 534,
     "completion_tokens": 276,
-    "latency_ms": 7792,
+    "latency_ms": 6119,
     "cost_usd": 0.0,
     "fallbacks": [
       "groq: rate limited"

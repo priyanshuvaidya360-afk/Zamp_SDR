@@ -1,0 +1,17 @@
+{
+  "output": {
+    "genericness": 2,
+    "reason": "The email references specific dates, roles, and company details, so it is not fully generic."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 343,
+    "completion_tokens": 382,
+    "latency_ms": 713,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

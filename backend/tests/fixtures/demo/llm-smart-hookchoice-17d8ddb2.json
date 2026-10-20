@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 13,
+    "angle": "Kristen Twining recently discussed AI‑forward sales strategies on the Cyber GTM Talk podcast, highlighting a focus on modernizing sales processes; our outbound pipeline engine can help her team generate qualified leads without adding SDR headcount.",
+    "runners_up": [
+      9,
+      2
+    ],
+    "why_not_others": "The other signals are merely role announcements that don’t directly address pipeline or sales‑process challenges."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 750,
+    "completion_tokens": 585,
+    "latency_ms": 13798,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

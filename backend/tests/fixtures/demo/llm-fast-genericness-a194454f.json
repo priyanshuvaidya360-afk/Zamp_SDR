@@ -1,0 +1,17 @@
+{
+  "output": {
+    "genericness": 1,
+    "reason": "It contains a specific appointment date, role, and company, making it highly person- and company-specific."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 769,
+    "completion_tokens": 117,
+    "latency_ms": 1529,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}
