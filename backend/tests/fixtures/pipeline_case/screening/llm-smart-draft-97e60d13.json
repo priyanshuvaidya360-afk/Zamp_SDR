@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "quick thought on Acme Close",
+    "body": "- You launched Acme Close on 24 September 2026, automating bank reconciliation and accruals to cut month‑end close from ten days to three.\n- Many finance teams see outbound pipeline growth tied to hiring more SDRs, while generic sequences lead to low reply rates and wasted budget.\n- Would you be open to a brief 15‑minute call to explore how Halyard can boost pipeline without extra headcount? Priyanshu",
+    "claims": [
+      {
+        "sentence": "- You launched Acme Close on 24 September 2026, automating bank reconciliation and accruals to cut month‑end close from ten days to three.",
+        "signal_id": 1
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1032,
+    "completion_tokens": 965,
+    "latency_ms": 2520,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

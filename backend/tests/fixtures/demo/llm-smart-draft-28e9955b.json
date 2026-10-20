@@ -1,0 +1,18 @@
+{
+  "output": {
+    "subject": "quick thought on outbound",
+    "body": "Outbound teams often stall when they rely on hiring more SDRs, which drives up costs and reduces reply rates.\nHalyard surfaces buying signals, finds the right contacts, and drafts researched first‑touch emails so your team can build pipeline without adding headcount.\nWould you be open to a short 15‑minute call to explore this?\nPriyanshu",
+    "claims": []
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 762,
+    "completion_tokens": 934,
+    "latency_ms": 13267,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

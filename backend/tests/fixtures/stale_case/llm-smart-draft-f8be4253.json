@@ -1,0 +1,27 @@
+{
+  "output": {
+    "subject": "scaling your london outbound team",
+    "body": "I saw Kestrel Labs is hiring four Sales Development Representatives for your new outbound team in London. \"Half of our pipeline already comes from the UK,\" said chief executive Aoife Byrne, adding \"Being in London lets us meet those customers in person.\" Scaling that team without adding more SDR headcount can be tough, especially as generic sequences see declining reply rates. Would you be open to a 15‑minute call to explore how an outbound pipeline engine could support your growth?\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I saw Kestrel Labs is hiring four Sales Development Representatives for your new outbound team in London.",
+        "signal_id": 2
+      },
+      {
+        "sentence": "\"Half of our pipeline already comes from the UK,\" said chief executive Aoife Byrne, adding \"Being in London lets us meet those customers in person.\"",
+        "signal_id": 1
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 894,
+    "completion_tokens": 1287,
+    "latency_ms": 4710,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

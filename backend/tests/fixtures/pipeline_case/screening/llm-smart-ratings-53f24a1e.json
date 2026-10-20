@@ -1,0 +1,65 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 4,
+        "specificity": 2,
+        "reasoning": "New product launch will require fresh outbound outreach to generate pipeline for Acme Close."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 4,
+        "specificity": 2,
+        "reasoning": "Series C funding raises pressure to quickly scale revenue, driving need for more pipeline."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Doubling engineering headcount does not directly create outbound pipeline need."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 3,
+        "specificity": 2,
+        "reasoning": "Geographic expansion into SE Asia will need new prospecting to fill the market."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 4,
+        "specificity": 2,
+        "reasoning": "Hiring across sales indicates growing outbound capacity and need for pipeline support."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 1,
+        "specificity": 5,
+        "reasoning": "Priya’s workflow overhaul is finance‑focused and unrelated to outbound sales generation."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 3,
+        "specificity": 4,
+        "reasoning": "Priya’s reshare of the Singapore office opening signals regional growth, implying new pipeline demand."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 0,
+        "specificity": 1,
+        "reasoning": "Hiring an Accounts Payable Specialist is a back‑office role, not linked to sales outreach."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1154,
+    "completion_tokens": 1226,
+    "latency_ms": 3152,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

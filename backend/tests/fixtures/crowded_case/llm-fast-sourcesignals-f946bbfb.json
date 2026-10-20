@@ -2,10 +2,22 @@
   "output": {
     "signals": [
       {
+        "type": "funding",
+        "about": "company",
+        "summary": "Company completed Series B funding",
+        "evidence": "Fresh off our Series B",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
         "type": "hiring",
         "about": "company",
-        "summary": "Lumen Analytics is hiring six Sales Development Representatives in Austin",
-        "evidence": "Sales Development Representative (6 open roles), Austin, TX Fresh off our Series B, we're building our first outbound team in Austin",
+        "summary": "Company is hiring six Sales Development Representatives in Austin",
+        "evidence": "Sales Development Representative (6 open roles), Austin, TX",
         "published_at": "2026-10-14",
         "sensitive": false,
         "speaker": null,
@@ -26,8 +38,8 @@
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 1074,
-    "completion_tokens": 426,
-    "latency_ms": 6384,
+    "completion_tokens": 1428,
+    "latency_ms": 1704,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

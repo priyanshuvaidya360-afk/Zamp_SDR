@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "new role, sharper pipeline",
+    "body": "I saw that Merav Keren Kindler was appointed vice president of marketing at Reco on 8 June 2026. With your new role, refining outbound targets could reduce your team's cost per opportunity as generic sequences see declining reply rates. Would you be open to a brief 15‑minute call to explore how an automated pipeline engine could help your team build pipeline without adding SDR headcount?\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I saw that Merav Keren Kindler was appointed vice president of marketing at Reco on 8 June 2026.",
+        "signal_id": 9
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 870,
+    "completion_tokens": 1422,
+    "latency_ms": 3676,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

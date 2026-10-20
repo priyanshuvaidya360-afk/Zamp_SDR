@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 3,
+    "angle": "Dana Okafor, as Head of Growth at Lumen Analytics, is currently hiring six SDRs in Austin, highlighting a need for scalable pipeline generation without further SDR headcount—exactly what Halyard delivers.",
+    "runners_up": [
+      1,
+      4
+    ],
+    "why_not_others": "The other signals describe company‑wide events (a new CRO and a Series B) that are less directly linked to Dana’s immediate growth‑pipeline challenge."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 655,
+    "completion_tokens": 513,
+    "latency_ms": 1749,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

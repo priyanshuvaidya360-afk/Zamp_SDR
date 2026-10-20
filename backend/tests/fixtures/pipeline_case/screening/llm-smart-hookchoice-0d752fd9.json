@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 1,
+    "angle": "Priya Raman, as VP Finance, will be keen on Acme Close which automates bank reconciliation and speeds month‑end close, aligning with her goal to improve finance efficiency.",
+    "runners_up": [
+      2,
+      7
+    ],
+    "why_not_others": "Funding and expansion are broader company signals and less directly tied to the finance challenges our solution addresses."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 698,
+    "completion_tokens": 315,
+    "latency_ms": 4861,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

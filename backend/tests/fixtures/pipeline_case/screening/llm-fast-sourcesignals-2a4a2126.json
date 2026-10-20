@@ -4,13 +4,13 @@
       {
         "type": "product_launch",
         "about": "company",
-        "summary": "Acme Fintech launched Acme Close, a product that automates bank reconciliation and accruals to shorten month-end close.",
+        "summary": "Acme Fintech launches Acme Close, a new product that automates bank reconciliation and accruals to speed month-end close",
         "evidence": "Today we are launching Acme Close, a new product that automates bank reconciliation and accruals so finance teams can finish the month-end close in three days instead of ten.",
         "published_at": "2026-09-24",
         "sensitive": false,
         "speaker": null,
         "is_reshare": false,
-        "time_sensitive": false,
+        "time_sensitive": true,
         "job_posting": null
       }
     ]
@@ -20,8 +20,8 @@
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 1020,
-    "completion_tokens": 632,
-    "latency_ms": 34759,
+    "completion_tokens": 448,
+    "latency_ms": 10198,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

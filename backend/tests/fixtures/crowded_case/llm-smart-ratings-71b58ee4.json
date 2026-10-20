@@ -1,0 +1,41 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 4,
+        "specificity": 4,
+        "reasoning": "New CRO will likely push for more outbound pipeline to meet revenue goals."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Series B funding creates immediate pressure to scale pipeline quickly."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 3,
+        "specificity": 4,
+        "reasoning": "Hiring six SDRs shows growing outbound effort, indicating pipeline needs."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 4,
+        "specificity": 2,
+        "reasoning": "Series B completion signals board expectations for rapid pipeline growth."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 828,
+    "completion_tokens": 886,
+    "latency_ms": 2455,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

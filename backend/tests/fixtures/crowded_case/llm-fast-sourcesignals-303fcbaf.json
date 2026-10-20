@@ -4,13 +4,13 @@
       {
         "type": "funding",
         "about": "company",
-        "summary": "Lumen Analytics raised $40M Series B led by Northzone",
+        "summary": "Lumen Analytics raises $40M Series B led by Northzone",
         "evidence": "Product analytics startup Lumen Analytics has closed a $40M Series B round led by Northzone.",
         "published_at": "2026-10-10",
         "sensitive": false,
         "speaker": null,
         "is_reshare": false,
-        "time_sensitive": true,
+        "time_sensitive": false,
         "job_posting": null
       }
     ]
@@ -20,8 +20,8 @@
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 1061,
-    "completion_tokens": 397,
-    "latency_ms": 34366,
+    "completion_tokens": 500,
+    "latency_ms": 13979,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

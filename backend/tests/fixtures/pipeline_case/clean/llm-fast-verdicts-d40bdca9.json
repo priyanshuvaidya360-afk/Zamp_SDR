@@ -4,12 +4,12 @@
       {
         "index": 1,
         "label": "hostile",
-        "reason": "Requests to reveal system prompt"
+        "reason": "Requests system prompt"
       },
       {
         "index": 2,
         "label": "hostile",
-        "reason": "Requests to send emails"
+        "reason": "Requests to send email"
       }
     ]
   },
@@ -17,9 +17,9 @@
     "provider": "groq",
     "model": "openai/gpt-oss-20b",
     "role": "fast",
-    "prompt_tokens": 569,
-    "completion_tokens": 175,
-    "latency_ms": 1842,
+    "prompt_tokens": 440,
+    "completion_tokens": 176,
+    "latency_ms": 817,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

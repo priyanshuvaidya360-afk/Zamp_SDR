@@ -5,6 +5,7 @@ with `python -m scripts.record_pipeline_case`) and ends with a stored ready_for_
 Part 2: the critic's code checks and the rewrite flow, with the model mocked.
 """
 
+import re
 from datetime import date
 
 import pytest
@@ -48,7 +49,7 @@ async def test_csv_row_to_a_stored_ready_for_review_draft(replay, session):
     assert final.critic_report["mode"] == "hooked" and final.critic_report["banner"] is None
     assert final.hook_signal_id is not None and final.claims
     assert len(final.body.split()) < settings.draft_max_words
-    assert "Priya" not in final.body  # the prospect is "you", never named in the third person
+    assert not re.search(r"\bPriya\b", final.body)  # the prospect is "you", never named in the third person
     hook = session.get(SignalRecord, final.hook_signal_id)
     if hook.speaker:  # whichever hook this recording picked, borrowed words name their author
         assert hook.speaker.split()[0] in final.body

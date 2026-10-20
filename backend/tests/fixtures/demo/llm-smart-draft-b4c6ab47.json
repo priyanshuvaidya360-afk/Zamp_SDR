@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "new product marketing signal",
+    "body": "I saw that you joined Reco as Vice President of Product Marketing on 8 June 2026. That role puts you in a position to surface buying signals, letting your team build pipeline without adding more SDRs as generic sequences see declining replies. Would you be open to a brief 15‑minute call to explore how Halyard can feed your campaigns with vetted buying signals?\n\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I saw that you joined Reco as Vice President of Product Marketing on 8 June 2026.",
+        "signal_id": 9
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 823,
+    "completion_tokens": 832,
+    "latency_ms": 2094,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

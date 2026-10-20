@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "ai-forward sales and outbound pipeline",
+    "body": "I listened to your appearance on the Cyber GTM Talk podcast on 8 October 2026, where you discussed AI-forward sales strategies. Scaling outbound pipeline without adding SDR headcount is a challenge many SaaS teams face as generic sequences see declining reply rates. Would you be open to a 15‑minute call to explore how Halyard can help your team boost meeting volume per rep?\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I listened to your appearance on the Cyber GTM Talk podcast on 8 October 2026, where you discussed AI-forward sales strategies.",
+        "signal_id": 13
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 879,
+    "completion_tokens": 996,
+    "latency_ms": 2654,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "output": {
+    "genericness": 0,
+    "reason": "This email is personalized with specific facts about the individual, their role, and company, so it cannot be sent to another person without changes."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 351,
+    "completion_tokens": 312,
+    "latency_ms": 1033,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

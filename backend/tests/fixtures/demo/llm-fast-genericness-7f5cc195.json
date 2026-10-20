@@ -1,0 +1,17 @@
+{
+  "output": {
+    "genericness": 0,
+    "reason": "It references a specific interview on a specific date and addresses unique challenges tied to the recipient’s company."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 348,
+    "completion_tokens": 432,
+    "latency_ms": 1082,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

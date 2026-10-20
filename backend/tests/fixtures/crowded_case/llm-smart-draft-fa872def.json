@@ -1,0 +1,31 @@
+{
+  "output": {
+    "subject": "scalable pipeline for lumen analytics",
+    "body": "I see you're hiring six Sales Development Representatives in Austin. Scaling outbound without adding headcount is tough when generic sequences see declining replies. Your recent $40 million Series B funding gives you a strong runway to expand growth initiatives. Daniel Reyes mentioned that Lumen Analytics now has its first Chief Revenue Officer. Halyard can surface buying signals, find the right contacts, and draft cited first‑touch emails for your reps, letting your team build pipeline without hiring more SDRs. Would you be open to a brief 15‑minute call to explore how this could fit your hiring plans?\n\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I see you're hiring six Sales Development Representatives in Austin.",
+        "signal_id": 3
+      },
+      {
+        "sentence": "Your recent $40 million Series B funding gives you a strong runway to expand growth initiatives.",
+        "signal_id": 2
+      },
+      {
+        "sentence": "Daniel Reyes mentioned that Lumen Analytics now has its first Chief Revenue Officer.",
+        "signal_id": 1
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1003,
+    "completion_tokens": 1793,
+    "latency_ms": 4314,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

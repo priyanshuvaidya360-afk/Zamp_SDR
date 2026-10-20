@@ -1,0 +1,17 @@
+{
+  "output": {
+    "genericness": 0,
+    "reason": "The email includes many company‑specific details such as hiring numbers, funding round, and a named CRO that cannot be applied to a different company without significant rewriting."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 386,
+    "completion_tokens": 392,
+    "latency_ms": 900,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

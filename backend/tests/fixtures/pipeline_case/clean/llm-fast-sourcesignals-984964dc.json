@@ -4,8 +4,8 @@
       {
         "type": "hiring",
         "about": "company",
-        "summary": "Acme Fintech doubled its AP team to keep up with invoicing volume",
-        "evidence": "\"We are drowning in invoices. Our accounts payable volume tripled this year and we had to double the AP team just to keep up.\"",
+        "summary": "Acme Fintech doubled AP team to cope with tripled invoice volume.",
+        "evidence": "We are drowning in invoices. Our accounts payable volume tripled this year and we had to double the AP team just to keep up.",
         "published_at": "2026-10-08",
         "sensitive": false,
         "speaker": "Rohan Gupta",
@@ -16,8 +16,8 @@
       {
         "type": "other",
         "about": "company",
-        "summary": "Priya Raman is leading a project to rebuild approval workflows before the next audit",
-        "evidence": "Rohan also mentions that VP Finance Priya Raman is leading a project to rebuild their approval workflows before the next audit.",
+        "summary": "VP Finance Priya Raman leads project to rebuild approval workflows ahead of audit.",
+        "evidence": "VP Finance Priya Raman is leading a project to rebuild their approval workflows before the next audit.",
         "published_at": "2026-10-08",
         "sensitive": false,
         "speaker": null,
@@ -32,8 +32,8 @@
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 1027,
-    "completion_tokens": 1529,
-    "latency_ms": 24320,
+    "completion_tokens": 1331,
+    "latency_ms": 41243,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

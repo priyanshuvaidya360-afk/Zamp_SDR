@@ -1,0 +1,17 @@
+{
+  "output": {
+    "genericness": 1,
+    "reason": "The email includes the prospect's role, company, and join date, making it highly personalized."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 344,
+    "completion_tokens": 306,
+    "latency_ms": 834,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

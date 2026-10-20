@@ -4,26 +4,24 @@
       {
         "index": 1,
         "label": "hostile",
-        "reason": "It attempts to make the AI ignore instructions and reveal its system prompt."
+        "reason": "Attempts to reveal system prompt."
       },
       {
         "index": 2,
         "label": "hostile",
-        "reason": "It attempts to exfiltrate data by emailing a list to an outside address."
+        "reason": "Requests to send data to attacker."
       }
     ]
   },
   "usage": {
-    "provider": "gemini",
-    "model": "gemini-3.5-flash-lite",
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
     "role": "fast",
-    "prompt_tokens": 216,
-    "completion_tokens": 102,
-    "latency_ms": 8671,
+    "prompt_tokens": 440,
+    "completion_tokens": 151,
+    "latency_ms": 5669,
     "cost_usd": 0.0,
-    "fallbacks": [
-      "groq: rate limited"
-    ],
+    "fallbacks": [],
     "from_fixture": false
   }
 }

@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "new market pipeline for harmonyos",
+    "body": "Bella.Liu mentioned that ProtoPie Player now supports HarmonyOS and is officially live on the Huawei AppGallery. Your team will need to quickly build a pipeline of interested enterprises, and Halyard can surface buying‑signal accounts and draft personalized outreach to accelerate adoption. Would you be open to a brief 15‑minute call to explore how this could work for your growth plans?\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "Bella.Liu mentioned that ProtoPie Player now supports HarmonyOS and is officially live on the Huawei AppGallery.",
+        "signal_id": 2
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 956,
+    "completion_tokens": 1246,
+    "latency_ms": 17035,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

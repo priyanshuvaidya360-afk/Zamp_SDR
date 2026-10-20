@@ -4,8 +4,8 @@
       {
         "type": "funding",
         "about": "company",
-        "summary": "Acme Fintech raised $40M Series C funding from Lightspeed Venture Partners with participation from Sequoia Capital and Accel",
-        "evidence": "Acme Fintech on Wednesday said it has secured $40 million in Series C funding led by Lightspeed Venture Partners.",
+        "summary": "Acme Fintech raised $40 million in a Series C round led by Lightspeed Venture Partners.",
+        "evidence": "Acme Fintech bags $40 million in Series C funding led by Lightspeed.",
         "published_at": "2026-10-01",
         "sensitive": false,
         "speaker": null,
@@ -20,8 +20,8 @@
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 1021,
-    "completion_tokens": 449,
-    "latency_ms": 26808,
+    "completion_tokens": 416,
+    "latency_ms": 22649,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false

@@ -1,0 +1,21 @@
+{
+  "output": {
+    "signal_id": 2,
+    "angle": "Omar Haddad may be looking to scale the new London outbound team, and hiring SDRs signals a need for pipeline support without adding headcount.",
+    "runners_up": [
+      1
+    ],
+    "why_not_others": "Signal 1 concerns the office opening and is quoted to Aoife Byrne, not directly tied to Omar's sales pipeline challenges."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 623,
+    "completion_tokens": 476,
+    "latency_ms": 1526,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "New product launch creates demand for outbound pipeline to acquire customers"
+      },
+      {
+        "signal_id": 2,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Series C funding raises pressure to accelerate pipeline growth"
+      },
+      {
+        "signal_id": 3,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Hiring push in sales signals need for more qualified leads"
+      },
+      {
+        "signal_id": 4,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "AP team expansion is finance‑operational and only weakly linked to sales pipeline"
+      },
+      {
+        "signal_id": 5,
+        "relevance": 0,
+        "specificity": 5,
+        "reasoning": "Finance workflow overhaul does not generate outbound pipeline need"
+      },
+      {
+        "signal_id": 6,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Opening a Singapore office opens new market, likely increasing outbound pipeline demand"
+      },
+      {
+        "signal_id": 7,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Accounts Payable hire is unrelated to sales outreach and only marginally relevant"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1080,
+    "completion_tokens": 974,
+    "latency_ms": 2526,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

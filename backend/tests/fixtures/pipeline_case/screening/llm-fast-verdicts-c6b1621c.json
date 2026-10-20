@@ -4,7 +4,7 @@
       {
         "index": 1,
         "label": "screening_trap",
-        "reason": "Tests if outreach is AI-generated."
+        "reason": "Testing for AI content."
       }
     ]
   },
@@ -13,8 +13,8 @@
     "model": "openai/gpt-oss-20b",
     "role": "fast",
     "prompt_tokens": 439,
-    "completion_tokens": 142,
-    "latency_ms": 664,
+    "completion_tokens": 132,
+    "latency_ms": 575,
     "cost_usd": 0.0,
     "fallbacks": [],
     "from_fixture": false
