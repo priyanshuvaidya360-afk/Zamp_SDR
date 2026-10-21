@@ -2,6 +2,9 @@ ddgs==9.16.0
 exa-py==2.25.0
 fastapi==0.144.0
 httpx==0.28.1
+langchain-core==1.6.12
+langchain-openai==1.7.2
+langgraph==1.2.16
 openai==3.35.1
 pandas==3.0.6
 pydantic-settings==2.16.0

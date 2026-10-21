@@ -320,36 +320,10 @@ async def run_one(run_id: int, start_stage: str | None = None,
             start = next(i for i, s in enumerate(stages) if s.name == start_stage)
             _restore_outputs(ctx, stages[:start])
 
-        status, reason = None, None
-        for index in range(start, len(stages)):
-            stage = stages[index]
-            _record(ctx, stage, StageState.started)
-            ctx._stage_tokens, ctx._stage_credits = 0, 0.0
-            began = time.perf_counter()
-            try:
-                output = await _call_stage(stage, ctx, slot)
-            except StopRun as stop:
-                status, reason = stop.status, stop.reason
-                _record(ctx, stage, StageState.done, stop.reason,
-                        {**stop.payload, "stopped": stop.status.value, **_usage(ctx)},
-                        _elapsed_ms(began))
-            except Exception as error:  # this run only; the batch carries on
-                log.exception("run %s failed in %s", run_id, stage.name)
-                message = plain_error(error)
-                status, reason = RunStatus.failed, f"{stage.label} failed: {message}"
-                _record(ctx, stage, StageState.failed, message,
-                        {"error": type(error).__name__, **_usage(ctx)}, _elapsed_ms(began))
-            else:
-                ctx.outputs[stage.name] = output
-                _record(ctx, stage, StageState.done, getattr(output, "message", ""),
-                        {"output": output.model_dump(mode="json"), **_usage(ctx)},
-                        _elapsed_ms(began))
-                continue
-            for skipped in stages[index + 1:]:
-                _record(ctx, skipped, StageState.skipped, "Not run")
-            break
-        else:
-            status, reason = ctx.final_status, ctx.final_reason
+        from app.pipeline.graph import run_graph  # the graph module imports this one
+
+        result = await run_graph(stages, ctx, slot, start)
+        status, reason = result["status"], result["reason"]
 
         with Session(db.engine) as session:
             run = session.get(Run, run_id)

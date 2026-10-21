@@ -13,3 +13,17 @@ STAGES = [
     Stage("draft", "Draft", draft.run_draft, draft.DraftOutput),
     Stage("critic", "Critic and fix", draft.run_critic, draft.CriticOutput),
 ]
+
+
+# What each stage is, for the pipeline diagram (agents/PIPELINE.md): who decides, and which
+# agents/*.md file holds its prompts (None = no model involved).
+STAGE_INFO = {
+    "intake": {"decided_by": "code", "agent": None},
+    "resolve": {"decided_by": "fast model + code checks", "agent": "resolve.md"},
+    "gather": {"decided_by": "code", "agent": None},
+    "extract": {"decided_by": "fast model + code checks", "agent": "extract.md"},
+    "score": {"decided_by": "smart model + code", "agent": "score.md"},
+    "account_plan": {"decided_by": "smart model + code rules", "agent": "account_plan.md"},
+    "draft": {"decided_by": "smart model", "agent": "draft.md"},
+    "critic": {"decided_by": "code checks + fast model", "agent": "draft.md"},
+}
