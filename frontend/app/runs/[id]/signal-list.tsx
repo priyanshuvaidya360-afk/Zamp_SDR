@@ -1,11 +1,14 @@
+import { ExternalLink } from "lucide-react";
+
 import type { SignalRecord } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-// Middle column: every signal, the chosen hook first with its angle, the rest with "why not".
+// Signals tab: the hook the email is built on, up top, with the angle; every other signal below
+// as one line you can open for the evidence, the score and why it wasn't used.
 export function SignalList({ signals, angle, waiting }: { signals: SignalRecord[]; angle: string | null; waiting: boolean }) {
   if (!signals.length) {
     return (
-      <p className="rounded-xl border border-dashed bg-white px-4 py-10 text-center text-sm text-muted-foreground">
+      <p className="rounded-xl border border-dashed bg-white px-4 py-12 text-center text-sm text-muted-foreground">
         {waiting ? "Signals appear here as pages are read." : "No signals were found."}
       </p>
     );
@@ -16,11 +19,28 @@ export function SignalList({ signals, angle, waiting }: { signals: SignalRecord[
       Number(isExcluded(a)) - Number(isExcluded(b)) ||
       (b.scores.score ?? -1) - (a.scores.score ?? -1),
   );
+  const hook = ordered.find((s) => s.selected);
+  const others = ordered.filter((s) => s !== hook);
   return (
-    <div className="space-y-3">
-      {ordered.map((signal, i) => (
-        <SignalCard key={signal.id} signal={signal} rank={i + 1} angle={signal.selected ? angle : null} />
-      ))}
+    <div className="space-y-6">
+      {hook && (
+        <section className="space-y-2">
+          <h3 className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Hook used in the email</h3>
+          <HookCard signal={hook} angle={angle} />
+        </section>
+      )}
+      {others.length > 0 && (
+        <section className="space-y-2">
+          <h3 className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+            {hook ? "Other signals" : "Signals"} · {others.length}
+          </h3>
+          <ul className="divide-y overflow-hidden rounded-xl border bg-white">
+            {others.map((s) => (
+              <SignalRow key={s.id} signal={s} />
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   );
 }
@@ -29,89 +49,142 @@ function isExcluded(signal: SignalRecord) {
   return signal.type === "ai_screening" || signal.sensitive;
 }
 
-function SignalCard({ signal, rank, angle }: { signal: SignalRecord; rank: number; angle: string | null }) {
-  const score = signal.scores.score;
+function host(signal: SignalRecord) {
+  return signal.source_url.startsWith("http") ? new URL(signal.source_url).hostname.replace(/^www\./, "") : "uploaded bio";
+}
+
+function Tags({ signal }: { signal: SignalRecord }) {
   const crowd = signal.scores.crowded ? signal.scores.adjustments?.find((a) => a.name === "crowded") : undefined;
-  const domain = signal.source_url.startsWith("http") ? new URL(signal.source_url).hostname.replace(/^www\./, "") : "uploaded bio";
+  const tags: { text: string; tone: "amber" | "red" | "zinc" }[] = [];
+  if (crowd) tags.push({ text: `Crowded story · ${signal.coverage} outlets`, tone: "amber" });
+  else if (signal.coverage > 1) tags.push({ text: `${signal.coverage} outlets`, tone: "zinc" });
+  if (signal.ghost_suspect) tags.push({ text: "Possible ghost job", tone: "amber" });
+  if (signal.sensitive) tags.push({ text: "Sensitive", tone: "red" });
+  if (signal.type === "ai_screening") tags.push({ text: "AI screening", tone: "amber" });
+  if (!tags.length) return null;
+  const tones = { zinc: "bg-zinc-100 text-zinc-700", amber: "bg-amber-100 text-amber-900", red: "bg-red-100 text-red-800" };
   return (
-    <article
-      className={cn(
-        "rounded-xl border bg-white p-4",
-        signal.selected && "border-primary ring-2 ring-primary/20",
-        isExcluded(signal) && "bg-zinc-50",
-      )}
-    >
-      <div className="flex flex-wrap items-center gap-1.5 text-xs">
-        {score != null && !isExcluded(signal) && (
-          <span className="tabular-nums text-muted-foreground" title={crowd ? "Rank before and after the crowd penalty" : "Rank"}>
-            {crowd?.delta && signal.scores.rank_before_penalty && signal.scores.rank_before_penalty !== rank && (
-              <s className="mr-1">#{signal.scores.rank_before_penalty}</s>
-            )}
-            #{rank}
+    <>
+      {tags.map((t) => (
+        <span key={t.text} className={cn("rounded-full px-2 py-0.5 text-[11px] font-medium", tones[t.tone])}>
+          {t.text}
+        </span>
+      ))}
+    </>
+  );
+}
+
+function Meta({ signal }: { signal: SignalRecord }) {
+  return (
+    <span className="text-xs text-muted-foreground">
+      {signal.type.replace(/_/g, " ")} · {signal.about === "person" ? "about them" : "about the company"} · {signal.published_at ?? "undated"}
+    </span>
+  );
+}
+
+function HookCard({ signal, angle }: { signal: SignalRecord; angle: string | null }) {
+  return (
+    <article className="rounded-xl border border-primary/40 bg-white p-5 shadow-xs ring-4 ring-primary/5">
+      <div className="flex flex-wrap items-center gap-2">
+        <Meta signal={signal} />
+        <Tags signal={signal} />
+        {signal.scores.score != null && (
+          <span className="ml-auto rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary tabular-nums">
+            {signal.scores.score.toFixed(1)} / 5
           </span>
         )}
-        {signal.selected && <span className="rounded-md bg-primary px-1.5 py-0.5 font-medium text-primary-foreground">Hook</span>}
-        <span className="rounded-md bg-zinc-100 px-1.5 py-0.5 font-medium text-zinc-700">{signal.type.replace(/_/g, " ")}</span>
-        <span className="text-muted-foreground">{signal.about === "person" ? "about them" : "about the company"}</span>
-        <span className="text-muted-foreground">· {signal.published_at ?? "undated"}</span>
-        {signal.coverage > 1 && !crowd && <Badge tone="zinc">reported by {signal.coverage} outlets</Badge>}
-        {crowd && (
-          <Badge tone="amber">
-            {crowd.reason}, {crowd.delta.toString().replace("-", "\u2212")}
-          </Badge>
-        )}
-        {crowd && <Badge tone="zinc">context only</Badge>}
-        {signal.ghost_suspect && <Badge tone="amber">possible ghost job</Badge>}
-        {signal.sensitive && <Badge tone="red">sensitive</Badge>}
-        {signal.type === "ai_screening" && <Badge tone="amber">AI screening</Badge>}
-        {(signal.scores.adjustments ?? []).filter((a) => a !== crowd).map((a) => (
-          <Badge key={a.name} tone="amber">
-            {a.name} {a.delta > 0 ? "+" : ""}
-            {a.delta}
-          </Badge>
-        ))}
       </div>
-      <p className="mt-2 text-sm font-medium">{signal.summary}</p>
-      <blockquote className="mt-1 border-l-2 border-zinc-200 pl-2 text-xs text-muted-foreground">“{signal.evidence}”</blockquote>
-      {signal.note && <p className="mt-2 text-xs text-amber-800">{signal.note}</p>}
-      {angle && <p className="mt-2 text-sm"><span className="font-medium">Angle:</span> {angle}</p>}
-      {score != null && <ScoreBar signal={signal} />}
-      <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs">
-        {signal.source_url.startsWith("http") ? (
-          <a href={signal.source_url} target="_blank" rel="noreferrer" className="text-primary hover:underline">
-            {domain}
-          </a>
-        ) : (
-          <span className="text-muted-foreground">{domain}</span>
-        )}
-        {!signal.selected && signal.rejected_reason && (
-          <span className="text-muted-foreground">Why not: {signal.rejected_reason}</span>
-        )}
-      </div>
+      <p className="mt-2 text-base font-medium text-zinc-900">{signal.summary}</p>
+      {angle && (
+        <p className="mt-3 rounded-lg bg-zinc-50 px-3 py-2 text-sm text-zinc-700">
+          <span className="font-medium text-zinc-900">Angle · </span>
+          {angle}
+        </p>
+      )}
+      <Evidence signal={signal} />
+      <ScoreBreakdown signal={signal} />
     </article>
   );
 }
 
-function ScoreBar({ signal }: { signal: SignalRecord }) {
-  const s = signal.scores;
-  const width = Math.max(0, Math.min(100, ((s.score ?? 0) / 5) * 100));
+function SignalRow({ signal }: { signal: SignalRecord }) {
+  const score = signal.scores.score;
   return (
-    <div className="mt-3" title={s.reasoning}>
-      <div className="flex items-center gap-2">
-        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-100">
-          <div className={cn("h-full rounded-full", signal.selected ? "bg-primary" : "bg-zinc-400")} style={{ width: `${width}%` }} />
+    <li>
+      <details className="group">
+        <summary className="flex cursor-pointer list-none items-center gap-3 px-4 py-3 hover:bg-zinc-50">
+          <span className={cn("w-9 shrink-0 text-sm font-medium tabular-nums", isExcluded(signal) ? "text-zinc-300" : "text-zinc-500")}>
+            {score != null && !isExcluded(signal) ? score.toFixed(1) : "–"}
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className={cn("block truncate text-sm", isExcluded(signal) ? "text-zinc-400" : "text-zinc-800")}>{signal.summary}</span>
+            <span className="mt-0.5 flex flex-wrap items-center gap-1.5">
+              <Meta signal={signal} />
+              <Tags signal={signal} />
+            </span>
+          </span>
+          <span className="text-xs text-muted-foreground group-open:hidden">Details</span>
+        </summary>
+        <div className="space-y-2 border-t bg-zinc-50/60 px-4 py-3 pl-16">
+          {signal.rejected_reason && (
+            <p className="text-sm text-zinc-700">
+              <span className="font-medium">Why not used · </span>
+              {signal.rejected_reason}
+            </p>
+          )}
+          <Evidence signal={signal} />
+          <ScoreBreakdown signal={signal} />
         </div>
-        <span className="text-xs font-medium tabular-nums">{s.score?.toFixed(2)}</span>
-      </div>
-      <p className="mt-1 text-[11px] text-muted-foreground">
-        relevance {s.relevance} · specificity {s.specificity} · recency {s.recency?.toFixed(1)} ({s.days_old} days) ·
-        verifiability {s.verifiability}
-      </p>
+      </details>
+    </li>
+  );
+}
+
+function Evidence({ signal }: { signal: SignalRecord }) {
+  return (
+    <div className="mt-3 space-y-1.5">
+      <blockquote className="border-l-2 border-zinc-200 pl-3 text-sm text-zinc-600">“{signal.evidence}”</blockquote>
+      {signal.note && <p className="text-xs text-amber-800">{signal.note}</p>}
+      {signal.source_url.startsWith("http") ? (
+        <a href={signal.source_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-primary hover:underline">
+          {host(signal)} <ExternalLink className="size-3" />
+        </a>
+      ) : (
+        <span className="text-xs text-muted-foreground">{host(signal)}</span>
+      )}
     </div>
   );
 }
 
-function Badge({ tone, children }: { tone: "zinc" | "amber" | "red"; children: React.ReactNode }) {
-  const tones = { zinc: "bg-zinc-100 text-zinc-700", amber: "bg-amber-100 text-amber-900", red: "bg-red-100 text-red-800" };
-  return <span className={cn("rounded-md px-1.5 py-0.5", tones[tone])}>{children}</span>;
+function ScoreBreakdown({ signal }: { signal: SignalRecord }) {
+  const s = signal.scores;
+  if (s.score == null) return null;
+  const parts = [
+    ["Relevance", s.relevance?.toString()],
+    ["Specificity", s.specificity?.toString()],
+    ["Recency", s.recency != null ? `${s.recency.toFixed(1)} (${s.days_old} days)` : undefined],
+    ["Verifiability", s.verifiability?.toString()],
+  ].filter((p): p is [string, string] => p[1] != null);
+  const adjustments = s.adjustments ?? [];
+  return (
+    <div className="mt-3 border-t pt-3" title={s.reasoning}>
+      <dl className="flex flex-wrap gap-x-5 gap-y-1 text-xs">
+        {parts.map(([k, v]) => (
+          <div key={k} className="flex gap-1.5">
+            <dt className="text-muted-foreground">{k}</dt>
+            <dd className="font-medium text-zinc-800 tabular-nums">{v}</dd>
+          </div>
+        ))}
+        {adjustments.map((a) => (
+          <div key={a.name} className="flex gap-1.5">
+            <dt className="text-muted-foreground">{a.name.replace(/_/g, " ")}</dt>
+            <dd className="font-medium text-amber-800 tabular-nums">
+              {a.delta > 0 ? "+" : "−"}
+              {Math.abs(a.delta)}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
 }

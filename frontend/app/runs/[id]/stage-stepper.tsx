@@ -4,18 +4,18 @@ import { StepIcon } from "@/components/step-icon";
 import { formatDuration, stepState } from "@/lib/stages";
 import type { StageEvent, StageInfo } from "@/lib/types";
 
-// Left column: one row per stage. Spinner, then tick / warning / cross, duration, one-line
+// Agent activity tab: one row per stage. Spinner, then tick / warning / cross, duration, one-line
 // result; open a stage for its queries, sources, model output and credits.
 export function StageStepper({ stages, latest }: { stages: StageInfo[]; latest: Map<string, StageEvent> }) {
   return (
-    <ol className="space-y-1">
+    <ol className="space-y-0.5 rounded-xl border bg-white p-3">
       {stages.map((stage, index) => {
         const event = latest.get(stage.name);
         const state = stepState(event);
         return (
           <li key={stage.name} className="relative">
-            {index < stages.length - 1 && <span className="absolute top-7 bottom-0 left-[7.5px] w-px bg-zinc-200" aria-hidden />}
-            <details className="group rounded-lg px-1 py-1.5 open:bg-white open:ring-1 open:ring-zinc-200">
+            {index < stages.length - 1 && <span className="absolute top-8 bottom-0 left-[15.5px] w-px bg-zinc-200" aria-hidden />}
+            <details className="group rounded-lg px-2 py-2 open:bg-zinc-50">
               <summary className="flex cursor-pointer list-none items-start gap-3">
                 <StepIcon state={state} className="mt-0.5 bg-zinc-50" />
                 <div className="min-w-0 flex-1">

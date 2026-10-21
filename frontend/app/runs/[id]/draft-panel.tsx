@@ -1,83 +1,74 @@
-import { Check, X } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 import type { DraftRecord, SignalRecord } from "@/lib/types";
 
-// Right column: the latest draft with every factual sentence underlined and linked to its source,
-// plus the critic's checklist. Review actions live in components/review-controls.tsx (T15).
-export function DraftPanel({ drafts, signals }: { drafts: DraftRecord[]; signals: SignalRecord[] }) {
+// The email, laid out like a mail client: To / Subject, then the body. Every factual sentence is
+// underlined and carries a small number that points to its source in the list underneath.
+// Review actions live in components/review-controls.tsx; the quality checks in content-guide.tsx.
+export function DraftPanel({ drafts, signals, to }: { drafts: DraftRecord[]; signals: SignalRecord[]; to?: string }) {
   if (!drafts.length) return null;
   const final = latestDraft(drafts)!;
   const report = final.critic_report;
-  const corrected = report.revalidated_from != null;
   const bySignal = new Map(signals.map((s) => [s.id, s]));
-  const warnings = (report.warnings ?? []).filter((w) => w !== report.banner);
+  const body = final.edited_body ?? final.body;
+  const cited = final.edited_body ? { body, sources: [] as SignalRecord[], parts: [body] as React.ReactNode[] } : citeBody(final, bySignal);
+  const version = [
+    report.mode === "outline" ? "Outline" : "Draft",
+    `v${final.version}`,
+    report.revalidated_from != null ? "corrected on re-check" : final.version > 1 ? "rewritten after critic notes" : null,
+    final.reviewer_action === "edit" ? "edited by you" : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       {report.banner && (
-        <p className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">{report.banner}</p>
+        <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">{report.banner}</p>
       )}
-      <article className="rounded-xl border bg-white p-4">
-        <p className="text-xs text-muted-foreground">
-          {report.mode === "outline" ? "Outline" : "Draft"} · version {final.version}
-          {corrected ? " (corrected on re-check)" : final.version > 1 && " (rewritten after the critic's notes)"}
-          {final.reviewer_action === "edit" && " · edited by the reviewer"}
-        </p>
-        <p className="mt-2 text-sm">
-          <span className="text-muted-foreground">Subject: </span>
-          <span className="font-medium">{final.subject}</span>
-        </p>
-        <div className="mt-3 text-sm leading-relaxed whitespace-pre-wrap">
-          {final.edited_body ? (
-            final.edited_body
-          ) : (
-            <CitedBody body={final.body} claims={final.claims} signals={bySignal} />
-          )}
-        </div>
-        {final.review.reason && <p className="mt-3 text-xs text-muted-foreground">Rejected: {final.review.reason}</p>}
+      <article className="overflow-hidden rounded-xl border bg-white shadow-xs">
+        <dl className="divide-y text-sm">
+          {to && <Row label="To" value={to} />}
+          <Row label="Subject" value={final.subject} strong />
+        </dl>
+        <div className="px-6 py-6 text-[15px] leading-7 whitespace-pre-wrap text-zinc-800">{cited.parts}</div>
+        <p className="border-t bg-zinc-50/70 px-6 py-2.5 text-xs text-muted-foreground">{version}</p>
       </article>
 
-      {report.checks && (
-        <div className="rounded-xl border bg-white p-4 text-sm">
-          <p className="font-medium">Critic</p>
-          <ul className="mt-2 space-y-1">
-            {report.checks.map((c) => (
-              <li key={c.name} className="flex items-start gap-2">
-                {c.passed ? <Check className="mt-0.5 size-3.5 text-emerald-600" /> : <X className="mt-0.5 size-3.5 text-red-600" />}
-                <span>
-                  {c.name.replace(/_/g, " ")}
-                  {c.detail && <span className="text-xs text-muted-foreground"> · {c.detail}</span>}
+      {cited.sources.length > 0 && (
+        <section aria-label="Sources" className="rounded-xl border bg-white px-5 py-4">
+          <h3 className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Sources for each fact</h3>
+          <ol className="mt-3 space-y-2.5 text-sm">
+            {cited.sources.map((s, i) => (
+              <li key={s.id} className="flex gap-3">
+                <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[11px] font-medium text-primary">
+                  {i + 1}
                 </span>
+                <div className="min-w-0">
+                  <p className="text-zinc-800">{s.summary}</p>
+                  {s.source_url.startsWith("http") ? (
+                    <a href={s.source_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-primary hover:underline">
+                      {new URL(s.source_url).hostname.replace(/^www\./, "")} <ExternalLink className="size-3" />
+                    </a>
+                  ) : (
+                    <span className="text-xs text-muted-foreground">uploaded bio</span>
+                  )}
+                </div>
               </li>
             ))}
-            {report.genericness && (
-              <li className="flex items-start gap-2">
-                {report.genericness.genericness < 3 ? (
-                  <Check className="mt-0.5 size-3.5 text-emerald-600" />
-                ) : (
-                  <X className="mt-0.5 size-3.5 text-red-600" />
-                )}
-                <span>
-                  specific to them ({report.genericness.genericness}/5 generic)
-                  <span className="block text-xs text-muted-foreground">{report.genericness.reason}</span>
-                </span>
-              </li>
-            )}
-          </ul>
-          {warnings.length > 0 && (
-            <ul className="mt-3 space-y-1 text-xs text-amber-800">
-              {warnings.map((w) => (
-                <li key={w}>{w}</li>
-              ))}
-            </ul>
-          )}
-          {report.confidence_formula && (
-            <p className="mt-3 text-xs text-muted-foreground">
-              Confidence {report.confidence} = {report.confidence_formula}
-            </p>
-          )}
-        </div>
+          </ol>
+        </section>
       )}
+      {final.review.reason && <p className="text-sm text-muted-foreground">Rejected: {final.review.reason}</p>}
+    </div>
+  );
+}
+
+function Row({ label, value, strong }: { label: string; value: string; strong?: boolean }) {
+  return (
+    <div className="flex gap-4 px-6 py-3">
+      <dt className="w-16 shrink-0 text-muted-foreground">{label}</dt>
+      <dd className={strong ? "font-medium text-zinc-900" : "text-zinc-800"}>{value}</dd>
     </div>
   );
 }
@@ -87,17 +78,10 @@ export function latestDraft(drafts: DraftRecord[]): DraftRecord | undefined {
   return drafts.reduce<DraftRecord | undefined>((best, d) => (!best || d.version > best.version ? d : best), undefined);
 }
 
-/** The body with each claimed sentence underlined and linked to the signal it relies on. */
-function CitedBody({
-  body,
-  claims,
-  signals,
-}: {
-  body: string;
-  claims: DraftRecord["claims"];
-  signals: Map<number, SignalRecord>;
-}) {
-  const spans = claims
+/** The body with each claimed sentence underlined and numbered; sources in order of first use. */
+function citeBody(draft: DraftRecord, signals: Map<number, SignalRecord>) {
+  const body = draft.body;
+  const spans = draft.claims
     .map((claim) => {
       const sentence = claim.sentence.replace(/^-\s*/, "").trim();
       const start = body.indexOf(sentence);
@@ -106,25 +90,22 @@ function CitedBody({
     .filter((s) => s.start >= 0 && s.signal)
     .sort((a, b) => a.start - b.start);
 
+  const sources: SignalRecord[] = [];
   const parts: React.ReactNode[] = [];
   let cursor = 0;
   for (const span of spans) {
     if (span.start < cursor) continue; // overlapping claim: keep the first
+    let n = sources.findIndex((s) => s.id === span.signal!.id) + 1;
+    if (!n) n = sources.push(span.signal!);
     parts.push(body.slice(cursor, span.start));
     parts.push(
-      <a
-        key={span.start}
-        href={span.signal!.source_url.startsWith("http") ? span.signal!.source_url : undefined}
-        target="_blank"
-        rel="noreferrer"
-        title={`Source: ${span.signal!.summary}`}
-        className="underline decoration-primary/50 decoration-2 underline-offset-4 hover:decoration-primary"
-      >
+      <span key={span.start} className="underline decoration-primary/40 decoration-2 underline-offset-4" title={span.signal!.summary}>
         {body.slice(span.start, span.end)}
-      </a>,
+        <sup className="ml-0.5 text-[10px] font-semibold text-primary no-underline">{n}</sup>
+      </span>,
     );
     cursor = span.end;
   }
   parts.push(body.slice(cursor));
-  return <>{parts}</>;
+  return { body, sources, parts };
 }

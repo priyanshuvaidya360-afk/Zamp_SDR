@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
+import { ContentGuide } from "@/app/runs/[id]/content-guide";
 import { DraftPanel, latestDraft } from "@/app/runs/[id]/draft-panel";
 import { ReviewControls } from "@/components/review-controls";
 import { StatusChip } from "@/components/status-chip";
@@ -137,7 +138,7 @@ export function ReviewQueue({ batchId }: { batchId: number }) {
               </div>
               <StatusChip status={run.status} />
             </div>
-            <DraftPanel drafts={shown.drafts} signals={shown.signals} />
+            <DraftPanel drafts={shown.drafts} signals={shown.signals} to={[run.full_name || `${run.first_name} ${run.last_name}`, run.title].filter(Boolean).join(" · ")} />
           </section>
           <aside className="space-y-3">
             <ReviewControls
@@ -159,6 +160,12 @@ export function ReviewQueue({ batchId }: { batchId: number }) {
                 )}
               </div>
             )}
+            <details className="rounded-xl border bg-white p-4">
+              <summary className="cursor-pointer text-sm font-medium">Content guide</summary>
+              <div className="mt-4">
+                <ContentGuide draft={draft} />
+              </div>
+            </details>
             <p className="text-xs text-muted-foreground">
               Keys: <b>a</b> approve · <b>e</b> edit · <b>r</b> reject · <b>j</b> next · <b>k</b> previous
             </p>
