@@ -26,6 +26,9 @@ T01-T18 are at the end of the guide; do one task per session.
   scrape LinkedIn.
 - Frontend: Next.js 16 (App Router, TypeScript), Tailwind v4, shadcn/ui. Read
   `frontend/AGENTS.md` before writing frontend code: Next 16 differs from older versions.
+- Design system: navy chrome (`--navy` #0b2a66), blue actions (`--primary` #1a56db), cool blue-grey
+  surfaces (zinc is remapped to blue-greys in `globals.css`), Plus Jakarta Sans UI + Source Serif 4
+  for the email body. Change colours in the tokens in `frontend/app/globals.css`, not per component.
 - Live updates: SSE (`text/event-stream`) + browser `EventSource`.
 
 ## Folder map

@@ -8,21 +8,21 @@ import type { StageEvent, StageInfo } from "@/lib/types";
 // result; open a stage for its queries, sources, model output and credits.
 export function StageStepper({ stages, latest }: { stages: StageInfo[]; latest: Map<string, StageEvent> }) {
   return (
-    <ol className="space-y-0.5 rounded-xl border bg-white p-3">
+    <ol className="rounded-[14px] border bg-white px-4 py-2">
       {stages.map((stage, index) => {
         const event = latest.get(stage.name);
         const state = stepState(event);
         return (
           <li key={stage.name} className="relative">
-            {index < stages.length - 1 && <span className="absolute top-8 bottom-0 left-[15.5px] w-px bg-zinc-200" aria-hidden />}
-            <details className="group rounded-lg px-2 py-2 open:bg-zinc-50">
+            {index < stages.length - 1 && <span className="absolute top-7 bottom-0 left-[11px] w-px bg-zinc-200" aria-hidden />}
+            <details className="group rounded-lg px-1 py-2.5 open:bg-zinc-50">
               <summary className="flex cursor-pointer list-none items-start gap-3">
-                <StepIcon state={state} className="mt-0.5 bg-zinc-50" />
+                <StepIcon state={state} className="mt-0.5" />
                 <div className="min-w-0 flex-1">
                   <p className="flex items-baseline justify-between gap-2 text-sm font-medium">
                     {stage.label}
                     {event?.duration_ms != null && (
-                      <span className="text-xs font-normal text-muted-foreground tabular-nums">{formatDuration(event.duration_ms)}</span>
+                      <span className="font-mono text-xs font-normal text-primary tabular-nums">{formatDuration(event.duration_ms)}</span>
                     )}
                   </p>
                   <p className="text-xs text-muted-foreground">{summaryLine(state, event)}</p>

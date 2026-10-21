@@ -62,7 +62,7 @@ export function BatchView({ batchId }: { batchId: number }) {
     <div className="space-y-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">{detail.batch.filename}</h1>
+          <h1 className="text-2xl font-bold tracking-tight">{detail.batch.filename}</h1>
           <p className="text-muted-foreground">
             Batch #{detail.batch.id} · {progress.total} prospect{progress.total === 1 ? "" : "s"}
             {detail.not_run.length > 0 && ` · ${detail.not_run.length} rows not run`}

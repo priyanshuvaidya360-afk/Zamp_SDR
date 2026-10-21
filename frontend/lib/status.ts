@@ -7,10 +7,18 @@ import type { RowStatus, RunStatus } from "./types";
 export type Tone = "green" | "amber" | "red" | "grey";
 
 export const TONE_CLASSES: Record<Tone, string> = {
-  green: "bg-emerald-50 text-emerald-700 ring-emerald-600/20",
-  amber: "bg-amber-50 text-amber-800 ring-amber-600/25",
-  red: "bg-red-50 text-red-700 ring-red-600/20",
-  grey: "bg-zinc-100 text-zinc-600 ring-zinc-500/20",
+  green: "bg-[#e7f6ee] text-[#137a43] ring-[#bfe6cf]",
+  amber: "bg-[#fff4e8] text-[#a14a00] ring-[#f7d6b2]",
+  red: "bg-red-50 text-red-700 ring-red-200",
+  grey: "bg-[#eaf1fd] text-[#1a56db] ring-[#c9d8f5]",
+};
+
+/** The dot colour that goes with each tone (status chips). */
+export const TONE_DOT: Record<Tone, string> = {
+  green: "bg-[#1a9a56]",
+  amber: "bg-[#e28a1d]",
+  red: "bg-red-500",
+  grey: "bg-[#3b82f6]",
 };
 
 export const RUN_STATUS: Record<RunStatus, { label: string; tone: Tone }> = {

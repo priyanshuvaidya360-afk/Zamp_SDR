@@ -25,16 +25,16 @@ export function SignalList({ signals, angle, waiting }: { signals: SignalRecord[
     <div className="space-y-6">
       {hook && (
         <section className="space-y-2">
-          <h3 className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Hook used in the email</h3>
+          <h3 className="text-xs font-bold tracking-[0.08em] text-primary uppercase">Hook used in the email</h3>
           <HookCard signal={hook} angle={angle} />
         </section>
       )}
       {others.length > 0 && (
         <section className="space-y-2">
-          <h3 className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+          <h3 className="text-xs font-bold tracking-[0.08em] text-primary uppercase">
             {hook ? "Other signals" : "Signals"} · {others.length}
           </h3>
-          <ul className="divide-y overflow-hidden rounded-xl border bg-white">
+          <ul className="divide-y overflow-hidden rounded-[14px] border bg-white">
             {others.map((s) => (
               <SignalRow key={s.id} signal={s} />
             ))}
@@ -83,26 +83,32 @@ function Meta({ signal }: { signal: SignalRecord }) {
 }
 
 function HookCard({ signal, angle }: { signal: SignalRecord; angle: string | null }) {
+  const meta = `${signal.type.replace(/_/g, " ")} · ${signal.about === "person" ? "about them" : "about the company"} · ${signal.published_at ?? "undated"}`;
   return (
-    <article className="rounded-xl border border-primary/40 bg-white p-5 shadow-xs ring-4 ring-primary/5">
-      <div className="flex flex-wrap items-center gap-2">
-        <Meta signal={signal} />
-        <Tags signal={signal} />
-        {signal.scores.score != null && (
-          <span className="ml-auto rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary tabular-nums">
-            {signal.scores.score.toFixed(1)} / 5
-          </span>
-        )}
+    <article className="overflow-hidden rounded-[14px] border bg-white">
+      <div className="flex flex-col gap-2.5 bg-navy p-5 text-white">
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-xs text-[#a9c1ee]">{meta}</span>
+          {signal.scores.score != null && (
+            <span className="rounded-full bg-[#3b82f6] px-2.5 py-0.5 text-[13px] font-bold whitespace-nowrap tabular-nums">
+              {signal.scores.score.toFixed(1)} / 5
+            </span>
+          )}
+        </div>
+        <p className="text-lg leading-snug font-semibold tracking-tight text-pretty">{signal.summary}</p>
+        <div className="flex flex-wrap gap-1.5 empty:hidden">
+          <Tags signal={signal} />
+        </div>
       </div>
-      <p className="mt-2 text-base font-medium text-zinc-900">{signal.summary}</p>
-      {angle && (
-        <p className="mt-3 rounded-lg bg-zinc-50 px-3 py-2 text-sm text-zinc-700">
-          <span className="font-medium text-zinc-900">Angle · </span>
-          {angle}
-        </p>
-      )}
-      <Evidence signal={signal} />
-      <ScoreBreakdown signal={signal} />
+      <div className="space-y-4 p-5">
+        {angle && (
+          <p className="rounded-[10px] bg-background px-4 py-3.5 text-sm leading-relaxed text-zinc-800">
+            <strong className="text-navy">Angle</strong> · {angle}
+          </p>
+        )}
+        <Evidence signal={signal} />
+        <ScoreBreakdown signal={signal} />
+      </div>
     </article>
   );
 }
@@ -112,8 +118,8 @@ function SignalRow({ signal }: { signal: SignalRecord }) {
   return (
     <li>
       <details className="group">
-        <summary className="flex cursor-pointer list-none items-center gap-3 px-4 py-3 hover:bg-zinc-50">
-          <span className={cn("w-9 shrink-0 text-sm font-medium tabular-nums", isExcluded(signal) ? "text-zinc-300" : "text-zinc-500")}>
+        <summary className="flex cursor-pointer list-none items-center gap-3.5 px-4 py-3.5 hover:bg-zinc-50">
+          <span className={cn("flex size-11 shrink-0 items-center justify-center rounded-[10px] text-[15px] font-bold tabular-nums", isExcluded(signal) ? "bg-zinc-100 text-zinc-300" : "bg-secondary text-primary")}>
             {score != null && !isExcluded(signal) ? score.toFixed(1) : "–"}
           </span>
           <span className="min-w-0 flex-1">
@@ -123,9 +129,9 @@ function SignalRow({ signal }: { signal: SignalRecord }) {
               <Tags signal={signal} />
             </span>
           </span>
-          <span className="text-xs text-muted-foreground group-open:hidden">Details</span>
+          <span className="text-[13px] font-semibold text-primary group-open:hidden">Details</span>
         </summary>
-        <div className="space-y-2 border-t bg-zinc-50/60 px-4 py-3 pl-16">
+        <div className="space-y-3 border-t bg-zinc-50 px-4 py-4 pl-[76px]">
           {signal.rejected_reason && (
             <p className="text-sm text-zinc-700">
               <span className="font-medium">Why not used · </span>
@@ -142,8 +148,8 @@ function SignalRow({ signal }: { signal: SignalRecord }) {
 
 function Evidence({ signal }: { signal: SignalRecord }) {
   return (
-    <div className="mt-3 space-y-1.5">
-      <blockquote className="border-l-2 border-zinc-200 pl-3 text-sm text-zinc-600">“{signal.evidence}”</blockquote>
+    <div className="space-y-2">
+      <blockquote className="border-l-[3px] border-[#3b82f6] pl-3.5 font-serif text-[15px] leading-relaxed text-zinc-800 italic">“{signal.evidence}”</blockquote>
       {signal.note && <p className="text-xs text-amber-800">{signal.note}</p>}
       {signal.source_url.startsWith("http") ? (
         <a href={signal.source_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs text-primary hover:underline">
@@ -164,27 +170,16 @@ function ScoreBreakdown({ signal }: { signal: SignalRecord }) {
     ["Specificity", s.specificity?.toString()],
     ["Recency", s.recency != null ? `${s.recency.toFixed(1)} (${s.days_old} days)` : undefined],
     ["Verifiability", s.verifiability?.toString()],
+    ...(s.adjustments ?? []).map((a) => [a.name.replace(/_/g, " "), `${a.delta > 0 ? "+" : "\u2212"}${Math.abs(a.delta)}`]),
   ].filter((p): p is [string, string] => p[1] != null);
-  const adjustments = s.adjustments ?? [];
   return (
-    <div className="mt-3 border-t pt-3" title={s.reasoning}>
-      <dl className="flex flex-wrap gap-x-5 gap-y-1 text-xs">
-        {parts.map(([k, v]) => (
-          <div key={k} className="flex gap-1.5">
-            <dt className="text-muted-foreground">{k}</dt>
-            <dd className="font-medium text-zinc-800 tabular-nums">{v}</dd>
-          </div>
-        ))}
-        {adjustments.map((a) => (
-          <div key={a.name} className="flex gap-1.5">
-            <dt className="text-muted-foreground">{a.name.replace(/_/g, " ")}</dt>
-            <dd className="font-medium text-amber-800 tabular-nums">
-              {a.delta > 0 ? "+" : "−"}
-              {Math.abs(a.delta)}
-            </dd>
-          </div>
-        ))}
-      </dl>
+    <div className="grid grid-cols-2 gap-2" title={s.reasoning}>
+      {parts.map(([k, v]) => (
+        <div key={k} className="flex flex-col gap-0.5 rounded-lg border px-3 py-2.5">
+          <span className="text-xs text-muted-foreground capitalize">{k}</span>
+          <span className="text-base font-bold text-navy tabular-nums">{v}</span>
+        </div>
+      ))}
     </div>
   );
 }

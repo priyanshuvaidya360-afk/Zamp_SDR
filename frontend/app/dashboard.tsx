@@ -117,7 +117,7 @@ function Metrics({ state }: { state: Load<Stats> & { reload: () => void } }) {
         {cards.map((c) => (
           <div key={c.label} className="rounded-xl border bg-white p-4">
             <p className="text-xs text-muted-foreground">{c.label}</p>
-            <p className="mt-1 text-2xl font-semibold tracking-tight tabular-nums">{c.value}</p>
+            <p className="mt-1 text-2xl font-bold tracking-tight tabular-nums">{c.value}</p>
             <p className="mt-1 text-[11px] text-muted-foreground">{c.note}</p>
           </div>
         ))}

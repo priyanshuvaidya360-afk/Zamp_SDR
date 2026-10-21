@@ -1,6 +1,5 @@
 "use client";
 
-import { BookOpenCheck } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
@@ -30,7 +29,8 @@ export function RunView({ runId }: { runId: number }) {
   const [events, setEvents] = useState<StageEvent[]>([]);
   const [streamFrom, setStreamFrom] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [guide, setGuide] = useState(false);
+  const [side, setSide] = useState<"signals" | "guide">("signals");
+  const [sender, setSender] = useState<string | undefined>(undefined);
   const refetch = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const load = useCallback(
@@ -49,6 +49,10 @@ export function RunView({ runId }: { runId: number }) {
   useEffect(() => {
     load(true);
   }, [load]);
+
+  useEffect(() => {
+    api.getSeller().then((seller) => setSender(seller.rep.name), () => {});
+  }, []);
 
   const scheduleRefetch = useCallback(() => {
     clearTimeout(refetch.current);
@@ -98,24 +102,29 @@ export function RunView({ runId }: { runId: number }) {
   }
 
   const to = [name, run.title].filter(Boolean).join(" · ");
+  const initials = name.split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]?.toUpperCase()).join("");
 
   return (
     // One screen on desktop: three columns that scroll on their own. Stacked on small screens.
     <div className="space-y-4 lg:relative lg:left-1/2 lg:w-[min(96rem,calc(100vw-3rem))] lg:-translate-x-1/2">
-      <header className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
-        <div className="flex min-w-0 flex-wrap items-baseline gap-x-3">
-          <Link href={`/batches/${run.batch_id}`} className="text-sm text-muted-foreground hover:text-foreground">
-            ← Batch #{run.batch_id}
-          </Link>
-          <h1 className="text-xl font-semibold tracking-tight">{name}</h1>
+      <header className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-[14px] border bg-white px-5 py-4">
+        <Link
+          href={`/batches/${run.batch_id}`}
+          className="flex items-center gap-1.5 rounded-lg bg-secondary px-3 py-1.5 text-[13px] font-semibold text-primary hover:bg-[#dce8fc]"
+        >
+          ← Batch #{run.batch_id}
+        </Link>
+        <div className="flex size-11 items-center justify-center rounded-full bg-primary text-base font-bold text-white">{initials}</div>
+        <div className="flex min-w-0 flex-col gap-0.5">
+          <h1 className="text-[22px] leading-tight font-bold tracking-tight">{name}</h1>
           <p className="truncate text-sm text-muted-foreground">
             {[run.title, run.company ?? run.domain].filter(Boolean).join(" at ")}
             {run.message_type === "follow_up" && " · follow-up"}
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="ml-auto flex items-center gap-3">
           {run.final_reason && run.status !== "needs_input" && (
-            <p className="max-w-md truncate text-sm text-muted-foreground" title={run.final_reason}>
+            <p className="hidden max-w-md truncate text-sm text-muted-foreground xl:block" title={run.final_reason}>
               {run.final_reason}
             </p>
           )}
@@ -127,17 +136,20 @@ export function RunView({ runId }: { runId: number }) {
         <CandidateCards reason={run.final_reason ?? "Identity is unclear."} candidates={candidates} onPick={pick} />
       )}
 
-      <div className="grid grid-cols-[minmax(0,1fr)] gap-4 lg:h-[calc(100vh-10.5rem)] lg:min-h-[30rem] lg:grid-cols-[17rem_minmax(0,1fr)_minmax(0,23rem)]">
-        <Column title="Agent activity" note={`${run.cost_credits} credits${run.confidence != null ? ` · confidence ${run.confidence.toFixed(2)}` : ""}`}>
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-5 lg:h-[calc(100vh-15.5rem)] lg:min-h-[30rem] lg:grid-cols-[19rem_minmax(0,1fr)_minmax(0,24rem)]">
+        <Column
+          title="Agent activity"
+          chips={[`${run.cost_credits} credits`, ...(run.confidence != null ? [`confidence ${run.confidence.toFixed(2)}`] : [])]}
+        >
           <StageStepper stages={detail.stages} latest={latest} />
         </Column>
 
         <section aria-label="Email" className="flex min-h-0 flex-col gap-3">
           <div className="min-h-0 flex-1 overflow-y-auto pr-1">
             {draft ? (
-              <DraftPanel drafts={detail.drafts} signals={detail.signals} to={to} />
+              <DraftPanel drafts={detail.drafts} signals={detail.signals} to={to} from={sender} />
             ) : (
-              <p className="rounded-xl border border-dashed bg-white px-4 py-16 text-center text-sm text-muted-foreground">
+              <p className="rounded-[14px] border border-dashed bg-white px-4 py-16 text-center text-sm text-muted-foreground">
                 {running ? "The email appears here once the hook is chosen." : "No draft for this run."}
               </p>
             )}
@@ -147,46 +159,52 @@ export function RunView({ runId }: { runId: number }) {
           )}
         </section>
 
-        <Column
-          title={guide && draft ? "Content guide" : "Signals"}
-          note={guide && draft ? undefined : `${detail.signals.length} found`}
-          action={
-            draft && (
+        <section aria-label="Signals and content guide" className="flex min-h-0 flex-col gap-3">
+          <div className="grid shrink-0 grid-cols-2 gap-1 rounded-xl border bg-white p-1" role="tablist">
+            {(
+              [
+                ["signals", `Signals · ${detail.signals.length}`],
+                ["guide", "Content guide"],
+              ] as const
+            ).map(([id, label]) => (
               <button
-                onClick={() => setGuide((g) => !g)}
-                aria-pressed={guide}
+                key={id}
+                role="tab"
+                aria-selected={side === id}
+                disabled={id === "guide" && !draft}
+                onClick={() => setSide(id)}
                 className={cn(
-                  "flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium transition-colors",
-                  guide ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-zinc-100 hover:text-foreground",
+                  "rounded-[9px] px-3 py-2 text-[13px] font-semibold transition-colors disabled:opacity-40",
+                  side === id ? "bg-primary text-white" : "text-muted-foreground hover:bg-secondary hover:text-navy",
                 )}
               >
-                <BookOpenCheck className="size-3.5" /> Content guide
+                {label}
               </button>
-            )
-          }
-        >
-          {guide && draft ? (
-            <div className="rounded-xl border bg-white p-5">
-              <ContentGuide draft={draft} />
-            </div>
-          ) : (
-            <SignalList signals={detail.signals} angle={angle} waiting={running} />
-          )}
-        </Column>
+            ))}
+          </div>
+          <div className="min-h-0 flex-1 overflow-y-auto pr-1">
+            {side === "guide" && draft ? <ContentGuide draft={draft} /> : <SignalList signals={detail.signals} angle={angle} waiting={running} />}
+          </div>
+        </section>
       </div>
     </div>
   );
 }
 
-function Column({ title, note, action, children }: { title: string; note?: string; action?: React.ReactNode; children: React.ReactNode }) {
+function Column({ title, chips, children }: { title: string; chips?: string[]; children: React.ReactNode }) {
   return (
-    <section aria-label={title} className="flex min-h-0 flex-col gap-2">
-      <div className="flex h-7 shrink-0 items-center justify-between gap-2">
-        <h2 className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
-          {title}
-          {note && <span className="ml-2 font-normal tracking-normal normal-case">{note}</span>}
-        </h2>
-        {action}
+    <section aria-label={title} className="flex min-h-0 flex-col gap-3">
+      <div className="flex shrink-0 flex-col gap-2 rounded-[14px] border bg-white px-5 py-4">
+        <h2 className="text-xs font-bold tracking-[0.08em] text-primary uppercase">{title}</h2>
+        {chips && chips.length > 0 && (
+          <div className="flex flex-wrap gap-2 text-[13px]">
+            {chips.map((c) => (
+              <span key={c} className="rounded-md bg-secondary px-2.5 py-0.5 font-semibold text-navy">
+                {c}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
       <div className="min-h-0 flex-1 overflow-y-auto pr-1">{children}</div>
     </section>

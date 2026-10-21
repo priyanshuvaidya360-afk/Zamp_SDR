@@ -108,7 +108,7 @@ export function ReviewQueue({ batchId }: { batchId: number }) {
           <Link href={`/batches/${batchId}`} className="text-sm text-muted-foreground hover:text-foreground">
             ← {batch.batch.filename}
           </Link>
-          <h1 className="text-2xl font-semibold tracking-tight">Review queue</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Review queue</h1>
           <p className="text-muted-foreground">
             {pending.length ? `Draft ${index + 1} of ${pending.length} waiting` : "Nothing waiting for review"}
             {done.length > 0 && ` · ${done.length} reviewed just now`}

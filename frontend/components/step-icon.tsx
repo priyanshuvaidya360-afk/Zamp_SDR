@@ -1,4 +1,4 @@
-import { AlertTriangle, CheckCircle2, Circle, Loader2, MinusCircle, XCircle } from "lucide-react";
+import { AlertTriangle, Check, Circle, Loader2, MinusCircle, XCircle } from "lucide-react";
 
 import type { StepState } from "@/lib/stages";
 import { cn } from "@/lib/utils";
@@ -8,9 +8,13 @@ export function StepIcon({ state, className }: { state: StepState; className?: s
   const size = cn("size-4 shrink-0", className);
   switch (state) {
     case "running":
-      return <Loader2 aria-label="running" className={cn(size, "animate-spin text-zinc-500")} />;
+      return <Loader2 aria-label="running" className={cn(size, "animate-spin text-primary")} />;
     case "done":
-      return <CheckCircle2 aria-label="done" className={cn(size, "text-emerald-600")} />;
+      return (
+        <span aria-label="done" className={cn(size, "flex items-center justify-center rounded-full bg-primary text-white")}>
+          <Check className="size-3" strokeWidth={3} />
+        </span>
+      );
     case "warning":
       return <AlertTriangle aria-label="needs attention" className={cn(size, "text-amber-600")} />;
     case "failed":
