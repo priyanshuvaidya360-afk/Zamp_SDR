@@ -18,9 +18,10 @@ export function DraftPanel({
 }) {
   if (!drafts.length) return null;
   const final = latestDraft(drafts)!;
+  const sender = from || "Halyard";
   const report = final.critic_report;
   const bySignal = new Map(signals.map((s) => [s.id, s]));
-  const cited = final.edited_body ? { sources: [] as SignalRecord[], parts: [final.edited_body] as React.ReactNode[] } : citeBody(final, bySignal);
+  const cited = final.edited_body ? { sources: [] as SignalRecord[], parts: [final.edited_body] as React.ReactNode[] } : citeBody(final, bySignal, to?.split(" · ")[0]?.split(" ")[0], sender);
   const version = [
     report.mode === "outline" ? "Outline" : "Draft",
     `v${final.version}`,
@@ -29,7 +30,6 @@ export function DraftPanel({
   ]
     .filter(Boolean)
     .join(" · ");
-  const sender = from || "Halyard";
 
   return (
     <div className="space-y-4">
@@ -55,7 +55,7 @@ export function DraftPanel({
             {to && <p className="text-[13px] text-muted-foreground">to {to} ▾</p>}
           </div>
         </div>
-        <div className="max-w-[860px] px-8 pb-8 font-serif text-[17px] leading-[1.75] whitespace-pre-wrap text-zinc-800 sm:pl-[86px]">
+        <div className="max-w-[860px] px-8 pb-8 font-serif text-[14.5px] leading-[1.65] whitespace-pre-wrap text-zinc-800 sm:pl-[86px]">
           {cited.parts}
         </div>
         {cited.sources.length > 0 && (
@@ -93,8 +93,8 @@ export function latestDraft(drafts: DraftRecord[]): DraftRecord | undefined {
 }
 
 /** The body with each claimed sentence underlined and numbered; sources in order of first use. */
-function citeBody(draft: DraftRecord, signals: Map<number, SignalRecord>) {
-  const body = draft.body;
+function citeBody(draft: DraftRecord, signals: Map<number, SignalRecord>, firstName: string | undefined, sender: string) {
+  const body = letterLayout(draft.body, firstName, sender, draft.claims.length === 0 && draft.body.trimStart().startsWith("- "));
   const spans = draft.claims
     .map((claim) => {
       const sentence = claim.sentence.replace(/^-\s*/, "").trim();
@@ -122,4 +122,26 @@ function citeBody(draft: DraftRecord, signals: Map<number, SignalRecord>) {
   }
   parts.push(body.slice(cursor));
   return { body, sources, parts };
+}
+
+/** The model writes the body as one run of sentences. Show it the way a business email is laid out:
+ * greeting, one short paragraph per idea, sign-off. Display only: the stored text is unchanged, and
+ * every sentence stays intact, so the underlined claims still match. */
+function letterLayout(body: string, firstName: string | undefined, sender: string, isOutline: boolean): string {
+  const text = body.trim();
+  if (isOutline) return text;
+  const sentences = text.split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter(Boolean);
+  let signoff = sender.split(" ")[0];
+  const last = sentences[sentences.length - 1];
+  if (last && !/[.!?]$/.test(last)) {
+    // A name left at the end of the body ("... a chat? Priyanshu") is the sign-off, not a sentence.
+    const m = last.match(/^(.*[.!?])\s+(\S+(?:\s\S+)?)$/);
+    sentences.pop();
+    if (m) {
+      sentences.push(m[1]);
+      signoff = m[2];
+    } else signoff = last;
+  }
+  const joined = sentences.join("\n\n");
+  return `${firstName ? `Hi ${firstName},` : "Hi,"}\n\n${joined}\n\nBest,\n${signoff}`;
 }
