@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
-  { href: "/", label: "Dashboard" },
-  { href: "/batches/new", label: "New batch" },
+  { href: "/", label: "Prospects" },
+  { href: "/dashboard", label: "Dashboard" },
 ];
 
 export function Nav() {
@@ -28,7 +28,7 @@ export function Nav() {
               href={link.href}
               className={cn(
                 "rounded-lg px-3.5 py-2 text-[#c9d8f5] transition-colors hover:bg-white/10 hover:text-white",
-                pathname === link.href && "bg-white/10 font-semibold text-white",
+                (link.href === "/" ? pathname === "/" || pathname.startsWith("/batches") || pathname.startsWith("/runs") : pathname.startsWith(link.href)) && "bg-white/10 font-semibold text-white",
               )}
             >
               {link.label}

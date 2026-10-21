@@ -1,25 +1,42 @@
-import Link from "next/link";
+import { FlowSteps } from "@/components/flow-steps";
 
-import { buttonVariants } from "@/components/ui/button";
+import { RecentLists } from "./recent-lists";
+import { UploadHero } from "./upload-hero";
 
-import { Dashboard } from "./dashboard";
-
-// Spec: docs/GUIDE.md "UI: three screens" > 3 Dashboard, and T16.
+// Step 1 of the flow: upload a prospect CSV. Spec: docs/GUIDE.md "UI: three screens" > 1.
 export default function Home() {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
-          <p className="max-w-2xl text-muted-foreground">
-            Every prospect researched, every hook cited, every draft waiting for a person. Nothing is ever sent.
+    <div className="space-y-8">
+      <FlowSteps current={0} />
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <UploadHero />
+        <aside className="space-y-4 rounded-[14px] border bg-white p-6">
+          <h2 className="text-xs font-bold tracking-[0.08em] text-primary uppercase">Why Signal</h2>
+          <p className="text-[15px] leading-relaxed text-zinc-800">
+            A rep with 200 prospects cannot research every person, find the news or pain point that matters, and write a
+            message that sounds like it.
           </p>
-        </div>
-        <Link href="/batches/new" className={buttonVariants()}>
-          New batch
-        </Link>
+          <ul className="space-y-3 text-sm">
+            {[
+              ["Researches", "reads the public web for each person and their company"],
+              ["Picks one hook", "the most relevant, recent, verifiable signal, scored in the open"],
+              ["Drafts and cites", "under 120 words, every fact linked to its source"],
+              ["You decide", "approve, edit or reject. Nothing is ever sent."],
+            ].map(([title, text], i) => (
+              <li key={title} className="flex gap-3">
+                <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-bold text-primary">
+                  {i + 1}
+                </span>
+                <span>
+                  <strong className="text-navy">{title}</strong>
+                  <span className="text-muted-foreground"> · {text}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </aside>
       </div>
-      <Dashboard />
+      <RecentLists />
     </div>
   );
 }

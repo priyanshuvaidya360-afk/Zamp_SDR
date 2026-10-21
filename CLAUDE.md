@@ -37,7 +37,8 @@ backend/
   app/
     main.py            FastAPI app; includes routers from routes/
     routes/batches.py  POST /batches, GET /batches (paginated), GET /batches/{id}[/preview|/events], PATCH .../mapping,
-                       POST /batches/{id}/start, GET /batches/{id}/export.csv[?all=true]
+                       POST /batches/{id}/start (all rows), POST /batches/{id}/draft ({row_numbers} or all remaining;
+                       a row that already has a run is not run twice), GET /batches/{id}/export.csv[?all=true]
     routes/stats.py    GET /stats: dashboard numbers (definitions in its docstring)
     routes/runs.py     GET /runs (status filter, name search, paginated), GET /runs/{id}[/events], POST /runs/{id}/resume,
                        POST /runs/{id}/review (approve / edit / reject)
@@ -96,11 +97,12 @@ backend/
   tests/               pytest; tests/fixtures/ holds recorded search results
   scripts/             CLI helpers (smoke tests, seeding, demo checks)
 frontend/
-  app/                 page.tsx + dashboard.tsx = dashboard (metrics, why-not-ready, batches /
-                       all-runs tabs); batches/new (upload + preview + mapping),
-                       batches/[id] (live batch view, export), batches/[id]/review (review
-                       queue, keys a/e/r/j/k), runs/[id] (live run view: stepper, signal
-                       cards, cited draft, review controls, candidate cards)
+  app/                 the flow: page.tsx (1 upload + recent lists) -> components/mapping-dialog.tsx (2 map
+                       columns, a dialog) -> batches/[id] (3 prospect list, a "Draft email" button per row, or
+                       "Draft all") -> runs/[id] (4 live run view: agent activity, cited email, signals / content
+                       guide, review controls); batches/[id]/review (review queue, keys a/e/r/j/k);
+                       dashboard/ (metrics, why-not-ready; dashboard-view.tsx); batches/new redirects to /
+                       components/flow-steps.tsx is the 4-step progress bar shown on each screen
   components/review-controls.tsx  approve / edit / reject, "Re-checking N facts", diff modal
   components/          nav, status-chip; shadcn/ui (Base UI flavour) in components/ui
   lib/api.ts           the only place that calls the backend (NEXT_PUBLIC_API_URL,

@@ -88,7 +88,7 @@ function Metrics({ state }: { state: Load<Stats> & { reload: () => void } }) {
   if (s.runs_total === 0 && s.batches_this_week === 0)
     return (
       <Empty>
-        No runs yet. <Link href="/batches/new" className="text-primary hover:underline">Upload a prospect CSV</Link> to start.
+        No runs yet. <Link href="/" className="text-primary hover:underline">Upload a prospect CSV</Link> to start.
       </Empty>
     );
 
@@ -159,7 +159,7 @@ function BatchesPanel() {
   if (page.data.total === 0)
     return (
       <Empty>
-        No batches yet. <Link href="/batches/new" className="text-primary hover:underline">Upload one</Link>.
+        No batches yet. <Link href="/" className="text-primary hover:underline">Upload one</Link>.
       </Empty>
     );
   return (

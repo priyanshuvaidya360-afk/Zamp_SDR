@@ -308,3 +308,38 @@ def test_resume_endpoint_guards(client):
     wait_until_done(client, started["batch_id"])
     run_id = started["run_ids"][0]
     assert client.post(f"/runs/{run_id}/resume", json={"stage": "resolve"}).status_code == 409
+
+
+# --- Drafting prospects one at a time ---------------------------------------------------------
+
+
+def test_draft_one_row_runs_only_that_prospect_and_is_idempotent(client):
+    batch_id = client.post("/batches", files={"file": ("p.csv", FIVE.encode(), "text/csv")}).json()["batch_id"]
+    first = client.post(f"/batches/{batch_id}/draft", json={"row_numbers": [3]})
+    assert first.status_code == 202
+    assert [r["row_number"] for r in first.json()["runs"]] == [3]
+    run_id = first.json()["runs"][0]["run_id"]
+    # Asking again returns the same run instead of researching the prospect twice.
+    assert client.post(f"/batches/{batch_id}/draft", json={"row_numbers": [3]}).json()["runs"][0]["run_id"] == run_id
+
+    deadline = time.time() + 10
+    while time.time() < deadline:
+        body = client.get(f"/batches/{batch_id}").json()
+        if body["progress"]["done"] == 1:
+            break
+        time.sleep(0.02)
+    prospects = {p["row_number"]: p for p in body["prospects"]}
+    assert len(prospects) == 5
+    assert prospects[3]["run"]["status"] == "ready_for_review"
+    assert prospects[2]["run"] is None
+    assert body["batch"]["status"] != "done"  # four prospects are still waiting for their turn
+
+    # "Draft all" then covers the remaining four and the batch finishes.
+    rest = client.post(f"/batches/{batch_id}/draft")
+    assert len(rest.json()["runs"]) == 5
+    assert wait_until_done(client, batch_id)["progress"]["done"] == 5
+
+
+def test_draft_rejects_invalid_rows(client):
+    batch_id = client.post("/batches", files={"file": ("p.csv", (FIVE + "Bad,,Acme,acme.com\n").encode(), "text/csv")}).json()["batch_id"]
+    assert client.post(f"/batches/{batch_id}/draft", json={"row_numbers": [7]}).status_code == 422

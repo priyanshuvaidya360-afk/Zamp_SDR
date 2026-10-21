@@ -6,14 +6,16 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { StatusChip } from "@/components/status-chip";
 import { StepIcon } from "@/components/step-icon";
-import { buttonVariants } from "@/components/ui/button";
+import { FlowSteps } from "@/components/flow-steps";
+import { MappingDialog } from "@/components/mapping-dialog";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { api, ApiError, streams } from "@/lib/api";
 import { stateOf } from "@/lib/stages";
 import { RUN_STATUS } from "@/lib/status";
-import type { AccountPlan, BatchDetail, LiveEvent, RunStatus, RunSummary } from "@/lib/types";
+import type { AccountPlan, BatchDetail, BatchPreview, LiveEvent, Prospect, RunSummary } from "@/lib/types";
 import { useEventStream } from "@/lib/use-event-stream";
+import { cn } from "@/lib/utils";
 
 // Spec: docs/GUIDE.md "UI: three screens" > 1b Batch view, and T11.
 
@@ -21,6 +23,8 @@ export function BatchView({ batchId }: { batchId: number }) {
   const router = useRouter();
   const [detail, setDetail] = useState<BatchDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [drafting, setDrafting] = useState<number | "all" | null>(null);
+  const [mapping, setMapping] = useState<BatchPreview | null>(null);
   const refetch = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const load = useCallback(() => {
@@ -37,7 +41,7 @@ export function BatchView({ batchId }: { batchId: number }) {
     refetch.current = setTimeout(load, 500);
   }, [load]);
 
-  const live = detail !== null && detail.batch.status !== "done";
+  const live = detail !== null && detail.runs.some((r) => r.status === "running");
   useEventStream(live ? streams.batch(batchId) : null, (event: LiveEvent) => {
     setDetail((current) => (current ? applyEvent(current, event) : current));
     if (event.type === "run_status" && event.status !== "running") scheduleRefetch();
@@ -50,75 +54,103 @@ export function BatchView({ batchId }: { batchId: number }) {
   );
   const accounts = useMemo(() => groupAccounts(detail?.runs ?? []), [detail?.runs]);
 
-  if (error) return <p className="text-red-700">{error}</p>;
+  async function draft(rows?: number[]) {
+    setDrafting(rows?.length === 1 ? rows[0] : "all");
+    setError(null);
+    try {
+      const result = await api.draftRows(batchId, rows);
+      if (rows?.length === 1) {
+        router.push(`/runs/${result.runs.find((r) => r.row_number === rows[0])!.run_id}`);
+        return;
+      }
+      load();
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Couldn't start the draft.");
+    }
+    setDrafting(null);
+  }
+
+  async function editMapping() {
+    try {
+      setMapping(await api.getPreview(batchId));
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Couldn't open the mapping.");
+    }
+  }
+
+  if (error && !detail) return <p className="text-red-700">{error}</p>;
   if (!detail) return <p className="text-muted-foreground">Loading…</p>;
 
-  const { progress } = detail;
-  const percent = progress.total ? Math.round((progress.done / progress.total) * 100) : 0;
-  const counts = Object.entries(progress.counts).filter(([, n]) => n) as [RunStatus, number][];
+  // Live run state wins over the snapshot the prospects list was loaded with.
+  const runByRow = new Map(detail.runs.map((r) => [r.row_number, r]));
+  const prospects = detail.prospects.map((p) => ({ ...p, run: runByRow.get(p.row_number) ?? null }));
+  const draftable = prospects.filter((p) => p.status === "valid");
+  const remaining = draftable.filter((p) => !p.run).length;
+  const drafted = draftable.length - remaining;
   const waiting = detail.runs.filter((r) => r.status === "ready_for_review").length;
+  const canRemap = detail.batch.status === "validating" && detail.runs.length === 0;
 
   return (
     <div className="space-y-6">
+      <FlowSteps current={2} />
+
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">{detail.batch.filename}</h1>
-          <p className="text-muted-foreground">
-            Batch #{detail.batch.id} · {progress.total} prospect{progress.total === 1 ? "" : "s"}
-            {detail.not_run.length > 0 && ` · ${detail.not_run.length} rows not run`}
+          <h1 className="text-[28px] leading-tight font-bold tracking-tight">Your prospects</h1>
+          <p className="mt-1 text-muted-foreground">
+            {detail.batch.filename} · {draftable.length} ready to draft
+            {drafted > 0 && ` · ${drafted} started`}
+            {detail.not_run.length > 0 && ` · ${detail.not_run.length} need a fix`}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <Link
-            href={`/batches/${batchId}/review`}
-            className={buttonVariants({ variant: waiting ? "default" : "outline" })}
-            aria-disabled={!waiting}
-          >
-            Review queue{waiting ? ` (${waiting})` : ""}
-          </Link>
-          <a href={api.exportUrl(batchId)} className={buttonVariants({ variant: "outline" })}>
-            Export CSV
+          {canRemap && (
+            <Button variant="outline" size="lg" onClick={editMapping}>
+              Edit column mapping
+            </Button>
+          )}
+          {waiting > 0 && (
+            <Link href={`/batches/${batchId}/review`} className={buttonVariants({ variant: "outline", size: "lg" })}>
+              Review queue ({waiting})
+            </Link>
+          )}
+          <a href={api.exportUrl(batchId)} className={buttonVariants({ variant: "outline", size: "lg" })}>
+            Export approved CSV
           </a>
-          <a href={api.exportUrl(batchId, true)} className="text-xs text-muted-foreground hover:text-foreground hover:underline">
-            all rows
-          </a>
+          {remaining > 1 && (
+            <Button size="lg" onClick={() => draft()} disabled={drafting !== null}>
+              {drafting === "all" ? "Starting…" : `Draft all ${remaining}`}
+            </Button>
+          )}
         </div>
       </div>
 
-      <Card>
-        <CardContent className="space-y-3">
-          <div className="flex items-baseline justify-between text-sm">
-            <span className="font-medium">
-              {progress.done} of {progress.total} done
-            </span>
-            <span className="text-muted-foreground">{live ? "Running…" : "Finished"}</span>
-          </div>
-          <div
-            className="h-2 overflow-hidden rounded-full bg-zinc-100"
-            role="progressbar"
-            aria-valuenow={percent}
-            aria-valuemin={0}
-            aria-valuemax={100}
-          >
-            <div className="h-full rounded-full bg-primary transition-[width] duration-500" style={{ width: `${percent}%` }} />
-          </div>
-          <SimilarityLine batch={detail.batch} />
-          <div className="flex flex-wrap gap-2">
-            {counts.map(([status, n]) => (
-              <span key={status} className="inline-flex items-center gap-1.5 text-sm">
-                <StatusChip status={status} />
-                <span className="tabular-nums text-muted-foreground">{n}</span>
-              </span>
+      {error && <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-2.5 text-sm text-red-700">{error}</p>}
+      <SimilarityLine batch={detail.batch} />
+
+      <div className="overflow-hidden rounded-[14px] border bg-white">
+        <table className="w-full text-sm">
+          <thead className="bg-zinc-50 text-left text-xs text-muted-foreground">
+            <tr>
+              <th className="w-14 px-5 py-3 font-semibold">Row</th>
+              <th className="px-3 py-3 font-semibold">Prospect</th>
+              <th className="px-3 py-3 font-semibold">Company</th>
+              <th className="hidden px-3 py-3 font-semibold lg:table-cell">Domain / LinkedIn</th>
+              <th className="px-3 py-3 font-semibold">Status</th>
+              <th className="px-5 py-3 text-right font-semibold">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {prospects.map((p) => (
+              <ProspectRow key={p.row_number} p={p} labels={labels} busy={drafting !== null} onDraft={() => draft([p.row_number])} drafting={drafting === p.row_number} />
             ))}
-          </div>
-        </CardContent>
-      </Card>
+          </tbody>
+        </table>
+      </div>
 
       {accounts.length > 0 && (
         <div className="space-y-3">
-          <h2 className="text-sm font-medium tracking-wide text-muted-foreground uppercase">
-            Accounts with several people
-          </h2>
+          <h2 className="text-xs font-bold tracking-[0.08em] text-primary uppercase">Accounts with several people</h2>
           <div className="grid gap-3 md:grid-cols-2">
             {accounts.map(([key, runs]) => {
               const plan = runs.find((r) => r.account_plan)?.account_plan;
@@ -150,68 +182,71 @@ export function BatchView({ batchId }: { batchId: number }) {
         </div>
       )}
 
-      <Card>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Prospect</TableHead>
-                  <TableHead>Company</TableHead>
-                  <TableHead>Stage</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Hook</TableHead>
-                  <TableHead className="text-right">Confidence</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {detail.runs.map((run) => (
-                  <TableRow
-                    key={run.id}
-                    className="cursor-pointer"
-                    onClick={() => router.push(`/runs/${run.id}`)}
-                  >
-                    <TableCell>
-                      <Link href={`/runs/${run.id}`} className="font-medium hover:underline" onClick={(e) => e.stopPropagation()}>
-                        {run.name}
-                      </Link>
-                      {run.title && <p className="text-xs text-muted-foreground">{run.title}</p>}
-                    </TableCell>
-                    <TableCell>{run.company ?? <span className="text-muted-foreground">—</span>}</TableCell>
-                    <TableCell className="max-w-80">
-                      <StageCell run={run} labels={labels} />
-                    </TableCell>
-                    <TableCell>
-                      <StatusChip status={run.status} />
-                    </TableCell>
-                    <TableCell>{run.hook_type ? <HookChip type={run.hook_type} /> : <span className="text-muted-foreground">—</span>}</TableCell>
-                    <TableCell className="text-right tabular-nums">
-                      {run.confidence != null ? run.confidence.toFixed(2) : <span className="text-muted-foreground">—</span>}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </CardContent>
-      </Card>
-
-      {detail.not_run.length > 0 && (
-        <details className="rounded-xl border bg-white px-4 py-3 text-sm">
-          <summary className="cursor-pointer font-medium">
-            {detail.not_run.length} row{detail.not_run.length === 1 ? " was" : "s were"} not run
-          </summary>
-          <ul className="mt-2 space-y-1 text-muted-foreground">
-            {detail.not_run.map((row) => (
-              <li key={row.row_number}>
-                Row {row.row_number}
-                {row.name && ` · ${row.name}`}: {row.reason}
-              </li>
-            ))}
-          </ul>
-        </details>
+      {mapping && (
+        <MappingDialog
+          initial={mapping}
+          confirmLabel="Save mapping"
+          onClose={() => setMapping(null)}
+          onConfirm={() => {
+            setMapping(null);
+            load();
+          }}
+        />
       )}
     </div>
+  );
+}
+
+function ProspectRow({
+  p,
+  labels,
+  busy,
+  drafting,
+  onDraft,
+}: {
+  p: Prospect;
+  labels: Record<string, string>;
+  busy: boolean;
+  drafting: boolean;
+  onDraft: () => void;
+}) {
+  const run = p.run;
+  const draftable = p.status === "valid";
+  return (
+    <tr className={cn("border-t", !draftable && "bg-zinc-50/70")}>
+      <td className="px-5 py-3.5 text-muted-foreground tabular-nums">{p.row_number}</td>
+      <td className="px-3 py-3.5">
+        <p className="font-semibold">{p.name || "—"}</p>
+        {p.title && <p className="text-xs text-muted-foreground">{p.title}</p>}
+      </td>
+      <td className="px-3 py-3.5">{p.company || <span className="text-muted-foreground">—</span>}</td>
+      <td className="hidden max-w-48 truncate px-3 py-3.5 text-muted-foreground lg:table-cell">{p.domain || p.linkedin_url || "—"}</td>
+      <td className="max-w-72 px-3 py-3.5">
+        {!draftable ? (
+          <span className={cn("text-xs", p.status === "invalid" ? "text-red-700" : "text-muted-foreground")}>{p.reason}</span>
+        ) : !run ? (
+          <span className="text-muted-foreground">Not drafted yet</span>
+        ) : run.status === "running" ? (
+          <StageCell run={run} labels={labels} />
+        ) : (
+          <span className="flex flex-wrap items-center gap-2">
+            <StatusChip status={run.status} />
+            {run.hook_type && <HookChip type={run.hook_type} />}
+          </span>
+        )}
+      </td>
+      <td className="px-5 py-3.5 text-right whitespace-nowrap">
+        {!draftable ? null : !run ? (
+          <Button onClick={onDraft} disabled={busy}>
+            {drafting ? "Starting…" : "Draft email →"}
+          </Button>
+        ) : (
+          <Link href={`/runs/${run.id}`} className={buttonVariants({ variant: run.status === "running" ? "default" : "outline" })}>
+            {run.status === "running" ? "Watch live" : run.status === "needs_input" ? "Resolve" : "View draft"}
+          </Link>
+        )}
+      </td>
+    </tr>
   );
 }
 

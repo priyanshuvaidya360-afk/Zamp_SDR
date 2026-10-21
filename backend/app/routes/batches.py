@@ -118,6 +118,52 @@ async def start_batch(batch_id: int, session: Session = Depends(get_session)) ->
     return {"batch_id": batch.id, "status": batch.status, "run_ids": run_ids}
 
 
+class DraftRequest(BaseModel):
+    row_numbers: list[int] | None = None  # None: every valid row that has no draft yet
+
+
+@router.post("/{batch_id}/draft", status_code=202)
+async def draft_rows(batch_id: int, request: DraftRequest | None = None,
+                     session: Session = Depends(get_session)) -> dict[str, Any]:
+    """Start the pipeline for chosen rows (or all remaining ones). Returns each row's run id, so the
+    UI can open the live run page straight away. A row that already has a run is not run again."""
+    batch = _get_batch(session, batch_id)
+    wanted = set(request.row_numbers) if request and request.row_numbers is not None else None
+    valid = {r["row_number"] for r in batch.rows if r["status"] == "valid"}
+    if wanted is not None and not wanted <= valid:
+        raise HTTPException(422, "Only valid rows can be drafted. Check the row numbers.")
+    if not valid:
+        raise HTTPException(422, "No valid rows to run. Fix the file or the column mapping first.")
+    new_ids = runner.create_runs(session, batch, wanted)
+    if new_ids:
+        runner.spawn(runner.run_batch(new_ids))
+    runs = session.exec(select(Run).where(Run.batch_id == batch_id)).all()
+    return {"batch_id": batch.id, "runs": [{"row_number": r.row_number, "run_id": r.id} for r in runs
+                                           if wanted is None or r.row_number in wanted]}
+
+
+def _prospects(batch: Batch, runs: list[Run], latest: dict, hooks: dict) -> list[dict[str, Any]]:
+    """Every row of the file, in file order, with its run (if it has been drafted yet)."""
+    by_row = {r.row_number: r for r in runs}
+    out = []
+    for row in batch.rows:
+        d = row["data"]
+        run = by_row.get(row["row_number"])
+        out.append({
+            "row_number": row["row_number"],
+            "status": row["status"],
+            "reason": row["reason"],
+            "warnings": row["warnings"],
+            "name": d.get("full_name") or " ".join(filter(None, (d.get("first_name"), d.get("last_name")))),
+            "title": d.get("title"),
+            "company": d.get("company"),
+            "domain": d.get("company_domain"),
+            "linkedin_url": d.get("linkedin_url"),
+            "run": run_summary(run, latest.get(run.id), hooks.get(run.id)) if run else None,
+        })
+    return out
+
+
 @router.get("/{batch_id}")
 def get_batch(batch_id: int, session: Session = Depends(get_session)) -> dict[str, Any]:
     """The batch, its runs (with each run's latest stage), and rows that never became runs."""
@@ -130,6 +176,7 @@ def get_batch(batch_id: int, session: Session = Depends(get_session)) -> dict[st
         "progress": runner.batch_progress(session, batch_id),
         "stages": [{"name": s.name, "label": s.label} for s in runner.get_stages()],
         "runs": [run_summary(r, latest.get(r.id), hooks.get(r.id)) for r in runs],
+        "prospects": _prospects(batch, runs, latest, hooks),
         "not_run": [
             {"row_number": r["row_number"], "status": r["status"], "reason": r["reason"],
              "name": " ".join(filter(None, (r["data"].get("first_name"), r["data"].get("last_name"))))}

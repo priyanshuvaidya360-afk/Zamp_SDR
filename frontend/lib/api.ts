@@ -6,6 +6,7 @@ import type {
   BatchListItem,
   BatchPreview,
   Candidate,
+  DraftResponse,
   Mapping,
   ReviewAction,
   ReviewResult,
@@ -65,6 +66,9 @@ export const api = {
   updateMapping: (batchId: number, mapping: Mapping) =>
     request<BatchPreview>(`/batches/${batchId}/mapping`, json("PATCH", { mapping })),
   startBatch: (batchId: number) => request<StartResponse>(`/batches/${batchId}/start`, { method: "POST" }),
+  /** Start the pipeline for these rows (all remaining valid rows when none are given). */
+  draftRows: (batchId: number, rowNumbers?: number[]) =>
+    request<DraftResponse>(`/batches/${batchId}/draft`, json("POST", { row_numbers: rowNumbers ?? null })),
   getBatch: (batchId: number) => request<BatchDetail>(`/batches/${batchId}`),
   getSeller: () => request<SellerProfile>("/seller"),
   getRun: (runId: number) => request<RunDetail>(`/runs/${runId}`),

@@ -126,6 +126,25 @@ export interface StageInfo {
   label: string;
 }
 
+/** One row of the uploaded file, with its draft run once the rep has asked for one. */
+export interface Prospect {
+  row_number: number;
+  status: RowStatus;
+  reason: string | null;
+  warnings: string[];
+  name: string;
+  title: string | null;
+  company: string | null;
+  domain: string | null;
+  linkedin_url: string | null;
+  run: RunSummary | null;
+}
+
+export interface DraftResponse {
+  batch_id: number;
+  runs: { row_number: number; run_id: number }[];
+}
+
 export interface BatchDetail {
   batch: {
     id: number;
@@ -139,6 +158,7 @@ export interface BatchDetail {
   progress: BatchProgress;
   stages: StageInfo[];
   runs: RunSummary[];
+  prospects: Prospect[];
   not_run: { row_number: number; status: RowStatus; reason: string | null; name: string }[];
 }
 

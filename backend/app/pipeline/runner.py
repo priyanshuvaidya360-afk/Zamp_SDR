@@ -176,11 +176,17 @@ def account_key_for(data: dict[str, Any]) -> str | None:
     return f"name:{re.sub(r'\s+', '-', company)}" if company else None
 
 
-def create_runs(session: Session, batch: Batch) -> list[int]:
-    """One run per valid preview row (invalid / duplicate rows stay in batch.rows)."""
+def create_runs(session: Session, batch: Batch, row_numbers: set[int] | None = None) -> list[int]:
+    """One run per valid preview row (invalid / duplicate rows stay in batch.rows).
+
+    `row_numbers` limits it to those rows (the rep drafts prospects one at a time); rows that
+    already have a run are skipped, so asking twice never researches a prospect twice."""
     run_ids = []
+    existing = set(session.exec(select(Run.row_number).where(Run.batch_id == batch.id)).all())
     for row in batch.rows:
-        if row["status"] != "valid":
+        if row["status"] != "valid" or row["row_number"] in existing:
+            continue
+        if row_numbers is not None and row["row_number"] not in row_numbers:
             continue
         data = row["data"]
         run = Run(
@@ -389,7 +395,8 @@ def update_batch_progress(batch_id: int) -> None:
         batch = session.get(Batch, batch_id)
         if batch_context(batch_id).running_batch:
             return
-        if progress["done"] == progress["total"] and batch.status != BatchStatus.done:
+        # Prospects can be drafted one at a time: the batch is done once every valid row has been.
+        if progress["done"] == progress["total"] >= batch.valid_count and batch.status != BatchStatus.done:
             batch.status = BatchStatus.done
             batch.finished_at = utcnow()
             session.add(batch)

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { FlowSteps } from "@/components/flow-steps";
 import { ReviewControls } from "@/components/review-controls";
 import { StatusChip } from "@/components/status-chip";
 import { api, ApiError, streams } from "@/lib/api";
@@ -107,12 +108,13 @@ export function RunView({ runId }: { runId: number }) {
   return (
     // One screen on desktop: three columns that scroll on their own. Stacked on small screens.
     <div className="space-y-4 lg:relative lg:left-1/2 lg:w-[min(96rem,calc(100vw-3rem))] lg:-translate-x-1/2">
+      <FlowSteps current={3} compact />
       <header className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-[14px] border bg-white px-5 py-4">
         <Link
           href={`/batches/${run.batch_id}`}
           className="flex items-center gap-1.5 rounded-lg bg-secondary px-3 py-1.5 text-[13px] font-semibold text-primary hover:bg-[#dce8fc]"
         >
-          ← Batch #{run.batch_id}
+          ← All prospects
         </Link>
         <div className="flex size-11 items-center justify-center rounded-full bg-primary text-base font-bold text-white">{initials}</div>
         <div className="flex min-w-0 flex-col gap-0.5">
@@ -136,10 +138,10 @@ export function RunView({ runId }: { runId: number }) {
         <CandidateCards reason={run.final_reason ?? "Identity is unclear."} candidates={candidates} onPick={pick} />
       )}
 
-      <div className="grid grid-cols-[minmax(0,1fr)] gap-5 lg:h-[calc(100vh-15.5rem)] lg:min-h-[30rem] lg:grid-cols-[19rem_minmax(0,1fr)_minmax(0,24rem)]">
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-5 lg:h-[calc(100vh-18rem)] lg:min-h-[30rem] lg:grid-cols-[19rem_minmax(0,1fr)_minmax(0,24rem)]">
         <Column
           title="Agent activity"
-          chips={[`${run.cost_credits} credits`, ...(run.confidence != null ? [`confidence ${run.confidence.toFixed(2)}`] : [])]}
+          chips={[`${run.cost_credits} credit${run.cost_credits === 1 ? "" : "s"}`, ...(run.confidence != null ? [`confidence ${run.confidence.toFixed(2)}`] : [])]}
         >
           <StageStepper stages={detail.stages} latest={latest} />
         </Column>
