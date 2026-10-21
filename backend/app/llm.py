@@ -4,19 +4,26 @@ Spec: docs/GUIDE.md T03. Every provider is reached through the OpenAI-compatible
 switching provider is a settings change. Callers ask for a role ("smart" or "fast"), never a
 model ID, and always get back a validated Pydantic object.
 
+Built on LangChain: each provider is a `ChatOpenAI` chat model, and the order of providers is
+a LangChain fallback chain (`.with_fallbacks()`): Groq first, Gemini if Groq fails.
+
 Flow per call: fixtures (if DEMO_MODE=fixtures) -> for each provider in settings.llm_providers
 that has a key: up to 3 tries on transient errors -> on 429 / exhausted retries / bad output,
-fall through to the next provider.
+fall through to the next provider. The words of every prompt live in agents/*.md.
 """
 
 import asyncio
 import copy
 import logging
 import time
+from functools import lru_cache
 from typing import Any, Literal, TypeVar
 
 import openai
-from openai import AsyncOpenAI
+from langchain_core.messages import convert_to_messages
+from langchain_core.runnables import RunnableLambda
+from langchain_openai import ChatOpenAI
+from langchain_openai.chat_models.base import OpenAIRefusalError
 from pydantic import BaseModel, ValidationError
 from tenacity import AsyncRetrying, retry_if_exception_type, stop_after_attempt, wait_exponential
 
@@ -34,6 +41,10 @@ RETRY_WAIT = wait_exponential(multiplier=1, min=1, max=8)  # tests swap this for
 
 class LLMUnavailable(Exception):
     """Every configured provider failed. The message lists why, in plain words."""
+
+
+class _ProviderFailed(Exception):
+    """One provider could not answer (the reason is in the skipped list); the next one is tried."""
 
 
 class Usage(BaseModel):
@@ -96,17 +107,20 @@ def _provider_config(name: str) -> tuple[str, str, dict[str, str]]:
     raise ValueError(f"Unknown LLM provider '{name}'")
 
 
-_clients: dict[tuple[str, str], AsyncOpenAI] = {}
+@lru_cache(maxsize=None)
+def _chat_model(api_key: str, base_url: str, model: str, timeout: float) -> ChatOpenAI:
+    """The LangChain chat model for one provider and model. Retries are ours (tenacity), so the
+    SDK's own retries are off; the Responses API is off because Groq and Gemini only speak
+    chat completions."""
+    return ChatOpenAI(model=model, api_key=api_key, base_url=base_url, timeout=timeout,
+                      max_retries=0, use_responses_api=False)
 
 
-def _client(api_key: str, base_url: str) -> AsyncOpenAI:
-    key = (api_key, base_url)
-    if key not in _clients:
-        # Retries are ours (tenacity), so the SDK's own retries are off.
-        _clients[key] = AsyncOpenAI(
-            api_key=api_key, base_url=base_url, timeout=settings.llm_timeout_s, max_retries=0
-        )
-    return _clients[key]
+def _text(content: Any) -> str:
+    """A chat reply's text (a plain string, or a list of content blocks)."""
+    if isinstance(content, str):
+        return content
+    return "".join(block if isinstance(block, str) else block.get("text", "") for block in content)
 
 
 async def _call(
@@ -114,20 +128,13 @@ async def _call(
 ) -> tuple[str, int, int]:
     """One raw completion. Returns (content, prompt_tokens, completion_tokens)."""
     api_key, base_url, _ = _provider_config(provider)
-    response = await _client(api_key, base_url).chat.completions.create(
-        model=model,
-        messages=messages,
-        response_format={
-            "type": "json_schema",
-            "json_schema": {"name": schema_name, "strict": True, "schema": schema},
-        },
-    )
-    usage = response.usage
-    return (
-        response.choices[0].message.content or "",
-        usage.prompt_tokens if usage else 0,
-        usage.completion_tokens if usage else 0,
-    )
+    chat = _chat_model(api_key, base_url, model, settings.llm_timeout_s).bind(response_format={
+        "type": "json_schema",
+        "json_schema": {"name": schema_name, "strict": True, "schema": schema},
+    })
+    reply = await chat.ainvoke(convert_to_messages(messages))
+    usage = reply.usage_metadata or {}
+    return _text(reply.content), usage.get("input_tokens", 0), usage.get("output_tokens", 0)
 
 
 def _schema_rejection(error: openai.BadRequestError) -> tuple[str, str] | None:
@@ -206,65 +213,76 @@ async def structured(
     json_schema = strict_schema(schema)
     skipped: list[str] = []
 
-    for provider in providers:
-        api_key, _, models = _provider_config(provider)
-        if not api_key:
-            skipped.append(f"{provider}: no API key")
-            continue
-        model = models[role]
-        messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
-        started = time.perf_counter()
-        prompt_tokens = completion_tokens = 0
-        try:
-            for validation_try in range(2):
-                try:
-                    content, p_tok, c_tok = await _call_with_retry(
-                        provider, model, messages, schema.__name__, json_schema
-                    )
-                    prompt_tokens += p_tok
-                    completion_tokens += c_tok
-                    output = schema.model_validate_json(content)
-                    break
-                except ValidationError as error:
-                    if validation_try == 1:
-                        raise
-                    problem = str(error)
-                except openai.BadRequestError as error:
-                    rejected = _schema_rejection(error)
-                    if rejected is None or validation_try == 1:
-                        raise
-                    content, problem = rejected
-                # One retry, telling the model exactly what was wrong.
-                messages = messages + [
-                    {"role": "assistant", "content": content},
-                    {"role": "user", "content": (
-                        "Your reply did not match the required schema:\n"
-                        f"{problem}\nReturn corrected JSON only, using only allowed values."
-                    )},
-                ]
-        except openai.RateLimitError as error:
-            skipped.append(f"{provider}: rate limited")
-            log.warning("LLM %s rate limited (retry-after %s), falling back", provider, _retry_after_s(error))
-            continue
-        except (openai.APIError, ValidationError) as error:
-            skipped.append(f"{provider}: {type(error).__name__}")
-            log.warning("LLM %s failed (%s), falling back", provider, error)
-            continue
+    def attempt(provider: str) -> RunnableLambda:
+        """One provider as a LangChain runnable: gives (output, usage), or raises _ProviderFailed."""
 
-        usage = Usage(
-            provider=provider,
-            model=model,
-            role=role,
-            prompt_tokens=prompt_tokens,
-            completion_tokens=completion_tokens,
-            latency_ms=int((time.perf_counter() - started) * 1000),
-            fallbacks=skipped,
-        )
+        async def run(_: Any) -> tuple[T, Usage]:
+            api_key, _, models = _provider_config(provider)
+            if not api_key:
+                skipped.append(f"{provider}: no API key")
+                raise _ProviderFailed(provider)
+            model = models[role]
+            messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
+            started = time.perf_counter()
+            prompt_tokens = completion_tokens = 0
+            try:
+                for validation_try in range(2):
+                    try:
+                        content, p_tok, c_tok = await _call_with_retry(
+                            provider, model, messages, schema.__name__, json_schema
+                        )
+                        prompt_tokens += p_tok
+                        completion_tokens += c_tok
+                        output = schema.model_validate_json(content)
+                        break
+                    except ValidationError as error:
+                        if validation_try == 1:
+                            raise
+                        problem = str(error)
+                    except openai.BadRequestError as error:
+                        rejected = _schema_rejection(error)
+                        if rejected is None or validation_try == 1:
+                            raise
+                        content, problem = rejected
+                    # One retry, telling the model exactly what was wrong.
+                    messages = messages + [
+                        {"role": "assistant", "content": content},
+                        {"role": "user", "content": (
+                            "Your reply did not match the required schema:\n"
+                            f"{problem}\nReturn corrected JSON only, using only allowed values."
+                        )},
+                    ]
+            except openai.RateLimitError as error:
+                skipped.append(f"{provider}: rate limited")
+                log.warning("LLM %s rate limited (retry-after %s), falling back", provider, _retry_after_s(error))
+                raise _ProviderFailed(provider) from error
+            except (openai.APIError, ValidationError, OpenAIRefusalError) as error:
+                skipped.append(f"{provider}: {type(error).__name__}")
+                log.warning("LLM %s failed (%s), falling back", provider, error)
+                raise _ProviderFailed(provider) from error
+            return output, Usage(
+                provider=provider,
+                model=model,
+                role=role,
+                prompt_tokens=prompt_tokens,
+                completion_tokens=completion_tokens,
+                latency_ms=int((time.perf_counter() - started) * 1000),
+                fallbacks=list(skipped),
+            )
+
+        return RunnableLambda(run)
+
+    try:
+        if not providers:
+            raise _ProviderFailed("none")
+        first, *others = [attempt(p) for p in providers]
+        output, usage = await first.with_fallbacks(others, exceptions_to_handle=(_ProviderFailed,)).ainvoke(None)
+    except _ProviderFailed:
+        message = "No LLM provider could answer. " + "; ".join(skipped)
         if settings.demo_mode == "record":
-            save_fixture(slug, {"output": output.model_dump(mode="json"), "usage": usage.model_dump()})
-        return output, usage
+            save_fixture(slug, {"error": message})
+        raise LLMUnavailable(message) from None
 
-    message = "No LLM provider could answer. " + "; ".join(skipped)
     if settings.demo_mode == "record":
-        save_fixture(slug, {"error": message})
-    raise LLMUnavailable(message)
+        save_fixture(slug, {"output": output.model_dump(mode="json"), "usage": usage.model_dump()})
+    return output, usage

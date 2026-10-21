@@ -125,6 +125,20 @@ Decisions and assumptions made while building Signal. Add to this as you build
 - Follow-ups tell the hook model what the person replied (trusted CRM data), so it prefers a signal
   that answers it. The critic rejects internal labels such as "person_content" in an email.
 
+- Tech stack change (LangGraph + LangChain + prompts in markdown): done in three steps, each
+  checked by the existing tests and the offline demo replay with no re-recording. Prompts moved
+  to agents/*.md word for word. LangGraph runs the per-prospect stages only; the batch-level
+  similarity check and the review queue stay plain code. LangChain provides the chat client
+  (ChatOpenAI) and the Groq-to-Gemini fallback chain; our own strict JSON schema, corrective
+  retry, rate-limit waits and recording stay, because they encode free-tier quirks.
+- LangGraph costs about 2 ms per prospect (compiling the graph, once, about 10 ms; importing the
+  library about 0.3 s at startup). LangSmith (LangChain's cloud tracing) is installed as a
+  dependency but off unless someone sets LANGSMITH_TRACING; nothing is sent anywhere.
+- Python 3.15 was checked: langgraph 1.2.16, langchain-core 1.6.12, langchain-openai 1.7.2 install
+  and run, and both providers answered a live structured call through ChatOpenAI.
+- Editing a prompt changes its exact text, so recorded demo answers no longer match: re-record
+  (free, uses Groq/Gemini quota) before replaying the demo.
+
 ## Technical
 - Zero cost: every service runs on a free tier with no credit card. The LLM is Groq
   (`openai/gpt-oss-120b` smart, `openai/gpt-oss-20b` fast) with Gemini free tier as

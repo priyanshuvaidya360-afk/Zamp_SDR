@@ -13,7 +13,12 @@ T01-T18 are at the end of the guide; do one task per session.
 - Backend: Python 3.15, FastAPI, SQLModel (SQLite locally, Postgres deployed), Pydantic,
   pydantic-settings, httpx, tenacity, pandas, scikit-learn, trafilatura.
 - Zero cost: everything runs on free tiers with no credit card. Do not add a paid service.
-- LLM: `openai` SDK against OpenAI-compatible endpoints. Groq primary (smart model
+- Orchestration: LangGraph. `app/pipeline/graph.py` is the per-prospect graph (one node per
+  stage); `agents/PIPELINE.md` is drawn from it (`python -m scripts.draw_pipeline`).
+- Prompts: every word a model reads lives in `agents/*.md` (one file per agent, loaded by
+  `app/prompts.py`). Edit the markdown, not the Python. Numbers (weights, cutoffs) stay in `config.py`.
+- LLM: LangChain `ChatOpenAI` (`langchain-openai`) against OpenAI-compatible endpoints, with the
+  provider order as a LangChain fallback chain. Groq primary (smart model
   `openai/gpt-oss-120b` for hook choice and drafting, fast model `openai/gpt-oss-20b` for
   extraction and classification), Gemini fallback (`gemini-3.6-flash` /
   `gemini-3.5-flash-lite`). Code asks for a role ("smart" / "fast"), never a model ID.
@@ -43,8 +48,10 @@ backend/
     models.py          SQLModel tables + RunStatus enum (Signal/Draft tables are
                        SignalRecord/DraftRecord to avoid clashing with schemas.py)
     schemas.py         Pydantic stage outputs
-    llm.py             structured(role, system, user, Schema): Groq -> Gemini, strict
-                       JSON schema, retries, one corrective retry on schema errors
+    llm.py             structured(role, system, user, Schema): LangChain ChatOpenAI, Groq ->
+                       Gemini via .with_fallbacks(), strict JSON schema, retries, one
+                       corrective retry on schema errors
+    prompts.py         loads agents/*.md: get(agent, section, **values); strict placeholders
     search.py          search() / extract(): Tavily -> DuckDuckGo -> Exa, 24 h cache
     fetch.py           httpx + trafilatura page text (blocks linkedin.com)
     fixtures.py        DEMO_MODE record/fixtures store + response cache; record_reuse makes a
@@ -54,7 +61,10 @@ backend/
     pipeline/
       runner.py        Stage / RunContext / StopRun, run_one, run_batch, global
                        semaphore, per-account shared research, restart recovery
-      stages.py        the stage list, in order (real stages + remaining stand-ins)
+      graph.py         the LangGraph graph run_one drives: one node per stage, early exits,
+                       resume entry; each node records the same stage events as always
+      stages.py        the stage list, in order (real stages + remaining stand-ins), and
+                       STAGE_INFO (who decides, which agents/ file) for the diagram
       stubs.py         stand-in stages (0.3 s each), used by runner/API tests only
       intake.py        stage 1: recently-researched block, internal context, rules for
                        case 1 (not_now -> follow-up; opted out -> suppressed) and case 2
@@ -98,6 +108,7 @@ frontend/
                        event id; reconnects; closes on `end`
   lib/stages.ts        stepper state from events (done / warning / failed...)
   public/              demo.csv ("Use demo CSV"), template.csv (download)
+agents/                one .md per agent (prompts) + README.md (how to edit) + PIPELINE.md (generated diagram)
 seed/                  context.json (fake CRM data); demo.csv + demo_messy.csv (the demo);
                        demo_cases.json (each row's expected outcome); simweb/ (fictional pages)
 seller_profile.yaml    what "we" sell, ICP, tone, personas, competitors, regions
@@ -125,6 +136,8 @@ docs/GUIDE.md          the spec
   after a free-tier rate limit, run it again until no row fails; it then prunes unused recordings
 - `cd backend && .venv/bin/python -m scripts.check_demo`: replay the demo with the network off and
   check every row against seed/demo_cases.json (exit 0 = pass)
+- `cd backend && .venv/bin/python -m scripts.draw_pipeline [--check]`: redraw agents/PIPELINE.md from
+  the LangGraph graph (a test fails if it is stale)
 - `make seed`: load `seed/context.json` (fake CRM / sequence history) into the database; idempotent
 - Backend Python is always `backend/.venv/bin/python`; there is no uv.
 - Frontend: after adding a route, run `npx next typegen` (or `make dev-web`) so
@@ -139,6 +152,9 @@ docs/GUIDE.md          the spec
   through `ctx.batch.company_research(ctx.account_key, factory)` so it runs once per account.
   Code owns the flow; the LLM only makes judgements inside a stage. The draft reads its hook
   through `score.effective_score(ctx)` (the account plan's assignment when there is one).
+- Prompt wording lives in `agents/*.md`; code only picks sections and fills `{placeholders}`.
+  Recorded answers are matched by exact prompt text, so after editing a prompt re-record
+  (`record_demo`, `record_*_case`) before using `DEMO_MODE=fixtures`.
 - All LLM calls go through `app/llm.py`. All search and fetch go through `app/search.py`.
   No direct `openai` / `tavily` / `ddgs` / `exa` / `httpx` calls elsewhere.
 - Web text is untrusted. It always reaches the model inside `<untrusted_source>` tags with
