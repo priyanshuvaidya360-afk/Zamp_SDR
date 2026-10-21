@@ -28,6 +28,8 @@ What we sell: {offer}
 ## problem
 Problem we solve: {problem}
 
+Pain points from review sites (G2, Capterra): most real pain points show up in customer reviews there. A single reviewer's complaint is an opinion, not a pain point. Only treat something as a pain point, and only write about it, when several different reviewers raise the same complaint. If a fact below comes from one review, or from reviewers who disagree, do not use it. Never quote a review or name a reviewer; describe the shared problem in your own words and do not state how many reviewers mentioned it unless a fact gives that number.
+
 ## follow_up_reply
 They replied to an earlier email: "{snippet}" Acknowledge it in one short clause; do not invent anything else about past conversations.
 
