@@ -79,7 +79,8 @@ async def test_aged_draft_shows_the_diff_and_exports_the_corrected_text(session,
     assert "hiring two Sales Development Representatives" in row["body"] and "four" not in row["body"]
     assert row["first_name"] == "Omar" and row["email"] == "omar@kestrellabs.example"  # original columns kept
     signal = session.get(SignalRecord, check.signal_id)
-    assert "two" in signal.summary and signal.note.startswith("Updated on re-check")
+    # The model may write the new count as a word or a digit; either states the current fact.
+    assert re.search(r"\b(two|2)\b", signal.summary) and signal.note.startswith("Updated on re-check")
 
 
 async def test_a_fresh_draft_is_approved_without_a_re_check(session, stale_run):
@@ -87,6 +88,29 @@ async def test_a_fresh_draft_is_approved_without_a_re_check(session, stale_run):
     assert review.recheck_summary(session, session.get(Run, run_id))["facts"] == 0
     result = await review.review(session, run_id, ReviewerAction.approve)  # network is off: no fetch happened
     assert result.outcome == "approved" and result.checks == []
+
+
+async def test_a_company_level_draft_needs_the_rep_to_vouch_for_the_person(session, stale_run):
+    run_id = await stale_run()
+    run = session.get(Run, run_id)
+    run.identity_unverified = True  # resolve never found them; the rep asked for a company-level draft
+    session.add(run)
+    session.commit()
+    for action, body in ((ReviewerAction.approve, None), (ReviewerAction.edit, "Hi Omar, edited.")):
+        with pytest.raises(review.ReviewError, match="never found online"):
+            await review.review(session, run_id, action, body=body)
+    result = await review.review(session, run_id, ReviewerAction.approve, identity_confirmed=True)
+    assert result.outcome == "approved"
+    assert review.latest_draft(session, run_id).review["identity_confirmed_by_rep"] is True
+
+
+async def test_a_company_level_draft_can_be_rejected_without_vouching(session, stale_run):
+    run_id = await stale_run()
+    run = session.get(Run, run_id)
+    run.identity_unverified = True
+    session.add(run)
+    session.commit()
+    assert (await review.review(session, run_id, ReviewerAction.reject)).outcome == "rejected"
 
 
 async def test_a_gone_fact_sends_the_run_back_with_the_runner_up(session, stale_run, monkeypatch):
@@ -191,3 +215,15 @@ def test_age_draft_is_dev_only(client, session, monkeypatch):
     assert detail["recheck"] == {"facts": 0, "draft_age_days": 12}
     csv_response = client.get("/batches/1/export.csv?all=true")
     assert csv_response.status_code == 200 and csv_response.headers["content-type"].startswith("text/csv")
+
+
+
+def test_a_rewrite_may_keep_the_sentences_own_date_but_not_the_old_count():
+    before = "I saw that Kestrel Labs is hiring four SDRs in London (2 October 2026)."
+    old, new = "Kestrel Labs is hiring four SDRs in London", "Kestrel Labs is hiring two SDRs in London"
+    good = "I saw that Kestrel Labs is hiring two SDRs in London (2 October 2026)."
+    assert review.invented_numbers(before, good, old, new) == set()
+    kept_old = "I saw that Kestrel Labs is hiring four SDRs in London (2 October 2026)."
+    assert review.invented_numbers(before, kept_old, old, new) == {"4"}
+    added = "I saw that Kestrel Labs is hiring two SDRs in London, up 50% (2 October 2026)."
+    assert review.invented_numbers(before, added, old, new) == {"50"}

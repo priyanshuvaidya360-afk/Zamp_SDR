@@ -1,0 +1,31 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "ProtoPie lists notable enterprise customers and case studies including NIO, FAW-VW, Meta, Riot Games, Mercedes, Medtronic, and The Washington Post.",
+        "evidence": "Meta Achieves High-Fidelity Prototyping at Scale with ProtoPie",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1833,
+    "completion_tokens": 147,
+    "latency_ms": 1308,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

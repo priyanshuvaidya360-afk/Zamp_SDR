@@ -1,0 +1,18 @@
+{
+  "output": {
+    "subject": "pipeline for acme close",
+    "body": "- Acme Fintech launched Acme Close on 24 September 2026.\n- Your need for rapid pipeline without hiring extra SDRs aligns with the outbound growth challenge of relying on more SDR headcount and generic sequences.\n- Would you be open to a short chat? – Priyanshu",
+    "claims": []
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1469,
+    "completion_tokens": 563,
+    "latency_ms": 14861,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

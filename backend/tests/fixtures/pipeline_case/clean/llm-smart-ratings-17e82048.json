@@ -1,0 +1,77 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "New product launch creates immediate need for outbound sales pipeline."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Series C funding likely unlocks budget for faster pipeline growth."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Geographic expansion drives demand for new outbound prospecting."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Expansion announcement signals fresh markets needing pipeline generation."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "Large customer base indicates ongoing pipeline demand, but no specific trigger."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Hiring sales staff signals scaling outbound effort and need for pipeline support."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Tripled AP volume shows company growth, indirectly implying more revenue targets."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 1,
+        "specificity": 5,
+        "reasoning": "Priya’s workflow project is finance‑focused and only loosely related to sales pipeline."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 4,
+        "specificity": 4,
+        "reasoning": "Priya reshared the Singapore office news, showing personal interest in expansion that will need pipeline."
+      },
+      {
+        "signal_id": 10,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Hiring an AP specialist is a finance role and offers a weak link to outbound pipeline needs."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1577,
+    "completion_tokens": 1517,
+    "latency_ms": 3639,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,5 +1,6 @@
 """Record the real models on the stale-draft case (case 10): stages 4-7, then approve after 12
-simulated days (re-check: compare + rewrite), then approve the corrected version.
+simulated days (re-check: compare + rewrite), then approve the corrected version; then a rep's
+edit of a fresh run (the edit's factual audit).
 
   cd backend && .venv/bin/python -m scripts.record_stale_case
 
@@ -61,6 +62,21 @@ async def main() -> None:
             second = await review.review(session, run_id, ReviewerAction.approve, draft_id=first.draft_id)
             print("=== approve again:", second.outcome)
         print("\n" + review.export_csv(session, session.get(Batch, run.batch_id)))
+
+    # A rep's edit is audited before it is approved: record that call too (tests/test_review.py
+    # edits a fresh run). Everything else replays the answers recorded above.
+    settings.record_reuse = True
+    db.engine = db.make_engine(f"sqlite:///{workdir / 'edit.db'}")
+    db.create_db_and_tables()
+    runner._batch_contexts.clear()
+    with Session(db.engine) as session:
+        [run_id] = stale_case.make_batch(session)
+    await runner.run_one(run_id)
+    with Session(db.engine) as session:
+        draft = review.latest_draft(session, run_id)
+        edited = draft.body.replace("Would you be open", "Open")
+        result = await review.review(session, run_id, ReviewerAction.edit, body=edited)
+        print(f"=== edit: {result.outcome} | {result.message}")
     print(f"{len(list(stale_case.FIXTURES.glob('*.json')))} fixtures in {stale_case.FIXTURES}")
 
 

@@ -1,0 +1,61 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "Subject: outbound email bottleneck",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a subject line summarizing the topic rather than a stated factual claim.",
+        "suggestion": null
+      },
+      {
+        "sentence": "You mentioned running outbound experiments with a two-person team and hitting a bottleneck on crafting personalized, research-cited emails (30 September 2026).",
+        "about": "prospect",
+        "status": "supported",
+        "fact_id": 1,
+        "reason": "Fact 1 confirms Maya Collins discussed a two-person team and writing research-backed first emails being the bottleneck.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Halyard solves this by drafting researched, cited first-touch emails for reps to review, so growth teams build pipeline without adding SDR headcount.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": null,
+        "reason": "This accurately reflects what Halyard sells according to the seller definition.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15-minute call to explore?",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a meeting request rather than a factual statement.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Priyanshu",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is simply the sender's signature name.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email is highly tailored to specific facts about the prospect's outbound bottleneck and team size."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1030,
+    "completion_tokens": 468,
+    "latency_ms": 1694,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

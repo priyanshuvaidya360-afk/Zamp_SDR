@@ -1,0 +1,31 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Omar Haddad",
+        "title": null,
+        "company": "Kestrel Labs",
+        "company_domain": "kestrellabs.example",
+        "location": "London",
+        "country": "GB",
+        "evidence_url": "https://kestrellabs.example/team",
+        "evidence": "Omar Haddad, VP Sales (London)",
+        "confidence": 0.95
+      }
+    ],
+    "reasoning": "The search results explicitly place Omar Haddad as VP Sales at Kestrel Labs with a company domain match and London location."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 689,
+    "completion_tokens": 113,
+    "latency_ms": 1338,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

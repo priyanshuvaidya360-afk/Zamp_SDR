@@ -1,0 +1,35 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "\"Ferncastle\" pricing tier plan product update",
+        "why": "to find new product launches or packaging changes needing pipeline"
+      },
+      {
+        "query": "\"Ferncastle\" sales-led growth OR outbound OR enterprise",
+        "why": "to spot shifts toward a sales-led motion"
+      },
+      {
+        "query": "\"Ferncastle\" podcast interview OR guest OR speaker",
+        "why": "to uncover recent strategy updates from leadership"
+      },
+      {
+        "query": "\"Ferncastle\" customer success OR case study OR testimonial",
+        "why": "to identify referenceable accounts and target verticals"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 488,
+    "completion_tokens": 164,
+    "latency_ms": 1205,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

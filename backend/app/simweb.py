@@ -1,4 +1,4 @@
-"""A simulated web for fictional demo companies (docs/GUIDE.md T17; see ASSUMPTIONS.md).
+"""A simulated web for fictional demo companies (docs/PROJECT_SPEC.md T17; see ASSUMPTIONS.md).
 
 Some demo cases need content that must not be attached to real people: a flan line in a bio, a
 hostile instruction, a "not now" reply, a careers page that changes between two dates. Those
@@ -38,7 +38,7 @@ from app.config import settings
 def _load(directory: str) -> list[dict[str, Any]]:
     companies = []
     for path in sorted(Path(directory).glob("*.yaml")):
-        data = yaml.safe_load(path.read_text())
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
         data["terms"] = [t.lower() for t in data.get("terms", [])]
         for page in data.get("pages", []):
             page["match"] = [m.lower() for m in page.get("match", [])]

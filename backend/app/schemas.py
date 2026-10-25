@@ -1,6 +1,6 @@
 """Pydantic stage outputs. The LLM returns these via JSON-schema tool calls.
 
-Spec: docs/GUIDE.md "Data model" (core schemas), extended per T02 with the edge-case
+Spec: docs/PROJECT_SPEC.md "Data model" (core schemas), extended per T02 with the edge-case
 fields used by cases 4, 5, 7 and 10.
 """
 
@@ -20,6 +20,7 @@ SignalType = Literal[
     "partnership",
     "press",
     "negative_event",
+    "company_focus",  # what they sell, to whom, stated goals: evergreen, from their own site
     "ai_screening",  # case 11: never a hook
     "other",
 ]

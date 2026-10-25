@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "site:reco.ai blog OR news OR announcement",
+  "results": [
+    {
+      "url": "https://www.reco.ai/blog/the-hidden-risk-inside-your-saas-stack-how-saas-to-saas-connections-expose-sensitive-data",
+      "title": "The Hidden Risk of SaaS-to-SaaS Connections",
+      "content": "September 1, 2026\n\nSalesforce and Anthropic announced Claudeforce, an expanded partnership that plugs Claude directly into the data, workflows, and governance of the Salesforce platform. The headline product is Salesforce in Claude — a plugin with 37 prebuilt sales skills (e.g., meeting prep, deal health, pipeline review) that lets a seller reason over live revenue data and take governed action without leaving Claude.\n\nSee more featured resources [...] lets attackers exfiltrate Microsoft 365 Copilot data with zero clicks, and what it reveals about AI agent security most enterprises haven't addressed. This article breaks down the attack chain, the broader prompt injection risk, and how Reco maps Copilot access to shut exposure down before it's exploited.\n\n.png)\n\n3 min read\n\nAI & Agent Security\n\n##### Claudeforce Makes One Thing Clear: Apps Aren't Dying. They're the Agent's Runtime.\n\nTal Shapira\n\nSeptember 1, 2026 [...] Into the Expanse: A Security Leader’s Guide to the Agent Frontier\n\nRead more\n\nReco\nGet a demo\n\nDemo Request\n\nTake a personalized product tour with a member of our team to see how we can help make your existing security teams and tools more effective within minutes.\n\nThank you! Your submission has been received!\n\nOops! Something went wrong while submitting the form.\n\nHome\nBlog\n\nThe Hidden Risk Inside Your SaaS Stack: How SaaS-to-SaaS Connections Expose Sensitive Data",
+      "published_date": null,
+      "score": 0.23082477
+    },
+    {
+      "url": "https://www.reco.ai/blog/reco-agent-security-launch",
+      "title": "Reco Launches AI Agent Security for the Enterprise",
+      "content": "‍\n\nALTAMONTE SPRINGS, FL — June 25, 2026 — Reco, the AI and agent ecosystem security company, today announced Reco Agent Security, which expands the Reco Platform with advanced capabilities that prevent data exposure, unintended use and process disruption caused by AI agents operating across connected applications and workflows.\n\n‍ [...] Zoe Hillenmeyer\n\nUpdated\n\nJune 25, 2026\n\nSeptember 7, 2026\n\n3 min to read\n\nReady to Close the SaaS Security Gap?\n\nChat with us\n\nNew capabilities discover, prioritize and remediate agent risk across  business applications, workflows, identities and integrations where AI agents operate\n\n‍ [...] Into the Expanse: A Security Leader’s Guide to the Agent Frontier\n\nRead more\n\nReco\nGet a demo\n\nDemo Request\n\nTake a personalized product tour with a member of our team to see how we can help make your existing security teams and tools more effective within minutes.\n\nThank you! Your submission has been received!\n\nOops! Something went wrong while submitting the form.\n\nHome\nBlog\n\nReco Launches Agent Security for Enterprise Ecosystems\n\n# Reco Launches Agent Security for Enterprise Ecosystems",
+      "published_date": null,
+      "score": 0.18728161
+    },
+    {
+      "url": "https://www.reco.ai/blog/popular-doesnt-mean-secure-the-2025-state-of-shadow-ai-report-findings",
+      "title": "State of Shadow AI Report 2025: Key Findings",
+      "content": "August 7, 2026\n\nSecurity for enterprise AI tends to move in two stages: first you learn what’s actually happening, then you stop the part that shouldn’t. Reco took the first stage with Claude Enterprise in June, bringing the same identity governance, posture management, and agent security we apply to Okta, Salesforce, and M365 to every Claude surface (see our announcement).\n\nSee more featured resources\n\n## Your agents are already running. Do you know what they're doing?\n\nRequest a demo [...] Raises $85M Total after Series B Funding\n\nRead the News\n\n\n\nRequest a Demo\n\nDemo Request\n\nTake a personalized product tour with a member of our team to see how we can help make your existing security teams and tools more effective within minutes.\n\nThank you! Your submission has been received!\n\nOops! Something went wrong while submitting the form.\n\nHome\nBlog\n\nPopular Doesn’t Mean Secure - The 2025 State of Shadow AI Report Findings [...] To mitigate this risk, organizations should implement OpenAI-specific protection mechanisms and monitoring, given that platform’s dominant role. Enforce data classification and handling rules for any interaction with OpenAI, define approved use cases, provide training on safe use, and consider enterprise licensing options that give more visibility and control. At the same time, broaden your discovery efforts to encompass the full spectrum of AI tools in use, not just ChatGPT. The goal is to",
+      "published_date": null,
+      "score": 0.11501327
+    },
+    {
+      "url": "https://www.reco.ai/blog/real-ai-security-incidents",
+      "title": "Real AI Security Incidents: Lessons from the Field",
+      "content": "Raises $85M Total after Series B Funding\n\nRead the News\n\n\n\nRequest a Demo\n\nDemo Request\n\nTake a personalized product tour with a member of our team to see how we can help make your existing security teams and tools more effective within minutes.\n\nThank you! Your submission has been received!\n\nOops! Something went wrong while submitting the form.\n\nHome\nBlog\n\nReal AI Security Incidents: Lessons from the Field\n\n# Real AI Security Incidents: Lessons from the Field\n\nTal Shapira\n\nUpdated",
+      "published_date": null,
+      "score": 0.10274522
+    },
+    {
+      "url": "https://www.reco.ai/belk-customer-testimonial",
+      "title": "Belk Story | Shift SaaS Security Left with Reco",
+      "content": "All Supported ApplicationsSalesforceMicrosoft 365Google WorkspaceServiceNowWorkday\n\nServiceNow\n\nSlackOktaVeevaSentinelOne\n\nResources\n\nBlogLearnIT HubCustomer StoriesWebinarsCompareSSPM ReportCISO GuideFinancial GuideHealthcare GuideSalesforce GuideMicrosoft GuideAI Security GuideShadow AI GuideState of SaaS Security ReportThe State of Shadow AI ReportResource Center\n\nCompany\n\nAbout Reco\n\nCareers\n\nNewsroomBrand GuidelinesPartnersTrust CenterContact Us\n\nTop Content [...] Raises $85M Total after Series B Funding\n\nRead the News\n\n\n\nRequest a Demo\n\n###### customer stories\n\n# Belk Uses Reco to Shift SaaS Security Left, Uniting the Business, Security & IT Teams [...] .svg)\n\nPlatform\n\nPosture ManagementApp Discovery & GovernanceIdentity & Access GovernanceThreat Detection & ResponseData Exposure ManagementShadow App DiscoveryGenerative AI DiscoveryAgentic AI SecurityReco AI AgentsAI Governance and SecuritySaaS App Factory™\n\nUse Cases\n\nShadow SaaS DetectionSaaS Ticketing WorkflowUnsanctioned Apps ControlSaaS OffboardingCustom Policy StudioShadow AI DiscoveryIdentity Governance ComplianceAI-Powered SaaS Security Insights\n\nIntegrations By App",
+      "published_date": null,
+      "score": 0.09312415
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

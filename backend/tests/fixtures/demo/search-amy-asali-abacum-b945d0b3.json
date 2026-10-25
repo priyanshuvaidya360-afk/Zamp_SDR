@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Amy Asali\" \"Abacum\"",
+  "results": [
+    {
+      "url": "https://www.linkedin.com/posts/adwarnick_day-one-at-abacum-im-joining-as-head-of-activity-7493416391346307073-uDNq",
+      "title": "Amy Asali (Dwarnick)'s Post",
+      "content": "Day one at Abacum. I'm joining as Head of Growth to build a predictable inbound engine for the AI-native FP&A platform finance teams can actually run.",
+      "published_date": null,
+      "score": 0.5973971
+    },
+    {
+      "url": "https://www.linkedin.com/posts/adwarnick_lifecycle-marketing-manager-activity-7506707391028269056-TUqk",
+      "title": "Amy Asali (Dwarnick)'s Post - Lifecycle Marketing Manager",
+      "content": "I'm hiring for a lifecycle marketing manager. A month in at Abacum, the momentum is hard to miss. Record breaking deals, new hires, and the team just moved",
+      "published_date": null,
+      "score": 0.5829428
+    },
+    {
+      "url": "https://www.linkedin.com/posts/adwarnick_marketing-manager-lifecycle-activity-7506707391028269056-crk2",
+      "title": "Amy Asali (Dwarnick)'s Post - Marketing Manager, Lifecycle",
+      "content": "I'm hiring for a lifecycle marketing manager. A month in at Abacum, the momentum is hard to miss. Record breaking deals, new hires, and the team just moved",
+      "published_date": null,
+      "score": 0.5758033
+    },
+    {
+      "url": "https://www.marketsmedia.com/2025-women-in-finance-awards",
+      "title": "2025 WOMEN IN FINANCE AWARDS - Markets Media",
+      "content": "2018\n\nMatilde Acerra-Skelton | Excellence in Prime Brokerage, Barclays\n\nAmanda Asali | Rising Star, Mizuho Americas\n\nElizabeth Bodisch | Excellence in Trading Fixed Income, Deutsche Bank\n\nHeather Brownlie | Excellence in Trading ETFs, BlackRock\n\nLindsey Burik | Excellence in Trading Platforms, Mizuho Americas\n\nAbigail Carras | Rising Star, Deutsche Bank\n\nJenny Chen | Excellence in Multi-Asset Trading, Societe Generale\n\nMarie Chinnici-Everitt | Excellence in Marketing & Communications, DTCC [...] | Ying Cao | Excellence in Fintech | Barclays |\n| Kate James | Excellence in Fintech | ChartIQ |\n| Meena Jeenarian | Excellence in Fintech | Abacus |\n| Jennifer Theiss | Excellence in Fintech | IHS Markit |\n| Joyce Frost | Legacy Award | Riverside Risk Advisors |\n| Jacqueline Stone | Trailblazer | Credit Suisse |\n| Kathryn Zhao | Innovation in Quantitative Trading | Cantor Fitzgerald |\n| Mariam Rafi | Excellence in Regulation | Citi | [...] | Excellence in Trading - FX | Rekha Nair | Societe Generale |\n| Excellence in FICC | Rashaan ‘Rash’ Reid | Bank of America |\n| Excellence in Data Strategy | Olga Sudvarg | Invesco |\n| Excellence in Digital Assets | Nadine Chakar | DTCC |\n| Excellence in Repo | Leslie Hillsamer | Scotiabank |\n| Excellence in RiskTech | Dharrini Bala Gadiyaram | Bloomberg |\n| Excellence in Structured Solutions | Jee-Won Yang | Mizuho Americas |\n| Excellence in Sustainability | Emily Kreps | Deutsche Bank |",
+      "published_date": null,
+      "score": 0.14174438
+    },
+    {
+      "url": "https://www.marketsmedia.com/2026-women-in-finance-awards-ny",
+      "title": "2026 WOMEN IN FINANCE AWARDS - Markets Media",
+      "content": "2018\n\nMatilde Acerra-Skelton | Excellence in Prime Brokerage, Barclays\n\nAmanda Asali | Rising Star, Mizuho Americas\n\nElizabeth Bodisch | Excellence in Trading Fixed Income, Deutsche Bank\n\nHeather Brownlie | Excellence in Trading ETFs, BlackRock\n\nLindsey Burik | Excellence in Trading Platforms, Mizuho Americas\n\nAbigail Carras | Rising Star, Deutsche Bank\n\nJenny Chen | Excellence in Multi-Asset Trading, Societe Generale\n\nMarie Chinnici-Everitt | Excellence in Marketing & Communications, DTCC [...] | Ying Cao | Excellence in Fintech | Barclays |\n| Kate James | Excellence in Fintech | ChartIQ |\n| Meena Jeenarian | Excellence in Fintech | Abacus |\n| Jennifer Theiss | Excellence in Fintech | IHS Markit |\n| Joyce Frost | Legacy Award | Riverside Risk Advisors |\n| Jacqueline Stone | Trailblazer | Credit Suisse |\n| Kathryn Zhao | Innovation in Quantitative Trading | Cantor Fitzgerald |\n| Mariam Rafi | Excellence in Regulation | Citi | [...] | Excellence in Trading - FX | Rekha Nair | Societe Generale |\n| Excellence in FICC | Rashaan ‘Rash’ Reid | Bank of America |\n| Excellence in Data Strategy | Olga Sudvarg | Invesco |\n| Excellence in Digital Assets | Nadine Chakar | DTCC |\n| Excellence in Repo | Leslie Hillsamer | Scotiabank |\n| Excellence in RiskTech | Dharrini Bala Gadiyaram | Bloomberg |\n| Excellence in Structured Solutions | Jee-Won Yang | Mizuho Americas |\n| Excellence in Sustainability | Emily Kreps | Deutsche Bank |",
+      "published_date": null,
+      "score": 0.13675845
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

@@ -1,0 +1,83 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "New product launch creates immediate need for outbound pipeline to drive sales."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Product availability on Growth plan suggests ongoing pipeline demand but is indirect."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Series C funding is a classic trigger for rapid pipeline growth."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Geographic expansion requires new customer acquisition, driving outbound need."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Large existing customer base implies continued pipeline work, though not a strong trigger."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Planned Southeast Asia expansion signals upcoming sales effort."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Aggressive hiring in sales directly increases outbound pipeline demand."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 2,
+        "specificity": 4,
+        "reasoning": "Tripling AP volume shows company growth, modestly raising pipeline relevance for finance‑focused buyers."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 1,
+        "specificity": 5,
+        "reasoning": "Priya's internal workflow project is weakly related to outbound sales needs."
+      },
+      {
+        "signal_id": 10,
+        "relevance": 5,
+        "specificity": 4,
+        "reasoning": "Expansion office opening, highlighted by Priya's reshare, signals new market pipeline needs."
+      },
+      {
+        "signal_id": 11,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Hiring an AP specialist is unrelated to outbound sales pipeline."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1616,
+    "completion_tokens": 1351,
+    "latency_ms": 13665,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

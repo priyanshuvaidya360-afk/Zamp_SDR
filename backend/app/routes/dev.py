@@ -1,4 +1,4 @@
-"""Dev-only helpers for demos (docs/GUIDE.md T15). Every route answers 404 when DEMO_MODE=live."""
+"""Dev-only helpers for demos (docs/PROJECT_SPEC.md T15). Every route answers 404 when DEMO_MODE=live."""
 
 from datetime import timedelta
 from typing import Any

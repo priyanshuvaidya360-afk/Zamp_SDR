@@ -43,7 +43,7 @@ async def main() -> None:
     for d in out.dropped:
         print(f"DROPPED {d.reason}: {d.summary[:80]}")
     print(f"\n{len(list(FIXTURES.glob('*.json')))} fixtures written to {FIXTURES}")
-    (workdir / "output.json").write_text(json.dumps(out.model_dump(mode="json"), indent=2))
+    (workdir / "output.json").write_text(json.dumps(out.model_dump(mode="json"), indent=2), encoding="utf-8")
 
 
 if __name__ == "__main__":

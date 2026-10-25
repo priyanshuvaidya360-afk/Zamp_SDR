@@ -6,7 +6,7 @@ import pytest
 
 from app import prompts
 
-AGENTS = ["resolve", "extract", "score", "account_plan", "draft", "recheck"]
+AGENTS = ["resolve", "research", "extract", "score", "account_plan", "draft", "recheck"]
 
 
 def test_parse_sections_comments_and_notes():
@@ -36,8 +36,9 @@ def test_every_agent_file_loads_with_no_empty_section(agent):
 
 
 def test_every_agent_is_listed_in_the_index():
-    index = (prompts.AGENTS_DIR / "README.md").read_text()
-    assert all(f"{agent}.md" in index for agent in AGENTS)
+    index = (prompts.AGENTS_DIR / "README.md").read_text(encoding="utf-8")
+    assert all(prompts.file_name(agent) in index for agent in AGENTS)
+    assert set(prompts.AGENT_FILES) == set(AGENTS)  # every agent has a descriptive file name
 
 
 def test_placeholders_are_plain_words():

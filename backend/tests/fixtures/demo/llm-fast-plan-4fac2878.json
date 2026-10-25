@@ -1,0 +1,33 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "\"Abacum\" PR Newswire release",
+        "why": "Latest press announcements and product launches"
+      },
+      {
+        "query": "\"Abacum\" Product Hunt launch",
+        "why": "Community buzz and early adopter feedback"
+      },
+      {
+        "query": "\"Abacum\" GitHub repository",
+        "why": "Open‑source projects and tech stack details"
+      },
+      {
+        "query": "\"Abacum\" AWS Marketplace listing",
+        "why": "Cloud integration and partner ecosystem"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 860,
+    "completion_tokens": 534,
+    "latency_ms": 1102,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

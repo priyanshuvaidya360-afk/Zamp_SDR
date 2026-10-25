@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "hiring 4 sdrs in london",
+    "body": "Hi Omar,\nI saw that Kestrel Labs is hiring four Sales Development Representatives in London (2 October). Hiring more SDRs is the usual way to grow outbound capacity, but it adds headcount and can strain reply rates. Would you be open to a quick 15‑minute call to see how Halyard could generate the same pipeline without extra hires?\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I saw that Kestrel Labs is hiring four Sales Development Representatives in London (2 October).",
+        "signal_id": 3
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1333,
+    "completion_tokens": 902,
+    "latency_ms": 11315,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

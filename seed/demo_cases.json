@@ -1,5 +1,5 @@
 {
-  "_comment": "Expected outcome of every demo row (docs/GUIDE.md T17). scripts/check_demo.py replays both CSVs from tests/fixtures/demo/ with the network off and checks each row. Real companies (ProtoPie, Reco, GetResponse, Abacum) were researched on the live web on 19 Oct 2026; fictional ones (.example domains, Acme Fintech) on the simulated web in seed/simweb/.",
+  "_comment": "Expected outcome of every demo row (docs/PROJECT_SPEC.md T17). scripts/check_demo.py replays both CSVs from tests/fixtures/demo/ with the network off and checks each row. Real companies (ProtoPie, Reco, GetResponse, Abacum) were researched on the live web on 19 Oct 2026; fictional ones (.example domains, Acme Fintech) on the simulated web in seed/simweb/.",
   "rows": [
     {"file": "demo.csv", "row": 2, "name": "Ryan Yu", "status": "ready_for_review", "case": "happy path (real web)", "expect": {"message_type": "cold", "draft_mode": "hooked"}},
     {"file": "demo.csv", "row": 3, "name": "Merav Keren Kindler", "status": "ready_for_review", "case": "3 committee + 5 crowded raise (real web)", "expect": {"crowded": ["funding"], "hook_type_not": ["funding"], "send_day": 5}},

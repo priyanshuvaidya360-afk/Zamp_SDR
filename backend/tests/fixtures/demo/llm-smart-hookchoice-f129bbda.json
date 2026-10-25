@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 16,
+    "angle": "They just announced a partnership with ServiceNow to extend AI agent security, which will require new joint go‑to‑market campaigns and pipeline generation that a tool like Halyard can fuel without adding SDR headcount.",
+    "runners_up": [
+      18,
+      2
+    ],
+    "why_not_others": "The AT&T partnership is a strategic investment and the funding news are broader company events, while the ServiceNow partnership directly creates demand‑generation needs for Sandy’s product marketing role."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 934,
+    "completion_tokens": 373,
+    "latency_ms": 1372,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

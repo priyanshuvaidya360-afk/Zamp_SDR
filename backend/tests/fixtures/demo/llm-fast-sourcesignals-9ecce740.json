@@ -1,0 +1,43 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "ProtoPie integrates with Figma, Sketch, and Adobe XD.",
+        "evidence": "Figma, Adobe XD 및 Sketch에서 사용 가능합니다.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "ProtoPie lists Microsoft, R/GA, and Google as customers using their product.",
+        "evidence": "Eduardo Sonnino, Senior Designer, Microsoft",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": "Eduardo Sonnino",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2161,
+    "completion_tokens": 239,
+    "latency_ms": 1583,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

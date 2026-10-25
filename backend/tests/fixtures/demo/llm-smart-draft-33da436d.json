@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "5 new sdrs in austin",
+    "body": "Hi Daniel,\n\nI saw that Ferncastle is hiring five Sales Development Representatives for your new Austin office (5 October). Scaling outbound with more SDRs can strain headcount while generic sequences see dropping replies. Our outbound pipeline engine delivers vetted accounts and drafted, cited first‑touch emails so your team builds pipeline without adding SDRs. Would a brief 15‑minute call to explore fit be useful?\n\nBest,\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I saw that Ferncastle is hiring five Sales Development Representatives for your new Austin office (5 October).",
+        "signal_id": 2
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1322,
+    "completion_tokens": 932,
+    "latency_ms": 2381,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

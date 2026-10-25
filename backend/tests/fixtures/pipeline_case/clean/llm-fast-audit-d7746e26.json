@@ -1,0 +1,61 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "Subject: 40m series c insight",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 2,
+        "reason": "The subject references the $40M Series C funding from the facts.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I saw that Acme Fintech secured $40 million in Series C funding on 1 October 2026.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 2,
+        "reason": "The funding amount, company, and date match the provided facts.",
+        "suggestion": null
+      },
+      {
+        "sentence": "That capital will need to stretch further, and building outbound pipeline by hiring more SDRs or using generic sequences can quickly erode runway.",
+        "about": "market",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This links their situation to the problem we solve as a general remark.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Our outbound pipeline engine finds accounts showing buying signals, surfaces the right contacts, and drafts researched first‑touch emails for your reps to review, so you can generate pipeline without adding SDR headcount.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": "seller",
+        "reason": "This accurately describes what Halyard sells based on the seller description.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15‑minute call to explore?",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is the call to action and ask, which is not a factual claim about the prospect.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email relies on specific factual details about the company's recent funding event and explicitly mentions the company name."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1048,
+    "completion_tokens": 495,
+    "latency_ms": 1981,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "person_content",
+        "about": "person",
+        "summary": "Maya Collins discussed running outbound experiments with a two-person team and personalized email bottlenecks",
+        "evidence": "We test one new outbound angle a week, but writing research-backed first emails by hand is the bottleneck.",
+        "published_at": "2026-09-30",
+        "sensitive": false,
+        "speaker": "Maya Collins",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 961,
+    "completion_tokens": 149,
+    "latency_ms": 1264,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Kestrel Labs opened its first London office in Shoreditch",
+        "evidence": "Kestrel Labs has opened its first office outside Dublin, in London's Shoreditch.",
+        "published_at": "2026-09-22",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Kestrel Labs stated that half of its pipeline already comes from the UK",
+        "evidence": "Half of our pipeline already comes from the UK",
+        "published_at": "2026-09-22",
+        "sensitive": false,
+        "speaker": "Aoife Byrne",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 995,
+    "completion_tokens": 173,
+    "latency_ms": 1301,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

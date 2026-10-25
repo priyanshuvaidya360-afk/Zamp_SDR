@@ -1,0 +1,8 @@
+{
+  "provider": "simweb",
+  "query": "site:brightwave.example Brightwave",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

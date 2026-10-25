@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 2,
+    "angle": "Priya just secured a $40M Series C, so she’ll be focused on stretching that capital to drive growth—our engine delivers pipeline without the cost of hiring additional SDRs, preserving runway.",
+    "runners_up": [
+      1,
+      6
+    ],
+    "why_not_others": "The product launch and hiring news are less directly tied to her financial mandate compared to the new funding round."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 919,
+    "completion_tokens": 367,
+    "latency_ms": 1070,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

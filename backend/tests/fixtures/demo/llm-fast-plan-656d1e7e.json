@@ -1,0 +1,35 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "acmefintech.com integration OR API partners",
+        "why": "new technical integrations and ecosystem growth"
+      },
+      {
+        "query": "\"Acme Fintech\" podcast OR interview OR webinar",
+        "why": "leadership discussing growth strategy in public"
+      },
+      {
+        "query": "\"Acme Fintech\" open source OR GitHub",
+        "why": "developer activity and product expansion"
+      },
+      {
+        "query": "\"Acme Fintech\" conference speaker OR sponsor",
+        "why": "event marketing and market presence"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 653,
+    "completion_tokens": 150,
+    "latency_ms": 1174,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

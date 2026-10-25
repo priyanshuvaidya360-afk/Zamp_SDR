@@ -1,0 +1,24 @@
+{
+  "output": {
+    "verdicts": [
+      {
+        "index": 1,
+        "label": "screening_trap",
+        "reason": "It tests if the email is AI-written by asking for a flan recipe."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 387,
+    "completion_tokens": 60,
+    "latency_ms": 764,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

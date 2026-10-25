@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "quick note on Modeler launch",
+    "body": "I saw that on 13 October 2026 you launched Modeler, an AI agent that brings agentic modeling to finance teams. As you aim to get finance decision‑makers on board fast, many growth teams struggle with outbound pipelines that only grow by adding more SDRs or suffer from generic sequences with low reply rates. Halyard automatically spots buying signals, surfaces the right contacts, and drafts researched, cited first‑touch emails for your reps to review, letting your team build pipeline without increasing headcount. If you’re open to a 15‑minute call to see a sample outreach for Modeler, let me know.\n\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I saw that on 13 October 2026 you launched Modeler, an AI agent that brings agentic modeling to finance teams.",
+        "signal_id": 2
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1112,
+    "completion_tokens": 1450,
+    "latency_ms": 3451,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

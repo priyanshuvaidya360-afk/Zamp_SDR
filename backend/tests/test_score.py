@@ -121,7 +121,8 @@ def test_formula_and_verifiability(monkeypatch):
     monkeypatch.setattr(settings, "today", TODAY)
     assert score.recency_points(TODAY, TODAY) == (0, 5.0)
     days, points = score.recency_points(None, TODAY)
-    assert days == 120 and points == pytest.approx(5 * math.exp(-2))
+    assert days == settings.undated_days == 120
+    assert points == pytest.approx(5 * math.exp(-120 / settings.recency_scale_days))
 
     own = signal("x", url="https://acmefintech.com/news")
     assert score.verifiability(own, "acmefintech.com") == 1.0

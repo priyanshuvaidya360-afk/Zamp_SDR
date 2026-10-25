@@ -7,17 +7,18 @@ import { StatusChip } from "@/components/status-chip";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { api, ApiError } from "@/lib/api";
-import { RUN_STATUS } from "@/lib/status";
-import type { BatchListItem, Page, RunStatus, RunSummary, Stats } from "@/lib/types";
+import { IDENTITY_OUTCOME, RUN_STATUS } from "@/lib/status";
+import type { BatchListItem, IdentityOutcome, Page, RunStatus, RunSummary, Stats } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-// Spec: docs/GUIDE.md "UI: three screens" > 3 Dashboard, and T16. Every number comes from GET
+// Spec: docs/PROJECT_SPEC.md "UI: three screens" > 3 Dashboard, and T16. Every number comes from GET
 // /stats; definitions are in backend/app/routes/stats.py. Each panel loads, fails and empties on
 // its own, so one slow query never blanks the page.
 
 const PAGE = 10;
 const RUN_FILTERS: RunStatus[] = [
-  "ready_for_review", "approved", "rejected", "needs_input", "low_signal", "held", "blocked", "suppressed", "failed", "running",
+  "ready_for_review", "approved", "rejected", "needs_input", "low_signal", "held", "blocked", "suppressed", "failed",
+  "dismissed", "already_drafted", "running",
 ];
 
 type Load<T> = { data: T | null; error: string | null; loading: boolean };
@@ -110,6 +111,10 @@ function Metrics({ state }: { state: Load<Stats> & { reload: () => void } }) {
   ];
   const notReady = Object.entries(s.not_ready) as [RunStatus, number][];
   const notReadyTotal = notReady.reduce((n, [, c]) => n + c, 0);
+  // needs_input split by why identity failed: lots of "Check data" means a bad list, not a weak agent.
+  const identity = (Object.keys(IDENTITY_OUTCOME) as IdentityOutcome[])
+    .map((o) => [o, s.identity?.[o] ?? 0] as const)
+    .filter(([, n]) => n > 0);
 
   return (
     <div className="grid grid-cols-[minmax(0,1fr)] gap-4 lg:grid-cols-[minmax(0,1fr)_18rem]">
@@ -144,6 +149,32 @@ function Metrics({ state }: { state: Load<Stats> & { reload: () => void } }) {
             </li>
           ))}
         </ul>
+        {identity.length > 0 && (
+          <div className="mt-3 border-t pt-3">
+            <p className="text-xs text-muted-foreground">Needs input, by why identity failed</p>
+            <ul className="mt-2 flex flex-wrap gap-2">
+              {identity.map(([outcome, n]) => (
+                <li key={outcome} className="flex items-center gap-1.5 text-sm">
+                  <StatusChip status="needs_input" outcome={outcome} />
+                  <span className="tabular-nums text-muted-foreground">{n}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {s.dismissed > 0 && (
+          <p className="mt-3 border-t pt-3 text-xs text-muted-foreground">
+            {s.dismissed} run{s.dismissed === 1 ? "" : "s"} dismissed by a rep after identity failed
+          </p>
+        )}
+        {(s.retryable > 0 || s.factual_review > 0) && (
+          <p className="mt-3 border-t pt-3 text-xs text-muted-foreground">
+            {s.retryable > 0 && `${s.retryable} failed run${s.retryable === 1 ? "" : "s"} can be retried`}
+            {s.retryable > 0 && s.factual_review > 0 && " · "}
+            {s.factual_review > 0 &&
+              `${s.factual_review} draft${s.factual_review === 1 ? "" : "s"} need${s.factual_review === 1 ? "s" : ""} a factual fix before approval`}
+          </p>
+        )}
       </section>
     </div>
   );
@@ -341,7 +372,7 @@ function RunRow({ run: r }: { run: RunSummary }) {
         </Link>
       </TableCell>
       <TableCell title={r.final_reason ?? undefined}>
-        <StatusChip status={r.status} />
+        <StatusChip status={r.status} outcome={r.identity_outcome} />
       </TableCell>
       <TableCell className="text-muted-foreground">{r.hook_type?.replace(/_/g, " ") ?? "–"}</TableCell>
       <TableCell className="text-right tabular-nums">{r.confidence == null ? "–" : r.confidence.toFixed(2)}</TableCell>

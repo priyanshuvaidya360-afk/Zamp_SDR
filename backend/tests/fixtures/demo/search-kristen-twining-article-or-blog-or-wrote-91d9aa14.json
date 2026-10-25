@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Kristen Twining\" article OR blog OR wrote OR webinar",
+  "results": [
+    {
+      "url": "https://en.wikipedia.org/wiki/Kristen_Anderson-Lopez",
+      "title": "Kristen Anderson-Lopez - Wikipedia",
+      "content": "Kristen Anderson-Lopez (born March 21, 1972) is an American songwriter. She is known for co-writing the songs for the 2013 animated musical film Frozen and its 2019 sequel Frozen 2 with her husband Robert Lopez. The couple won the Academy Award for Best Original Song for \"Let It Go\" from Frozen and \"Remember Me\" from Coco (2017) at the 86th and 90th awards respectively. She also won two Grammy ...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.trainingmagnetwork.com/recordings",
+      "title": "Training Webinar Recordings | Training Magazine Network",
+      "content": "Training Magazine Network hosts free live and recorded webinars for corporate training and learning professionals. Learn from experts who speak at Training magazine’s conferences and other eLearning and training industry events.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://blog.quiltedtwins.com/new-blog",
+      "title": "Becky's Quilts And Designs Blog — Quilted Twins",
+      "content": "6 days ago · Blog Enjoy the fun as you read along about Becky's quilts and experiences as an American living in Poland.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://bearfoottheory.com/",
+      "title": "Bearfoot Theory - Outdoor Adventure Blog",
+      "content": "Bearfoot Theory is an outdoor adventure and travel blog where Kristen Bor shares her experiences with hiking, camping, gear, and van life.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://writingcraft.com/",
+      "title": "CRAFT TALKS Writing Webinars Courses and Seminars - Craft Talks",
+      "content": "Learn better writing from expert teachers. Classes in revision, writing, publishing, self-editing and more. Network with a writing community.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

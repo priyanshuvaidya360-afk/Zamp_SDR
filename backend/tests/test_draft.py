@@ -18,6 +18,7 @@ from app.models import DraftRecord, Run, RunStatus, SignalRecord
 from app.pipeline import draft, runner
 from app.pipeline.draft import code_checks
 from app.pipeline.extract import ExtractedSignal
+from app.pipeline.resolve import Candidate, ResolveOutput
 from app.schemas import Draft
 from tests.extraction_case import TODAY, make_batch, pipeline_stages, variant_dir
 
@@ -75,6 +76,17 @@ async def test_screening_trap_gets_an_outline_with_the_banner(replay):
     assert run.confidence < 0.4  # identity halved by the trap, then x hook strength
 
 
+async def test_a_company_level_draft_is_told_to_say_nothing_personal(replay):
+    run, _ = await replay(with_bio=False)
+    ctx = runner._load_context(run.id, None)
+    runner._restore_outputs(ctx, runner.get_stages())
+    assert "We could not confirm" not in draft.build_prompt(ctx, "hooked")  # a verified person: unchanged prompt
+    person = Candidate(name="Priya Raman", evidence_url="", evidence="", confidence=settings.identity_unverified)
+    ctx.outputs["resolve"] = ResolveOutput(message="", person=person, unverified=True)
+    prompt = draft.build_prompt(ctx, "hooked")
+    assert "We could not confirm that Priya Raman works at" in prompt and "Say nothing about them personally" in prompt
+
+
 # --- Part 2: critic code checks ---------------------------------------------------------------
 
 SIGNALS = {
@@ -92,7 +104,7 @@ SIGNALS = {
                        source_url="https://pod.example.com/42", note="Said by Rohan Gupta, not Amy Asali."),
 }
 GOOD_BODY = ("Hi Amy,\nAbacum launched Modeler on 13 October. New products need pipeline from scratch, and "
-             "hiring SDRs for it is slow. Open to a 15-minute call?\nShivam")
+             "hiring SDRs for it is slow. Open to a 15-minute call?\nAlex")
 GOOD_CLAIM = {"sentence": "Abacum launched Modeler on 13 October.", "signal_id": 1}
 
 
@@ -127,16 +139,16 @@ def test_claims_must_be_known_safe_and_in_the_email():
 
 
 def test_someone_elses_words_must_name_them():
-    body = "Hi Amy,\nYour AP volume tripled this year. Open to a 15-minute call?\nShivam"
+    body = "Hi Amy,\nYour AP volume tripled this year. Open to a 15-minute call?\nAlex"
     failed = check(body=body, claims=[{"sentence": "Your AP volume tripled this year.", "signal_id": 4}])
     assert "Rohan Gupta's words without naming them" in failed["attribution"]
 
-    named = "Hi Amy,\nRohan mentioned AP volume tripled. Open to a 15-minute call?\nShivam"
+    named = "Hi Amy,\nRohan mentioned AP volume tripled. Open to a 15-minute call?\nAlex"
     assert "attribution" not in check(body=named, claims=[{"sentence": "Rohan mentioned AP volume tripled.", "signal_id": 4}])
 
 
 def test_numbers_from_signals_and_the_ask_are_fine():
-    body = "Hi Amy,\nAcme is hiring 4 SDRs. Open to a 15‑minute call?\nShivam"  # non-breaking hyphen
+    body = "Hi Amy,\nAcme is hiring 4 SDRs. Open to a 15‑minute call?\nAlex"  # non-breaking hyphen
     assert check(body=body, claims=[{"sentence": "Acme is hiring 4 SDRs.", "signal_id": 2}]) == {}
 
 
@@ -165,7 +177,9 @@ def ctx(session):
     return c
 
 
-def fake_models(monkeypatch, drafts: list[dict], generic: list[int]):
+def fake_models(monkeypatch, drafts: list[dict], generic: list[int], audits: list[list[dict]] | None = None):
+    """Mocked models: the writer answers with `drafts`; the critic's audit answers with the next
+    genericness score (0 once the list is empty) and the next list of audited claims (none)."""
     prompts = []
 
     async def structured(role, system, user, schema, providers=None):
@@ -173,7 +187,9 @@ def fake_models(monkeypatch, drafts: list[dict], generic: list[int]):
         if schema is Draft:
             prompts.append(user)
             return Draft(**drafts.pop(0)), usage
-        return draft._Genericness(genericness=generic.pop(0), reason="test"), usage
+        claims = audits.pop(0) if audits else []
+        return draft._Audit(claims=claims, genericness=generic.pop(0) if generic else 0,
+                            genericness_reason="test"), usage
 
     monkeypatch.setattr(llm, "structured", structured)
     return prompts

@@ -1,0 +1,95 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "hiring",
+        "about": "company",
+        "summary": "Abacum is hiring a Sales Development Representative (SDR) for the DACH region in Barcelona.",
+        "evidence": "We are looking for a native German-speaking Sales Development Representative to join our go-to-market team in Barcelona and help us grow across Germany, Austria and Switzerland.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": {
+          "title": "",
+          "locations": [
+            "Barcelona"
+          ],
+          "posted_days_ago": 29
+        }
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum offers a business planning solution that automates reporting, enables collaboration, and simplifies planning and forecasting for finance teams.",
+        "evidence": "Abacum is the leading Business Planning solution for finance teams to drive performance. By automating reporting, enabling collaboration, and simplifying planning and forecasting, we help finance teams shift from number crunching to driving strategic decisions.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum serves industry leaders such as Dish Networks, Strava, BetterUp, Kajabi, JG Wentworth, Abridge, Cortex and hundreds more.",
+        "evidence": "We’re trusted by industry leaders such as Dish Networks, Strava, BetterUp, Kajabi, JG Wentworth, Abridge, Cortex, and hundreds more.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum integrates with tools like Gong, Salesloft, ZoomInfo/Cognism, and Sales Navigator.",
+        "evidence": "Access to the latest tech, including Gong, Salesloft, ZoomInfo / Cognism, Sales Navigator and more!",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Abacum raised over $100m and closed a $60M Series B in June 2025 led by Scale Venture Partners.",
+        "evidence": "We have raised over $100m, closing in June 2025 our $60M Series B, led by Scale Venture Partners, with the strong participation of Cathay Innovation, Y Combinator, Atomico, Creandum, and angel operators from Adyen, Zapier, and Twitch.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Abacum has offices in New York, Toronto, and Barcelona, expanding its global footprint.",
+        "evidence": "Headquartered in New York, we have offices in Toronto and Barcelona.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 2267,
+    "completion_tokens": 2490,
+    "latency_ms": 61717,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

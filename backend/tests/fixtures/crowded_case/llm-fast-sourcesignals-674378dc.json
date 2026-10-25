@@ -1,0 +1,61 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "hiring",
+        "about": "company",
+        "summary": "Lumen Analytics is hiring six Sales Development Representatives in Austin",
+        "evidence": "We're hiring six Sales Development Representatives to start conversations with product and growth leaders at mid-market SaaS companies.",
+        "published_at": "2026-10-14",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": {
+          "title": "",
+          "locations": [
+            "Austin, TX"
+          ],
+          "posted_days_ago": null
+        }
+      },
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Lumen Analytics recently closed a Series B funding round",
+        "evidence": "Fresh off our Series B, we're building our first outbound team in Austin.",
+        "published_at": "2026-10-14",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Lumen Analytics is building its first outbound team in Austin",
+        "evidence": "we're building our first outbound team in Austin.",
+        "published_at": "2026-10-14",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1050,
+    "completion_tokens": 411,
+    "latency_ms": 1545,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

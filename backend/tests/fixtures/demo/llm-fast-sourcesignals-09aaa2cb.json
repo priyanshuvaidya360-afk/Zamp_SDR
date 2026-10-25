@@ -1,0 +1,31 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco provides a product tour to help security teams make existing security tools more effective.",
+        "evidence": "Take a personalized product tour with a member of our team to see how we can help make your existing security teams and tools more effective within minutes.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1859,
+    "completion_tokens": 143,
+    "latency_ms": 1662,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

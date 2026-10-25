@@ -1,0 +1,35 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "protopie.io enterprise plan pricing launch",
+        "why": "new sales-led motion or plan launch"
+      },
+      {
+        "query": "\"ProtoPie\" ecosystem integration plugins design tools",
+        "why": "product updates and ecosystem expansions"
+      },
+      {
+        "query": "\"ProtoPie\" speaker conference design systems UX",
+        "why": "event appearances and market presence"
+      },
+      {
+        "query": "protopie.io case study enterprise design team",
+        "why": "enterprise customer wins"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 635,
+    "completion_tokens": 148,
+    "latency_ms": 1122,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

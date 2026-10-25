@@ -1,20 +1,20 @@
 # Signal (PS-3 Outreach Engine)
 
-An SDR uploads a CSV of prospects (first name, last name, and a company domain or LinkedIn
-URL). For each row, a fixed pipeline resolves the person's identity, researches the public
+An SDR uploads a CSV of prospects (first name, last name, the person's LinkedIn URL, and
+optionally a company domain). For each row, a fixed pipeline resolves the person's identity, researches the public
 web, picks one cited hook, and writes a short first-touch email (under 120 words) that waits
 in a review queue. The UI shows a live run view (every stage streamed over SSE) and a
 dashboard. Nothing is ever sent: the end state is approve / edit / reject by a human.
 
-Specs for each stage live in `docs/GUIDE.md`. Cite the section you used. Build tasks
+Specs for each stage live in `docs/PROJECT_SPEC.md`. Cite the section you used. Build tasks
 T01-T18 are at the end of the guide; do one task per session.
 
 ## Stack
-- Backend: Python 3.15, FastAPI, SQLModel (SQLite locally, Postgres deployed), Pydantic,
+- Backend: Python 3.13, FastAPI, SQLModel (SQLite locally, Postgres deployed), Pydantic,
   pydantic-settings, httpx, tenacity, pandas, scikit-learn, trafilatura.
 - Zero cost: everything runs on free tiers with no credit card. Do not add a paid service.
 - Orchestration: LangGraph. `app/pipeline/graph.py` is the per-prospect graph (one node per
-  stage); `agents/PIPELINE.md` is drawn from it (`python -m scripts.draw_pipeline`).
+  stage); `agents/PIPELINE_DIAGRAM.md` is drawn from it (`python -m scripts.draw_pipeline`).
 - Prompts: every word a model reads lives in `agents/*.md` (one file per agent, loaded by
   `app/prompts.py`). Edit the markdown, not the Python. Numbers (weights, cutoffs) stay in `config.py`.
 - LLM: LangChain `ChatOpenAI` (`langchain-openai`) against OpenAI-compatible endpoints, with the
@@ -41,11 +41,13 @@ backend/
                        a row that already has a run is not run twice), GET /batches/{id}/export.csv[?all=true]
     routes/stats.py    GET /stats: dashboard numbers (definitions in its docstring)
     routes/runs.py     GET /runs (status filter, name search, paginated), GET /runs/{id}[/events], POST /runs/{id}/resume,
-                       POST /runs/{id}/review (approve / edit / reject)
+                       POST /runs/{id}/retry (failed runs, in place), POST /runs/{id}/review (approve / edit / reject)
     routes/dev.py      POST /dev/age-draft/{draft_id}?days=12 (404 when DEMO_MODE=live)
-    review.py          stage 8: review actions, revalidate on approve (case 10), CSV export
+    review.py          stage 8: review actions, revalidate on approve (case 10), CSV export; approve is
+                       refused while facts are unsupported, and an edit is audited before it is approved
     events.py          in-process pub/sub (topics run:<id>, batch:<id>) + SSE formatting
     seller.py          loads seller_profile.yaml
+    limits.py          per-visitor hourly caps (uploads, prospects drafted) so a shared link can't drain quotas
     ingest.py          CSV parse, header aliases, cleaning, row checks, in-file dedupe
     config.py          settings from env / backend/.env
     db.py              engine, create_db_and_tables, get_session
@@ -76,8 +78,11 @@ backend/
       competitors.py   case 6: competitor usage (held / displacement) and mentions (never a hook)
       crowded.py       case 5: outlet coverage from search results, crowded test, the
                        critic's "first sentence references the event" check
-      resolve.py       stage 2: identity; code verifies the model's evidence
-      research.py      stage 3: category searches, relevance gate, page reads;
+      resolve.py       stage 2: identity; code verifies the model's evidence; diagnose() says why
+                       identity failed (search_failed / bad_data / not_public / ambiguous /
+                       unconfirmed); resume options: pick, fix row, company-level draft, dismiss
+      research.py      stage 3: core + own-site + wide searches, plus a few the fast model plans
+                       (agents/stage3_plan_extra_searches.md, code-checked, DuckDuckGo first); relevance gate, page reads;
                        second_order(): case 5's one follow-up search after a crowded event
     context_adapter.py CRM / sequence-history lookups (seed tables; swap for HubSpot here)
       extract.py       stage 4: AI-instruction scan (regex + classifier, strip unsafe text),
@@ -93,7 +98,8 @@ backend/
       similarity.py    batch-level step after all drafts (case 9): TF-IDF similarity,
                        20% hook-source cap with re-runs, diversity score
       draft.py         stages 6-7: smart-model draft (hooked / role_based / outline), critic
-                       code checks + fast-model genericness, one rewrite, warnings kept
+                       code checks + one fast-model factual audit of the whole email (and genericness),
+                       one rewrite, warnings kept; unsupported facts block approval
   tests/               pytest; tests/fixtures/ holds recorded search results
   scripts/             CLI helpers (smoke tests, seeding, demo checks)
 frontend/
@@ -103,7 +109,8 @@ frontend/
                        guide, review controls); batches/[id]/review (review queue, keys a/e/r/j/k);
                        dashboard/ (metrics, why-not-ready; dashboard-view.tsx); batches/new redirects to /
                        components/flow-steps.tsx is the 4-step progress bar shown on each screen
-  components/review-controls.tsx  approve / edit / reject, "Re-checking N facts", diff modal
+  components/review-controls.tsx  approve / edit / reject, "Re-checking N facts", diff modal, factual gate
+  components/retry-button.tsx     retry a failed run in place (prospect list + run view)
   components/          nav, status-chip; shadcn/ui (Base UI flavour) in components/ui
   lib/api.ts           the only place that calls the backend (NEXT_PUBLIC_API_URL,
                        default http://localhost:8000); turns errors into readable messages
@@ -113,16 +120,21 @@ frontend/
                        event id; reconnects; closes on `end`
   lib/stages.ts        stepper state from events (done / warning / failed...)
   public/              demo.csv ("Use demo CSV"), template.csv (download)
-agents/                one .md per agent (prompts) + README.md (how to edit) + PIPELINE.md (generated diagram)
+agents/                one .md per agent, named by stage and job (stage2_identify_person.md ...
+                       stage8_recheck_stale_facts.md; prompts.AGENT_FILES maps code keys to files)
+                       + README.md (how to edit) + PIPELINE_DIAGRAM.md (generated diagram)
 seed/                  context.json (fake CRM data); demo.csv + demo_messy.csv (the demo);
                        demo_cases.json (each row's expected outcome); simweb/ (fictional pages)
 seller_profile.yaml    what "we" sell, ICP, tone, personas, competitors, regions
 ASSUMPTIONS.md         every assumption made; add to it as you build
-docs/GUIDE.md          the spec
+docs/PROJECT_SPEC.md   the spec (stages, edge cases, build tasks T01-T18)
+docs/TECHNICAL_BRIEF_PROMPT.md  a full technical brief to paste into an AI assistant
+README.md              overview, process map, run locally, deploy
+render.yaml            Render blueprint for the backend (frontend deploys on Vercel)
 ```
 
 ## Commands
-- `make setup`: create `backend/.venv` with python3.15, install backend and frontend deps
+- `make setup`: create `backend/.venv` with python3.13, install backend and frontend deps
 - `make dev-api`: FastAPI on http://localhost:8000 (`GET /health`)
 - `make dev-web`: Next.js on http://localhost:3000
 - `make test`: backend pytest suite
@@ -141,7 +153,7 @@ docs/GUIDE.md          the spec
   after a free-tier rate limit, run it again until no row fails; it then prunes unused recordings
 - `cd backend && .venv/bin/python -m scripts.check_demo`: replay the demo with the network off and
   check every row against seed/demo_cases.json (exit 0 = pass)
-- `cd backend && .venv/bin/python -m scripts.draw_pipeline [--check]`: redraw agents/PIPELINE.md from
+- `cd backend && .venv/bin/python -m scripts.draw_pipeline [--check]`: redraw agents/PIPELINE_DIAGRAM.md from
   the LangGraph graph (a test fails if it is stale)
 - `make seed`: load `seed/context.json` (fake CRM / sequence history) into the database; idempotent
 - Backend Python is always `backend/.venv/bin/python`; there is no uv.

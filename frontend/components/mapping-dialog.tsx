@@ -9,7 +9,7 @@ import type { BatchPreview, Field, Mapping } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 // Step 2 of the flow: after the upload, check which CSV column feeds which field. Opens as a
-// dialog over the page; changing a column re-checks every row. Spec: docs/GUIDE.md "Input: the
+// dialog over the page; changing a column re-checks every row. Spec: docs/PROJECT_SPEC.md "Input: the
 // prospect CSV" (header aliases) and T10.
 
 const NOT_MAPPED = "__not_mapped__";
@@ -17,8 +17,8 @@ const NOT_MAPPED = "__not_mapped__";
 const FIELDS: { field: Field; label: string; hint: string; required?: boolean }[] = [
   { field: "first_name", label: "First name", hint: "required", required: true },
   { field: "last_name", label: "Last name", hint: "required", required: true },
-  { field: "company_domain", label: "Company domain", hint: "this or LinkedIn URL", required: true },
-  { field: "linkedin_url", label: "LinkedIn URL", hint: "this or company domain", required: true },
+  { field: "company_domain", label: "Company domain", hint: "optional, helps research" },
+  { field: "linkedin_url", label: "LinkedIn URL", hint: "required: the person's profile (linkedin.com/in/…)", required: true },
   { field: "company", label: "Company", hint: "recommended" },
   { field: "title", label: "Title", hint: "shapes who the email is written for" },
   { field: "full_name", label: "Full name", hint: "used if first/last are missing" },
@@ -126,7 +126,7 @@ export function MappingDialog({
                     <th className="px-3 py-2 font-semibold">Row</th>
                     <th className="px-3 py-2 font-semibold">Name</th>
                     <th className="px-3 py-2 font-semibold">Company</th>
-                    <th className="px-3 py-2 font-semibold">Domain / LinkedIn</th>
+                    <th className="px-3 py-2 font-semibold">LinkedIn / Domain</th>
                     <th className="px-3 py-2 font-semibold">Check</th>
                   </tr>
                 </thead>
@@ -138,7 +138,7 @@ export function MappingDialog({
                         <td className="px-3 py-2 text-muted-foreground tabular-nums">{row.row_number}</td>
                         <td className="px-3 py-2 font-medium">{d.full_name || [d.first_name, d.last_name].filter(Boolean).join(" ") || "—"}</td>
                         <td className="px-3 py-2">{d.company || "—"}</td>
-                        <td className="max-w-48 truncate px-3 py-2 text-muted-foreground">{d.company_domain || d.linkedin_url || "—"}</td>
+                        <td className="max-w-48 truncate px-3 py-2 text-muted-foreground">{d.linkedin_url || d.company_domain || "—"}</td>
                         <td className="px-3 py-2">
                           {row.status === "valid" ? (
                             <span className="font-semibold text-[#137a43]">✓ ready</span>

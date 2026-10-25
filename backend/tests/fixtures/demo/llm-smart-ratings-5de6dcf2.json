@@ -1,0 +1,35 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 5,
+        "specificity": 5,
+        "reasoning": "Maya’s discussion of outbound bottlenecks shows she’s facing the exact pipeline challenges Halyard solves."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "The new self‑serve plan opens a market segment that will need outbound outreach to build pipeline."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "Their focus on clinic scheduling indicates a target market for outbound sales, but the info is broad."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 840,
+    "completion_tokens": 756,
+    "latency_ms": 1915,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

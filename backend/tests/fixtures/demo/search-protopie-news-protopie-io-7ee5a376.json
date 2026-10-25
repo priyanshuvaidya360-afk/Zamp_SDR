@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"ProtoPie\" news protopie.io",
+  "results": [
+    {
+      "url": "https://www.protopie.io/blog/category/news",
+      "title": "News - ProtoPie",
+      "content": "On July 24, 2026, the legacy Individual Plan will be retired. Every Individual Plan user is being moved to Pro and if you act before the deadline, you'll keep your current price for a full year. Enjoy One Month Free of ProtoPie Pro + 1,000 AI Credits! ProtoPie Black Friday Is Here!",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.protopie.io/blog/tags/protopie-news",
+      "title": "ProtoPie News",
+      "content": "ProtoPie Plugged In and Amped Up at Pleos 25! Advanced Prototyping — #1 Advanced prototyping tool for building realistic, high-fidelity advanced prototypes. Flexible integrations, real data simulations, native sensors, voice interactions and more. No-code tool.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.einpresswire.com/article/779195816/protopie-secures-21m-in-series-b-funding-to-drive-global-expansion-and-innovation-in-high-fidelity-interaction-design",
+      "title": "ProtoPie Secures $21M in Series B Funding to Drive Global ...",
+      "content": "Jan 22, 2025 · ProtoPie raises $21M in Series B to expand globally, drive innovation in high-fidelity design, and enhance UX prototyping tools for industries worldwide.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://community.protopie.io/c/announcements/what-s-new-in-protopie-7941eb",
+      "title": "What's New in ProtoPie | ProtoPioneers",
+      "content": "ProtoPie Connect: We're thrilled to announce the release of ProtoPie Connect 2.5.1, which brings improvements to the login flow for Enterprise teams. That's not all - our Connect team is already hard at work on version 2.6.0, which will introduce the much-awaited API plugin.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.einpresswire.com/article/890585543/protopie-reclaims-design-control-new-ai-interaction-engine-prioritizes-human-precision-over-automated-vibes",
+      "title": "ProtoPie Reclaims Design Control: New AI Interaction Engine ...",
+      "content": "Feb 9, 2026 · ProtoPie has launched ProtoPie AI in Open Beta, introducing a disruptive \"Human-in-the-Loop\" workflow that combines AI speed with surgical manual precision.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

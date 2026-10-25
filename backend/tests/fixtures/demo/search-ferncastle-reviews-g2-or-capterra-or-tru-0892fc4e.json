@@ -1,0 +1,8 @@
+{
+  "provider": "simweb",
+  "query": "\"Ferncastle\" reviews G2 OR Capterra OR Trustpilot",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

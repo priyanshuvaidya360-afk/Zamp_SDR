@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 14,
+    "angle": "Sandy, as VP Product Marketing, just led the launch of Browser Guard, a new product that will need targeted outreach to drive adoption—Halyard can surface buying signals and craft personalized emails to accelerate its market traction.",
+    "runners_up": [
+      18,
+      19
+    ],
+    "why_not_others": "The funding and partnership signals are company‑wide financial news, not directly tied to Sandy’s product‑marketing focus."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 713,
+    "completion_tokens": 494,
+    "latency_ms": 26523,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "protopie.io case study enterprise design team",
+  "results": [
+    {
+      "url": "https://www.protopie.io/use-cases/enterprise",
+      "title": "ProtoPie for Enterprise Design Teams",
+      "content": "ProtoPie's Enterprise plan is designed for growth, allowing you to add editor seats anytime to match your team's expanding needs. After subscribing, simply let us know how many extra seats you require, and we'll adjust your billing cycle accordingly.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.protopie.io/resources/client-success-stories",
+      "title": "ProtoPie Case Studies & Success Stories",
+      "content": "See how teams at Google, Samsung, Monzo, and leading OEMs use ProtoPie to ship faster, align stakeholders, and reduce engineering rework.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.casestudies.com/company/protopie/case-study/how-zillow-uses-protopie-in-its-design-process-to-create-user-experiences-for-the-next-generation-all-without-needing-to-code",
+      "title": "Case Study: Zillow creates high-fidelity no-code prototypes ...",
+      "content": "The solution was implementing ProtoPie Enterprise, a no-code prototyping tool. ProtoPie enabled Zillow's designers to build complex, end-to-end prototypes that were powerful and flexible enough for internal presentations and live user testing.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.casestudies.com/company/protopie/case-study/how-the-design-team-at-mbition-harnesses-the-power-of-protopie-to-prototype-connected-experiences",
+      "title": "Case Study: MBition achieves faster high-fidelity Mercedes me ...",
+      "content": "MBition (Computer Software) partnered with ProtoPie (Computer Software) to solve key challenges. \"How the design team at MBition harnesses the power of ProtoPie to prototype connected experiences\" is their real-world success story.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://cdn.featuredcustomers.com/CustomerCaseStudy.document/protopie-case-study-1.pdf",
+      "title": "ProtoPie Reaches Global Design Teams to Drive Prototyping ...",
+      "content": "With nearly 100 global employees, ProtoPie empowers design teams worldwide with its code-free platform, supporting complex interactions and animations to streamline prototyping and foster innovation in UX design.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

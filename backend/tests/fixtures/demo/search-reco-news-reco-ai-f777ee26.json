@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Reco\" news reco.ai",
+  "results": [
+    {
+      "url": "https://www.reco.ai/newsroom",
+      "title": "Reco Newsroom: AI Security News & Updates",
+      "content": "Mar 18, 2023 · Stay up to date with Reco's latest AI security news, product launches, partnerships, and insights to strengthen enterprise security and reduce risk.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.reco.ai/",
+      "title": "AI Agent Security Platform | Reco",
+      "content": "Reco has not only helped us protect our business, but has also produced financial ROI by discovering redundant accounts and allowing us to consolidate licensing.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.distillintelligence.com/news/reco",
+      "title": "Latest Reco News & Announcements | Distill",
+      "content": "Sep 29, 2026 · See the latest news and media coverage for Reco. We track all announcements, press releases, and industry mentions in real time, all in one place. In short: Reco raised $140M in total funding, became an OpenAI Select Partner, expanded key partnerships, and published agent security research.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.calcalistech.com/ctechnews/article/sj2lnmt5mg",
+      "title": "Reco raises $55 million with AT&T backing to secure AI agents",
+      "content": "Sep 29, 2026 · Reco operates in the emerging field of agent security, focusing on securing AI agents that connect to applications, identities, permissions, and organizational data and can operate autonomously within enterprise workflows.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://fintech.global/2026/09/29/reco-raises-55m-to-secure-the-agentic-enterprise/",
+      "title": "Reco raises $55m to secure the agentic enterprise",
+      "content": "Sep 29, 2026 · Reco, an agentic security company that protects AI agents and the environments they operate in, has closed an additional $55m in funding, lifting its total capital raised to $140m. AT&T Ventures took part as a strategic investor, while Forestay and Quadrille Capital joined as new backers. The company plans to put the capital towards growing […]",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

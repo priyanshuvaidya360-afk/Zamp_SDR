@@ -1,0 +1,33 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "\"ProtoPie\" integration HubSpot",
+        "why": "May find a partnership that includes sales integration."
+      },
+      {
+        "query": "\"ProtoPie\" expands into Europe",
+        "why": "May reveal a new regional launch needing pipeline."
+      },
+      {
+        "query": "\"ProtoPie\" sales-led motion",
+        "why": "May uncover a shift to sales-led strategy."
+      },
+      {
+        "query": "\"ProtoPie\" new VP Sales",
+        "why": "May indicate new sales leadership requiring pipeline."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 710,
+    "completion_tokens": 1899,
+    "latency_ms": 2587,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

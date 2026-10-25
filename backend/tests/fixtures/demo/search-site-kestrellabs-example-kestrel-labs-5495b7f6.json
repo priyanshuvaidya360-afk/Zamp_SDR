@@ -1,0 +1,8 @@
+{
+  "provider": "simweb",
+  "query": "site:kestrellabs.example Kestrel Labs",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

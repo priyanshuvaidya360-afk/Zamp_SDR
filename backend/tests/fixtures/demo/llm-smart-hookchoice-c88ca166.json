@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 15,
+    "angle": "They just raised $55 million, giving them fresh budget to scale demand generation—our engine can help them build pipeline quickly without hiring more SDRs.",
+    "runners_up": [
+      16,
+      14
+    ],
+    "why_not_others": "Funding signals immediate budget for growth, whereas the partnerships are less directly linked to an urgent outbound need."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 928,
+    "completion_tokens": 405,
+    "latency_ms": 1288,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

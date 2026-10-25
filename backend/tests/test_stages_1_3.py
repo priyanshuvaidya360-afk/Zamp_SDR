@@ -4,12 +4,12 @@ import hashlib
 from datetime import timedelta
 
 import pytest
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 from app import ingest, llm, search
 from app.config import settings
 from app.llm import Usage
-from app.models import Batch, Run, RunStatus, utcnow
+from app.models import Batch, DraftRecord, Run, RunStatus, utcnow
 from app.pipeline import intake, research, resolve, runner
 from app.pipeline.resolve import Candidate, IdentityCandidates
 from app.pipeline.runner import StopRun
@@ -36,8 +36,14 @@ class FakeSearch:
     def __init__(self):
         self.queries: list[str] = []
         self.extracted: list[list[str]] = []
+        self.site_up: bool | None = True
+        self.reachable_checked: list[str] = []
 
-    async def search(self, query, depth="basic", days=180, max_results=5, topic="general"):
+    async def site_reachable(self, domain):
+        self.reachable_checked.append(domain)
+        return self.site_up
+
+    async def search(self, query, depth="basic", days=180, max_results=5, topic="general", free_first=False):
         self.queries.append(query)
         tag = hashlib.md5(query.encode()).hexdigest()[:6]
         results = [SearchResult(url=f"https://news{i}.example.com/{tag}", title=f"{query} #{i}",
@@ -60,6 +66,7 @@ def fake_search(monkeypatch) -> FakeSearch:
     fake = FakeSearch()
     monkeypatch.setattr(search, "search", fake.search)
     monkeypatch.setattr(search, "extract", fake.extract)
+    monkeypatch.setattr(search, "site_reachable", fake.site_reachable)
     return fake
 
 
@@ -104,9 +111,22 @@ async def test_intake_blocks_a_person_researched_recently(session):
     second = make_ctx(session, PRIYA)  # another batch, same person
     with pytest.raises(StopRun) as stop:
         await intake.run(second)
-    assert stop.value.status == RunStatus.blocked
+    assert stop.value.status == RunStatus.blocked  # the earlier run has no draft (yet)
     assert stop.value.reason.startswith("Contacted recently")
-    assert stop.value.payload == {"earlier_run_id": first.run_id}
+    assert stop.value.payload == {"earlier_run_id": first.run_id, "earlier_status": "running"}
+
+
+async def test_a_person_drafted_recently_shows_that_draft_instead(session):
+    first = make_ctx(session, PRIYA)
+    session.add(DraftRecord(run_id=first.run_id, version=1, subject="s", body="b", claims=[]))
+    _update_run(session, first.run_id, status=RunStatus.ready_for_review)
+    with pytest.raises(StopRun) as stop:
+        await intake.run(make_ctx(session, PRIYA))  # another batch, same person
+    draft = session.exec(select(DraftRecord)).one()
+    assert stop.value.status == RunStatus.already_drafted
+    assert stop.value.reason.startswith(f"Already drafted on ") and f"run #{first.run_id} (ready for review)" in stop.value.reason
+    assert stop.value.payload == {"earlier_run_id": first.run_id, "earlier_status": "ready_for_review",
+                                  "draft_id": draft.id}
 
 
 def _update_run(session: Session, run_id: int, **fields) -> None:
@@ -181,7 +201,8 @@ def test_same_name_at_different_companies_stays_ambiguous():
 
 
 @pytest.mark.parametrize(("candidates", "reason"), [
-    ([], "Couldn't find this person in public search results. Confirm who they are."),
+    # No candidate, but results name her with Acme (the fake's titles echo the query): the rep confirms.
+    ([], "Priya Raman appears in 10 results, but none confirms who they are. Confirm it's the right person."),
     ([person(confidence=0.6)], "Best match is only 0.60 confident. Confirm it's the right person."),
     ([person(confidence=0.3)], "No confident match in public search results. Confirm who they are."),
 ])
@@ -240,6 +261,140 @@ async def test_resume_with_the_reps_pick_skips_searching(session, fake_search, m
     assert fake_search.queries == [] and calls == []
 
 
+async def test_details_the_rep_typed_replace_the_csv(session, fake_search, monkeypatch):
+    # No candidates found: the rep types who the person is, and that beats the CSV.
+    fake_identity(monkeypatch)
+    ctx = make_ctx(session, PRIYA)
+    ctx.resume_input = {"candidate": person(title="CFO", company="Acme Pay", company_domain="https://acmepay.io/",
+                                            location=None, country=None, evidence_url="", confidence=1)}
+    await resolve.run(ctx)
+    assert (ctx.row["title"], ctx.row["company"], ctx.row["domain"]) == ("CFO", "Acme Pay", "acmepay.io")
+    run = session.get(Run, ctx.run_id)
+    session.refresh(run)
+    assert (run.title, run.company, run.domain) == ("CFO", "Acme Pay", "acmepay.io")
+
+
+# --- Stage 2: why identity failed (diagnose) -------------------------------------------
+
+
+def answer_searches(monkeypatch, *results: SearchResult, provider="tavily", fallbacks=()):
+    async def fake(query, depth="basic", days=180, max_results=5, topic="general", free_first=False):
+        return SearchResponse(provider=provider, query=query, results=list(results), fallbacks=list(fallbacks))
+
+    monkeypatch.setattr(search, "search", fake)
+
+
+async def stop_of(ctx) -> StopRun:
+    with pytest.raises(StopRun) as stop:
+        await resolve.run(ctx)
+    return stop.value
+
+
+async def test_search_outage_is_not_blamed_on_the_prospect(session, fake_search, monkeypatch):
+    fake_identity(monkeypatch)
+    answer_searches(monkeypatch, provider="none", fallbacks=["tavily: HTTPError", "duckduckgo: no results"])
+    ctx = make_ctx(session, PRIYA)
+    stop = await stop_of(ctx)
+    assert (stop.status, stop.payload["outcome"]) == (RunStatus.needs_input, "search_failed")
+    assert stop.reason.startswith("Web search wasn't available")
+    assert stop.payload["diagnosis"] == [{"label": "Search unavailable (tavily)", "ok": False}]
+    assert session.get(Run, ctx.run_id).identity_outcome == "search_failed"
+
+
+async def test_nothing_found_because_nothing_exists_is_still_search_working(session, fake_search, monkeypatch):
+    # Every provider answered "no results": search worked, the person just isn't there.
+    fake_identity(monkeypatch)
+    answer_searches(monkeypatch, provider="none", fallbacks=["tavily: no results", "duckduckgo: no results"])
+    stop = await stop_of(make_ctx(session, PRIYA))
+    assert stop.payload["outcome"] == "not_public"
+    assert stop.reason == "Acme Fintech is real, but Priya Raman doesn't appear anywhere online with it."
+    assert fake_search.reachable_checked == ["acmefintech.com"]
+
+
+@pytest.mark.parametrize(("first", "last", "why"), [
+    ("Test", "User", "'Test User' looks like a placeholder"),
+    ("John", "Doe", "'John Doe' is a placeholder name"),
+    ("Priya", "Raman2", "'Priya Raman2' contains digits"),
+])
+async def test_placeholder_names_are_bad_data(session, fake_search, monkeypatch, first, last, why):
+    fake_identity(monkeypatch)
+    stop = await stop_of(make_ctx(session, f"{first},{last},,Acme Fintech,VP Finance,acmefintech.com,,"))
+    assert stop.payload["outcome"] == "bad_data"
+    assert stop.reason == f"This row looks like bad data: {why}. Fix the row or dismiss it."
+
+
+def test_unusual_real_names_are_not_called_fake():
+    for first, last in [("Na", "Li"), ("Bo", "Bo"), ("Ng", "Ng"), ("Mary-Ann", "O'Neil"), ("X", "Æ")]:
+        assert resolve.placeholder_name(first, last) is None, (first, last)
+
+
+async def test_dead_domain_with_no_mentions_is_bad_data(session, fake_search, monkeypatch):
+    fake_identity(monkeypatch)
+    answer_searches(monkeypatch, SearchResult(url="https://elsewhere.com/x", title="Something else", content="unrelated"))
+    fake_search.site_up = False
+    stop = await stop_of(make_ctx(session, PRIYA))
+    assert stop.payload["outcome"] == "bad_data"
+    assert "acmefintech.com doesn't load" in stop.reason
+    assert {"label": "acmefintech.com doesn't load", "ok": False} in stop.payload["diagnosis"]
+
+
+async def test_real_company_without_the_person_is_not_public(session, fake_search, monkeypatch):
+    fake_identity(monkeypatch)
+    answer_searches(monkeypatch, SearchResult(url="https://acmefintech.com/about", title="About Acme Fintech",
+                                              content="Acme Fintech builds payments software."))
+    stop = await stop_of(make_ctx(session, PRIYA))
+    assert stop.payload["outcome"] == "not_public"
+    assert fake_search.reachable_checked == []  # the company was found: no need to load its site
+    labels = {c["label"]: c["ok"] for c in stop.payload["diagnosis"]}
+    assert labels == {"Search working (3 queries, 1 result)": True, "Name looks real": True,
+                      "Email is at acmefintech.com": True, "Acme Fintech named in 1 result": True,
+                      "Raman named with Acme Fintech in 0 results": False}
+
+
+async def test_two_rivals_are_ambiguous(session, fake_search, monkeypatch):
+    fake_identity(monkeypatch, person(confidence=0.85), person("Priya Raman (Pune)", confidence=0.7,
+                                                                            company="Other", company_domain="other.com"))
+    stop = await stop_of(make_ctx(session, PRIYA))
+    assert (stop.payload["outcome"], stop.reason) == ("ambiguous", "2 people could match. Pick the right one.")
+
+
+async def test_company_level_draft_continues_unverified(session, fake_search, monkeypatch):
+    calls = fake_identity(monkeypatch)
+    ctx = make_ctx(session, PRIYA)
+    ctx.resume_input = {"unverified": True}
+    out = await resolve.run(ctx)
+    assert out.unverified and not out.rep_confirmed
+    assert out.person.confidence == ctx.confidence == settings.identity_unverified
+    assert (out.person.company, out.person.company_domain) == ("Acme Fintech", "acmefintech.com")
+    assert fake_search.queries == [] and calls == []
+    assert session.get(Run, ctx.run_id).identity_unverified
+
+
+async def test_company_level_draft_needs_a_company(session, fake_search, monkeypatch):
+    fake_identity(monkeypatch)
+    ctx = make_ctx(session, "Hanna,Andrzejewska,,,,,linkedin.com/in/hanna-a,")
+    ctx.resume_input = {"unverified": True}
+    assert (await stop_of(ctx)).status == RunStatus.needs_input
+
+
+async def test_a_fixed_row_is_searched_again_with_the_new_details(session, fake_search, monkeypatch):
+    fake_identity(monkeypatch, person(company="Acme Pay", company_domain="acmepay.io", evidence_url="https://acmefintech.com/team"))
+    ctx = make_ctx(session, PRIYA)
+    ctx.resume_input = {"fix": {"company": "Acme Pay", "company_domain": "https://www.acmepay.io/", "title": "CFO"}}
+    with pytest.raises(StopRun):  # the fake's evidence doesn't name Acme Pay: not auto-accepted, but searched
+        await resolve.run(ctx)
+    assert fake_search.queries[0] == '"Priya Raman" site:acmepay.io'
+    assert (ctx.row["company"], ctx.row["domain"], ctx.row["title"]) == ("Acme Pay", "acmepay.io", "CFO")
+
+
+async def test_rep_can_dismiss(session, fake_search, monkeypatch):
+    fake_identity(monkeypatch)
+    ctx = make_ctx(session, PRIYA)
+    ctx.resume_input = {"dismiss": True}
+    stop = await stop_of(ctx)
+    assert stop.status == RunStatus.dismissed and fake_search.queries == []
+
+
 # --- Stage 3: gather -------------------------------------------------------------------
 
 
@@ -262,7 +417,9 @@ async def test_gather_skips_results_that_never_mention_the_company_or_person(ses
     assert not any("afropop" in s.url for s in out.sources)
     by_category = {q.category: q for q in out.queries}
     # Company results name Acme in the title/URL; LinkedIn and afropop are dropped.
-    assert all(q.relevant == q.results - 2 for q in out.queries if q.about == "company")
+    assert all(q.relevant == q.results - 2 for q in out.queries if q.about == "company" and q.category not in research.SITE_QUERIES)
+    # The own-site search keeps only pages on acmefintech.com: the team page.
+    assert by_category["company_site"].relevant == 1 and by_category["company_site"].query == "site:acmefintech.com Acme Fintech"
     # Person results need the full name AND the company: only the team page has both.
     assert by_category["person_content"].relevant == 1
     assert {q.category: q.query for q in out.queries}["funding"] == '"Acme Fintech" raises funding round'
@@ -273,7 +430,189 @@ async def test_company_research_runs_once_per_account(session, fake_search):
     dev = make_ctx(session, "Dev,Rao,,Acme Fintech,Controller,acmefintech.com,,")
     dev.batch = priya.batch  # same batch -> shared research
     await research.run(priya)
-    company_searches = len(fake_search.queries) - len(research.PERSON_QUERIES)
+    per_person = len(research.PERSON_QUERIES) + len(research.PERSON_WIDE_QUERIES)
+    company_searches = len(fake_search.queries) - per_person
     await research.run(dev)
-    assert len(fake_search.queries) == company_searches + 2 * len(research.PERSON_QUERIES)
+    assert len(fake_search.queries) == company_searches + 2 * per_person
     assert dev.credits < priya.credits  # company research charged once, to Priya's run
+
+
+@pytest.mark.parametrize(("raw", "clean"), [
+    ("CredWise Finserv India | Home Loan Experts", "CredWise Finserv India"),
+    ("Fast VPS & FinTech Services (FVFS)", "Fast VPS & FinTech Services"),
+    ("Acme - The payments company", "Acme"),
+    ("Coca-Cola", "Coca-Cola"),
+    ("Acme Fintech", "Acme Fintech"),
+])
+def test_company_names_are_cleaned_for_search(raw, clean):
+    assert research.search_name(raw) == clean
+
+
+async def test_own_site_is_searched_without_a_date_window(session, fake_search, monkeypatch):
+    windows = {}
+    original = fake_search.search
+
+    async def spy(query, depth="basic", days=180, max_results=5, topic="general", free_first=False):
+        windows[query] = (days, free_first)
+        return await original(query, depth, days, max_results, topic)
+
+    monkeypatch.setattr(search, "search", spy)
+    out = await research.run(make_ctx(session, "Ana,Lima,,CredWise Finserv | Home Loans,CFO,acmefintech.com,,"))
+    assert windows["site:acmefintech.com CredWise Finserv"] == (research.SITE_DAYS, False)
+    assert windows['"CredWise Finserv" raises funding round'] == (settings.signal_window_days, False)  # no tagline
+    # The wider nets try the free provider first.
+    assert windows['"CredWise Finserv" reviews G2 OR Capterra OR Trustpilot'][1] is True
+    assert windows['"Ana Lima" article OR blog OR wrote OR webinar'][1] is True
+    assert any(s.url == "https://acmefintech.com/team" for s in out.sources)
+    assert len(windows) <= settings.gather_max_searches
+
+
+async def test_no_domain_means_no_site_search(session, fake_search):
+    await research.run(make_ctx(session, "Hanna,Andrzejewska,,GetResponse,,,linkedin.com/in/hanna-a,"))
+    assert not any(q.startswith("site:") for q in fake_search.queries)
+
+
+async def test_a_page_both_searches_found_is_kept_once(session, fake_search):
+    # acmefintech.com/team names Priya and Acme: the own-site search and the person search both keep it.
+    out = await research.run(make_ctx(session, PRIYA))
+    urls = [s.url for s in out.sources]
+    assert len(urls) == len(set(urls))
+    assert [s.about for s in out.sources if s.url == "https://acmefintech.com/team"] == ["person"]
+
+
+async def test_every_search_result_is_kept_for_the_sources_tab(session, fake_search, monkeypatch):
+    fake_identity(monkeypatch, person())
+    ctx = make_ctx(session, PRIYA)
+    resolved = await resolve.run(ctx)
+    assert {"url": "https://www.linkedin.com/in/someone", "title": "LinkedIn"} in resolved.found
+    assert len({f["url"] for f in resolved.found}) == len(resolved.found)
+    gathered = await research.run(ctx)
+    funding = next(q for q in gathered.queries if q.category == "funding")
+    assert len(funding.found) == funding.results == 6 and funding.relevant < 6  # dropped results are listed too
+
+
+
+def test_company_named_inside_the_article_counts_but_one_passing_mention_does_not():
+    terms = research.company_terms("Varicash", "varicash.com")
+    inside = SearchResult(url="https://news.example/fintech-week", title="Fintech week",
+                          content="Varicash, a lending startup, said... Varicash will also hire.")
+    domain = SearchResult(url="https://events.example/sponsors", title="Sponsors", content="Silver: varicash.com")
+    listicle = SearchResult(url="https://list.example/top-50", title="Top 50 startups", content="... Varicash ...")
+    assert research.is_about_company(inside, terms) and research.is_about_company(domain, terms)
+    assert not research.is_about_company(listicle, terms)
+
+
+@pytest.mark.parametrize(("query", "accepted"), [
+    ('"Acme Fintech" RBI payment aggregator licence', True),
+    ("site:acmefintech.com pricing", True),
+    ("best payment startups India", False),          # doesn't name the company
+    ('"Acme Fintech" site:linkedin.com', False),     # never LinkedIn
+    ('"Acme Fintech" site:crunchbase.com', False),   # site: only on their own domain
+    ('"Acme Fintech" raises funding round', False),  # already planned
+])
+def test_code_checks_every_planned_query(query, accepted):
+    existing = {'"acme fintech" raises funding round'}
+    result = research.accept_planned(research.PlannedQuery(query=query), "Acme Fintech", "acmefintech.com", existing)
+    assert (result is not None) == accepted
+
+
+def planner(monkeypatch, *queries: str) -> list[dict]:
+    calls = []
+
+    async def structured(role, system, user, schema, providers=None):
+        calls.append({"role": role, "user": user})
+        plan = research._Plan(queries=[research.PlannedQuery(query=q, why="test") for q in queries])
+        return plan, Usage(provider="groq", model="m", role=role, prompt_tokens=50, completion_tokens=10)
+
+    monkeypatch.setattr(llm, "structured", structured)
+    return calls
+
+
+async def test_planned_queries_run_free_first_and_count_toward_the_cap(session, fake_search, monkeypatch):
+    monkeypatch.setattr(settings, "gather_planned_queries", 3)
+    calls = planner(monkeypatch, '"Acme Fintech" RBI licence', "top fintech startups")
+    ctx = make_ctx(session, PRIYA)
+    out = await research.run(ctx)
+    assert calls[0]["role"] == "fast" and '"Acme Fintech" raises funding round' in calls[0]["user"]
+    assert [q.query for q in out.planned] == ['"Acme Fintech" RBI licence']  # the off-topic one is dropped
+    assert {q.query: q.about for q in out.queries if q.category.startswith("explore_")} == {
+        '"Acme Fintech" RBI licence': "company"}
+    assert out.searches <= settings.gather_max_searches and ctx.tokens == 60
+    assert "1 planned for Acme Fintech" in out.message
+
+
+async def test_colleagues_share_one_plan_whoever_runs_first(session, fake_search, monkeypatch):
+    # Company research runs once per account, inside whichever colleague's run gets there first.
+    # The plan must not depend on who that is, or a replay could ask for searches never recorded.
+    monkeypatch.setattr(settings, "gather_planned_queries", 2)
+    calls = planner(monkeypatch, '"Acme Fintech" RBI licence')
+    priya = make_ctx(session, PRIYA)
+    dev = make_ctx(session, "Dev,Rao,,Acme Fintech,Controller,acmefintech.com,,")
+    dev.batch = priya.batch
+    first = await research.run(dev)
+    second = await research.run(priya)
+    assert len(calls) == 1  # planned once for the account
+    assert "Dev Rao" not in calls[0]["user"] and "Priya Raman" not in calls[0]["user"]  # the company alone
+    assert first.planned == second.planned and [q.query for q in second.planned] == ['"Acme Fintech" RBI licence']
+
+
+async def test_a_failed_planner_never_fails_the_run(session, fake_search, monkeypatch):
+    monkeypatch.setattr(settings, "gather_planned_queries", 3)
+
+    async def down(*args, **kwargs):
+        raise llm.LLMUnavailable("both providers down")
+
+    monkeypatch.setattr(llm, "structured", down)
+    out = await research.run(make_ctx(session, PRIYA))
+    assert out.planned == [] and out.searches == 14
+
+
+def test_the_prospect_list_says_who_was_researched_before_drafting(session, client):
+    # Priya was researched in an earlier batch; Dev is new. The list says so before any Draft click.
+    earlier = make_ctx(session, PRIYA)
+    _update_run(session, earlier.run_id, status=RunStatus.ready_for_review)
+    csv = (HEADER + PRIYA + "\nDev,Rao,,Acme Fintech,Controller,acmefintech.com,,\n").encode()
+    batch_id = client.post("/batches", files={"file": ("again.csv", csv, "text/csv")}).json()["batch_id"]
+    rows = {p["name"]: p["researched_before"] for p in client.get(f"/batches/{batch_id}").json()["prospects"]}
+    assert rows["Priya Raman"]["run_id"] == earlier.run_id and rows["Priya Raman"]["status"] == "ready_for_review"
+    assert rows["Dev Rao"] is None  # a fresh prospect
+
+
+def test_a_row_whose_own_research_is_done_is_already_researched(session, client):
+    from app.models import StageEvent, StageState
+    csv = (HEADER + PRIYA + "\n").encode()
+    batch_id = client.post("/batches", files={"file": ("one.csv", csv, "text/csv")}).json()["batch_id"]
+    assert client.get(f"/batches/{batch_id}").json()["prospects"][0]["researched_before"] is None  # not drafted yet
+    [run_id] = runner.create_runs(session, session.get(Batch, batch_id))
+    _update_run(session, run_id, status=RunStatus.low_signal)
+    session.add(StageEvent(run_id=run_id, stage="extract", state=StageState.done))
+    session.commit()
+    [row] = client.get(f"/batches/{batch_id}").json()["prospects"]
+    assert row["researched_before"]["run_id"] == run_id  # drafting again won't search again
+
+
+def test_a_stopped_rerun_never_counts_as_research(session):
+    # A run that stopped as a duplicate did no research: the next upload points at the real one.
+    first = make_ctx(session, PRIYA)
+    _update_run(session, first.run_id, status=RunStatus.ready_for_review)
+    second = make_ctx(session, PRIYA)
+    _update_run(session, second.run_id, status=RunStatus.blocked)
+    third = make_ctx(session, PRIYA)
+    assert intake.find_recent_run(third).id == first.run_id
+
+
+def test_a_stopped_duplicate_row_points_at_the_earlier_research(session, client):
+    # The run stopped at intake; the stages after it are recorded as "not run", so the intake event
+    # (which names the earlier run) is not the latest one.
+    from app.models import StageEvent, StageState
+    first = make_ctx(session, PRIYA)
+    _update_run(session, first.run_id, status=RunStatus.ready_for_review)
+    batch_id = client.post("/batches", files={"file": ("dup.csv", (HEADER + PRIYA + "\n").encode(), "text/csv")}).json()["batch_id"]
+    [run_id] = runner.create_runs(session, session.get(Batch, batch_id))
+    _update_run(session, run_id, status=RunStatus.blocked)
+    session.add(StageEvent(run_id=run_id, stage="intake", state=StageState.done,
+                           payload={"stopped": "blocked", "earlier_run_id": first.run_id}))
+    session.add(StageEvent(run_id=run_id, stage="resolve", state=StageState.skipped))
+    session.commit()
+    [row] = client.get(f"/batches/{batch_id}").json()["prospects"]
+    assert row["researched_before"]["run_id"] == first.run_id

@@ -1,0 +1,53 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "proto pie AI launch",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 13,
+        "reason": "ProtoPie launching ProtoPie AI is supported by the facts.",
+        "suggestion": null
+      },
+      {
+        "sentence": "ProtoPie just launched ProtoPie AI with component authoring.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 13,
+        "reason": "ProtoPie AI launch and component authoring are explicitly mentioned in the facts.",
+        "suggestion": null
+      },
+      {
+        "sentence": "As Head of Growth, you likely need a steady flow of qualified prospects to accelerate adoption, and Halyard can deliver ready‑to‑engage leads without expanding your SDR team.",
+        "about": "prospect",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a bridging sentence stating a likely need and offering the seller's product.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15‑minute call to explore this?",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a call to action question.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 2,
+    "genericness_reason": "The email references the specific recent ProtoPie AI launch, though it uses a standard generic pitch structure."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 778,
+    "completion_tokens": 379,
+    "latency_ms": 1538,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

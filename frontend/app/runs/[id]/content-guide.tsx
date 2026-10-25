@@ -1,6 +1,6 @@
 import { Check, X } from "lucide-react";
 
-import type { DraftRecord } from "@/lib/types";
+import type { DraftRecord, FactualReport } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 // The "content guide": is this email good to send? A navy summary, then one row per check
@@ -14,7 +14,11 @@ export function ContentGuide({ draft }: { draft: DraftRecord }) {
   const words = body.trim().split(/\s+/).filter(Boolean).length;
   const subjectLen = draft.subject.length;
   const sourced = new Set(draft.claims.map((c) => c.signal_id)).size;
-  const warnings = (report.warnings ?? []).filter((w) => w !== report.banner);
+  const factual = report.factual;
+  // Factual problems are listed in their own section below; don't repeat them as warnings.
+  const warnings = (report.warnings ?? []).filter(
+    (w) => w !== report.banner && !(factual && /^(unsupported_fact|contradicted_fact|check this fact)/.test(w)),
+  );
 
   const rows: Row[] = [
     { title: "Length", value: `${words} words`, note: `Under ${MAX_WORDS} words`, ok: words <= MAX_WORDS, fill: words / MAX_WORDS },
@@ -33,6 +37,16 @@ export function ContentGuide({ draft }: { draft: DraftRecord }) {
       fill: sourced ? 1 : 0,
     },
   ];
+  if (factual) {
+    const wrong = factual.unsupported + factual.contradicted;
+    rows.push({
+      title: "Factual accuracy",
+      value: `${factual.supported} verified`,
+      note: `${factual.unsupported} unsupported · ${factual.contradicted} contradicted · ${factual.uncertain} to check`,
+      ok: wrong === 0,
+      fill: factual.checked ? factual.supported / factual.checked : 1,
+    });
+  }
   if (report.genericness) {
     rows.push({
       title: "Personal",
@@ -81,6 +95,8 @@ export function ContentGuide({ draft }: { draft: DraftRecord }) {
         </div>
       ))}
 
+      {factual && factual.issues.length > 0 && <FactualIssues factual={factual} />}
+
       {report.checks && (
         <div className="space-y-2 px-5 py-4.5">
           <h3 className="text-xs font-bold tracking-[0.08em] text-primary uppercase">Critic checklist</h3>
@@ -116,3 +132,46 @@ export function ContentGuide({ draft }: { draft: DraftRecord }) {
 }
 
 type Row = { title: string; value: string; note: string; ok: boolean; fill: number };
+
+/** Each sentence the factual audit could not match to the research, with why and what to use instead. */
+function FactualIssues({ factual }: { factual: FactualReport }) {
+  return (
+    <div className="space-y-3 border-b px-5 py-4.5">
+      <h3 className="text-xs font-bold tracking-[0.08em] text-primary uppercase">Factual accuracy</h3>
+      {factual.blocking && (
+        <p className="text-[13px] text-[#a14a00]">
+          Approve is off until these sentences are fixed. Edit the email; your edit is checked again before it is approved.
+        </p>
+      )}
+      <ul className="space-y-3 text-sm">
+        {factual.issues.map((issue) => (
+          <li key={issue.sentence} className="space-y-1">
+            <span
+              className={cn(
+                "rounded-md px-2 py-0.5 text-xs font-semibold",
+                issue.status === "uncertain" ? "bg-secondary text-navy" : "bg-[#fff4e8] text-[#a14a00]",
+              )}
+            >
+              {issue.status === "uncertain" ? "Check" : issue.status === "contradicted" ? "Contradicted" : "Unsupported"}
+            </span>
+            <p className="text-zinc-800">&ldquo;{issue.sentence}&rdquo;</p>
+            <p className="text-xs text-muted-foreground">{issue.reason}</p>
+            {issue.evidence && (
+              <p className="text-xs text-muted-foreground">
+                Source:{" "}
+                {issue.source_url ? (
+                  <a href={issue.source_url} target="_blank" rel="noreferrer" className="text-primary underline">
+                    {issue.evidence}
+                  </a>
+                ) : (
+                  issue.evidence
+                )}
+              </p>
+            )}
+            {issue.suggestion && <p className="text-xs text-[#137a43]">Suggested: {issue.suggestion}</p>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}

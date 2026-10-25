@@ -1,0 +1,31 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "ProtoPie states it is a multi-platform rapid high-fidelity prototyping tool enabling code-free interactive wireframes.",
+        "evidence": "ProtoPie is a multi-platform rapid high-fidelity prototyping tool that enables developers to create interactive wireframes quickly and intuitively",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1846,
+    "completion_tokens": 146,
+    "latency_ms": 1467,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

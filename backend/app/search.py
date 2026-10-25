@@ -1,6 +1,6 @@
 """The only way the app searches the web or extracts pages.
 
-Spec: docs/GUIDE.md T03. Provider order: Tavily (1,000 free credits/month) -> DuckDuckGo
+Spec: docs/PROJECT_SPEC.md T03. Provider order: Tavily (1,000 free credits/month) -> DuckDuckGo
 (ddgs, no key, pages fetched by app/fetch.py) -> Exa (only if EXA_API_KEY is set). A provider
 that errors, is out of credits, or returns nothing hands over to the next one.
 
@@ -18,8 +18,8 @@ from pydantic import BaseModel
 from tenacity import AsyncRetrying, retry_if_exception_type, stop_after_attempt, wait_exponential
 
 from app.config import settings
-from app.fetch import fetch_many, is_blocked
-from app.fixtures import cache_get, cache_put, load_fixture, make_slug, replay_pause, reusable, save_fixture
+from app.fetch import fetch_many, is_blocked, reachable
+from app.fixtures import FixtureMissing, cache_get, cache_put, load_fixture, make_slug, replay_pause, reusable, save_fixture
 
 log = logging.getLogger(__name__)
 
@@ -239,14 +239,21 @@ async def _with_retry(fn, *args):
 # --- Public API --------------------------------------------------------------
 
 
+PAID = ("tavily", "exa")  # providers that spend credits
+
+
 async def search(
     query: str, depth: Depth = "basic", days: int = 180, max_results: int = 5,
-    topic: Topic = "general",
+    topic: Topic = "general", free_first: bool = False,
 ) -> SearchResponse:
-    """Search the web, newest `days` only. Empty results are a valid answer (thin signal)."""
+    """Search the web, newest `days` only. Empty results are a valid answer (thin signal).
+    free_first: try the no-key providers (DuckDuckGo) before the ones that spend credits; for the
+    wider, nice-to-have searches, so exploring more doesn't burn the free Tavily quota."""
     params = {"query": query, "depth": depth, "days": days, "max_results": max_results}
     if topic != "general":  # keeps slugs and cache keys of existing recordings unchanged
         params["topic"] = topic
+    if free_first:
+        params["free_first"] = True
     slug = make_slug("search", query, params)
     if settings.demo_mode == "fixtures":
         await replay_pause()
@@ -256,11 +263,14 @@ async def search(
 
     skipped: list[str] = []
     response = SearchResponse(provider="none", query=query, results=[])
-    for provider in get_providers():
+    providers = get_providers()
+    if free_first:  # stable sort: the simulated web stays first, paid providers move last
+        providers = sorted(providers, key=lambda p: p.name in PAID)
+    for provider in providers:
         if not provider.available():
             continue
         authoritative = getattr(provider, "authoritative", False)
-        cache_key = {"provider": provider.name, "op": "search", **params}
+        cache_key = {"provider": provider.name, "op": "search", **{k: v for k, v in params.items() if k != "free_first"}}
         if not authoritative and (hit := cache_get(cache_key)) is not None:
             response = SearchResponse(**{**hit, "credits": 0, "cached": True})
             break
@@ -339,3 +349,18 @@ async def extract(urls: list[str], fresh: bool = False) -> ExtractResponse:
     if settings.demo_mode == "record":
         save_fixture(slug, response.model_dump())
     return response
+
+
+async def site_reachable(domain: str) -> bool | None:
+    """Does the company's website answer at all? (resolve.diagnose: real company or bad data.)
+    None when it couldn't be checked, including a demo replay that never recorded this check."""
+    slug = make_slug("reachable", domain, {"domain": domain})
+    if settings.demo_mode == "fixtures":
+        try:
+            return load_fixture(slug)["reachable"]
+        except FixtureMissing:
+            return None
+    answer = await reachable(f"https://{domain}")
+    if settings.demo_mode == "record":
+        save_fixture(slug, {"reachable": answer})
+    return answer

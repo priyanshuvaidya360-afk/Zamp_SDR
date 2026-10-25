@@ -1,0 +1,43 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Abacum raised a $60 million Series B in June 2025 led by Scale Venture Partners.",
+        "evidence": "Abacum, which started in Barcelona and now focuses mainly on the U.S. market, raised a $60 million Series B in June 2025 led by Scale Venture Partners",
+        "published_at": "2026-10-22",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum targets a smaller mid-market customer base and focuses mainly on the U.S. market.",
+        "evidence": "Abacum targets a smaller mid-market customer base than Pigment — a different position in the same category.",
+        "published_at": "2026-10-22",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2350,
+    "completion_tokens": 308,
+    "latency_ms": 1588,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

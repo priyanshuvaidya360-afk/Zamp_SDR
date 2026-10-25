@@ -1,0 +1,46 @@
+{
+  "provider": "tavily",
+  "query": "\"Abacum\" AWS Marketplace listing",
+  "results": [
+    {
+      "url": "https://ca.jooble.org/jdp/-8875761131642508700",
+      "title": "Enterprise Account Executive - North America at Abacum",
+      "content": "Abacum is the only FP&A platform to pass NetSuite's SuiteCloud Developer Network review, is listed on the Sage Intacct Marketplace, and is a verified Microsoft",
+      "published_date": null,
+      "score": 0.72278196
+    },
+    {
+      "url": "https://finstackprices.com/tools/abacum",
+      "title": "Abacum: pricing, AI features & alternatives",
+      "content": "Abacum (FP&A and consolidation) ... A \"price clue\" comes from a third party (e.g. AWS Marketplace or a review site), not the vendor's own price list.",
+      "published_date": null,
+      "score": 0.5746579
+    },
+    {
+      "url": "https://info.rillet.com/how-rillet-works-integrations-ai-security",
+      "title": "How Rillet works: integrations, automation, Aura AI, and security",
+      "content": "| Banking | RBC, J.P. Morgan, Bank of America | Supports treasury/bank data connectivity that feeds reconciliation and cash visibility. |\n| FP&A | Anaplan, Adaptive Insights, Aleph, Abacum | Planning/forecasting tools can connect to accounting actuals for variance and performance management. | [...] | Payments / commerce | Stripe, AWS Marketplace, Apple Store | Payment activity can be reconciled to invoices and cash for accurate AR and revenue tracking. |\n| Data warehouse | Snowflake, BigQuery, Redshift | Enables analytics/reporting workflows that depend on reliable, standardized accounting data. |\n| Payroll | Rippling, Gusto, Deel, Justworks | Payroll data can be incorporated into recurring journals and close workflows. | [...] ### Integration coverage: what the \"12,000+ integrations\" typically spans",
+      "published_date": null,
+      "score": 0.14835568
+    },
+    {
+      "url": "https://www.ycombinator.com/companies/industry/saas/new-york",
+      "title": "SaaS Startups funded by Y Combinator (YC) in New York 2026 | Y Combinator",
+      "content": "digital-health\n\n  health-tech](/companies/g-lnk) [Ryvn\n\n  Ryvn\n\n  F2024\n\n   • Active • 5 employees • New York City\n\n  Ryvn provides the devtools and infrastructure to easily deploy any workload, on any cloud, and on-prem. Run apps in your own cloud and offer Bring Your Own Cloud (BYOC) to your customers in minutes, with built-in observability designed for sensitive industries.\n\n  infrastructure\n\n  developer-tools\n\n  devops\n\n  saas](/companies/ryvn) [Afternoon.co\n\n  Afternoon.co\n\n  F2024 [...] W2023\n\n   • Active • 8 employees • Philadelphia, PA, USA [...] cheaper than People Data Labs, Crustdata, CoreSignal, Cognism, Bright Data (BrightData), Live Data (LiveData), Explorium, Seamless.ai, Seamless AI, RocketReach, Kaspr, Snov.io, Snov, Uplead, Lead411, and SalesIntel. We also provide verified emails, verified phones, email data, and phone data for 4x cheaper than Clay, Apollo, ZoomInfo, Hunter, Hunter.io, Lusha, ContactOut, Wiza, LeadMagic, Prospeo, FindyMail, Icypeas, FullEnrich, Datagma, Dropcontact, and LeadIQ. - Bulk API search for companies,",
+      "published_date": null,
+      "score": 0.02127316
+    },
+    {
+      "url": "https://www.linkedin.com/in/lchoicer55",
+      "title": "Louis Choicer - Software Engineer",
+      "content": "## Education\n- Stony Brook University, Bachelor of Science - BS, Computer Science [...] ## Skills\nindustry standards, logging, mern stack, scalability, rest apis, sqlite database, pipelines, web development, ci/cd pipelines, frontend web, app development, recursive, ci/cd, hosting, framework\n\n## Organizations\n- Nu Alpha Phi Fraternity, President (2016) [...] ## Recent Activity\n- Commented On A Post: Congrats Alex! Amazing job 🚀 🚀 🚀\n- Liked: Every new hire gets $5K for their desk. No approval. No conversation about what’s “reasonable.” Some of the things in our office: -...\n- Liked: Here are 25 COMPANIES paying $100k-$400k for FULLY-REMOTE devs: 1. RevenueCat 2. AssemblyAI 3. Goodnotes 4. Customer.io 5. Phantom 6....",
+      "published_date": null,
+      "score": 0.017782131
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [
+    "duckduckgo: DDGSException"
+  ],
+  "cached": false
+}

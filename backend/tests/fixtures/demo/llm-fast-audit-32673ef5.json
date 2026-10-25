@@ -1,0 +1,43 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "I saw that Kestrel Labs is hiring four Sales Development Representatives in London.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 2,
+        "reason": "Supported by fact 2.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Aoife Byrne mentioned that half of your pipeline already comes from the UK.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 1,
+        "reason": "Supported by fact 1.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I know Kestrel Labs provides close‑management software for finance teams.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 3,
+        "reason": "Supported by fact 3.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 0,
+    "genericness_reason": "Email contains company-specific facts that cannot be replaced by only changing the name."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1213,
+    "completion_tokens": 1228,
+    "latency_ms": 48917,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

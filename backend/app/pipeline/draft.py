@@ -1,9 +1,12 @@
 """Stages 6-7: write the email, then critique it (one rewrite if it fails).
 
-Spec: docs/GUIDE.md stages 6-7, the draft prompt, case 7 (attribution), case 11 (outline +
+Spec: docs/PROJECT_SPEC.md stages 6-7, the draft prompt, case 7 (attribution), case 11 (outline +
 banner) and T09. The smart model writes; code checks everything checkable (length, banned
 phrases, dates, numbers, every claim maps to a real and safe signal, someone else's words name
-the speaker), and the fast model scores how generic it is. Nothing is ever sent.
+the speaker), and one fast-model audit reads the whole email: every factual sentence, declared in
+`claims` or not, is checked against the facts the writer was given (unsupported or contradicted
+ones block approval until a rep fixes them), and it scores how generic the email is. Nothing is
+ever sent.
 
 Three modes:
 - hooked: the normal email, built on the one hook from stage 5
@@ -33,6 +36,8 @@ Mode = Literal["hooked", "role_based", "outline"]
 SCREENING_BANNER = "This person filters AI-written outreach. Rewrite by hand or use another channel."
 ROLE_BASED_BANNER = ("Role-based draft: no specific signal was found for this person. Personalise it "
                      "before sending, or skip them.")
+UNVERIFIED_BANNER = ("Identity not verified: this person was never found online with this company, so the "
+                     "draft speaks to the role and company only. Confirm they exist before approving.")
 DEFAULT_BANNED = ["I hope this finds you well", "I came across your profile"]
 
 
@@ -101,6 +106,11 @@ def mode_for(ctx: RunContext) -> Mode:
     return "role_based" if effective_score(ctx).hook is None else "hooked"
 
 
+def unverified(ctx: RunContext) -> bool:
+    """The rep asked for a company-level draft for a person never found online (resolve)."""
+    return bool(getattr(ctx.outputs.get("resolve"), "unverified", False))
+
+
 def _reply_snippet(ctx: RunContext) -> str | None:
     intake: IntakeOutput | None = ctx.outputs.get("intake")
     own = [t for t in (intake.reply_outcomes if intake else []) if t.same_person and t.reply_snippet]
@@ -108,7 +118,7 @@ def _reply_snippet(ctx: RunContext) -> str | None:
 
 
 def build_prompt(ctx: RunContext, mode: Mode) -> str:
-    """Assemble the writer's instructions from the sections of agents/draft.md."""
+    """Assemble the writer's instructions from the sections of agents/stage6_write_and_check_email.md."""
     seller, rep = ctx.seller, ctx.seller.get("rep") or {}
     banned = (seller.get("tone") or {}).get("banned_phrases") or DEFAULT_BANNED
     title = f", {ctx.row['title']}" if ctx.row.get("title") else ""
@@ -123,6 +133,9 @@ def build_prompt(ctx: RunContext, mode: Mode) -> str:
     ]
     if follow_up and (snippet := _reply_snippet(ctx)):
         lines.append(prompts.get("draft", "follow_up_reply", snippet=snippet))
+    if unverified(ctx):
+        lines.append(prompts.get("draft", "unverified", prospect=display_name(ctx.row),
+                                 prospect_company=ctx.row.get("company") or ctx.row.get("domain")))
 
     hook, support = pick_facts(ctx)
     if mode == "role_based":
@@ -180,6 +193,8 @@ async def run_draft(ctx: RunContext) -> DraftOutput:
     hook, _ = pick_facts(ctx)
     draft = await write(ctx, mode)
     banner = {"outline": SCREENING_BANNER, "role_based": ROLE_BASED_BANNER}.get(mode)
+    if unverified(ctx):
+        banner = " ".join(filter(None, (UNVERIFIED_BANNER, banner)))
     draft_id = _store_draft(ctx, draft, 1, hook.id if hook else None, {"mode": mode, "banner": banner})
     label = {"hooked": "Wrote", "role_based": "Wrote a role-based", "outline": "Wrote an outline for a"}[mode]
     return DraftOutput(
@@ -224,6 +239,7 @@ FLATTERY = re.compile(r"^\W*(?:hi|hello|hey)?\W*(?:[\w.'-]+\W*)?(?:congrat\w*|ku
                       r"great job|amazing|impressive|what an?)\b", re.I)
 EMOJI = re.compile("[\U0001F300-\U0001FAFF\U00002600-\U000027BF\U0001F000-\U0001F2FF]")
 NUMBER = re.compile(r"\$?\d[\d,.]*\s?(?:%|[kmb]\b|million|billion|x\b)?", re.I)
+LINK = re.compile(r"https?://\S+|\bwww\.\S+", re.I)
 YOU_SAID = re.compile(r"\byou(?:'ve)? (?:said|wrote|posted|mentioned|shared your)\b|\byour (?:words|post)\b", re.I)
 
 
@@ -238,11 +254,55 @@ def _in_body(sentence: str, body: str) -> bool:
 
 
 def _numbers_in(text: str) -> set[str]:
+    text = spell_out_numbers(text)
     return {re.sub(r"[^\d.]", "", m.group()).rstrip(".") for m in NUMBER.finditer(text)} - {""}
 
 
+# Written-out quantities count as numbers ("two new SDRs" = "2 new SDRs"). "one" is left out: it is
+# far more often "one question" or "one of" than a count.
+_UNITS = {w: i for i, w in enumerate(
+    "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen "
+    "sixteen seventeen eighteen nineteen".split()) if i != 1}
+_TENS = {w: 10 * i for i, w in enumerate("_ _ twenty thirty forty fifty sixty seventy eighty ninety".split()) if i >= 2}
+_SCALES = {"hundred": 100, "thousand": 1_000, "million": 1_000_000, "billion": 1_000_000_000}
+_NUMBER_WORD = re.compile(r"\b(?:(?:%s|%s|dozen|one)(?:[\s-]+(?:%s|%s|%s|and))*)\b" % (
+    "|".join(_UNITS), "|".join(_TENS), "|".join(_UNITS), "|".join(_TENS), "|".join(_SCALES)), re.I)
+
+
+def _word_value(words: list[str]) -> int | None:
+    total = current = 0
+    for w in words:
+        if w in _UNITS:
+            current += _UNITS[w]
+        elif w == "one":
+            current += 1
+        elif w in _TENS:
+            current += _TENS[w]
+        elif w == "dozen":
+            current = (current or 1) * 12
+        elif w in _SCALES:
+            current = (current or 1) * _SCALES[w]
+            if _SCALES[w] >= 1000:
+                total, current = total + current, 0
+        elif w != "and":
+            return None
+    return total + current
+
+
+def spell_out_numbers(text: str) -> str:
+    """'two hundred' -> '200', 'a dozen' -> '12'; a lone 'one' stays a word."""
+    def put(match: re.Match[str]) -> str:
+        words = re.split(r"[\s-]+", match.group().lower())
+        if words == ["one"]:
+            return match.group()
+        value = _word_value(words)
+        return str(value) if value is not None else match.group()
+
+    return _NUMBER_WORD.sub(put, text)
+
+
 # Our own signal-type names must never reach a prospect ("(person_content, 8 October)").
-INTERNAL_LABEL = re.compile(r"\b(?:person_content|product_launch|leadership_change|negative_event|ai_screening|"
+INTERNAL_LABEL = re.compile(r"\b(?:person_content|product_launch|leadership_change|negative_event|ai_screening|company_focus|"
                             r"person_news|second_order|signal_id)\b")
 
 
@@ -273,6 +333,8 @@ def code_checks(draft: Draft, mode: Mode, signals: dict[int, ExtractedSignal], e
     checks.append(Check(name="absolute_dates", passed=not relative,
                         detail=f"relative date: {', '.join(relative)}" if relative else ""))
     checks.append(Check(name="no_emoji", passed=not EMOJI.search(body)))
+    links = LINK.findall(body)
+    checks.append(Check(name="no_links", passed=not links, detail=f"links: {', '.join(links)}" if links else ""))
     named = bool(prospect_name) and len(prospect_name.split()) > 1 and prospect_name.lower() in body.lower()
     checks.append(Check(name="addressed_as_you", passed=not named,
                         detail=f"calls the prospect '{prospect_name}' in the third person; write 'you'" if named else ""))
@@ -329,15 +391,161 @@ def code_checks(draft: Draft, mode: Mode, signals: dict[int, ExtractedSignal], e
     return checks
 
 
-async def genericness(ctx: RunContext, draft: Draft) -> _Genericness:
-    prompt = prompts.get("draft", "generic_user", prospect=display_name(ctx.row), company=ctx.row.get("company"),
-                         subject=draft.subject, body=draft.body)
-    result, usage = await llm.structured("fast", prompts.get("draft", "generic_system"), prompt, _Genericness)
-    ctx.add_usage(tokens=usage.prompt_tokens + usage.completion_tokens)
-    return result
+# --- Factual audit: read the whole email, never just the claims the writer declared ----------
+
+FactStatus = Literal["supported", "unsupported", "contradicted", "uncertain", "not_verifiable"]
+BLOCKING = ("unsupported", "contradicted")
 
 
-async def review(ctx: RunContext, draft: Draft, mode: Mode) -> tuple[list[Check], _Genericness | None]:
+class Evidence(BaseModel):
+    """One fact the auditor may accept: a verified signal (prompt id), the seller profile, or the
+    rep's notes. Stored with the critic report so a rep's later edit is checked against the same."""
+
+    id: str
+    text: str
+    source_url: str | None = None
+
+
+class _AuditClaim(BaseModel):
+    sentence: str = Field(description="The sentence (or subject) exactly as it appears in the email")
+    about: Literal["prospect", "company", "market", "seller", "other"]
+    status: FactStatus
+    fact_id: str | int | None = Field(default=None, description="Id of the fact that supports or contradicts it, else null")
+    reason: str = Field(description="One short sentence")
+    suggestion: str | None = Field(default=None, description="The sentence restated using only the facts, or null")
+
+
+class _Audit(BaseModel):
+    claims: list[_AuditClaim]
+    genericness: int = Field(ge=0, le=5)
+    genericness_reason: str = Field(description="One sentence")
+
+
+def evidence_for(ctx: RunContext, mode: Mode) -> list[Evidence]:
+    """The facts the writer was given (hook + support, never excluded ones), our offer, and the rep's
+    trusted notes. Nothing the models wrote themselves (angle, reasoning) counts as evidence."""
+    items = []
+    if mode != "role_based":
+        hook, support = pick_facts(ctx)
+        to_prompt, _ = prompt_ids(ctx)
+        for s in [hook, *support] if hook else []:
+            when = s.published_at.strftime("%d %B %Y").lstrip("0") if s.published_at else "undated"
+            items.append(Evidence(id=str(to_prompt[s.id]), source_url=s.source_url,
+                                  text=f"{s.type}, {when}: {s.summary} Evidence: \"{s.evidence}\""))
+    seller = ctx.seller
+    items.append(Evidence(id="seller", text=prompts.get(
+        "draft", "audit_seller", company=seller.get("company"), offer=" ".join(str(seller.get("offer", "")).split()),
+        problem=" ".join(str(seller.get("problem_solved", "")).split()))))
+    if ctx.row.get("rep_notes"):
+        items.append(Evidence(id="notes", text=prompts.get("draft", "audit_notes", notes=ctx.row["rep_notes"])))
+    return items
+
+
+async def audit(evidence: list[Evidence], prospect: str, company: str | None, subject: str,
+                body: str) -> tuple[_Audit, int]:
+    """One fast-model pass: every factual sentence in the email against the evidence, plus the
+    genericness score. Returns (audit, tokens)."""
+    facts = "\n".join(f"[{e.id}] {e.text}" for e in evidence)
+    user = prompts.get("draft", "audit_user", prospect=prospect, company=company or "their company",
+                       facts=facts, subject=subject, body=body)
+    result, usage = await llm.structured("fast", prompts.get("draft", "audit_system"), user, _Audit)
+    return result, usage.prompt_tokens + usage.completion_tokens
+
+
+def factual_report(result: _Audit, evidence: list[Evidence], subject: str, body: str,
+                   check_numbers: bool = False) -> dict:
+    """Code owns the verdict: sentences that aren't in the email are dropped, and 'supported' must
+    name a fact that was actually given. check_numbers adds the digits / written-out quantities
+    check for text no code check has seen yet (a rep's edit)."""
+    by_id = {e.id: e for e in evidence}
+    seller = by_id.get("seller")
+    facts = [e for e in evidence if e.id != "seller"]
+    text = f"{subject}\n{body}"
+    issues, counts = [], {status: 0 for status in FactStatus.__args__}
+    seen: set[str] = set()
+    for claim in result.claims:
+        if not claim.sentence.strip() or not _in_body(claim.sentence, text) or claim.sentence in seen:
+            continue
+        seen.add(claim.sentence)
+        status, reason = claim.status, claim.reason
+        fact = by_id.get(_fact_key(claim.fact_id))
+        if (claim.about == "seller" or (status == "supported" and fact is None)) and status != "contradicted" \
+                and seller and _coverage(claim.sentence, seller.text) >= 0.6:
+            # What we sell is checked against seller_profile.yaml by code, not the model's say-so.
+            status, fact, reason = "supported", seller, "Matches what we sell (seller profile)."
+        elif status == "supported" and fact is None:
+            best = max(facts, key=lambda e: _coverage(claim.sentence, e.text), default=None)
+            cover = _coverage(claim.sentence, best.text) if best else 0.0
+            if cover >= 0.5:  # the model forgot the id, but one fact clearly says it
+                fact = best
+            elif claim.about == "seller":  # our own product: only seller_profile.yaml can back it
+                status, reason = "unsupported", "Says something about what we sell that the seller profile doesn't."
+            elif _fact_key(claim.fact_id):  # an id that was never given: a made-up citation
+                status, reason = "unsupported", "It cites no fact that was given to the writer."
+            else:  # the model thinks it's fine but named nothing; code can't confirm it, so it only warns
+                status, reason = "uncertain", "Marked supported, but no fact was named; check it against the sources."
+        elif status == "unsupported" and claim.about != "seller":
+            # The fast model is not consistent run to run: if a given fact says the same thing in
+            # nearly the same words, with the same numbers, warn instead of blocking approval.
+            best = max(facts, key=lambda e: _coverage(claim.sentence, e.text), default=None)
+            if best and _coverage(claim.sentence, best.text) >= 0.7 \
+                    and _numbers_in(claim.sentence) <= _numbers_in(best.text):
+                status, fact = "uncertain", best
+                reason = f"{reason} But fact [{best.id}] says much the same; check it against the source."
+        counts[status] += 1
+        if status in (*BLOCKING, "uncertain"):
+            issues.append({"sentence": claim.sentence, "status": status, "reason": reason,
+                           "evidence": fact.text if fact else None, "source_url": fact.source_url if fact else None,
+                           "suggestion": claim.suggestion})
+    if check_numbers:
+        allowed = set().union(*(_numbers_in(e.text) for e in evidence)) if evidence else set()
+        stripped = re.sub(r"\b\d+\s?[-‐-—]?\s?min(?:ute)?s?\b", "", body, flags=re.I)
+        for sentence in re.split(r"(?<=[.!?])\s+|\n+", stripped):
+            invented = sorted(_numbers_in(sentence) - allowed)
+            flagged = any(_in_body(i["sentence"], sentence) or _in_body(sentence, i["sentence"]) for i in issues)
+            if invented and sentence.strip() and not flagged:
+                counts["unsupported"] += 1
+                issues.append({"sentence": sentence.strip(), "status": "unsupported", "source_url": None,
+                               "reason": f"Numbers not in any fact: {', '.join(invented)}", "evidence": None,
+                               "suggestion": None})
+    blocking = [i for i in issues if i["status"] in BLOCKING]
+    return {"checked": sum(v for k, v in counts.items() if k != "not_verifiable"),
+            **{k: v for k, v in counts.items() if k != "not_verifiable"},
+            "blocking": bool(blocking), "issues": issues,
+            "evidence": [e.model_dump() for e in evidence]}
+
+
+_STOP = set("your you our the and for with that this are can will from its their they them has have was were "
+             "into about more most not but all any "
+             # the ask ("would you be open to a 15-minute call to see how...") is not a claim
+             "would open minute call chat see how explore help interested worth quick".split())
+
+
+def _fact_key(fact_id: str | int | None) -> str:
+    """'[1]', 'Fact 1', 1, 'Seller' -> '1', '1', '1', 'seller' (models vary how they write an id)."""
+    key = str(fact_id if fact_id is not None else "").strip().strip("[]").strip().lower()
+    return re.sub(r"^(?:fact|id)\s*", "", key)
+
+
+def _coverage(sentence: str, text: str) -> float:
+    """Share of the sentence's content words that appear in `text`."""
+    def stem(w: str) -> str:  # "sdrs" = "sdr", "signals" = "signal"
+        return w[:-1] if len(w) > 3 and w.endswith("s") else w
+
+    words = [stem(w) for w in _words(sentence) if w not in _STOP]
+    have = {stem(w) for w in _words(text)}
+    return sum(w in have for w in words) / len(words) if words else 0.0
+
+
+def blocking_message(report: dict | None) -> str | None:
+    """The rep-facing reason a draft can't be approved yet, or None."""
+    if not report or not report.get("blocking"):
+        return None
+    n = sum(1 for i in report["issues"] if i["status"] in BLOCKING)
+    return f"{n} unsupported factual claim{'s' if n != 1 else ''}: edit {'them' if n != 1 else 'it'} before approving"
+
+
+async def review(ctx: RunContext, draft: Draft, mode: Mode) -> tuple[list[Check], _Genericness | None, dict]:
     extracted: ExtractOutput = ctx.outputs["extract"]
     scored: ScoreOutput = effective_score(ctx)
     signals = {s.id: s for s in extracted.signals if s.type != "ai_screening"}
@@ -345,15 +553,27 @@ async def review(ctx: RunContext, draft: Draft, mode: Mode) -> tuple[list[Check]
     banned = (ctx.seller.get("tone") or {}).get("banned_phrases") or DEFAULT_BANNED
     checks = code_checks(draft, mode, signals, excluded, ctx.row["last_name"], banned, _crowded_ids(ctx),
                          display_name(ctx.row))
-    generic = await genericness(ctx, draft) if mode == "hooked" else None
-    return checks, generic
+    evidence = evidence_for(ctx, mode)
+    result, tokens = await audit(evidence, display_name(ctx.row), ctx.row.get("company"), draft.subject, draft.body)
+    ctx.add_usage(tokens=tokens)
+    generic = _Genericness(genericness=result.genericness, reason=result.genericness_reason) if mode == "hooked" else None
+    return checks, generic, factual_report(result, evidence, draft.subject, draft.body)
 
 
-def _problems(checks: list[Check], generic: _Genericness | None) -> list[str]:
+def _problems(checks: list[Check], generic: _Genericness | None, factual: dict | None = None) -> list[str]:
     problems = [f"{c.name}: {c.detail}" if c.detail else c.name for c in checks if not c.passed]
     if generic and generic.genericness >= settings.genericness_fail_at:
         problems.append(f"too generic ({generic.genericness}/5): {generic.reason}")
+    for issue in (factual or {}).get("issues", []):
+        if issue["status"] in BLOCKING:
+            problems.append(f"{issue['status']}_fact: \"{issue['sentence']}\" ({issue['reason']}) "
+                            "Remove it or restate it using only the facts above.")
     return problems
+
+
+def _uncertain(factual: dict) -> list[str]:
+    return [f"check this fact: \"{i['sentence']}\" ({i['reason']})" for i in factual.get("issues", [])
+            if i["status"] == "uncertain"]
 
 
 def _confidence(ctx: RunContext, mode: Mode, warnings: list[str]) -> tuple[float | None, str]:
@@ -377,39 +597,48 @@ async def run_critic(ctx: RunContext) -> CriticOutput:
     drafted: DraftOutput = ctx.outputs["draft"]
     mode = drafted.mode
     draft = Draft(subject=drafted.subject, body=drafted.body, claims=drafted.claims)
-    checks, generic = await review(ctx, draft, mode)
-    problems = _problems(checks, generic)
+    checks, generic, factual = await review(ctx, draft, mode)
+    problems = _problems(checks, generic, factual)
     first_report = {"checks": [c.model_dump() for c in checks], "problems": problems,
-                    "genericness": generic.model_dump() if generic else None}
+                    "genericness": generic.model_dump() if generic else None, "factual": factual}
     _update_report(drafted.draft_id, first_report)
+    first_blocking = factual["blocking"]
 
     final_id, version, rewritten = drafted.draft_id, 1, False
-    if problems:
+    if problems:  # at most one rewrite, whatever it still gets wrong
         draft = await write(ctx, mode, previous=draft, problems=problems)
-        checks, generic = await review(ctx, draft, mode)
-        problems = _problems(checks, generic)
+        checks, generic, factual = await review(ctx, draft, mode)
+        problems = _problems(checks, generic, factual)
         final_id = _store_draft(ctx, draft, 2, drafted.hook_signal_id, {"mode": mode, "banner": drafted.banner})
         version, rewritten = 2, True
 
     passed = not problems
-    warnings = problems  # shown in review, never hidden
+    warnings = problems + _uncertain(factual)  # shown in review, never hidden
     if mode == "role_based":
         warnings = [ROLE_BASED_BANNER, *warnings]
     elif mode == "outline":
         warnings = [SCREENING_BANNER, *warnings]
     confidence, formula = _confidence(ctx, mode, problems)
     ctx.confidence = confidence
-    if ctx.final_status == RunStatus.ready_for_review and not ctx.final_reason and problems:
+    blocked = blocking_message(factual)
+    if blocked:  # stays in the queue, but can't be approved until the rep fixes those sentences
+        ctx.final_reason = blocked[0].upper() + blocked[1:]
+    elif ctx.final_status == RunStatus.ready_for_review and not ctx.final_reason and problems:
         ctx.final_reason = f"Draft has {len(problems)} warning(s) to review"
     _update_report(final_id, {"checks": [c.model_dump() for c in checks], "problems": problems,
-                              "genericness": generic.model_dump() if generic else None,
+                              "genericness": generic.model_dump() if generic else None, "factual": factual,
                               "passed": passed, "warnings": warnings, "final": True,
                               "confidence": confidence, "confidence_formula": formula})
 
     if passed:
         message = "Draft passed all checks" + (" after one rewrite" if rewritten else "")
+    elif blocked:
+        message = f"Manual fix needed: {blocked}"
     else:
         message = f"Draft still has {len(problems)} issue(s) after a rewrite; flagged for review"
+    message += f" · facts: {factual['supported']} verified, {factual['unsupported'] + factual['contradicted']} unsupported"
+    if first_blocking and not blocked:
+        message += " (unsupported ones removed by the rewrite)"
     if generic:
         message += f" · genericness {generic.genericness}/5"
     return CriticOutput(

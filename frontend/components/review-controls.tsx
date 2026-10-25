@@ -6,12 +6,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { api, ApiError } from "@/lib/api";
 import { wordDiff } from "@/lib/diff";
-import type { DraftRecord, ReviewResult } from "@/lib/types";
+import type { DraftRecord, FactualIssue, ReviewResult } from "@/lib/types";
 
-// Approve / edit / reject for one draft (stage 8). Spec: docs/GUIDE.md case 10 and "UI: three
+// Approve / edit / reject for one draft (stage 8). Spec: docs/PROJECT_SPEC.md case 10 and "UI: three
 // screens". Approving an old draft with time-sensitive facts first shows "Re-checking N facts";
 // a changed fact comes back as a red/green diff to approve again. Nothing is ever sent.
 // Callers key it by draft id, so a new draft starts with fresh state.
+// A draft whose factual audit found unsupported facts can't be approved as is: the rep edits it,
+// and the edit is audited again before it is approved.
+// A company-level draft (the person was never found online) needs the rep to tick that they
+// confirmed the person exists before approve or edit is allowed; reject never needs it.
 
 type Mode = "idle" | "editing" | "rejecting" | "rechecking" | "busy";
 
@@ -19,12 +23,15 @@ export function ReviewControls({
   runId,
   draft,
   recheckFacts,
+  unverified = false,
   shortcuts = false,
   onDone,
 }: {
   runId: number;
   draft: DraftRecord;
   recheckFacts: number;
+  /** Company-level draft: approving needs the rep to vouch the person exists. */
+  unverified?: boolean;
   shortcuts?: boolean;
   /** Called after every answer from the server (the caller reloads, or moves to the next draft). */
   onDone: (result: ReviewResult) => void;
@@ -35,14 +42,27 @@ export function ReviewControls({
   const [error, setError] = useState<string | null>(null);
   const [changed, setChanged] = useState<ReviewResult | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const [editIssues, setEditIssues] = useState<FactualIssue[] | null>(null);
+  const [vouched, setVouched] = useState(false);
+  const needsVouch = unverified && !vouched;
+  const factual = draft.critic_report.factual;
+  const blocked = Boolean(factual?.blocking);
+  const blockedCount = (factual?.issues ?? []).filter((i) => i.status !== "uncertain").length;
 
   const send = useCallback(
     async (action: "approve" | "edit" | "reject", opts: { body?: string; reason?: string; draftId?: number } = {}) => {
       setError(null);
       setMode(action === "approve" && recheckFacts > 0 && !opts.draftId ? "rechecking" : "busy");
       try {
-        const result = await api.review(runId, action, { draftId: draft.id, ...opts });
+        const result = await api.review(runId, action, { draftId: draft.id, identityConfirmed: vouched, ...opts });
         setMode("idle");
+        if (result.outcome === "needs_fix") {
+          // The edit still states facts the research doesn't support: keep editing.
+          setEditIssues((result.factual?.issues ?? []).filter((i) => i.status !== "uncertain"));
+          setMode("editing");
+          return;
+        }
+        setEditIssues(null);
         if (result.outcome === "changed") {
           setChanged(result);
           return;
@@ -55,7 +75,7 @@ export function ReviewControls({
         setError(e instanceof ApiError ? e.message : "Couldn't save the review.");
       }
     },
-    [runId, draft.id, recheckFacts, onDone],
+    [runId, draft.id, recheckFacts, vouched, onDone],
   );
 
   // a approve · e edit · r reject (not while typing, not while the diff is open).
@@ -64,7 +84,9 @@ export function ReviewControls({
     function onKey(event: KeyboardEvent) {
       const target = event.target as HTMLElement;
       if (target.closest("input, textarea, select, [contenteditable]") || event.metaKey || event.ctrlKey || event.altKey) return;
-      if (event.key === "a") send("approve");
+      if (event.key === "a") {
+        if (!blocked && !needsVouch) send("approve");
+      }
       else if (event.key === "e") setMode("editing");
       else if (event.key === "r") setMode("rejecting");
       else return;
@@ -72,7 +94,7 @@ export function ReviewControls({
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [shortcuts, changed, mode, send]);
+  }, [shortcuts, changed, mode, send, blocked, needsVouch]);
 
   const waiting = mode === "busy" || mode === "rechecking";
 
@@ -101,8 +123,23 @@ export function ReviewControls({
             rows={10}
             className="w-full rounded-lg border px-3 py-2 text-sm leading-relaxed outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
           />
+          {editIssues && editIssues.length > 0 && (
+            <div className="space-y-1.5 rounded-lg border border-[#f7d6b2] bg-[#fff4e8] px-3 py-2.5 text-sm text-[#a14a00]" role="alert">
+              <p className="font-semibold">Not approved: these sentences still state facts the research doesn&rsquo;t support.</p>
+              <ul className="list-disc space-y-1 pl-5">
+                {editIssues.map((i) => (
+                  <li key={i.sentence}>
+                    &ldquo;{i.sentence}&rdquo; <span className="text-xs">({i.reason})</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {blocked && !editIssues && (
+            <p className="text-xs text-muted-foreground">Your edit is checked for unsupported facts before it is approved.</p>
+          )}
           <div className="flex flex-wrap gap-2">
-            <Button type="submit" disabled={!body.trim() || body.trim() === draft.body.trim()}>
+            <Button type="submit" disabled={!body.trim() || body.trim() === draft.body.trim() || needsVouch}>
               Save and approve
             </Button>
             <Button type="button" variant="ghost" onClick={() => setMode("idle")}>
@@ -142,7 +179,11 @@ export function ReviewControls({
         </form>
       ) : (
         <div className="flex flex-wrap items-center gap-2">
-          <Button onClick={() => send("approve")} disabled={waiting}>
+          <Button
+            onClick={() => send("approve")}
+            disabled={waiting || blocked || needsVouch}
+            title={blocked ? "Fix the unsupported facts first (Edit)" : needsVouch ? "Confirm the person exists first" : undefined}
+          >
             <Check /> Approve {shortcuts && <Kbd>a</Kbd>}
           </Button>
           <Button variant="outline" onClick={() => setMode("editing")} disabled={waiting}>
@@ -152,6 +193,29 @@ export function ReviewControls({
             <X /> Reject {shortcuts && <Kbd>r</Kbd>}
           </Button>
         </div>
+      )}
+
+      {unverified && mode !== "rejecting" && !changed && (
+        <label className="flex items-start gap-2 rounded-lg border border-[#f7d6b2] bg-[#fff4e8] px-3 py-2.5 text-sm text-[#a14a00]">
+          <input
+            type="checkbox"
+            checked={vouched}
+            onChange={(e) => setVouched(e.target.checked)}
+            className="mt-0.5 size-4 accent-[#a14a00]"
+          />
+          <span>
+            I&rsquo;ve confirmed this person exists and works at this company. We never found them online, so
+            approving needs your word for it.
+          </span>
+        </label>
+      )}
+
+      {blocked && mode === "idle" && !changed && (
+        <p className="text-sm text-[#a14a00]">
+          Approve is off: {blockedCount} sentence{blockedCount === 1 ? "" : "s"} state
+          {blockedCount === 1 ? "s" : ""} facts the research doesn&rsquo;t support (see Factual accuracy in the content
+          guide). Edit the email to fix {blockedCount === 1 ? "it" : "them"}.
+        </p>
       )}
 
       {mode === "rechecking" && (

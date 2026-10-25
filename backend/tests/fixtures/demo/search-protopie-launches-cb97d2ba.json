@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"ProtoPie\" launches",
+  "results": [
+    {
+      "url": "https://www.protopie.io/blog/protopie-ai-beta-launch",
+      "title": "Introducing ProtoPie AI (Now in Beta)",
+      "content": "A note on beta: ProtoPie AI is launching in open beta, which means we’re continuously refining and improving the experience based on real-world usage. You’ll see enhancements roll out in the coming weeks and months as we learn from how teams actually use AI in their workflows.\n\n## See ProtoPie AI in Action\n\nProtoPie AI represents an important shift, not just faster prototyping, but better prototyping at scale. High-fidelity and test-readiness is the metric that matters. [...] ###### ProtoPie,\n\nWe are thrilled to announce ProtoPie AI–now available in open beta starting February 9, 2026, for Basic, Pro, and Enterprise plan users.\n\nIf you’ve explored AI prototyping tools, you’ve probably noticed a pattern: they help you start fast, but finishing properly becomes the challenge. AI generates something quickly, but when you need to refine behavior, adjust logic, or scale complexity, you hit a wall. [...] Ready to experience it yourself? Our team is standing by to walk you through a personalized demo and answer any questions you may have.\n\nRequest a Demo\n\n## Related posts\n\nprotopie mcp\n\n###### Releases\n\n##### ProtoPie MCP is Now Official\n\nIulia Sorodoc\n\n•\n\n3\n\nmin read\n\n\n\n###### Releases\n\n##### ProtoPie Player Now Available on Huawei AppGallery\n\nBella.Liu\n\n•\n\n3\n\nmin read\n\nconnect ai agents like claude, cursor and more to protopie via mcp\n\n###### Releases",
+      "published_date": "Mon, 09 Feb 2026 00:00:00 GMT",
+      "score": 0.8080827
+    },
+    {
+      "url": "https://www.protopie.io/blog/protopie-ai-is-officially-here-prototyping-with-component-ai",
+      "title": "ProtoPie AI is Officially Here: Supercharge Your Prototyping with Component AI",
+      "content": "###### Iulia Sorodoc, Product Marketing Manager at ProtoPie\n\nprotopie ai official launch\n\nWe are excited to announce that ProtoPie AI has officially graduated from its open beta phase.\n\nBased directly on your feedback, this official release is much more than a label change. We are introducing powerful Component AI authoring, an entirely revamped and transparent billing system, and crucial stability fixes. Here is everything you need to know. [...] ## Major update: Say hello to component AI authoring\n\nOne of the limitations during our beta was that AI could not easily manage or create reusable components. With this official launch, ProtoPie AI now supports local component authoring. You can seamlessly convert existing layers into local components, add or swap component instances, and override component variables entirely through natural language prompts.\n\ncreating component in protopie with ai [...] Our Creative Technologist, Mickey, puts the AI to the test with real prompts, unedited outputs, and a live Q&A session tackling real scenarios from designers and product teams.\n\nWatch the Demo\n\n## Looking ahead\n\nThe official release of ProtoPie AI is a leap forward for scalable, high-fidelity prototyping. By combining the speed of natural language generation with the precision of manual editing, we are helping you build test-ready prototypes faster than ever before.",
+      "published_date": "Tue, 16 Jun 2026 00:00:00 GMT",
+      "score": 0.76194656
+    },
+    {
+      "url": "https://www.protopie.io/blog/blog-protopie-mcp-from-design-to-code-faster",
+      "title": "ProtoPie MCP: Connect AI Agents to Your Prototypes with Model Context Protocol",
+      "content": "## Related posts\n\nprotopie mcp\n\n###### Releases\n\n##### ProtoPie MCP is Now Official\n\nIulia Sorodoc\n\n•\n\n3\n\nmin read\n\n\n\n###### Releases\n\n##### ProtoPie Player Now Available on Huawei AppGallery\n\nBella.Liu\n\n•\n\n3\n\nmin read\n\nprotopie ai official launch\n\n###### Releases\n\n##### ProtoPie AI is Officially Here: Supercharge Your Prototyping with Component AI\n\nIulia Sorodoc\n\n•\n\n3\n\nmin read [...] Blog\n\neBooks\n\nClients Success Stories\n\nEvents & Webinars\n\nProtoPie Gallery\n\nPRODUCT LEARNING & SUPPORT\n\nProtoPie School\n\nDownload ProtoPie\n\nProduct Documentation\n\nCommunity\n\nPricing\n\nDownload\n\nGet Started for Free\n\nBook a Demo\n\n###### Releases\n\n###### •\n\n5\n\nmin read\n\n# ProtoPie MCP: Connect AI Agents to Your Prototypes with Model Context Protocol\n\nShip Design to Code, Faster. Now available in beta.\n\n###### Iulia Sorodoc, Product Marketing Manager at ProtoPie [...] ProtoPie MCP brings native Model Context Protocol (MCP) support directly into ProtoPie, allowing AI agents like Claude Code, Cursor, Codex, VS Code, and others to interact directly with your prototypes. It’s available in beta at no additional cost for all Pro and Enterprise users.",
+      "published_date": "Mon, 20 Jul 2026 00:00:00 GMT",
+      "score": 0.635879
+    },
+    {
+      "url": "https://www.protopie.io/blog/protopie-ai-interaction-prototyping",
+      "title": "ProtoPie AI: Made to Get You Started, Built for Precision",
+      "content": "###### Releases\n\n##### ProtoPie Player Now Available on Huawei AppGallery\n\nBella.Liu\n\n•\n\n3\n\nmin read [...] PLUGINS\n\nFigma\n\nSketch\n\nAdobe XD\n\nResources\n\nINSIGHTS & INSPIRATION\n\nBlog\n\neBooks\n\nClients Success Stories\n\nEvents & Webinars\n\nProtoPie Gallery\n\nPRODUCT LEARNING & SUPPORT\n\nProtoPie School\n\nDownload ProtoPie\n\nProduct Documentation\n\nCommunity\n\nPricing\n\nDownload\n\nGet Started for Free\n\nBook a Demo\n\n###### Releases\n\n###### •\n\n1\n\nmin read\n\n# ProtoPie AI: Made to Get You Started, Built for Precision\n\nStart fast with AI. Shape interactions with confidence.\n\n###### ProtoPie, [...] Less grunt work. No creative ceiling. Just interaction logic you can shape and trust.\n\nProtoPie AI is coming soon.\n\nGet AI Updates\n\nIf you already have a ProtoPie account, you will be notified.\n\n## Related posts\n\nprotopie mcp\n\n###### Releases\n\n##### ProtoPie MCP is Now Official\n\nIulia Sorodoc\n\n•\n\n3\n\nmin read\n\n\n\n###### Releases\n\n##### ProtoPie Connect Haptics (for Windows) Plugin: Bring Real Haptic Feedback to Your Prototypes\n\nIulia Sorodoc\n\n•\n\n3\n\nmin read\n\n\n\n###### Releases",
+      "published_date": "Thu, 15 Jan 2026 00:00:00 GMT",
+      "score": 0.4527543
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=yD21INvAULg",
+      "title": "ProtoPie MCP: Connect AI Agents Directly to Your Prototypes",
+      "content": "# ProtoPie MCP: Connect AI Agents Directly to Your Prototypes\n## Channel: ProtoPie\n16.7K subscribers\n11 likes\n\n### Description\n616 views\nPosted: 2026-07-19\nProtoPie introduces native Model Context Protocol (MCP) support to power your AI assistants across two pillars: \n1) Studio MCP (The Intelligent Co-Pilot)\n2) Dev View & Code MCP (The Automated Handoff) [...] [1:25] into Studio. Connect to Claude. Describe the interaction you want. Then preview and save to cloud. Let's see it in\n[1:33] action. First, let's grab screens directly from Figma. No plug-in, no export, just copy them. Then drop them straight into Proto Studio.\n[1:43] Press command plus comma to open preferences. Head to the labs tab and turn on the MCP server. It starts immediately. No save or restart needed. [...] [3:43] you get accurate structured code straight from the source. It's a simple flow. Browse in dev view, install code\n[3:50] MCP, authorize once, drop the dev view link in with a prompt, run it locally, then compare side by side. Let's see it\n[3:58] in action. On Protoloud, open dev view, inspect any layer, and see exactly how an interaction is built. Trigger to\n[4:07] response. Click the MCP settings button, copy the install command, and paste it into your AI agent, claude code, cursor,",
+      "published_date": "Sun, 19 Jul 2026 00:00:00 GMT",
+      "score": 0.4229103
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

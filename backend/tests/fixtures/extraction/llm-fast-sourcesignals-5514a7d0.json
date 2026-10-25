@@ -1,0 +1,31 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "Acme Fintech launched Acme Close to automate bank reconciliation and accruals for finance teams",
+        "evidence": "Today we are launching Acme Close, a new product that automates bank reconciliation and accruals",
+        "published_at": "2026-09-24",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 983,
+    "completion_tokens": 144,
+    "latency_ms": 1221,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

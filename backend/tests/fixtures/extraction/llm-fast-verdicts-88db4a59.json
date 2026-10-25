@@ -1,0 +1,22 @@
+{
+  "output": {
+    "verdicts": [
+      {
+        "index": 1,
+        "label": "screening_trap",
+        "reason": "Tests for AI-generated outreach."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 606,
+    "completion_tokens": 124,
+    "latency_ms": 613,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

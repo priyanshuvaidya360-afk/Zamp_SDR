@@ -1,0 +1,55 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Reco raised $55 million in additional funding led by AT&T Ventures with participation from Forestay and Quadrille Capital",
+        "evidence": "Reco, the leader in Agentic Security, today announced it has raised an additional $55 million including a strategic investment from AT&T Ventures and support from new investors Forestay and Quadrille Capital.",
+        "published_at": "2026-09-29",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco provides an Agentic Security platform built on the Reco Graph to secure agents and operating environments",
+        "evidence": "Reco is the leader in Agentic Security. The Reco Platform secures agents and their operating environments where applications, identities, permissions and workflows converge.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "AT&T participates as both a customer and strategic investor in Reco",
+        "evidence": "AT&T’s participation as both a customer and strategic investor reflects the need for security that follows agents across enterprise ecosystems.",
+        "published_at": "2026-09-29",
+        "sensitive": false,
+        "speaker": "Ofer Klein",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2193,
+    "completion_tokens": 443,
+    "latency_ms": 1677,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

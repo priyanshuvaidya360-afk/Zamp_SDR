@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Sandy Mathews\" interview OR podcast OR talk",
+  "results": [
+    {
+      "url": "https://www.linkedin.com/in/sandramathewsit",
+      "title": "Sandra Mathews - United States | Professional Profile",
+      "content": "- Reposted: See you in San Francisco! We’re heading to Databricks Summit June 15–18 to talk about how to get more value out of your data lakehouse. At...\n- Reposted: The countdown is on, and the Quest Software team is excited to be in San Francisco connecting with customers, partners, and data leaders...\n- Shared: Are you going to be at the Databricks conference in San Francisco? Reserve your spot on June 16th at 1:50 to hear Sue Laine talk about... [...] - Shared: #QuestPartners Are you going to be at the Databricks #DataAISummit this year. Let me know! Let's connect and talk Data!!! Looking forward...\n- Shared: We invite all Quest partners to join the upcoming partner webinars. Please register and join to learn about the new and exciting Quest...\n- Shared: Quest Security Management Platform!!! Identity resilience works best when it’s built as one system.🌐 Today, we’re proud to introduce the...\n- Commented On A Post: Amazing and very exciting!! [...] - Bev Hurst: “Sandi's broad base of knowledge in several business areas makes her an invaluable asset to any organization. She has in-depth knowledge of the procurement and asset management processes and how the affect all other areas of the business. Her business acumen helps her manuever in any type of...",
+      "published_date": null,
+      "score": 0.26308006
+    },
+    {
+      "url": "https://www.facebook.com/cassandra.mathews.31/videos/2201362927259555",
+      "title": "Cassandra Sandy Mathews on Reels",
+      "content": "This video captures a joyful Christian worship session. It features a man in a wheelchair leading a congregation in a gospel song about perseverance and not",
+      "published_date": null,
+      "score": 0.21566483
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=QTT4qi_Ru4g",
+      "title": "Michael Henderson & Sandra Matthews - Moon World ...",
+      "content": "Fireside Chat: Michael Henderson & Sandra Matthews - Moon World Resorts @davosworldwide5 likes267 views8 months ago",
+      "published_date": null,
+      "score": 0.19868572
+    },
+    {
+      "url": "https://www.wkrg.com/video/comedian-matt-mathews-talks-upcoming-show-in-mobile-how-he-got-started-and-a-message-to-the-haters-full-uncut-interview/11974058",
+      "title": "Comedian Matt Mathews talks upcoming show in Mobile, ...",
+      "content": "Comedian Matt Mathews sat down with WKRG's Summer Poole for an exclusive interview ahead of his stand-up show at Mobile's new Regions Arena.",
+      "published_date": null,
+      "score": 0.09726189
+    },
+    {
+      "url": "https://www.facebook.com/KandiBurruss/videos/this-might-be-one-of-the-most-unhinged-conversations-ive-ever-had-on-speak-on-it/1763916738253750",
+      "title": "Kandi Burruss Speak On It With Matt Matthews",
+      "content": "Kandi Burruss interviews comedian Matt Matthews on. The teaser highlights various topics discussed, including personal finances, family dynamics, sexuality,",
+      "published_date": null,
+      "score": 0.05669954
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

@@ -1,0 +1,77 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "Subject: 5 new sdrs in austin",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 2,
+        "reason": "The fact confirms Ferncastle is hiring five SDRs.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Hi Daniel,",
+        "about": "prospect",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a salutation.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I saw that Ferncastle is hiring five Sales Development Representatives for your new Austin office (5 October).",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 2,
+        "reason": "Fact 2 explicitly states Ferncastle is hiring five SDRs for the new Austin office.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Scaling outbound with more SDRs can strain headcount while generic sequences see dropping replies.",
+        "about": "market",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a general remark about challenges teams face.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Our outbound pipeline engine delivers vetted accounts and drafted, cited first‑touch emails so your team builds pipeline without adding SDRs.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": "seller",
+        "reason": "This accurately matches what Halyard sells.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would a brief 15‑minute call to explore fit be useful?",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a call to action.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Best,\nPriyanshu",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a sign-off.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email relies on specific facts about the prospect's company hiring plans and office expansion."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1003,
+    "completion_tokens": 452,
+    "latency_ms": 1988,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

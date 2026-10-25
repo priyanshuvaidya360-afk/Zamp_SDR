@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"\" customer OR \"case study\" OR clients",
+  "results": [
+    {
+      "url": "https://en.wikipedia.org/wiki/Quotation_mark",
+      "title": "Quotation mark - Wikipedia",
+      "content": "Quotation marks[A] are punctuation marks used in pairs in various writing systems to identify direct speech, a quotation, or a phrase. The pair consists of an opening quotation mark and a closing quotation mark, which may or may not be the same glyph. [3] Quotation marks have a variety of forms in different languages and in different media.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.bbb.org/all/consumer-resources",
+      "title": "BBB consumer resources",
+      "content": "Check a company's rating, profile, and customer reviews before you buy. Have an unresolved issue with a business? Start a complaint and let BBB help. Warn others by reporting a scam to BBB Scam...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.merriam-webster.com/grammar",
+      "title": "Grammar Rules & Usage Guide | Merriam-Webster",
+      "content": "In this grammar guide, learn commonly confused words & sayings, word usage, punctuation tips, and rules for spelling & pronunciation.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/apostrophe",
+      "title": "Apostrophe (’) - Grammar - Cambridge Dictionary",
+      "content": "Apostrophe (’) - English Grammar Today - a reference to written and spoken English grammar and usage - Cambridge Dictionary",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://englishan.com/symbols-with-names/",
+      "title": "150 Symbols Names With Meanings And Common Uses - Englishan",
+      "content": "Jul 15, 2026 · Learn 150 symbols names with meanings, alternate names, and common symbols from punctuation, keyboards, math, currency, music, safety, and more.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

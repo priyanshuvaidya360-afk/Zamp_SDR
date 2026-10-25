@@ -1,0 +1,8 @@
+{
+  "provider": "simweb",
+  "query": "\"Ferncastle\" award OR recognized OR featured OR ranked",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

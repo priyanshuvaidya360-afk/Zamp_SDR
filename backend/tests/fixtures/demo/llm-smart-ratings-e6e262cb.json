@@ -1,0 +1,35 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "New Austin office expands market reach, likely increasing outbound pipeline needs."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 4,
+        "reasoning": "Hiring five SDRs shows they are scaling sales development, a clear use case for reducing headcount with an outbound engine."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "The company's focus on procurement software is generic and doesn't directly indicate a pipeline problem."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 841,
+    "completion_tokens": 703,
+    "latency_ms": 1785,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

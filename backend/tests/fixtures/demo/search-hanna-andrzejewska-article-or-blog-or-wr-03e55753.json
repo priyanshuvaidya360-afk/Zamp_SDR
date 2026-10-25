@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Hanna Andrzejewska\" article OR blog OR wrote OR webinar",
+  "results": [
+    {
+      "url": "https://en.wikipedia.org/wiki/Hannah_Arendt",
+      "title": "Hannah Arendt - Wikipedia",
+      "content": "Hannah Arendt[a] (born Johanna Arendt; 14 October 1906 – 4 December 1975) was a German and American historian and philosopher. She was one of the most influential political theorists of the twentieth century. [4][11][12] Her works cover a broad range of topics, but she is best known for those dealing with the nature of wealth, power, fame, and evil, as well as politics, direct democracy ...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.ihanna.nu/",
+      "title": "iHannas Blog | art, craft & creativity in everyday life",
+      "content": "creativity in everyday life . The blog of an artist & crafter who loves to inspire others with her art journals, mixed media, DIY postcards & embroidery - and has for the past 22 years!",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.mdanderson.org/cancerwise.html",
+      "title": "Cancerwise Blog | UT MD Anderson",
+      "content": "6 days ago · Cancerwise is UT MD Anderson’s blog features stories from survivors and caregivers, and our experts’ insights on cancer treatment, research breakthroughs, healthy living and more.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.cambridge.org/core/blog/",
+      "title": "Cambridge Core Blog",
+      "content": "5 days ago · The March article of Muses – the arts blog from BJPsych International is the first blog of the series. The blog is written by Dr Dami Ajayi, Specialty Doctor, Barnet Enfield and Haringey Mental Health NHS Foundation Trust and Trainee/Blog Editor, BJPsych International.…",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://ilona-andrews.com/blog/",
+      "title": "Blog - ILONA ANDREWS",
+      "content": "An Errand on the Mountain Blog, Free Fiction, Maggie, Vault 328 Comments | POST A COMMENT October 14, 2026 by Ilona",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

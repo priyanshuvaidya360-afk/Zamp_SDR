@@ -1,0 +1,41 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum offers a consumer review platform where shoppers can read, write and share reviews.",
+        "evidence": "We're all about consumer reviews. Get the real inside story from shoppers like you. Read, write and share reviews on Trustpilot today.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum integrates with Trustpilot to allow users to publish reviews.",
+        "evidence": "Read, write and share reviews on Trustpilot today.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1310,
+    "completion_tokens": 1715,
+    "latency_ms": 15426,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

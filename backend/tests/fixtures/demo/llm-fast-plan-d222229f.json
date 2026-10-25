@@ -1,0 +1,35 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "\"brightwave.example\" product led sales motion",
+        "why": "to find if they are adding outbound sales"
+      },
+      {
+        "query": "\"brightwave.example\" pricing new plan tiers",
+        "why": "to spot new product plans needing pipeline"
+      },
+      {
+        "query": "\"brightwave.example\" podcast interview marketing growth",
+        "why": "to uncover growth strategy and new initiatives"
+      },
+      {
+        "query": "\"brightwave.example\" speaker conference summit 2025",
+        "why": "to find recent marketing event presence"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 488,
+    "completion_tokens": 160,
+    "latency_ms": 1190,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

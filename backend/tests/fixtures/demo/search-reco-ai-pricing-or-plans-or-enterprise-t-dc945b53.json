@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "reco.ai pricing OR plans OR enterprise tier",
+  "results": [
+    {
+      "url": "https://cedreo.com/pricing/",
+      "title": "Plans & Pricing | CedreoMaket Pricing & Plans: Start FreePricing plans and subscription FAQ - KoyfinPlans and Pricing - VonageNotion Pricing Plans: Free, Plus, Business, & Enterprise.Front Pricing and Plans | FrontVercel Pricing: Hobby, Pro, and Enterprise plans",
+      "content": "Check out Cedreo pricing plans. It has everything you need to take your business to the next level. Create your conceptual designs in just 2 hours and win over new clients with photorealistic 3D renderings. Subscribe now! How pricing works Start designing for free, upgrade as your ambitions grow, and talk to us when you need Maket tailored. Koyfin pricing plans description and overview. Find out about the 30-day guarantee, refund policy, payment periods, auto-renewal option See plans and pricing for Vonage Communications APIs, Unified Communications, and Contact Centers. Find out more now. Learn more about our different pricing plans. We support everyone, from free personal accounts to enterprise businesses. Front offers 3 Success Services packages: Professional Onboarding, Enterprise Onboarding, and Success Services project hours. You can view pricing and what's included in each package here. Compliance Built-in support for global security and data protection standards. Security collateral available for Pro and Enterprise plans.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.maket.ai/pricing",
+      "title": "Maket Pricing & Plans: Start Free",
+      "content": "How pricing works Start designing for free, upgrade as your ambitions grow, and talk to us when you need Maket tailored.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.koyfin.com/pricing/",
+      "title": "Pricing plans and subscription FAQ - Koyfin",
+      "content": "Koyfin pricing plans description and overview. Find out about the 30-day guarantee, refund policy, payment periods, auto-renewal option",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.vonage.com/pricing/",
+      "title": "Plans and Pricing - Vonage",
+      "content": "See plans and pricing for Vonage Communications APIs, Unified Communications, and Contact Centers. Find out more now.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.notion.com/pricing",
+      "title": "Notion Pricing Plans: Free, Plus, Business, & Enterprise.",
+      "content": "Learn more about our different pricing plans. We support everyone, from free personal accounts to enterprise businesses.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

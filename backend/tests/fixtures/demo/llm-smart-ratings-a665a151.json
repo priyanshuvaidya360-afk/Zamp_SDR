@@ -1,0 +1,3 @@
+{
+  "error": "No LLM provider could answer. groq: rate limited; gemini: rate limited"
+}

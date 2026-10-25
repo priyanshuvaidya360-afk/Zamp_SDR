@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 13,
+    "angle": "Hi Ryan, I saw ProtoPie just launched ProtoPie AI with component authoring—congrats! As Head of Growth, you’ll likely need a steady flow of qualified prospects to accelerate adoption, and Halyard can deliver ready‑to‑engage leads without expanding your SDR team.",
+    "runners_up": [
+      7,
+      9
+    ],
+    "why_not_others": "The funding news is less immediately tied to a growth‑focused outreach need, and the User Testing launch is less relevant to driving new‑product pipeline."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 691,
+    "completion_tokens": 541,
+    "latency_ms": 20809,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

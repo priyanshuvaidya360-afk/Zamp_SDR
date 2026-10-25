@@ -159,7 +159,7 @@ async def test_unverifiable_or_old_signals_are_dropped(monkeypatch):
     out = await extract.process_sources([PAGE], "Company: Acme", TODAY)
     assert len(out.signals) == 1
     assert sorted(d.reason.split(" (")[0] for d in out.dropped) == [
-        "evidence not found on the page", "older than 180 days"]
+        "evidence not found on the page", f"older than {settings.signal_window_days} days"]
 
 
 async def test_listing_date_only_dates_single_story_pages(monkeypatch):
@@ -193,6 +193,12 @@ def test_speaker_rules():
     own = ExtractedSignal(**sig(type="person_content", about="person", speaker="Priya Raman"), source_url="u")
     extract.apply_speaker_rules(own, "Priya Raman", "Raman")
     assert own.about == "person" and own.note is None
+
+    # What the company says about itself is never one person's, even when it names the prospect.
+    focus = ExtractedSignal(**sig(type="company_focus", about="person", summary="Priya Raman leads a workflow rebuild"),
+                            source_url="u")
+    extract.apply_speaker_rules(focus, "Priya Raman", "Raman")
+    assert focus.about == "company"
 
 
 def test_ghost_jobs_by_age_and_cluster_date_window():

@@ -1,0 +1,53 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Abacum raised $100M to support finance teams.",
+        "evidence": "We've raised $100M to make finance leaders the hero of their organization",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Abacum has offices in New York City, Barcelona, Toronto and Buenos Aires.",
+        "evidence": "Today Abacum is a global company headquartered in New York City, with offices in Barcelona, Toronto and Buenos Aires",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum's mission is to empower finance teams to work smarter, make better decisions, and accelerate their companies’ success.",
+        "evidence": "Our mission is to empower finance teams to work smarter, make better decisions, and accelerate their companies’ success.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 2525,
+    "completion_tokens": 1218,
+    "latency_ms": 61461,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

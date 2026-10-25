@@ -1,0 +1,61 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "quick note on Modeler launch",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 2,
+        "reason": "Fact 2 confirms Abacum launched Modeler.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I saw that on 13 October 2026 you launched Modeler, an AI agent that brings agentic modeling to finance teams.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 2,
+        "reason": "Fact 2 explicitly states that Abacum launched Modeler on October 13, 2026.",
+        "suggestion": null
+      },
+      {
+        "sentence": "As you aim to get finance decision‑makers on board fast, many growth teams struggle with outbound pipelines that only grow by adding more SDRs or suffer from generic sequences with low reply rates.",
+        "about": "market",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a general remark about what growth teams face rather than a confirmed fact about the prospect.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Halyard automatically spots buying signals, surfaces the right contacts, and drafts researched, cited first‑touch emails for your reps to review, letting your team build pipeline without increasing headcount.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": "seller",
+        "reason": "This accurately reflects the seller description of Halyard.",
+        "suggestion": null
+      },
+      {
+        "sentence": "If you’re open to a 15‑minute call to see a sample outreach for Modeler, let me know.",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a call to action question.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email specifically references the recipient's exact recent product launch and product name."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 873,
+    "completion_tokens": 509,
+    "latency_ms": 2365,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

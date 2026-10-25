@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Abacum\" podcast OR interview growth strategy",
+  "results": [
+    {
+      "url": "https://www.abacum.ai/newsroom/podcast-40-million-raised-to-build-the-future-of-fp-a",
+      "title": "Podcast: $40 Million Raised to Build the Future of FP&A",
+      "content": "Our CEO and Co-Founder, Julio Martinez, recently joined Category Visionaries to discuss Abacum’s journey and share insights on building an FP&A platform that has successfully raised $40 million in funding. In this episode, Julio delves into key moments from his career and Abacum’s story, including: Sabbatical Inspirations: Julio’s transformative sabbatical in India, where his immersion ...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.abacum.ai/newsroom/eu-startups-podcast-episode-142-julio-martinez-co-founder-and-ceo-of-abacum",
+      "title": "Abacum: The AI-Native FP&A Platform",
+      "content": "Abacum is the AI-native FP&A platform built for CFOs to connect data, workflows and teams, simplifying planning and reporting with 700+ integrations.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.eu-startups.com/2025/10/eu-startups-podcast-episode-142-julio-martinez-co-founder-and-ceo-of-abacum/",
+      "title": "EU-Startups Podcast | Episode 142: Julio Martinez, Co-founder ...",
+      "content": "Oct 31, 2025 · In this episode of the EU-Startups Podcast, we sit down with Julio Martinez, Co-founder and CEO of Abacum, a platform that helps CFOs and finance teams forecast revenue, plan headcount, and model financial scenarios to drive efficient growth. Founded in 2020, the company has raised a total of $105 ...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=wMEQxzr5JpI",
+      "title": "#CFOPH Podcast - Ryan McDonald | Abacum - YouTubeAutomating Financial Planning: Abacum’s Julio MartínezWe're super excited to share this latest collaboration! ...",
+      "content": "In this episode, we sit down with Ryan McDonald, Head of Partnerships at Abacum, to explore how finance teams are evolving beyond spreadsheets, and what that... Listen to this episode from The Financial Technology Report with RJ Lumba on Spotify. Welcome to The Financial Technology Report, a leading information source on financial technology companies and solutions. In this episode, we speak with Julio Martínez, Co-Founder and CEO of Abacum, an automated FP&A platform built for mid-market finance teams. Abacum centralizes operational and financial ... We're super excited to share this latest collaboration! 🎙 Tune in for this conversation where Julio Martínez, CEO and Founder of Abacum, sat down with serial entrepreneur Hadi Radwan on his ...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://open.spotify.com/episode/5Opy2sTxtvb7EdYMbMaAMv",
+      "title": "Automating Financial Planning: Abacum’s Julio Martínez",
+      "content": "Listen to this episode from The Financial Technology Report with RJ Lumba on Spotify. Welcome to The Financial Technology Report, a leading information source on financial technology companies and solutions. In this episode, we speak with Julio Martínez, Co-Founder and CEO of Abacum, an automated FP&A platform built for mid-market finance teams. Abacum centralizes operational and financial ...",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

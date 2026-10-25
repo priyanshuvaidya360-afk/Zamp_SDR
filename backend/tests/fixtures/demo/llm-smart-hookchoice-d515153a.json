@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 3,
+    "angle": "She just confirmed the migration is complete and emphasized the need for outbound outreach with clean data, which is precisely what Halyard delivers without adding SDR headcount.",
+    "runners_up": [
+      2,
+      1
+    ],
+    "why_not_others": "Signal 2 is company‑wide and less personal, while signal 1 only mentions hiring SDRs and doesn’t address the migration status."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 941,
+    "completion_tokens": 531,
+    "latency_ms": 2659,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

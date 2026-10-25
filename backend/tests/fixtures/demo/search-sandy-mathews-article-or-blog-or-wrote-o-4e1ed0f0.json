@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Sandy Mathews\" article OR blog OR wrote OR webinar",
+  "results": [
+    {
+      "url": "https://en.wikipedia.org/wiki/Arthur_Mathews_(writer)",
+      "title": "Arthur Mathews (writer) - Wikipedia",
+      "content": "Arthur Mathews is an Irish comedy writer and actor. With writers including Graham Linehan, Paul Woodfull and Matt Berry, he co-created and co-wrote the television comedies Father Ted, Big Train and Toast of London, and contributed to comedy shows including Harry Enfield and Chums, The Fast Show, The Day Today, and Brass Eye.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://law.stanford.edu/blog/",
+      "title": "Blog - Stanford Law School",
+      "content": "4 days ago · New Article in Stanford Computational Antitrust: Computational Rule of Reason Analysis in Antitrust October 5, 2026 CodeX",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://sharemylesson.com/webinars",
+      "title": "Webinars - Share My Lesson",
+      "content": "Oct 4, 2026 · Share My Lesson works with our prestigious content partners to offer hundreds of free, for-credit professional development webinars on topics like current events, civic engagement, classroom management and instructional strategies, as well as on issues like social justice, climate education, mental health and anti-racism.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://knowledgematters.org/webinars/",
+      "title": "Webinars - Knowledge Matters",
+      "content": "Feb 5, 2026 · This action-oriented session explores classroom practices that develop and foster fluency and its connection to higher-order thinking, with concrete examples from a Baltimore middle school. - @ 4:30pm ET - Kyair Butts, Maryanne Wolf, and Melissa Orkin 11/03/2026",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://waitbutwhy.com/",
+      "title": "Wait But Why",
+      "content": "A popular long-form, stick-figure-illustrated blog about almost everything.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

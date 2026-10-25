@@ -1,6 +1,6 @@
 """Stage 8: human review, revalidate on approve (case 10), export.
 
-Spec: docs/GUIDE.md case 10, "UI: three screens" (review queue, export) and T15.
+Spec: docs/PROJECT_SPEC.md case 10, "UI: three screens" (review queue, export) and T15.
 - approve: if the draft is older than settings.revalidate_after_days and a claim relies on a
   time-sensitive signal, re-fetch those sources first. The fast model compares then vs now:
   unchanged -> approved; changed -> the smart model rewrites only that sentence, which becomes a
@@ -24,6 +24,7 @@ from sqlmodel import Session, select
 from app import llm, prompts, search
 from app.config import settings
 from app.models import Batch, DraftRecord, ReviewerAction, Run, RunStatus, SignalRecord, utcnow
+from app.pipeline import draft as drafting
 from app.pipeline.draft import _numbers_in, _words
 from app.pipeline.extract import evidence_on_page
 
@@ -47,20 +48,22 @@ class FactCheck(BaseModel):
 
 
 class ReviewResult(BaseModel):
-    outcome: Literal["approved", "edited", "rejected", "changed", "gone"]
+    outcome: Literal["approved", "edited", "rejected", "changed", "gone", "needs_fix"]
     message: str
     run_status: RunStatus
     draft_id: int  # the draft to show next (a new version when facts changed)
     checks: list[FactCheck] = []
     diff: dict[str, str] | None = None  # {"before", "after"} bodies, when a sentence was rewritten
+    factual: dict[str, Any] | None = None  # needs_fix: the factual audit of the rep's edit
 
 
 # --- Which drafts need a re-check -------------------------------------------------------------
 
 
 def latest_draft(session: Session, run_id: int) -> DraftRecord | None:
+    # Newest record, not highest version: a re-run (retry, batch rebalance) starts again at v1.
     return session.exec(select(DraftRecord).where(DraftRecord.run_id == run_id)
-                        .order_by(DraftRecord.version.desc())).first()
+                        .order_by(DraftRecord.id.desc())).first()
 
 
 def _aware(dt):
@@ -175,12 +178,17 @@ def edit_diff(before: str, after: str) -> list[str]:
 
 
 async def review(session: Session, run_id: int, action: ReviewerAction, body: str | None = None,
-                 reason: str | None = None, draft_id: int | None = None) -> ReviewResult:
+                 reason: str | None = None, draft_id: int | None = None,
+                 identity_confirmed: bool = False) -> ReviewResult:
     from app.pipeline import runner
 
     run, draft = _get(session, run_id)
     if draft_id is not None and draft_id != draft.id:
         raise ReviewError("A newer version of this draft exists; review that one.")
+    if run.identity_unverified and action != ReviewerAction.reject:
+        if not identity_confirmed:
+            raise ReviewError("This person was never found online. Confirm they exist and work there, then approve.")
+        draft.review = {**(draft.review or {}), "identity_confirmed_by_rep": True}
 
     if action == ReviewerAction.reject:
         _close(session, run, draft, action, RunStatus.rejected,
@@ -191,18 +199,40 @@ async def review(session: Session, run_id: int, action: ReviewerAction, body: st
     if action == ReviewerAction.edit:
         if not body or not body.strip():
             raise ReviewError("An edit needs the edited body.")
+        report = await check_edit(run, draft, body.strip())
+        if report is not None and report["blocking"]:
+            draft.review = {**(draft.review or {}), "edit_check": report}
+            session.add(draft)
+            session.commit()
+            return ReviewResult(outcome="needs_fix", message=drafting.blocking_message(report).capitalize() + ".",
+                                run_status=run.status, draft_id=draft.id, factual=report)
         draft.edited_body = body.strip()
-        _close(session, run, draft, action, RunStatus.approved, None, edit_diff=edit_diff(draft.body, draft.edited_body))
+        _close(session, run, draft, action, RunStatus.approved, None, edit_diff=edit_diff(draft.body, draft.edited_body),
+               **({"edit_check": report} if report is not None else {}))
         _announce(run)
         return ReviewResult(outcome="edited", message="Approved with your edits", run_status=run.status,
                             draft_id=draft.id)
 
+    if blocked := drafting.blocking_message((draft.critic_report or {}).get("factual")):
+        raise ReviewError(f"This draft has {blocked}. Edit the flagged sentences, then save.")
     stale = stale_claims(session, draft)
     if not stale:
         _close(session, run, draft, action, RunStatus.approved)
         _announce(run)
         return ReviewResult(outcome="approved", message="Approved", run_status=run.status, draft_id=draft.id)
     return await revalidate(session, run, draft, stale)
+
+
+async def check_edit(run: Run, draft: DraftRecord, body: str) -> dict[str, Any] | None:
+    """A rep's edit goes through the same factual audit as the draft did, against the same facts
+    (stored with the draft's critic report). None for drafts made before the audit existed."""
+    factual = (draft.critic_report or {}).get("factual")
+    if not factual or "evidence" not in factual:
+        return None
+    evidence = [drafting.Evidence(**e) for e in factual["evidence"]]
+    name = run.full_name or f"{run.first_name} {run.last_name}"
+    result, _ = await drafting.audit(evidence, name, run.company, draft.subject, body)
+    return drafting.factual_report(result, evidence, draft.subject, body, check_numbers=True)
 
 
 async def revalidate(session: Session, run: Run, draft: DraftRecord,
@@ -234,7 +264,7 @@ async def revalidate(session: Session, run: Run, draft: DraftRecord,
                 else:
                     after, used = await rewrite_sentence(sentence, signal.summary, verdict.new_fact, evidence)
                     tokens += used
-                    invented = _numbers_in(after) - _numbers_in(f"{verdict.new_fact} {evidence}")
+                    invented = invented_numbers(sentence, after, signal.summary, f"{verdict.new_fact} {evidence}")
                     if invented:  # the rewrite added a number the page doesn't give
                         check.verdict = "gone"
                         check.reason += f" (the rewrite added unsourced numbers: {', '.join(sorted(invented))})"
@@ -293,6 +323,16 @@ async def revalidate(session: Session, run: Run, draft: DraftRecord,
                         message=f"{_facts(len(changed))} changed since the draft was written: approve the corrected version")
 
 
+def invented_numbers(before: str, after: str, old_fact: str, new_fact: str) -> set[str]:
+    """Numbers in the rewritten sentence that nothing backs. Allowed: the new fact's numbers, and
+    the sentence's own numbers that were not part of the old fact (a date like "2 October 2026"
+    stays as it was). The old fact's numbers must go: keeping "four" when the page now says
+    "two" would be wrong."""
+    changed = _numbers_in(old_fact) - _numbers_in(new_fact)
+    kept = _numbers_in(before) - changed
+    return _numbers_in(after) - _numbers_in(new_fact) - kept
+
+
 def _update_signal(session: Session, signal: SignalRecord, fact: str, evidence: str) -> None:
     """The signal now states what the page says today; the note keeps what it said before."""
     was = signal.summary
@@ -337,6 +377,6 @@ def export_csv(session: Session, batch: Batch, everything: bool = False) -> str:
 def _final_draft(session: Session, run: Run) -> DraftRecord | None:
     """The approved version if there is one, else the latest."""
     drafts = session.exec(select(DraftRecord).where(DraftRecord.run_id == run.id)
-                          .order_by(DraftRecord.version.desc())).all()
+                          .order_by(DraftRecord.id.desc())).all()
     approved = [d for d in drafts if d.reviewer_action in (ReviewerAction.approve, ReviewerAction.edit)]
     return (approved or drafts or [None])[0]

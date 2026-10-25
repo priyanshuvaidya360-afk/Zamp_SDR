@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"\" expansion partnership",
+  "results": [
+    {
+      "url": "https://uconnhuskies.com/news/2026/10/21/general-uconn-and-m-t-bank-announce-historic-partnership",
+      "title": "M&T Bank, UConn Announce Expansion of Partnership - University of Connecticut Athletics",
+      "content": "M&T Bank and the University of Connecticut have announced an expansion of their strategic partnership. As the official bank of the University and the UConn Huskies, the evolution of the partnership includes the multiyear naming rights for the facility that houses Gampel Pavilion, home of the UConn men's and women's basketball teams. Under the agreement, the facility will be renamed as M&T Bank Center at Gampel Pavilion. [...] In addition to naming rights at Gampel Pavilion, the broader partnership supports academic and athletic priorities aligned with UConn's mission. It helps UConn expand educational opportunities, invest in student achievement, and strengthen the University's impact across Connecticut and New England. The partnership also includes investments in Connecticut-focused, co-branded activations and community engagements, which includes retail bank promotions, paid advertising, digital media inclusion, [...] The partnership builds on M&T Bank's broader banking relationship with UConn and UConn Athletics and reflects a shared commitment to Connecticut, higher education, athletics, and community engagement.",
+      "published_date": "Wed, 21 Oct 2026 19:00:00 GMT",
+      "score": 0.8591094
+    },
+    {
+      "url": "https://www.newsshooter.com/2026/10/15/adobe-nvidia-announce-an-expansion-of-their-partnership",
+      "title": "Adobe & NVIDIA announce an expansion of their partnership - Newsshooter",
+      "content": "# Adobe & NVIDIA announce an expansion of their partnership\n\n2 min read\n\nNVIDIA\n\nAdobe and NVIDIA have announced an expansion of their partnership to optimize Adobe’s flagship tools, including Adobe Photoshop, Premiere, Substance 3D, Frame.io and Brand Concierge. This is being done to deliver faster AI-powered creation, production, and personalization to customers. [...] Adobe and NVIDIA announced a strategic partnership back in March. That collaboration included GPU acceleration for media ingestion and intelligence in Frame.io, as well as ongoing work around Adobe Substance 3D, Adobe Firefly Foundry and 3D digital twin workflows for enterprise customers. [...] Adobe is also using NVIDIA accelerated computing to speed cloud media processing and intelligent content discovery for Adobe Frame.io. The updated Frame.io pipeline uses NVIDIA video acceleration, including NVIDIA NVDEC for hardware-accelerated decoding and NVIDIA TensorRT with CUDA for content preprocessing and embedding generation.",
+      "published_date": "Fri, 16 Oct 2026 04:28:08 GMT",
+      "score": 0.8080827
+    },
+    {
+      "url": "https://www.crusoe.ai/resources/newsroom/polar-crusoe-partnership-expansion",
+      "title": "Polar & Crusoe expand Norway AI partnership to 40MW | Crusoe",
+      "content": "Share:\n\nLONDON, UK – October 21, 2026 – Polar Data Centers (“Polar”), a European developer and operator of AI-ready data center infrastructure, today announced the expansion of its partnership with Crusoe, the AI factory company, building on the successful deployment and operation of Crusoe’s AI infrastructure at Polar’s DRA01 facility in Tørdal, Norway. [...] The expansion reflects Polar’s approach to developing long-term customer partnerships: delivering initial capacity successfully, operating it reliably, and creating a platform that can scale as customers’ requirements grow.\n\n###### Andy Hayes, CEO of Polar, said: [...] October 21, 2026\n\n# Polar Expands Partnership with Crusoe in Norway with New 40MW AI Infrastructure Development\n\nDRA01 facility now live and powering Crusoe Cloud, as partnership expands into DRA02 to support continued growth of AI infrastructure in Europe\n\nNo items found.\n\nOctober 21, 2026\n\nClose-up image of server components in a data center showing multiple storage drives with illuminated indicators.\n\nTable of contents\n\nThis is some text inside of a div block.\n\nShare:",
+      "published_date": "Wed, 21 Oct 2026 11:00:00 GMT",
+      "score": 0.65835214
+    },
+    {
+      "url": "https://finance.yahoo.com/markets/stocks/articles/crowdstrike-stock-bull-case-changed-071945387.html",
+      "title": "CrowdStrike Stock Has The Bull Case Changed After AI Security Partnership Expansion",
+      "content": "CrowdStrike Holdings and NVIDIA expanded their collaboration in October 2026, linking Falcon Guardian with NVIDIA OpenShell and Sentry to connect AI agent activity with security telemetry and enable hardware level policy enforcement.\n This move extends CrowdStrike's AI security capabilities further into infrastructure, tying autonomous agent protection directly to chips and data center hardware where enterprise workloads run. [...] For catalysts, investors will likely focus on how quickly this NVIDIA partnership converts into real deployments across high value AI infrastructure rather than remaining a technical proof point. Execution risk is clear. The firm already trades on expensive P/S and discounted cash flow metrics, so any gap between the AI security narrative and signed Falcon Flex, SIEM, identity and cloud security contracts could pressure both sentiment and the multiple. [...] The most relevant recent announcement is CrowdStrike's deeper integration of Falcon Guardian with NVIDIA's OpenShell and Sentry stack. That link between AI agent telemetry and in silicon controls directly supports management's push to make Guardian and broader AI security a meaningful contributor toward the long stated US$20b ARR ambition.",
+      "published_date": "Thu, 22 Oct 2026 21:00:00 GMT",
+      "score": 0.6241337
+    },
+    {
+      "url": "https://www.desmoinesregister.com/press-release/story/143138/landmark-funeral-group-expands-into-kentucky-and-indiana-through-partnership-with-funeral-excellence-group",
+      "title": "Landmark Funeral Group Expands into Kentucky and Indiana Through Partnership with Funeral Excellence Group - The Des Moines Register",
+      "content": "TOLEDO, OH, UNITED STATES, October 22, 2026 /EINPresswire.com/ — Landmark Funeral Group (“Landmark”) today announced a partnership with Funeral Excellence Group, marking its expansion into Kentucky and Indiana. The partnership will add nine locally owned and operated locations to Landmark’s network, five in Kentucky and four in Indiana, with local leadership and teams all remaining in place to grow the businesses and continue serving their respective communities.",
+      "published_date": "Thu, 22 Oct 2026 17:16:05 GMT",
+      "score": 0.5735118
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

@@ -1,0 +1,35 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "brightwave.example pricing plans features",
+        "why": "new product tier or plan changes"
+      },
+      {
+        "query": "\"Brightwave\" product-led sales motion",
+        "why": "transitioning to sales-led motion"
+      },
+      {
+        "query": "\"Brightwave\" podcast interview OR webinar speaker",
+        "why": "recent executive commentary on growth"
+      },
+      {
+        "query": "\"Brightwave\" open source github repository",
+        "why": "developer activity or product infrastructure changes"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 632,
+    "completion_tokens": 146,
+    "latency_ms": 1063,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,6 +1,6 @@
 """The only way the app calls an LLM.
 
-Spec: docs/GUIDE.md T03. Every provider is reached through the OpenAI-compatible API, so
+Spec: docs/PROJECT_SPEC.md T03. Every provider is reached through the OpenAI-compatible API, so
 switching provider is a settings change. Callers ask for a role ("smart" or "fast"), never a
 model ID, and always get back a validated Pydantic object.
 
@@ -108,12 +108,13 @@ def _provider_config(name: str) -> tuple[str, str, dict[str, str]]:
 
 
 @lru_cache(maxsize=None)
-def _chat_model(api_key: str, base_url: str, model: str, timeout: float) -> ChatOpenAI:
+def _chat_model(api_key: str, base_url: str, model: str, timeout: float,
+                max_tokens: int | None = None) -> ChatOpenAI:
     """The LangChain chat model for one provider and model. Retries are ours (tenacity), so the
     SDK's own retries are off; the Responses API is off because Groq and Gemini only speak
-    chat completions."""
+    chat completions. max_tokens None = the provider's default reply length."""
     return ChatOpenAI(model=model, api_key=api_key, base_url=base_url, timeout=timeout,
-                      max_retries=0, use_responses_api=False)
+                      max_tokens=max_tokens, max_retries=0, use_responses_api=False)
 
 
 def _text(content: Any) -> str:
@@ -128,7 +129,8 @@ async def _call(
 ) -> tuple[str, int, int]:
     """One raw completion. Returns (content, prompt_tokens, completion_tokens)."""
     api_key, base_url, _ = _provider_config(provider)
-    chat = _chat_model(api_key, base_url, model, settings.llm_timeout_s).bind(response_format={
+    max_tokens = settings.groq_max_output_tokens if provider == "groq" else None
+    chat = _chat_model(api_key, base_url, model, settings.llm_timeout_s, max_tokens).bind(response_format={
         "type": "json_schema",
         "json_schema": {"name": schema_name, "strict": True, "schema": schema},
     })
@@ -256,7 +258,8 @@ async def structured(
                 skipped.append(f"{provider}: rate limited")
                 log.warning("LLM %s rate limited (retry-after %s), falling back", provider, _retry_after_s(error))
                 raise _ProviderFailed(provider) from error
-            except (openai.APIError, ValidationError, OpenAIRefusalError) as error:
+            # LengthFinishReasonError: the reply hit its length limit mid-answer (not an APIError).
+            except (openai.APIError, openai.LengthFinishReasonError, ValidationError, OpenAIRefusalError) as error:
                 skipped.append(f"{provider}: {type(error).__name__}")
                 log.warning("LLM %s failed (%s), falling back", provider, error)
                 raise _ProviderFailed(provider) from error

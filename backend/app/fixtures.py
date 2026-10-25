@@ -1,6 +1,6 @@
 """Recorded responses (DEMO_MODE record/fixtures) and the 24 h response cache.
 
-Spec: docs/GUIDE.md T03. Fixtures are committed so the demo and tests run with the network
+Spec: docs/PROJECT_SPEC.md T03. Fixtures are committed so the demo and tests run with the network
 off; the cache is git-ignored and only saves credits during development.
 """
 
@@ -50,7 +50,7 @@ def load_fixture(slug: str) -> Any:
     path = settings.fixtures_dir / f"{slug}.json"
     if not path.exists():
         raise FixtureMissing(slug)
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def reusable(slug: str) -> Any | None:
@@ -64,7 +64,7 @@ def reusable(slug: str) -> Any | None:
         path = directory / f"{slug}.json"
         if not path.exists():
             continue
-        data = json.loads(path.read_text())
+        data = json.loads(path.read_text(encoding="utf-8"))
         if "error" in data or data.get("results") == [] or data.get("pages") == {}:
             continue
         if directory != settings.fixtures_dir:
@@ -76,7 +76,7 @@ def reusable(slug: str) -> Any | None:
 def save_fixture(slug: str, data: Any) -> Path:
     settings.fixtures_dir.mkdir(parents=True, exist_ok=True)
     path = settings.fixtures_dir / f"{slug}.json"
-    path.write_text(json.dumps(data, indent=2, ensure_ascii=False, default=str))
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False, default=str), encoding="utf-8")
     return path
 
 
@@ -88,7 +88,7 @@ def cache_get(key_payload: Any) -> Any | None:
     path = _cache_path(key_payload)
     if not path.exists():
         return None
-    entry = json.loads(path.read_text())
+    entry = json.loads(path.read_text(encoding="utf-8"))
     if time.time() - entry["ts"] > settings.cache_ttl_hours * 3600:
         return None
     return entry["data"]
@@ -97,5 +97,6 @@ def cache_get(key_payload: Any) -> Any | None:
 def cache_put(key_payload: Any, data: Any) -> None:
     settings.cache_dir.mkdir(parents=True, exist_ok=True)
     _cache_path(key_payload).write_text(
-        json.dumps({"ts": time.time(), "data": data}, ensure_ascii=False, default=str)
+        json.dumps({"ts": time.time(), "data": data}, ensure_ascii=False, default=str),
+        encoding="utf-8",
     )

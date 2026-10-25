@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"\" award OR recognized OR featured OR ranked",
+  "results": [
+    {
+      "url": "https://www.hrc.army.mil/content/Unit+Award+Info",
+      "title": "Unit Award Info - Human Resources Command",
+      "content": "21 hours ago · Awards are made to organizations when the heroism displayed or meritorious service performed is a result of group effort. A unit award is given to an operating unit and is worn by members of...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.hrc.army.mil/content/Foreign+Award+Info",
+      "title": "Foreign Award Info - Human Resources Command",
+      "content": "21 hours ago · Submit the request through the chain of command to the servicing HR office. The HR office verifies that the requested badge or decoration is listed in AR 600-8-22, Foreign Award/Badge Chart 1 or...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.ranker.com/crowdranked-list/5-star-movie-franchises",
+      "title": "The Best Movie Franchises Of All Time, Ranked",
+      "content": "Apr 23, 2026 · We've got you covered with this ultimate list containing every popular film franchise ranked by viewers. These franchises have captivated audiences with their rich storytelling, unforgettable characters, and epic adventures that span multiple installments.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://thestreamerawards.com/",
+      "title": "The Streamer Awards - Vote",
+      "content": "Recognizing the best of live streaming. You can use the progress bar at the top to navigate between categories. Please do not forget to click the Submit button when you are done! Your ballot will help decide the final award winners in each category.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.navywriter.com/",
+      "title": "Navy Eval, Award, and other Navy Writing Examples",
+      "content": "It's important that you take the time to find out what you need to do in order to meet and exceed standards and then make sure those achievements are recorded in your Eval. To help make your Eval as competitive as possible, this site contains instructions, phrases, examples, and other guidance.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

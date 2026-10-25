@@ -1,0 +1,16 @@
+{
+  "provider": "simweb",
+  "query": "\"Kestrel Labs\" opens new office expansion market",
+  "results": [
+    {
+      "url": "https://kestrellabs.example/blog/london-office",
+      "title": "Kestrel Labs opens its first London office",
+      "content": "22 September 2026. Kestrel Labs has opened its first office outside Dublin, in London. \"Half of\nour pipeline already comes from the UK,\" said chief executive Aoife Byrne.",
+      "published_date": "2026-09-22",
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

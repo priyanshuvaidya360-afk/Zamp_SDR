@@ -1,0 +1,46 @@
+{
+  "provider": "tavily",
+  "query": "\"Abacum\" customer OR \"case study\" OR clients",
+  "results": [
+    {
+      "url": "https://www.abacum.ai/industry/financial-services",
+      "title": "AI-Native FP&A Software for Financial Services and Fintech",
+      "content": "Abacum connects to Snowflake, BigQuery, NetSuite and Sage Intacct, case study “Thanks to Abacum, we've automated our monthly reporting, reducing manual",
+      "published_date": null,
+      "score": 0.5654673
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=XWAw2Pi_xeI",
+      "title": "How does Abacum support collaborative budget? | Demo",
+      "content": "From Client Meeting to Confident Recommendations: A Live Financial Planning Case Study Snap Projections financial planning software",
+      "published_date": null,
+      "score": 0.52071625
+    },
+    {
+      "url": "https://www.abacum.ai/industry/manufacturing",
+      "title": "AI-Native FP&A Software for Manufacturing",
+      "content": "Trusted by manufacturing finance teams BioFire scales vertically integrated manufacturing on Abacum, with a published case study to show for it.",
+      "published_date": null,
+      "score": 0.5009527
+    },
+    {
+      "url": "https://zanovoy.com/partners/abacum",
+      "title": "Abacum implementation and licensing partner | Zanovoy Partner",
+      "content": "As an Abacum implementation and licensing partner, we can quote and license Abacum directly, bundled with implementation and ongoing managed services. Many clients prefer this because it consolidates licensing, implementation, integration with the rest of their finance stack, and managed services into a single vendor relationship. One contract, one accountability, one renewal cycle. The other half of the time, clients prefer to license directly from Abacum and engage us as the implementation [...] Abacum is built for FP&A teams that have outgrown Excel-led planning but need a platform finance can run without specialist admins or long change cycles. Typical buyer: mid-market to enterprise companies with multiple business units, multi-entity consolidation needs, and an FP&A team scaling alongside the business. The platform is designed for finance ownership rather than IT or platform-admin dependency, which makes it a different operating model than legacy enterprise FP&A platforms. [...] ### 04\n\n### MANAGE\n\nOngoing.\n\nManaged services, ongoing optimization, model evolution as the business changes, new integration rollouts, and advisory support for FP&A leaders growing their planning maturity on the platform.\n\nStage 01 takes 1-2 weeks and ends with an honest read, including whether Abacum is the right call at all. Zero bias toward implementing.\n\nStart With a Free Abacum Evaluation\n\nClient Outcomes\n\n## Trusted Across Every Sector We Serve",
+      "published_date": null,
+      "score": 0.28372976
+    },
+    {
+      "url": "https://rsmus.com/services/digital-transformation/abacum-solutions.html",
+      "title": "Abacum solutions I RSM US",
+      "content": "As the speed of business accelerates, traditional planning and reporting processes can struggle to keep up. Abacum helps finance leaders move beyond spreadsheet-driven planning with an artificial intelligence‑native financial planning and analysis (FP&A) platform built for speed, collaboration and confident decision making. Together, RSM and Abacum enable your organization to establish a single, trusted financial operating model that keeps pace with growth and change.\n\n## Who benefits most [...] Guernsey\n Honduras\n Hong Kong SAR, China\n Hungary\n India\n Indonesia\n Iraq\n Ireland (Republic of)\n Israel\n Italy\n Ivory Coast\n Japan\n Jersey\n Jordan\n Kazakhstan\n Kenya\n Korea\n Kosovo\n Kuwait\n Kyrgyzstan\n Lebanon\n Luxembourg\n Macedonia (Republic of North)\n Malawi\n Malaysia\n Malta\n Mauritania\n Mauritius\n Mexico\n Morocco\n Mozambique\n Netherlands\n New Zealand\n Nicaragua\n Nigeria\n Norway\n Oman\n Pakistan\n Palestine\n Panama\n Paraguay\n Peru\n Philippines\n Poland\n Portugal\n Puerto Rico\n Qatar\n Romania [...] Qatar\n Romania\n Sao Tome & Principe\n Saudi Arabia\n Senegal\n Serbia\n Singapore\n Slovakia\n South Africa\n Spain\n Sri Lanka\n Swaziland\n Sweden\n Switzerland\n Taiwan\n Tajikistan\n Tanzania\n Thailand\n Tunisia\n Turkey\n UAE\n Uganda\n Ukraine\n United Kingdom\n Uruguay\n Venezuela\n Vietnam\n Zambia\n Zimbabwe",
+      "published_date": null,
+      "score": 0.26426387
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [
+    "duckduckgo: TimeoutException"
+  ],
+  "cached": false
+}

@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "40m series c insight",
+    "body": "I saw that Acme Fintech secured $40 million in Series C funding on 1 October 2026. That capital will need to stretch further, and building outbound pipeline by hiring more SDRs or using generic sequences can quickly erode runway. Our outbound pipeline engine finds accounts showing buying signals, surfaces the right contacts, and drafts researched first‑touch emails for your reps to review, so you can generate pipeline without adding SDR headcount. Would you be open to a brief 15‑minute call to explore?\n\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I saw that Acme Fintech secured $40 million in Series C funding on 1 October 2026.",
+        "signal_id": 2
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1396,
+    "completion_tokens": 1184,
+    "latency_ms": 2964,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

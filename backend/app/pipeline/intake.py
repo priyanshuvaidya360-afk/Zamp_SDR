@@ -1,11 +1,14 @@
 """Stage 1: intake and guardrails (code only, no LLM, no credits).
 
-Spec: docs/GUIDE.md stage 1 and "Account context". Blocks a person already researched in the
-last settings.recent_run_days days; otherwise collects internal context (past outreach,
+Spec: docs/PROJECT_SPEC.md stage 1 and "Account context". A person already researched in another batch
+in the last settings.recent_run_days days is not researched again: if that run wrote a draft,
+this one ends already_drafted and shows it (it is reviewed there, so one email is never in the
+queue twice); otherwise it ends blocked. Else it collects internal context (past outreach,
 replies, open deals, CRM owner). The rules that act on that context come in T13.
 """
 
 from datetime import timedelta
+from typing import Any
 
 from pydantic import BaseModel
 from sqlalchemy import func, or_
@@ -14,7 +17,7 @@ from sqlmodel import Session, select
 from app import db
 from app.config import settings
 from app.context_adapter import AccountInfo, OpenOpportunity, Touch, get_context_adapter
-from app.models import MessageType, Run, RunStatus, SequenceOutcome, utcnow
+from app.models import DraftRecord, MessageType, Run, RunStatus, SequenceOutcome, utcnow
 from app.pipeline.runner import RunContext, StopRun
 
 
@@ -28,14 +31,23 @@ class IntakeOutput(BaseModel):
 
 
 def find_recent_run(ctx: RunContext) -> Run | None:
-    """The same person in another batch within the window (failed runs don't count)."""
-    row = ctx.row
+    return find_recent(ctx.row, ctx.batch_id, ctx.run_id)
+
+
+# Runs that did no research of their own never count as "researched before".
+NOT_RESEARCH = (RunStatus.failed, RunStatus.blocked, RunStatus.already_drafted)
+
+
+def find_recent(row: dict[str, Any], batch_id: int, run_id: int | None = None) -> Run | None:
+    """The same person researched in another batch within the window. Used by intake (to skip a
+    second search) and by the prospect list (to say so before anyone clicks Draft). `row` uses
+    the run's keys: first_name, last_name, domain, linkedin_url, email."""
     same_person = []
     if row.get("linkedin_url"):
         same_person.append(Run.linkedin_url == row["linkedin_url"])
     if row.get("email"):
         same_person.append(Run.email == row["email"])
-    if row.get("domain"):
+    if row.get("domain") and row.get("first_name") and row.get("last_name"):
         same_person.append((func.lower(Run.first_name) == row["first_name"].lower())
                            & (func.lower(Run.last_name) == row["last_name"].lower())
                            & (Run.domain == row["domain"]))
@@ -44,8 +56,8 @@ def find_recent_run(ctx: RunContext) -> Run | None:
     since = utcnow() - timedelta(days=settings.recent_run_days)
     with Session(db.engine) as session:
         return session.exec(
-            select(Run).where(or_(*same_person), Run.batch_id != ctx.batch_id, Run.id != ctx.run_id,
-                              Run.started_at >= since, Run.status != RunStatus.failed)
+            select(Run).where(or_(*same_person), Run.batch_id != batch_id, Run.id != run_id,
+                              Run.started_at >= since, Run.status.not_in(NOT_RESEARCH))
             .order_by(Run.started_at.desc())
         ).first()
 
@@ -55,7 +67,7 @@ OPTED_OUT = {SequenceOutcome.not_interested.value: "said not interested",
 
 
 def apply_rules(ctx: RunContext, output: IntakeOutput) -> None:
-    """Cases 1 and 2 (docs/GUIDE.md "Account context", the cheap rules). Opting out wins over
+    """Cases 1 and 2 (docs/PROJECT_SPEC.md "Account context", the cheap rules). Opting out wins over
     everything; then an open deal holds the run; then a 'not now' turns it into a follow-up.
     Only this person's own replies count; a colleague's reply says nothing about them."""
     own = [t for t in output.reply_outcomes if t.same_person]  # newest first
@@ -83,10 +95,21 @@ def apply_rules(ctx: RunContext, output: IntakeOutput) -> None:
 async def run(ctx: RunContext) -> IntakeOutput:
     earlier = find_recent_run(ctx)
     if earlier:
+        with Session(db.engine) as session:
+            draft = session.exec(select(DraftRecord).where(DraftRecord.run_id == earlier.id)
+                                 .order_by(DraftRecord.id.desc())).first()
+        state = earlier.status.value.replace("_", " ")
+        if draft is not None:
+            raise StopRun(
+                RunStatus.already_drafted,
+                f"Already drafted on {earlier.started_at:%Y-%m-%d} in run #{earlier.id} ({state}): "
+                "showing that draft. Review it there.",
+                {"earlier_run_id": earlier.id, "earlier_status": earlier.status.value, "draft_id": draft.id},
+            )
         raise StopRun(
             RunStatus.blocked,
-            f"Contacted recently: already researched on {earlier.started_at:%Y-%m-%d} (run #{earlier.id})",
-            {"earlier_run_id": earlier.id},
+            f"Contacted recently: already researched on {earlier.started_at:%Y-%m-%d} (run #{earlier.id}, {state})",
+            {"earlier_run_id": earlier.id, "earlier_status": earlier.status.value},
         )
 
     adapter = get_context_adapter()

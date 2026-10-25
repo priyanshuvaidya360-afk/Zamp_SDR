@@ -1,0 +1,18 @@
+{
+  "output": {
+    "subject": "outbound pipeline without extra sdrs",
+    "body": "Outbound teams often struggle to grow pipelines without adding more SDRs. Halyard’s engine surfaces buying‑signal accounts, finds the right contacts and drafts cited first‑touch emails, letting reps build pipeline without hiring or generic blast sequences. Would you be open to a 15‑minute call to see if this approach could help your team?\n\nPriyanshu",
+    "claims": []
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 949,
+    "completion_tokens": 731,
+    "latency_ms": 12390,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

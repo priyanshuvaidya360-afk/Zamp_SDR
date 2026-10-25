@@ -1,0 +1,35 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "ferncastle.example pricing OR plans OR enterprise",
+        "why": "new product tier or sales motion"
+      },
+      {
+        "query": "\"Ferncastle\" podcast interview OR guest OR speaker",
+        "why": "executive interviews about growth strategy"
+      },
+      {
+        "query": "\"Ferncastle\" G2 Crowd category OR competitor comparison",
+        "why": "market positioning updates"
+      },
+      {
+        "query": "\"Ferncastle\" tech stack OR integration OR marketplace",
+        "why": "partnership and ecosystem signals"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 632,
+    "completion_tokens": 147,
+    "latency_ms": 1486,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

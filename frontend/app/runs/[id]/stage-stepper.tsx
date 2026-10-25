@@ -1,14 +1,31 @@
 "use client";
 
+import { RotateCcw } from "lucide-react";
+
 import { StepIcon } from "@/components/step-icon";
 import { formatDuration, stepState } from "@/lib/stages";
 import type { StageEvent, StageInfo } from "@/lib/types";
 
 // Agent activity tab: one row per stage. Spinner, then tick / warning / cross, duration, one-line
 // result; open a stage for its queries, sources, model output and credits.
-export function StageStepper({ stages, latest }: { stages: StageInfo[]; latest: Map<string, StageEvent> }) {
+export function StageStepper({
+  stages,
+  latest,
+  retry,
+}: {
+  stages: StageInfo[];
+  latest: Map<string, StageEvent>;
+  /** The latest retry of a failed run: where it restarted and whether research was reused. */
+  retry?: StageEvent;
+}) {
   return (
     <ol className="rounded-[14px] border bg-white px-4 py-2">
+      {retry && (
+        <li className="flex items-start gap-3 border-b px-1 py-2.5 text-xs text-muted-foreground">
+          <RotateCcw className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+          <span>{retry.message}</span>
+        </li>
+      )}
       {stages.map((stage, index) => {
         const event = latest.get(stage.name);
         const state = stepState(event);
@@ -99,8 +116,9 @@ function Sources({ output }: { output: Output }) {
     <div>
       <p className="font-medium">Pages read</p>
       <ul className="mt-1 space-y-1">
-        {sources.map((s) => (
-          <li key={s.url} className="truncate">
+        {sources.map((s, i) => (
+          // Older runs can list one page twice (found by a company and a person search).
+          <li key={`${i}-${s.url}`} className="truncate">
             <a href={s.url} target="_blank" rel="noreferrer" className="text-primary hover:underline">
               {s.title || s.url}
             </a>

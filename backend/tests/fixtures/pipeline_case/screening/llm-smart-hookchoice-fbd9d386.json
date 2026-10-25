@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 1,
+    "angle": "They just launched Acme Close, a new finance‑automation product, and will need to drive a rapid pipeline for it without hiring extra SDRs—exactly the problem Halyard solves.",
+    "runners_up": [
+      3,
+      10
+    ],
+    "why_not_others": "The funding news is broader growth and the Singapore expansion is only a reshared post, while the product launch directly impacts her finance remit."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 919,
+    "completion_tokens": 619,
+    "latency_ms": 12135,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "site:reco.ai Reco",
+  "results": [
+    {
+      "url": "https://www.reco.ai/blog/reco-raises-55-million-in-additional-funding-with-participation-from-at-t-ventures",
+      "title": "Reco Raises $55 Million in Additional Funding with Participation from",
+      "content": "Reco is the leader in Agentic Security. The Reco Platform secures agents and their operating environments where applications, identities, permissions and workflows converge. It discovers an organization’s entire third-party ecosystem, prioritizes real risk over alert volume, and remediates with precision across every human identity, agent, app and permission. The Reco Platform has more than 280 app integrations and 1,000 detection controls. Built on the Reco Graph, it delivers new integrations [...] Reco is the only platform that brings agent security, identity governance, and threat detection together in one place. The result: you move just as fast as AI.  \n  \nEvery day, your business deploys more agents, integrations, and non-human identities. Most of them operate invisibly. Reco makes them visible, maps what they can access, and tells you when they deviate from policy, before they become a liability.\n\nRequest a demo\n\nChat with us\n\nChat with us [...] ‍\n\nALTAMONTE SPRINGS, Fla. - Sep. 29, 2026 - Reco, the leader in Agentic Security, today announced it has raised an additional $55 million including a strategic investment from AT&T Ventures and support from new investors Forestay and Quadrille Capital. It brings Reco’s total funding to $140 million and will support expansion across sales, partnerships, channels and customer support.\n\n‍",
+      "published_date": null,
+      "score": 0.8016413
+    },
+    {
+      "url": "https://www.reco.ai/compare/reco-vs-obsidian",
+      "title": "Reco vs Obsidian Security: SaaS Security Compared [2026]",
+      "content": "‍\n\n## Reco Overview\n\n‍\n\nReco is an AI Agent Security Platform built for enterprises whose SaaS environments have outgrown traditional SaaS Security Posture Management. The platform secures more than 225 applications across the full SaaS lifecycle, with continuous monitoring spanning human identities, non-human identities, AI agents, and SaaS-to-SaaS integrations.\n\n‍ [...] ‍\n\nReco is designed for enterprises operating large, fast-moving SaaS environments where AI adoption, shadow SaaS, and autonomous workflows create exposure that legacy SSPM tools were never built to manage. Instead of treating SaaS security as a periodic posture review, Reco approaches it as a continuous governance challenge spanning discovery, identity risk, configuration management, data exposure, and AI-driven activity.\n\n‍\n\n## Obsidian Security Overview\n\n‍ [...] ## Conclusion\n\n‍\n\nReco and Obsidian Security reflect two different generations of SaaS security architecture. Obsidian was built during an earlier SaaS model centered on identity analytics and user-centric threat detection across a narrower set of federated applications. Reco is built for the SaaS environments enterprises actually operate in today, where AI agents, non-human identities, shadow SaaS, and autonomous SaaS-to-SaaS activity continuously reshape the attack surface.\n\n‍",
+      "published_date": null,
+      "score": 0.8003337
+    },
+    {
+      "url": "https://www.reco.ai/blog/saas-and-ai-security-is-here-reco-raises-series-b-to-dominate-the-future-of-ai-usage-in-saas",
+      "title": "Why Reco Raises Series B for SaaS and AI Security",
+      "content": "Reco is the only platform that brings agent security, identity governance, and threat detection together in one place. The result: you move just as fast as AI.  \n  \nEvery day, your business deploys more agents, integrations, and non-human identities. Most of them operate invisibly. Reco makes them visible, maps what they can access, and tells you when they deviate from policy, before they become a liability.\n\nRequest a demo\n\nChat with us\n\nChat with us [...] ‍\n\nFrom day one, Reco was designed specifically for the AI era. We're not retrofitting legacy tools to handle modern challenges, we built a purpose-built SaaS security platform from the ground up that secures SaaS AI, apps and agents. Our platform secures AI adoption across hundreds of thousands of SaaS apps and agents, and here's the key differentiator: it's all powered by our own AI Agents.\n\n‍ [...] Use Cases\n\nDetect Shadow SaaSSaaS Ticketing WorkflowUnsanctioned Apps ControlSaaS OffboardingCustom Policy StudioShadow AI DiscoveryEnsure Identity Governance ComplianceAI Powered SaaS Security Insights\n\nMemberships\n\nReco is a member of the Forbes technical counsil.Reco is a member of the cloud security alLiance (CSA).\n\nAccreditations\n\n.svg)\n\nAICPA for RecoAICPA for RecoReco - ISO 27001Reco - ISO 27001%201.svg)Reco - ISO 27001\n\nTermsPrivacy\n\n© 2026 Reco. All Rights Reserved.",
+      "published_date": null,
+      "score": 0.7817479
+    },
+    {
+      "url": "https://www.reco.ai/brand-guidelines",
+      "title": "Reco Brand Guidelines | Official Logos, Colors & Assets",
+      "content": "Reco is the only platform that brings agent security, identity governance, and threat detection together in one place. The result: you move just as fast as AI.  \n  \nEvery day, your business deploys more agents, integrations, and non-human identities. Most of them operate invisibly. Reco makes them visible, maps what they can access, and tells you when they deviate from policy, before they become a liability.\n\nRequest a demo\n\nChat with us\n\nChat with us [...] Use Cases\n\nDetect Shadow SaaSSaaS Ticketing WorkflowUnsanctioned Apps ControlSaaS OffboardingCustom Policy StudioShadow AI DiscoveryEnsure Identity Governance ComplianceAI Powered SaaS Security Insights\n\nMemberships\n\nReco is a member of the Forbes technical counsil.Reco is a member of the cloud security alLiance (CSA).\n\nAccreditations\n\n.svg)\n\nAICPA for RecoAICPA for RecoReco - ISO 27001Reco - ISO 27001%201.svg)Reco - ISO 27001\n\nTermsPrivacy\n\n© 2026 Reco. All Rights Reserved. [...] Chat with us\n\nAICPA for RecoAICPA for RecoReco - ISO 27001Reco - ISO 27001%201.svg)Reco - ISO 27001\n\n.svg)\n\nPlatform\n\nPosture ManagementApp Discovery & GovernanceIdentity & Access GovernanceThreat Detection & ResponseData Exposure ManagementShadow App DiscoveryGenerative AI DiscoveryAgentic AI SecurityReco AI AgentsAI Governance and SecuritySaaS App Factory™\n\nUse Cases",
+      "published_date": null,
+      "score": 0.78014404
+    },
+    {
+      "url": "https://www.reco.ai/platform/application-discovery",
+      "title": "Application Discovery for AI Agents & Shadow AI",
+      "content": "Yes. Reco specializes in uncovering hidden tools and connections.  \n  \n• Detects apps based on real usage patterns  \n  \n• Monitors OAuth apps, browser extensions, and APIs  \n  \n• Maps SaaS-to-SaaS relationships to expose risk paths  \n  \nIt gives you visibility into the complex web of shadow and interconnected tools. We identify both direct user access and indirect application connections, including the complex web of application relationships that create hidden attack vectors. [...] Unlike traditional IT asset management, Reco’s Application Discovery solution addresses the dynamic nature of SaaS environments where applications are constantly added, updated, and interconnected without IT oversight. [...] Reco automatically analyzes and labels every app it finds.  \n  \n• Tags apps as sanctioned or unsanctioned  \n  \n• Groups them by function, sensitivity, and business impact  \n  \n• Adds context like vendor, usage, and access levels  \n  \nThis helps teams act quickly, with the context to make smart decisions. Our AI-powered categorization considers factors like data sensitivity, user permissions, business criticality, and compliance requirements.",
+      "published_date": null,
+      "score": 0.67140645
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

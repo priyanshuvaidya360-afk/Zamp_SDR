@@ -1,0 +1,53 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "Subject: new AI security story",
+        "about": "market",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a subject line and general topic reference.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I saw that Reco launched AI agent security for the enterprise on 25 June 2026.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 13,
+        "reason": "Fact 13 confirms Reco launched AI agent security for the enterprise on 25 June 2026.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Your team now has a compelling story to share, but scaling outreach without adding SDRs can be tough as generic sequences lose traction.",
+        "about": "company",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This sentence links their product launch situation to a general industry challenge about SDRs and sequences.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15‑minute chat to explore how Halyard can help you amplify that story without extra headcount?",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": "seller",
+        "reason": "It accurately describes what Halyard sells regarding avoiding extra headcount.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email heavily relies on a specific company event, the AI agent security launch, making it tailored to Reco."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 908,
+    "completion_tokens": 409,
+    "latency_ms": 1671,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

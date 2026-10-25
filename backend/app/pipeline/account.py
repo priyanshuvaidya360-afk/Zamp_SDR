@@ -1,6 +1,6 @@
 """Account plan (case 3): a buying committee in one batch gets one coordinated plan.
 
-Spec: docs/GUIDE.md case 3 ("The four demo cases in full") and T12. When 2+ people at one
+Spec: docs/PROJECT_SPEC.md case 3 ("The four demo cases in full") and T12. When 2+ people at one
 company are in a batch, each waits here after scoring until every colleague has scored (or
 stopped earlier). The smart model then gives each person a different opener and angle, using the
 persona map in seller_profile.yaml. Code enforces the rules: no opener reused within the account,

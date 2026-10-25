@@ -1,0 +1,47 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Hiring SDRs shows they are scaling outbound and will need more pipeline without adding headcount."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "A HubSpot migration suggests new tooling that often triggers a need for better outbound prospecting."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "Offering spend‑management SaaS indicates they need a steady flow of qualified leads."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "Targeting mid‑market firms implies a sizable addressable market requiring outbound pipeline support."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Operating in UK and India expands geography, hinting at outbound needs but less directly linked."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 917,
+    "completion_tokens": 714,
+    "latency_ms": 1996,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

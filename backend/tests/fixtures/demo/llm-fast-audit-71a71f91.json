@@ -1,0 +1,43 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "You noted that testing a new outbound angle each week stalls because hand‑crafting research‑backed emails for 400 accounts is a bottleneck.",
+        "about": "prospect",
+        "status": "supported",
+        "fact_id": 1,
+        "reason": "Supported by fact 1",
+        "suggestion": "Maya Collins tests one new outbound angle a week and finds hand‑crafting emails for 400 accounts is a bottleneck."
+      },
+      {
+        "sentence": "That reflects the typical hurdle of growing outbound pipelines without expanding SDR headcount or resorting to generic sequences.",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "Opinion, not a factual claim",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15‑minute chat to explore a solution that surfaces buying signals and drafts ready‑to‑send emails?",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "Ask, not factual claim",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "Email contains prospect‑specific bottleneck and numeric details, limiting generic use."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1168,
+    "completion_tokens": 1280,
+    "latency_ms": 6004,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

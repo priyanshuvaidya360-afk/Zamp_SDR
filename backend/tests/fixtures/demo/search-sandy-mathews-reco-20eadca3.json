@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Sandy Mathews\" \"Reco\"",
+  "results": [
+    {
+      "url": "https://www.linkedin.com/in/sandramathewsit",
+      "title": "Sandra Mathews - United States | Professional Profile",
+      "content": "## Recommendations (3)\n- Bonnie Granner: “Sandi has outstanding skills in the procurement and leasing business functions. She understands the detailed aspects of the job and provides excellent direction as well as leadership to her team. She also builds very strong, postive, and trustworthy relationships with clients. She was a very... [...] - Bev Hurst: “Sandi's broad base of knowledge in several business areas makes her an invaluable asset to any organization. She has in-depth knowledge of the procurement and asset management processes and how the affect all other areas of the business. Her business acumen helps her manuever in any type of... [...] ## Recent Activity\n- Reposted: Bidding on critical infrastructure or government contracts requires speed—but compliance rules mean public AI tools are a non-starter. If...\n- Shared: Exciting times ahead for Quest!! PARTNERS AND QUEST SOFTWARE! Yesterday's acquisition of Anetac is about much more than adding technology....\n- Shared: If you're going to be at Databricks would love to connect!! LMK let's meet up. Join Quest Software at the biggest AI event of the year! If...",
+      "published_date": null,
+      "score": 0.6882385
+    },
+    {
+      "url": "https://www.citybiz.co/article/856966/reco-expands-leadership-team-and-global-operations-as-enterprise-ai-governance-demand-grows",
+      "title": "Reco Expands Leadership Team and Global Operations as Enterprise AI Governance Demand Grows | citybiz",
+      "content": "Additional appointments include Dana Harduf as chief human resources officer, Sandy Mathews as vice president of product marketing and Merav Keren Kindler as vice president of marketing. [...] June 8, 2026\n\nAs enterprises deploy growing numbers of AI agents across business applications, security teams are facing a new challenge: maintaining visibility, governance and control over systems that increasingly operate autonomously. Reco is positioning itself to address that challenge with a series of executive hires, international expansion efforts and channel partnerships aimed at supporting what the company views as a rapidly emerging enterprise security category. [...] Reco, which provides an AI security platform focused on discovering, governing and securing AI agents, identities and SaaS connections, announced several leadership appointments alongside new operations in Texas and the United Kingdom and Ireland. The company said the moves reflect accelerating demand from large enterprises seeking governance infrastructure for AI deployments.",
+      "published_date": null,
+      "score": 0.6453216
+    },
+    {
+      "url": "https://www.linkedin.com/posts/sandy-mathews_heading-to-black-hat-the-best-conversations-activity-7488107607778324480-0AIU",
+      "title": "Sandy Mathews' Post",
+      "content": "Sandy Mathews VP Product Marketing | Agentic AI & Autonomous Systems | Securing AI Execution at Scale | Ex-Palo Alto, Protect AI, Microsoft, Deloitte",
+      "published_date": null,
+      "score": 0.38248792
+    },
+    {
+      "url": "https://health.usnews.com/nurse-practitioners/sandra-matthews-2518597",
+      "title": "Sandra A. Matthews, NP | Gulfport, MS | Family Nurse Practitioner | US News Doctors",
+      "content": "Patients consistently express high satisfaction with this provider's care. They frequently commend the provider's friendly and direct communication style, which helps establish a comfortable and trusting relationship. The provider is also noted for being thorough, helpful, and genuinely dedicated to patient well-being, always prioritizing their needs. Multiple patients strongly recommend this provider. [...] Recover faster after knee replacement. Get a detailed week-by-week timeline, pain management tips, exercises and expert advice on when you can walk and drive.\n\nChristine ComizioMarch 6, 2026\n\nHealth »\n\nCompare Now [...] A family nurse practitioner is a nurse who completed a graduate degree in advanced practice nursing and a certification in family care. Depending on the state, nurse practitioners may act independently or as part of a team supervised by a physician. See all conditions on Sandra A. Matthews' profile.\n\nLet us know if this information is out of date or incorrect.\n\nReport a correction to this profile\n\nAre you Sandra A. Matthews?\n\nClaim or edit this profile at\n\nDoctor's Details\n\nSpeaks English",
+      "published_date": null,
+      "score": 0.33359057
+    },
+    {
+      "url": "https://www.facebook.com/MathewsYMCA/posts/-a-big-thank-you-to-sandy-ambrose-and-mathews-yacht-club-sandy-a-past-livestrong/1236930408465051",
+      "title": "Mathews YMCA thanks Sandy Ambrose for Livestrong chili ...",
+      "content": "A big thank you to Sandy Ambrose and Mathews Yacht Club! Sandy, a past LiveSTRONG participant and graduate, organized a 🌶️ Chili Cookoff 🌶️ fundraiser ...Read more",
+      "published_date": null,
+      "score": 0.13983068
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

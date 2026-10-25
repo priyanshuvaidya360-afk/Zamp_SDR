@@ -10,4 +10,4 @@ from app.config import settings
 
 @lru_cache(maxsize=1)
 def load_seller_profile() -> dict[str, Any]:
-    return yaml.safe_load(settings.seller_profile_path.read_text())
+    return yaml.safe_load(settings.seller_profile_path.read_text(encoding="utf-8"))

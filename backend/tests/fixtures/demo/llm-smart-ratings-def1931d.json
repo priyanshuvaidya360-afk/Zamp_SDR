@@ -1,0 +1,95 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "ProtoPie AI beta launch creates immediate demand for new customers, driving outbound pipeline needs."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 0,
+        "specificity": 0,
+        "reasoning": "Visily's seed funding is unrelated to ProtoPie and the prospect."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Listing enterprise customers shows ProtoPie targets large accounts, indicating ongoing pipeline opportunities."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Integration with design plugins is a product feature but not a direct pipeline trigger."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Designer testimonials highlight brand credibility but do not directly create outbound demand."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Retiring the Individual Plan will push users to higher tiers, creating upsell and new outbound opportunities."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "The launch of built‑in User Testing adds a new product line, prompting fresh outbound prospecting."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Award recognition boosts reputation but does not directly generate pipeline demand."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "ProtoPie’s $21M funding round creates pressure to scale revenue quickly, increasing outbound pipeline urgency."
+      },
+      {
+        "signal_id": 10,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Support for additional integrations expands product breadth but is a low‑directness trigger for outbound outreach."
+      },
+      {
+        "signal_id": 11,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Industry specialization describes market focus without a clear immediate pipeline need."
+      },
+      {
+        "signal_id": 12,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "General product description reinforces positioning but does not create a specific outbound demand."
+      },
+      {
+        "signal_id": 13,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Official launch of ProtoPie AI with Component AI authoring drives fresh market interest and pipeline requirements."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1396,
+    "completion_tokens": 1621,
+    "latency_ms": 9595,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"ProtoPie\" speaker conference design systems UX",
+  "results": [
+    {
+      "url": "https://www.protopie.io/blog/category/events",
+      "title": "Events - ProtoPie",
+      "content": "Advance your UI/UX career. Master ProtoPie now. Catch up on ProtoPie Events to learn best practices and industry trends from none other than ProtoPie’s experts and power users.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.einpresswire.com/article/784631881/protopie-strengthens-automotive-hmi-presence-at-car-hmi-usa-2024",
+      "title": "ProtoPie Strengthens Automotive HMI Presence at Car HMI USA 2024",
+      "content": "Feb 11, 2025 · NEW YORK, NY, UNITED STATES, February 11, 2025 / EINPresswire.com / -- ProtoPie, the leader in interactive prototyping tools for automotive HMI and UX design, made a strong impression at Car HMI USA 2024, held December 8–10th in Detroit, Michigan.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://community.protopie.io/c/announcements/protopie-at-the-5th-china-automotive-hmi-ux-design-innovation-conference",
+      "title": "ProtoPie at the 5th China Automotive HMI & UX Design ...",
+      "content": "ProtoPie will be attending the 5th China Automotive HMI & UX Design Innovation Conference on March 19th in Shanghai. Our APAC Business Development Manager, Link, will be delivering a presentation on “Integrating AI and Smart Hardware in...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.userinterviews.com/blog/ux-research-ops-conferences-events",
+      "title": "The Ultimate List of UX, Product, and Design Conferences ...",
+      "content": "Apr 27, 2026 · Too many conferences, not enough time (or budget) to figure out which ones are actually worth it. We did the heavy lifting and searched across design, product, and UX communities to find the in-person and virtual events worth your attention in 2026. From free virtual summits to executive leadership retreats, this list filters out the sales pitches to help you find the actual playbooks, real ...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://ux-design-awards.com/winners/2024-2-protopie",
+      "title": "ProtoPie - UX Design Awards",
+      "content": "ProtoPie empowers UI/UX designers to create more with an ecosystem of tools that allows them to create realistic, high-fidelity prototypes without coding.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

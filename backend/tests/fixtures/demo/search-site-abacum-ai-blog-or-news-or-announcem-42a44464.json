@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "site:abacum.ai blog OR news OR announcement",
+  "results": [
+    {
+      "url": "https://www.abacum.ai/newsroom/series-b-announcement",
+      "title": "Abacum raises $60m Series B",
+      "content": "New York/London/Barcelona, 11th June 2025 - Abacum, the business planning software company founded by Julio Martínez and Jorge Lluch, today announces that it has raised a $60m Series B round led by San Francisco-headquartered Scale Venture Partners.\n\nThere was also strong participation in the round from global VC fund Cathay Innovation, with existing investors Y Combinator, Creandum, Kfund, and Atomico all doubling down on their backing for the “Office of the CFO” technology company. [...] /\n\n# Abacum raises $60m Series B to lead the new era of business planning\n\njulio martinez\n\n###### Julio Martínez\n\n###### Co-Founder & CEO at Abacum\n\n4 min read\n\nJun 11, 2025\n\n·\n\nBlog Category\n\nabacum logo\n\nHome\n\n/\n\nResources\n\n/\n\nNewsroom\n\n# Abacum raises $60m Series B to lead the new era of business planning\n\njulio martinez\n\n###### Julio Martínez\n\n###### Co-Founder & CEO at Abacum\n\n4 min read\n\n·\n\nJun 11, 2025\n\n·\n\nBlog Category\n\nabacum logo\n\nHome\n\n/\n\nResources\n\n/\n\nNewsroom [...] /\n\nNewsroom\n\n# Abacum raises $60m Series B to lead the new era of business planning\n\njulio martinez\n\n###### Julio Martínez\n\n###### Co-Founder & CEO at Abacum\n\n4 min read\n\n·\n\nJun 11, 2025\n\n·\n\nBlog Category\n\nabacum logo",
+      "published_date": null,
+      "score": 0.19092038
+    },
+    {
+      "url": "https://www.abacum.ai/blog",
+      "title": "FP&A Blog: Finance Planning, Reporting, and AI Insights | Abacum",
+      "content": "/\n\n# Blog\n\nHome\n\n/\n\nResources\n\n/\n\nBlog\n\n# Blog\n\nHome\n\n/\n\nResources\n\n/\n\nBlog\n\n# Blog\n\n### Featured Content\n\nAI Spaces interface showing a finance workspace generated from tailored model templates\n\nJul 15, 2026\n\n#### Introducing AI Spaces - tailored templates built to fit your model\n\nCover image for Laura Quinn\n\n###### Laura Quinn\n\nProduct Marketing Manager at Abacum\n\nAI Spaces interface showing a finance workspace generated from tailored model templates\n\nJul 15, 2026 [...] Jul 15, 2026\n\n##### Introducing AI Spaces - tailored templates built to fit your model\n\nCover image for Laura Quinn\n\n###### Laura Quinn\n\nProduct Marketing Manager at Abacum\n\n### Latest Posts\n\nFinancial Planning\n\nFinancial Reporting\n\n10x CFO\n\nTech Stack\n\nBuilding a Finance Team\n\n##### FP&A for Nonprofits: How to Forecast, Plan and Report Through Funding Volatility\n\n·\n\nAbacum team\n\n·\n\nAbacum Intelligence\n\n##### FP&A in SaaS: 6 Lessons from RSM on Moving Beyond Spreadsheets\n\n·\n\nMatthew Sledge\n\n· [...] ##### A new Abacum: one layout, more room for your numbers\n\n·\n\nEloy Rodríguez\n\n##### How Do You Spot a Forecast Miss Before the Close?\n\n·\n\nJulio Martínez\n\n·\n\nBudgeting & Forecasting\n\n##### Abacum and CFGI Partner to Bring AI-Native FP&A to Strategic Advisory\n\n·\n\nJulio Martínez\n\n##### The Payroll Saving You Didn't Earn: Vacancy Savings vs Hiring Delays\n\n·\n\nJulio Martínez\n\n·\n\nBudgeting & Forecasting\n\n##### 7 Signs You Need Better FP&A Software in 2026\n\n·\n\nGeorge Weeks\n\n·\n\nBudgeting & Forecasting",
+      "published_date": null,
+      "score": 0.10055156
+    },
+    {
+      "url": "https://www.abacum.ai/blog/clinical-trial-costing",
+      "title": "Clinical Trial Costing: Phase-By-Phase Budget Guide | Abacum",
+      "content": "Personas\n\nCFOs\n\nFP&A teams\n\nRevOps teams\n\nHR teams\n\nCompany\n\nCustomers\n\nAbout\n\nCareers\n\nPartners\n\nReferral\n\nContact\n\nDiscover\n\nInteractive Demo\n\nWatch & Learn\n\nROI Calculator\n\nNewsletter\n\nBlog\n\nWebinars\n\nGuides\n\nTemplates\n\nInfographics\n\nInterviews\n\nNewsroom\n\nGlossary\n\nWhat is FP&A\n\n© 2026 Abacum Inc\n\nPrivacy policy\n\nCookie policy\n\nCookie settings\n\nEthical channel\n\nDo Not Sell or Share My Personal Information\n\nlinkedin logox logoyoutube logomail \n\nAI-native FP&A that drives business performance [...] About\n\nCareers\n\nPartners\n\nReferral\n\nContact\n\nDiscover\n\nInteractive Demo\n\nWatch & Learn\n\nROI Calculator\n\nNewsletter\n\nBlog\n\nWebinars\n\nGuides\n\nTemplates\n\nInfographics\n\nInterviews\n\nNewsroom\n\nGlossary\n\nWhat is FP&A\n\n© 2026 Abacum Inc\n\nPrivacy policy\n\nCookie policy\n\nCookie settings\n\nEthical channel\n\nDo Not Sell or Share My Personal Information\n\nlinkedin logox logoyoutube logomail \n\n###### Join us for Summer Fridays - 20 minutes on Thursday to take back your weekend\n\nSave my seat\n\nUse Cases",
+      "published_date": null,
+      "score": 0.07154592
+    },
+    {
+      "url": "https://www.abacum.ai/blog/ai-financial-modeling-best-practices",
+      "title": "AI Financial Modeling Best Practices Guide | Abacum",
+      "content": "Financial forecasting has undergone a revolutionary transformation, and AI financial modeling sits at the heart of this change. Gone are the days when finance teams spent countless hours manually updating spreadsheets and running scenarios – today's most strategic finance leaders are leveraging artificial intelligence to deliver faster, more accurate insights. AI adoption in financial modeling has surged dramatically from 37% in 2023 to 58% in 2024 according to Gartner research. [...] Careers\n\nPartners\n\nReferral\n\nContact\n\nDiscover\n\nSee Abacum in action\n\nWatch & Learn\n\nROI Calculator\n\nNewsletter\n\nBlog\n\nWebinars\n\nGuides\n\nTemplates\n\nInfographics\n\nInterviews\n\nNewsroom\n\nGlossary\n\nWhat is FP&A\n\n© 2026 Abacum Inc\n\nPrivacy policy\n\nCookie policy\n\nCookie settings\n\nEthical channel\n\nDo Not Sell or Share My Personal Information\n\nlinkedin logox logoyoutube logomail \n\n###### Webinar series with Christian Wattig: FP&A intelligence, one industry at a time\n\nSave my seat\n\nCustomers\n\nResources [...] Scenario Planning\n\nHeadcount Planning\n\nInvestor Reporting\n\nP&L, BS, CF\n\nPersonas\n\nCFOs\n\nFP&A teams\n\nRevOps teams\n\nHR teams\n\nIndustries\n\nSoftware & Technology\n\nProfessional Services\n\nRetail\n\nLife Sciences\n\nNonprofit\n\nManufacturing\n\nFinancial Services\n\nHealthcare\n\nReal Estate\n\nLogistics & Transportation\n\nConstruction\n\nEnergy & Utilities\n\nCompany\n\nCustomers\n\nAbout\n\nCareers\n\nPartners\n\nReferral\n\nContact\n\nDiscover\n\nSee Abacum in action\n\nWatch & Learn\n\nROI Calculator\n\nNewsletter\n\nBlog\n\nWebinars",
+      "published_date": null,
+      "score": 0.07000458
+    },
+    {
+      "url": "https://www.abacum.ai/blog/top-financial-planning-software-tools-for-smbs",
+      "title": "Financial planning software for SMBs: Top tools | Abacum",
+      "content": "Manufacturing\n\nFinancial Services\n\nHealthcare\n\nReal Estate\n\nLogistics & Transportation\n\nConstruction\n\nEnergy & Utilities\n\nCompany\n\nCustomers\n\nAbout\n\nCareers\n\nPartners\n\nReferral\n\nContact\n\nDiscover\n\nSee Abacum in action\n\nWatch & Learn\n\nROI Calculator\n\nNewsletter\n\nBlog\n\nWebinars\n\nGuides\n\nTemplates\n\nInfographics\n\nInterviews\n\nNewsroom\n\nGlossary\n\nWhat is FP&A\n\n© 2026 Abacum Inc\n\nPrivacy policy\n\nCookie policy\n\nCookie settings\n\nEthical channel\n\nDo Not Sell or Share My Personal Information [...] Energy & Utilities\n\nCompany\n\nCustomers\n\nAbout\n\nCareers\n\nPartners\n\nReferral\n\nContact\n\nDiscover\n\nSee Abacum in action\n\nWatch & Learn\n\nROI Calculator\n\nNewsletter\n\nBlog\n\nWebinars\n\nGuides\n\nTemplates\n\nInfographics\n\nInterviews\n\nNewsroom\n\nGlossary\n\nWhat is FP&A\n\n© 2026 Abacum Inc\n\nPrivacy policy\n\nCookie policy\n\nCookie settings\n\nEthical channel\n\nDo Not Sell or Share My Personal Information\n\nlinkedin logox logoyoutube logomail \n\n4.8 / 5.0\n\naicpa soc\n\nSOC 2 Type II certified\n\niso\n\nISO 27001 certified [...] Real Estate\n\nLogistics & Transportation\n\nEnergy & Utilities\n\nSee Abacum in action\n\nWatch & Learn\n\nROI Calculator\n\nBlog\n\nWhat is FP&A\n\n© 2026 Abacum Inc\n\nPrivacy policy\n\nCookie policy\n\nCookie settings\n\nEthical channel\n\nDo Not Sell or Share My Personal Information\n\nlinkedin logox logoyoutube logomail \n\n4.8 / 5.0\n\naicpa soc\n\nSOC 2 Type II certified\n\niso\n\nISO 27001 certified\n\ngdpr\n\nGDPR compliant\n\nProduct\n\nPlanning\n\nReporting\n\nIntelligence\n\nExcel connector\n\nData\n\nIntegrations\n\nSecurity\n\nCompare",
+      "published_date": null,
+      "score": 0.06909459
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "new AI security story",
+    "body": "I saw that Reco launched AI agent security for the enterprise on 25 June 2026. Your team now has a compelling story to share, but scaling outreach without adding SDRs can be tough as generic sequences lose traction. Would you be open to a brief 15‑minute chat to explore how Halyard can help you amplify that story without extra headcount? Priyanshu",
+    "claims": [
+      {
+        "sentence": "I saw that Reco launched AI agent security for the enterprise on 25 June 2026.",
+        "signal_id": 13
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1239,
+    "completion_tokens": 1001,
+    "latency_ms": 13329,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

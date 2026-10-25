@@ -1,0 +1,35 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Opening a London office will require new outbound pipeline to fill the market."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Hiring SDRs shows immediate need for more pipeline, a core trigger for the solution."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "As a finance‑focused SaaS provider, they likely need outbound prospecting to grow."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 863,
+    "completion_tokens": 619,
+    "latency_ms": 3425,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

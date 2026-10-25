@@ -1,0 +1,18 @@
+{
+  "output": {
+    "subject": "improve outbound pipeline",
+    "body": "Hi Hanna,\n\nMany heads of growth find that outbound pipeline only scales by adding more SDRs, and generic sequences see declining reply rates. Our outbound pipeline engine finds buying signals, surfaces the right contacts, and drafts researched first‑touch emails, so your team can build pipeline without extra headcount. Would you be open to a brief 15‑minute call to explore?\n\nPriyanshu",
+    "claims": []
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1205,
+    "completion_tokens": 757,
+    "latency_ms": 1784,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

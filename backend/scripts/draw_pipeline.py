@@ -1,4 +1,4 @@
-"""Draw the pipeline into agents/PIPELINE.md, straight from the LangGraph graph the app runs.
+"""Draw the pipeline into agents/PIPELINE_DIAGRAM.md, straight from the LangGraph graph the app runs.
 
   cd backend && .venv/bin/python -m scripts.draw_pipeline          # rewrite the file
   cd backend && .venv/bin/python -m scripts.draw_pipeline --check  # exit 1 if it is out of date
@@ -14,7 +14,7 @@ from app.config import REPO_DIR
 from app.pipeline.graph import build_graph
 from app.pipeline.stages import STAGE_INFO, STAGES
 
-TARGET = REPO_DIR / "agents" / "PIPELINE.md"
+TARGET = REPO_DIR / "agents" / "PIPELINE_DIAGRAM.md"
 
 HEADER = """# The pipeline
 
@@ -44,7 +44,7 @@ flowchart LR
   RUNS --> SIM["Batch check<br/>draft similarity, hook-source cap"]
   SIM -.->|over the cap: score again| RUNS
   SIM --> Q["Review queue<br/>approve, edit, reject"]
-  Q -->|old draft| RV["Re-check time-sensitive facts<br/>recheck.md"]
+  Q -->|old draft| RV["Re-check time-sensitive facts<br/>stage8_recheck_stale_facts.md"]
   RV -->|changed or gone| Q
   Q --> EX(["Export CSV"])
 ```
@@ -103,10 +103,10 @@ def render() -> str:
 def main() -> int:
     text = render()
     if "--check" in sys.argv:
-        current = TARGET.read_text() if TARGET.exists() else ""
-        print("PIPELINE.md is up to date" if current == text else "PIPELINE.md is out of date: run scripts.draw_pipeline")
+        current = TARGET.read_text(encoding="utf-8") if TARGET.exists() else ""
+        print("PIPELINE_DIAGRAM.md is up to date" if current == text else "PIPELINE_DIAGRAM.md is out of date: run scripts.draw_pipeline")
         return 0 if current == text else 1
-    TARGET.write_text(text)
+    TARGET.write_text(text, encoding="utf-8")
     print(f"wrote {TARGET}")
     return 0
 

@@ -1,0 +1,103 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Reco expanded its operations into Texas and the United Kingdom and Ireland.",
+        "evidence": "Reco, which provides an AI security platform focused on discovering, governing and securing AI agents, identities and SaaS connections, announced several leadership appointments alongside new operations in Texas and the United Kingdom and Ireland.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Reco appointed Zoe Hillenmeyer as chief operating officer.",
+        "evidence": "Among the leadership additions is Zoe Hillenmeyer, who has been appointed chief operating officer.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Reco named Kristen Twining senior vice president of Americas sales and business development.",
+        "evidence": "The company also named Kristen Twining senior vice president of Americas sales and business development.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Reco appointed Dana Harduf as chief human resources officer, Sandy Mathews as vice president of product marketing, and Merav Keren Kindler as vice president of marketing.",
+        "evidence": "Additional appointments include Dana Harduf as chief human resources officer, Sandy Mathews as vice president of product marketing and Merav Keren Kindler as vice president of marketing.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "press",
+        "about": "company",
+        "summary": "Reco received three Global InfoSec Awards for 2026.",
+        "evidence": "The company recently received three Global InfoSec Awards for 2026, including recognition in SaaS and cloud security, AI security solutions and generative AI cybersecurity categories.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco provides an AI security platform for discovering, governing, and securing AI agents, identities, and SaaS connections.",
+        "evidence": "Reco, which provides an AI security platform focused on discovering, governing and securing AI agents, identities and SaaS connections",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco's platform supports more than 235 applications and over 1,000 detection controls.",
+        "evidence": "The company says the platform supports more than 235 applications and includes more than 1,000 detection controls designed to identify security and governance risks.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1921,
+    "completion_tokens": 1007,
+    "latency_ms": 2802,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

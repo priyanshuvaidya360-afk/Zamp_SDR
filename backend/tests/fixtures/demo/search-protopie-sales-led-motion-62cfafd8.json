@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"ProtoPie\" sales-led motion",
+  "results": [
+    {
+      "url": "https://www.protopie.io/",
+      "title": "ProtoPie: AI-driven Prototyping Platform",
+      "content": "“For us, ProtoPie had a lot to offer with this project; we had so many moving parts, a lot of technical resources needed for prototyping, and ProtoPie really crushed it.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.protopie.io/learn/docs/interactions-animation-curves",
+      "title": "Easing - ProtoPie interactions-animation-curves",
+      "content": "Enhance your animations with realistic movements using the easing features in ProtoPie. In real life, objects don't abruptly start or stop moving. That's why it's crucial to include easing in your prototypes to achieve natural animations.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.motionmedia.com/protopie/",
+      "title": "Buy ProtoPie Software | Motion Media",
+      "content": "Explore official ProtoPie software, plugins, and tools at Motion Media. Competitive pricing, expert support, and fast delivery.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://kinetics.protopie.io/",
+      "title": "ProtoPie Kinetics",
+      "content": "Our AI model can detect motion phases with high accuracy when objects have clear edges and consistent lighting. Complex or cluttered backgrounds may reduce accuracy.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://lottiefiles.com/case-studies/protopie",
+      "title": "ProtoPie + LottieFiles | Case Studies",
+      "content": "How did Lottie animations contribute to Protopie’s success? No sacrifices are needed when incorporating Lottie animations into ProtoPie prototypes. Animation can be added in a number of different ways in ProtoPie—video can be used, for example.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

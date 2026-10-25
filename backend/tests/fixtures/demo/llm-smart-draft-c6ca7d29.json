@@ -1,0 +1,27 @@
+{
+  "output": {
+    "subject": "ai-forward gtm insight",
+    "body": "Hi Kristen,\n\nI saw you appeared on the Cyber GTM Talk podcast to discuss AI-forward go-to-market strategies in cybersecurity (8 October 2026).\n\nSince joining Reco as SVP of Sales in January 2026, you’ve been driving your team’s outbound growth.\n\nHalyard surfaces buying signals, finds the right contacts, and drafts cited first‑touch emails that your reps can review, helping you increase meetings per rep without adding SDR headcount.\n\nWould you be open to a brief 15‑minute call to explore?\n\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I saw you appeared on the Cyber GTM Talk podcast to discuss AI-forward go-to-market strategies in cybersecurity (8 October 2026).",
+        "signal_id": 13
+      },
+      {
+        "sentence": "Since joining Reco as SVP of Sales in January 2026, you’ve been driving your team’s outbound growth.",
+        "signal_id": 22
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1325,
+    "completion_tokens": 1579,
+    "latency_ms": 6498,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

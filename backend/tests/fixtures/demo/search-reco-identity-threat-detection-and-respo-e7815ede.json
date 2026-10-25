@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Reco\" identity threat detection and response podcast",
+  "results": [
+    {
+      "url": "https://www.reco.ai/platform/identity-threat-detection-and-response",
+      "title": "ITDR for SaaS | Identity Threat Detection & Response - reco.ai",
+      "content": "Detect account compromise, privilege abuse, and insider threats in real time. Reco ITDR uses AI to deliver identity threat insights and automate response.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.reco.ai/",
+      "title": "AI Agent Security Platform | Reco",
+      "content": "Reco saved us months of work we would’ve spent building threat detections. Instead of building them manually, Reco comes out-the-box with hundreds of pre-built threat detections.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://cybersectools.com/tools/reco-itdr-identity-threat-detection-and-response",
+      "title": "Reco ITDR (Identity Threat Detection and Response)",
+      "content": "Reco ITDR (Identity Threat Detection and Response) by Reco (Commercial). ITDR platform for detecting and responding to identity-based threats in SaaS. Compare alternatives in IAM.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sH8xH35D84M",
+      "title": "BigID Uses Reco for SaaS Threat Detection & Response and ...",
+      "content": "BigID Uses Reco for SaaS Threat Detection & Response and Insider Risk ManagementIn this customer story, Kyle Kurdziolek, VP of Security at BigID discusses ho...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://cybersectools.com/compare/agenco-identity-vs-reco-itdr-identity-threat-detection-and-response",
+      "title": "Agen.co Identity vs Reco ITDR (Identity Threat Detection and ...",
+      "content": "Reco ITDR (Identity Threat Detection and Response) Mid-market and enterprise security teams drowning in SaaS identity alerts will find real value in Reco ITDR because its 400+ detection rules actually reduce noise while catching SaaS-to-SaaS compromise patterns that generic SIEM rules miss.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

@@ -1,0 +1,18 @@
+{
+  "output": {
+    "subject": "outbound email bottleneck",
+    "body": "- You mentioned running outbound experiments with a two-person team and hitting a bottleneck on crafting personalized, research‑cited emails (30 September).\n- That bottleneck is the exact friction Halyard removes by auto‑spotting buying signals, finding contacts, and drafting cited first‑touch emails, letting growth teams scale without extra SDRs.\n- Would you be open to a brief 15‑minute call to explore? Priyanshu",
+    "claims": []
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1423,
+    "completion_tokens": 567,
+    "latency_ms": 13831,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

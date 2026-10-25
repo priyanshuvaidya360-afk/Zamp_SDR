@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"ProtoPie\" integration HubSpot",
+  "results": [
+    {
+      "url": "https://www.protopie.io/learn/docs/connect-custom-layer-integrations",
+      "title": "Custom Layer Integrations - ProtoPie",
+      "content": "ProtoPie Connect's Stage view enables you to integrate ProtoPie prototypes with diverse custom layers, including web, embeds, live cameras, and Unity projects. This integration enhances the user testing experience and renders your designs more dynamic.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.protopie.io/",
+      "title": "ProtoPie: AI-driven Prototyping Platform",
+      "content": "“The learning curve of ProtoPie was surprisingly small for the power that it delivers. Our team was able to onboard themselves and start building low-fidelity during week one and start showing the promise.”",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.protopie.io/learn/docs/cloud-getting-started",
+      "title": "Getting Started - ProtoPie Cloud",
+      "content": "ProtoPie Player ensures a seamless testing experience, free from the limitations that may arise when using mobile or web browsers. To experience the full range of features and functionalities of your prototype, open ProtoPie Player and scan the QR code of the prototype stored in the cloud.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://ecosystem.hubspot.com/marketplace/apps/featured",
+      "title": "HubSpot Marketplace",
+      "content": "HubSpot Marketplace",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.bing.com/aclick?ld=e8t-UL2O1XlY9raUCAhg4VKjVUCUyE_VxRCzO75dE7ZCxxmByhIfQMtrixK5rYzdA31-N2CTkWdrvh3biIbayBNrFIrZ0i29D64V9k7qSM99-__oNPOjQtjW3BEOQ32iIB3OKclUiCY2V9Jfv4kUJgZDqRdrhctX8AHn8bwqYtOEGvcgXZFjMTjGeFd-dO3Ywnl387e3sthxolbfP2mJoCblVzjZ0&u=aHR0cHMlM2ElMmYlMmZhdHRpby5jb20lMmZwJTJmY3JtLTEwMzEtMjQlM2Z1dG1fc291cmNlJTNkYmluZ19hZHMlMjZ1dG1fY2FtcGFpZ24lM2Q0ODI3ODM0MTUlMjZ1dG1fdGVybSUzZGNsaWVudCUyNTIwcmVsYXRpb25zaGlwJTI1MjBtYW5hZ2VtZW50JTI2dXRtX21lZGl1bSUzZHBwYyUyNm1zY2xraWQlM2Q1MTM1NWY1NjBlNmUxYmMxY2NmYzM1ODg3OTY2YjFhYg&rlid=51355f560e6e1bc1ccfc35887966b1ab",
+      "title": "Powerful API Integrations - Build Your Own CRM",
+      "content": "Unrivaled customer relationship management system. Track interactions end-to-end. Tweak anything and everything. Endless customization. Build and collaborate from anywhere. Free Plan - $0.00 - View more items",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

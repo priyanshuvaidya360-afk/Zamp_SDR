@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"ProtoPie\" appoints",
+  "results": [
+    {
+      "url": "https://www.instagram.com/p/DaaKaJoDX8Z",
+      "title": "Motion design is becoming prompt design. Figma just ...",
+      "content": "Motion design is becoming prompt design. Figma just collapsed 4 separate tools - After Effects, Framer, Lottie, and ProtoPie - into one workflow.",
+      "published_date": null,
+      "score": 0.1755384
+    },
+    {
+      "url": "https://www.devisgon.com/services/prototyping-wireframing-ui-ux-services",
+      "title": "Prototyping and Wireframes | Devisgon",
+      "content": "Modern UX, wireframing, prototyping, collaboration, usability testing, and developer handoff tools for product validation\n\nFigmaFigJamBalsamiqProtoPieAxure RPInVisionMiroMazeNotionLinearZeplinAdobe XD\n\nFigmaFigJamBalsamiqProtoPieAxure RPInVisionMiroMazeNotionLinearZeplinAdobe XD\n\nFigmaFigJamBalsamiqProtoPieAxure RPInVisionMiroMazeNotionLinearZeplinAdobe XD\n\nFigmaFigJamBalsamiqProtoPieAxure RPInVisionMiroMazeNotionLinearZeplinAdobe XD\n\n## Our Prototyping & Wireframing Process [...] A healthcare startup wanted to build a patient portal but was unsure whether older users could understand the appointment scheduling, document upload, and profile management flows.\n\n### Our UX Approach\n\nDevisgon created user flow diagrams, low fidelity wireframes, and a high fidelity clickable prototype, then tested the scheduling journey with representative users to find confusion points before development.\n\n### Measurable Impact [...] Prototyping helps teams find unclear flows, missing screens, usability problems, and weak product logic before development costs increase. It gives founders, designers, developers, and stakeholders a shared reference. Fixing problems in a prototype is faster and cheaper than rebuilding finished code.",
+      "published_date": "Wed, 13 May 2026 00:00:00 GMT",
+      "score": 0.15777196
+    },
+    {
+      "url": "https://medium.com/@qamarjafari1717/prototyping-in-ux-ui-the-complete-2026-guide-deep-practical-real-world-211474a2fdf0",
+      "title": "Medium",
+      "content": "This is where your concept becomes interactive.\n\nDepending on fidelity (low, mid, high), prototypes simulate:\n\nExample\n\nA clickable gray wireframe for a Healthcare Appointment App where:  \n1. selecting a date filters doctors  \n2. tapping doctor opens schedule modal  \n3. “Book Appointment” leads to confirmation\n\n### 4) User Evaluation\n\nUsers test the prototype using tasks:\n\nDesigners observe confusion, wrong clicks, hesitation, and emotions.\n\n### 5) Refinement\n\nBased on testing:\n\nExample [...] Example 3: Healthcare Appointment App  \nPrototype simulates:1. doctor profiles  \n2. time slots  \n3. appointment confirmation  \n4. medicine reminders\n\nUser feedback reveals:1. too many steps  \n2. unclear card hierarchy  \n3. missing “previous appointments” view\n\nExample 4: Food Delivery AppPrototype tested restaurant filtering.  \n Finding: Users struggled with too many filters.  \n Fix: Show top 3 filters first → hide rest behind “More”.\n\n## 7. Limitations of Prototyping (UX/UI Perspective) [...] ### Examples:\n\n1. Drag-and-drop  \n2. Swipe interactions  \n3. Multi-step forms  \n4. Carousels  \n5. Dynamic content\n\nTools: Figma, ProtoPie, Axure\n\n### 4. Incremental Prototyping (UX Equivalent: Module-Based Prototyping)\n\nDifferent features are prototyped separately and later combined. Simulates not just UI, but logic.\n\nReal Example\n\nA SaaS Dashboard team prototypes features separately:  \n1. Analytics  \n2. Billing  \n3. User Management  \n4. Integrations",
+      "published_date": "Mon, 08 Dec 2025 14:09:55 GMT",
+      "score": 0.15224668
+    },
+    {
+      "url": "https://www.capterra.com/p/201192/ProtoPie",
+      "title": "ProtoPie Software Pricing, Alternatives & More 2026",
+      "content": "With the help of Capterra, learn about ProtoPie Software - reviews, pricing plans, popular comparisons to other Prototyping products and more.",
+      "published_date": "Sun, 18 Oct 2026 21:00:00 GMT",
+      "score": 0.12788142
+    },
+    {
+      "url": "https://www.linkedin.com/posts/3addynamics_3ad-dynamics-strategic-appointment-senior-activity-7518334024168427520-umHe",
+      "title": "3AD Dynamics Appoints Gilberto Damasceno Jr as Senior ...",
+      "content": "We are proud to announce the appointment of Gilberto Damasceno Jr as Senior Advisor to the Board of 3AD Dynamics.",
+      "published_date": null,
+      "score": 0.0510308
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

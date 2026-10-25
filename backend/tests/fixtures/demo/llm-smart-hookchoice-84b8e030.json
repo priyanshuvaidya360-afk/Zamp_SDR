@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 5,
+    "angle": "Congrats on your recent appointment as Vice President of Marketing at Reco; as you’re scaling the marketing engine, Halyard can help you quickly surface buying signals and draft personalized outreach without expanding SDR headcount.",
+    "runners_up": [
+      18,
+      17
+    ],
+    "why_not_others": "The other signals focus on company‑wide funding or partnerships rather than Merav’s new marketing leadership role."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 749,
+    "completion_tokens": 473,
+    "latency_ms": 1111,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

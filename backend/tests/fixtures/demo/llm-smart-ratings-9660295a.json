@@ -1,0 +1,161 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Company accolade signals growth, modest reason to discuss pipeline needs."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "New $30M Series B funding is a classic trigger for outbound pipeline expansion."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Product description shows market presence but gives little direct pipeline pressure."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "CEO’s comment on AI adoption hints at market expansion, modest relevance."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Partnership integration suggests new selling opportunities, moderate relevance."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Executive team expansion indicates growth, modest pipeline relevance."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "COO appointment may affect marketing strategy, modest relevance."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "New senior VP of sales points to sales growth and need for pipeline."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Geographic expansion creates new market territories needing outbound outreach."
+      },
+      {
+        "signal_id": 10,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Awards reflect reputation but not direct pipeline pressure."
+      },
+      {
+        "signal_id": 11,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Product launch for enterprise AI security creates immediate pipeline demand."
+      },
+      {
+        "signal_id": 12,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "General platform description offers limited pipeline relevance."
+      },
+      {
+        "signal_id": 13,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Interim CEO appointment could shift growth priorities, modest relevance."
+      },
+      {
+        "signal_id": 14,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "ServiceNow partnership opens new sales channels, raising pipeline need."
+      },
+      {
+        "signal_id": 15,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Additional $55M funding is a strong trigger for scaling outbound pipeline."
+      },
+      {
+        "signal_id": 16,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Strategic investor/customer AT&T suggests larger deals and pipeline opportunities."
+      },
+      {
+        "signal_id": 17,
+        "relevance": 0,
+        "specificity": 3,
+        "reasoning": "Manpower subsidiary unrelated to SaaS outbound pipeline."
+      },
+      {
+        "signal_id": 18,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "UK expansion and major client win shows growth but weak pipeline link."
+      },
+      {
+        "signal_id": 19,
+        "relevance": 0,
+        "specificity": 3,
+        "reasoning": "Universal development arm not relevant to outbound sales engine."
+      },
+      {
+        "signal_id": 20,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Integration list shows product breadth, little direct pipeline pressure."
+      },
+      {
+        "signal_id": 21,
+        "relevance": 0,
+        "specificity": 3,
+        "reasoning": "G2 rating is reputation data, not a pipeline trigger."
+      },
+      {
+        "signal_id": 22,
+        "relevance": 0,
+        "specificity": 3,
+        "reasoning": "Pricing model information does not create outbound pipeline need."
+      },
+      {
+        "signal_id": 23,
+        "relevance": 0,
+        "specificity": 3,
+        "reasoning": "Company background details are unrelated to immediate pipeline challenges."
+      },
+      {
+        "signal_id": 24,
+        "relevance": 0,
+        "specificity": 3,
+        "reasoning": "Product tour description offers no direct pipeline driver."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 2300,
+    "completion_tokens": 1939,
+    "latency_ms": 4525,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

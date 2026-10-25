@@ -1,0 +1,35 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "\"Abacum\" new CMO OR VP marketing OR VP sales",
+        "why": "to find executive leadership changes in marketing or sales"
+      },
+      {
+        "query": "\"Abacum\" adds sales-led motion OR outbound sales",
+        "why": "to see if they are expanding from PLG to sales-led"
+      },
+      {
+        "query": "\"Abacum.ai\" pricing OR plans OR enterprise tier",
+        "why": "to check for new product tiers or packaging updates"
+      },
+      {
+        "query": "\"Abacum\" podcast OR interview growth strategy",
+        "why": "to uncover recent mentions of their pipeline and growth goals"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 488,
+    "completion_tokens": 174,
+    "latency_ms": 3016,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

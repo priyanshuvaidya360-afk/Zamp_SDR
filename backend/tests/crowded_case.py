@@ -55,7 +55,7 @@ UNRELATED = ("https://news.example.org/lumen-analytics-hubspot", "Lumen Analytic
 
 def _source(name: str, url: str, category: str, title: str, listed: str) -> Source:
     return Source(category=category, about="company", url=url, title=title, published_date=listed,
-                  snippet="", text=(DATA / name).read_text())
+                  snippet="", text=(DATA / name).read_text(encoding="utf-8"))
 
 
 def gather_output() -> GatherOutput:

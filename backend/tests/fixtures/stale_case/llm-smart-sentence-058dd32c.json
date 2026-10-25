@@ -1,0 +1,16 @@
+{
+  "output": {
+    "sentence": "I saw that Kestrel Labs is hiring two Sales Development Representatives in London (2 October)."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 396,
+    "completion_tokens": 156,
+    "latency_ms": 601,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

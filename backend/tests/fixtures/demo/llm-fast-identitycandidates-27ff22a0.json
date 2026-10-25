@@ -1,0 +1,31 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Priya Raman",
+        "title": null,
+        "company": "Acme Fintech",
+        "company_domain": "acmefintech.com",
+        "location": "London",
+        "country": "GB",
+        "evidence_url": "https://acmefintech.com/about/team",
+        "evidence": "Priya Raman, VP Marketing, leads marketing and demand generation from our London office.",
+        "confidence": 0.99
+      }
+    ],
+    "reasoning": "The search results match the prospect's name, title, company, and company domain exactly, including direct evidence from the company's team and blog pages."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 717,
+    "completion_tokens": 164,
+    "latency_ms": 1409,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

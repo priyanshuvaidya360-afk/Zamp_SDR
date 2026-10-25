@@ -1,0 +1,53 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "outbound with clean data",
+        "about": "prospect",
+        "status": "supported",
+        "fact_id": 3,
+        "reason": "The fact states they want outbound using clean data.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Following up as you suggested after your CRM migration, I saw you stated on 6 October 2026 that moving off three tools took two quarters and that you want outbound using clean data.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 3,
+        "reason": "The facts confirm the CRM migration and the exact quote about moving off three tools and wanting clean data.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Halyard spots buying signals and drafts researched first-touch emails for your team, letting you build pipeline with clean data without adding SDR headcount.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": "seller",
+        "reason": "This matches what Halyard sells.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a 15-minute call?",
+        "about": "prospect",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a call to action/ask.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 0,
+    "genericness_reason": "The email relies heavily on specific facts about the prospect's CRM migration and recent statements."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1053,
+    "completion_tokens": 388,
+    "latency_ms": 1942,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

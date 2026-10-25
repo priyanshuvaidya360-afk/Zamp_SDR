@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Merav Keren Kindler\" \"Reco\"",
+  "results": [
+    {
+      "url": "https://www.linkedin.com/posts/merav-keren-kindler_%F0%9D%91%AB%F0%9D%92%90-%F0%9D%92%9A%F0%9D%92%90%F0%9D%92%96-%F0%9D%92%89%F0%9D%92%82%F0%9D%92%95%F0%9D%92%86-%F0%9D%92%8D%F0%9D%92%90%F0%9D%92%94%F0%9D%92%8A%F0%9D%92%8F%F0%9D%92%88-%F0%9D%92%90%F0%9D%92%93-%F0%9D%92%8D%F0%9D%92%90%F0%9D%92%97%F0%9D%92%86-activity-7436679296997298176-Aihg",
+      "title": "Merav Keren Kindler's Post",
+      "content": "Reco is the only AI security platform designed specifically to manage AI, app, and agent sprawl across SaaS ecosystems.",
+      "published_date": null,
+      "score": 0.82288796
+    },
+    {
+      "url": "https://www.citybiz.co/article/856966/reco-expands-leadership-team-and-global-operations-as-enterprise-ai-governance-demand-grows",
+      "title": "Reco Expands Leadership Team and Global Operations as Enterprise AI Governance Demand Grows | citybiz",
+      "content": "Additional appointments include Dana Harduf as chief human resources officer, Sandy Mathews as vice president of product marketing and Merav Keren Kindler as vice president of marketing. [...] Reco, which provides an AI security platform focused on discovering, governing and securing AI agents, identities and SaaS connections, announced several leadership appointments alongside new operations in Texas and the United Kingdom and Ireland. The company said the moves reflect accelerating demand from large enterprises seeking governance infrastructure for AI deployments. [...] June 8, 2026\n\nAs enterprises deploy growing numbers of AI agents across business applications, security teams are facing a new challenge: maintaining visibility, governance and control over systems that increasingly operate autonomously. Reco is positioning itself to address that challenge with a series of executive hires, international expansion efforts and channel partnerships aimed at supporting what the company views as a rapidly emerging enterprise security category.",
+      "published_date": null,
+      "score": 0.65597594
+    },
+    {
+      "url": "https://www.linkedin.com/posts/recolabs_rsac-activity-7442118914995671040-KlJK",
+      "title": "#rsac | Reco",
+      "content": "... Merav Keren Kindler Gal Nakash Ofer Klein Shir Grinfeld Jack Creech Katelyn ... Reco's Post. View organization page for Reco · Reco. 18,774 followers. 7mo.",
+      "published_date": null,
+      "score": 0.60077465
+    },
+    {
+      "url": "https://www.linkedin.com/posts/julia-polisuk_excited-to-share-that-im-starting-a-new-activity-7495055902761361409-jyUY",
+      "title": "Julia Polisuk's Post",
+      "content": "Excited to share that I'm starting a new role as Head of Marketing at Reco ... And a special one to Merav Keren Kindler - my manager, mentor, and someone I",
+      "published_date": null,
+      "score": 0.55275756
+    },
+    {
+      "url": "https://www.linkedin.com/posts/ronfybish_companies-are-paying-researchers-to-find-activity-7463228111724150784-78rN",
+      "title": "Companies are paying researchers to find insights and ...",
+      "content": "Merav Keren Kindler VP Marketing | Builder, Growth Strategist, lead-to-revenue, Brand-to-pipeline, Sponsorship, Customer obsessed and having a blast all the",
+      "published_date": null,
+      "score": 0.46993434
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

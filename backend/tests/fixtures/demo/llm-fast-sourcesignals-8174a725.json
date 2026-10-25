@@ -1,0 +1,43 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Acme Fintech migrated its entire revenue team to HubSpot",
+        "evidence": "as of this week every Acme Fintech marketer and seller works in HubSpot",
+        "published_at": "2026-10-06",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": null
+      },
+      {
+        "type": "person_content",
+        "about": "person",
+        "summary": "Priya Raman stated that migrating off three tools took two quarters and they want outbound using clean data",
+        "evidence": "Moving off three tools took us two quarters",
+        "published_at": "2026-10-06",
+        "sensitive": false,
+        "speaker": "Priya Raman",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 960,
+    "completion_tokens": 261,
+    "latency_ms": 1291,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

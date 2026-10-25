@@ -5,12 +5,13 @@ import type {
   BatchDetail,
   BatchListItem,
   BatchPreview,
-  Candidate,
   DraftResponse,
   Mapping,
+  Page,
+  ResumeInput,
+  RetryResponse,
   ReviewAction,
   ReviewResult,
-  Page,
   RunDetail,
   RunStatus,
   RunSummary,
@@ -80,12 +81,22 @@ export const api = {
     if (opts.q?.trim()) params.set("q", opts.q.trim());
     return request<Page<RunSummary>>(`/runs?${params}`);
   },
-  resumeRun: (runId: number, candidate: Candidate) =>
-    request<{ run_id: number; status: string }>(`/runs/${runId}/resume`, json("POST", { stage: "resolve", input: { candidate } })),
-  review: (runId: number, action: ReviewAction, opts: { body?: string; reason?: string; draftId?: number } = {}) =>
+  /** Run a failed prospect again from where it failed (409 with a readable reason if it can't). */
+  retryRun: (runId: number) => request<RetryResponse>(`/runs/${runId}/retry`, { method: "POST" }),
+  /** Continue a needs_input run from identity: the rep's pick, a company-level draft, a new
+   *  search ({}), or dismiss. */
+  resumeRun: (runId: number, input: ResumeInput) =>
+    request<{ run_id: number; status: string }>(`/runs/${runId}/resume`, json("POST", { stage: "resolve", input })),
+  review: (
+    runId: number,
+    action: ReviewAction,
+    opts: { body?: string; reason?: string; draftId?: number; identityConfirmed?: boolean } = {},
+  ) =>
     request<ReviewResult>(
       `/runs/${runId}/review`,
-      json("POST", { action, body: opts.body, reason: opts.reason, draft_id: opts.draftId }),
+      json("POST", {
+        action, body: opts.body, reason: opts.reason, draft_id: opts.draftId, identity_confirmed: opts.identityConfirmed,
+      }),
     ),
   /** A plain link: the browser downloads the file. Approved rows only unless `all`. */
   exportUrl: (batchId: number, all = false) => `${API_URL}/batches/${batchId}/export.csv${all ? "?all=true" : ""}`,

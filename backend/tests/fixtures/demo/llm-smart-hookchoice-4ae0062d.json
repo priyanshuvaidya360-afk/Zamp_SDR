@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 2,
+    "angle": "Ryan is driving a migration and upsell effort to move Individual Plan users to Pro with a price‑lock incentive, a growth initiative that needs a steady flow of qualified accounts without adding SDR headcount, which is exactly what Halyard enables.",
+    "runners_up": [
+      14,
+      8
+    ],
+    "why_not_others": "The AI launch is a product feature update and the funding news are broader company events, neither directly ties to Ryan’s current growth‑pipeline priorities."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 895,
+    "completion_tokens": 293,
+    "latency_ms": 16061,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

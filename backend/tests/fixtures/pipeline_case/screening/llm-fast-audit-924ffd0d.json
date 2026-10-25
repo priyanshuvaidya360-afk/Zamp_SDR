@@ -1,0 +1,53 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "Subject: pipeline for acme close",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 1,
+        "reason": "The subject references the Acme Close product launch.",
+        "suggestion": null
+      },
+      {
+        "sentence": "- Acme Fintech launched Acme Close on 24 September 2026.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 1,
+        "reason": "This is explicitly stated in the product launch fact.",
+        "suggestion": null
+      },
+      {
+        "sentence": "- Your need for rapid pipeline without hiring extra SDRs aligns with the outbound growth challenge of relying on more SDR headcount and generic sequences.",
+        "about": "prospect",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This links their situation to the problem we solve and makes no verified factual assertions.",
+        "suggestion": null
+      },
+      {
+        "sentence": "- Would you be open to a short chat? – Priyanshu",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is an ask.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email is tightly tailored around the specific company product launch and name."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1006,
+    "completion_tokens": 279,
+    "latency_ms": 1579,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -5,7 +5,7 @@
 Runs both demo CSVs in DEMO_MODE=fixtures (recordings in tests/fixtures/demo/) on a throwaway
 database, then case 10's approve-after-twelve-days. Any connection to another host fails, so a
 pass proves the demo needs no network and no API keys. Exit code 0 = every row as expected.
-Spec: docs/GUIDE.md T17 ("Done when: passes twice in a row with the network off").
+Spec: docs/PROJECT_SPEC.md T17 ("Done when: passes twice in a row with the network off").
 """
 
 import asyncio
@@ -38,7 +38,7 @@ async def check() -> list[str]:
     for key in ("groq_api_key", "gemini_api_key", "tavily_api_key", "exa_api_key"):
         if hasattr(settings, key):
             setattr(settings, key, "")  # replays must not need keys
-    expected = json.loads(demo.CASES.read_text())
+    expected = json.loads(demo.CASES.read_text(encoding="utf-8"))
     result = await demo.run_demo()
     problems = []
     by_key = {(r["file"], r["row"]): r for r in result["rows"]}

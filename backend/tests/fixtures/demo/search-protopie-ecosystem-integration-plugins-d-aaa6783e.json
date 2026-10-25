@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"ProtoPie\" ecosystem integration plugins design tools",
+  "results": [
+    {
+      "url": "https://www.protopie.io/blog/dynamic-prototyping-protopie-connect-features-use-cases-more",
+      "title": "Dynamic Prototyping with ProtoPie Connect: Features, Use ...",
+      "content": "Sep 11, 2024 · ProtoPie Connect has a range of built-in plugins that allow you to integrate your ProtoPie prototypes (Pies) with external hardware devices and services. These include the API, IFTTT, Logitech G29 steering wheel, Arduino, Gamepad, blokdots, and Unity plugins.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.protopie.io/learn/docs/introducing-protopie-protopie-ecosystem",
+      "title": "ProtoPie Ecosystem - ProtoPie introducing-protopie-protopie ...",
+      "content": "ProtoPie Player allows you to test prototypes on any iOS, iPadOS & Android smartphone, or tablet display. ProtoPie Cloud makes collaboration and sharing prototypes with stakeholders easy and fast. And if you need to prototype more advanced connected experiences, upload it all to ProtoPie Connect.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://sourceforge.net/software/product/ProtoPie/integrations/",
+      "title": "ProtoPie Integrations - SourceForgeList of ProtoPie Integrations in 2026 - topbusinesssoftware.comDesign Tooling Landscape (Figma, Sketch, Penpot, ProtoPie)Proto Pie - Advanced Prototyping Tool - UI UX ShowcaseGitHub - ProtoPie/protopie-connect-custom-plugins: This ...",
+      "content": "View a list of ProtoPie integrations and software that integrates with ProtoPie below. Compare the best ProtoPie integrations as well as features, ratings, user reviews, and pricing of software that integrates with ProtoPie. Revolutionize your prototyping experience with seamless innovation today! This is a list of platforms and tools that integrate with ProtoPie. This list is updated as of September 2026. \"Transforming collaboration into innovation for exceptional design outcomes.\" A practitioner's map of the 2026 design tool ecosystem — where Figma dominates, where open-source challengers fit, and when to reach for a specialist like ProtoPie. Feb 22, 2026 · Most design tools stop at screen transitions. Proto Pie doesn’t. They enable designers to create dynamic interactions powered by logic, sensors, voice, and real data. Instead of simulating a flow, teams can prototype how a product actually behaves. This repository contains custom plugins of ProtoPie Connect.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://topbusinesssoftware.com/products/ProtoPie/integrations/",
+      "title": "List of ProtoPie Integrations in 2026 - topbusinesssoftware.com",
+      "content": "Revolutionize your prototyping experience with seamless innovation today! This is a list of platforms and tools that integrate with ProtoPie. This list is updated as of September 2026. \"Transforming collaboration into innovation for exceptional design outcomes.\"",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://uiuxatlas.com/lessons/prototyping/design-tooling-landscape/",
+      "title": "Design Tooling Landscape (Figma, Sketch, Penpot, ProtoPie)",
+      "content": "A practitioner's map of the 2026 design tool ecosystem — where Figma dominates, where open-source challengers fit, and when to reach for a specialist like ProtoPie.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

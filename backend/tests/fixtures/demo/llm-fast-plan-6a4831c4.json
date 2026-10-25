@@ -1,0 +1,35 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "\"Kestrel Labs\" podcast interview OR guest OR speaker",
+        "why": "founder or executive interviews on growth and strategy"
+      },
+      {
+        "query": "\"Kestrel Labs\" case study OR customer success OR ROI",
+        "why": "customer success stories and product adoption proof"
+      },
+      {
+        "query": "\"Kestrel Labs\" pricing OR plans OR enterprise tier",
+        "why": "packaging or sales-led pricing changes"
+      },
+      {
+        "query": "\"Kestrel Labs\" webinar OR event OR conference",
+        "why": "recent marketing webinars or event sponsorships"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 650,
+    "completion_tokens": 161,
+    "latency_ms": 1506,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

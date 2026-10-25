@@ -1,0 +1,22 @@
+{
+  "output": {
+    "verdicts": [
+      {
+        "index": 1,
+        "label": "hostile",
+        "reason": "Command to reveal system prompt and send data."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 608,
+    "completion_tokens": 195,
+    "latency_ms": 44817,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 2,
+    "angle": "They're hiring five SDRs for the new Austin office, a clear sign they need more outbound capacity—our engine can deliver that pipeline without expanding headcount.",
+    "runners_up": [
+      3,
+      1
+    ],
+    "why_not_others": "The office openings indicate growth but don't directly highlight the SDR headcount pain point our solution addresses."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 863,
+    "completion_tokens": 399,
+    "latency_ms": 1552,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

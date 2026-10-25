@@ -1,0 +1,46 @@
+{
+  "provider": "tavily",
+  "query": "\"Reco\" award OR recognized OR featured OR ranked",
+  "results": [
+    {
+      "url": "https://en.wikipedia.org/wiki/Grammy_Award_for_Record_of_the_Year",
+      "title": "Grammy Award for Record of the Year - Wikipedia",
+      "content": "The Grammy Award for Record of the Year is presented by the National Academy of Recording Arts and Sciences of the United States to \"honor artistic achievement, technical proficiency and overall excellence in the recording industry, without regard to sales or chart position.\" The Record of the Year award is one of the \"General Field\" categories at the awards presented annually since the 1st Annual Grammy Awards in 1959 (alongside Best New Artist, Song of the Year and Album of the Year). [...] Record of the Year is awarded for a single or for one track from an album. This award goes to the performing artist, the producer, recording engineer and/or mixer for that song. In this sense, \"record\" means a particular recorded song, not its composition or an album of songs. [...] The Record of the Year awards have been awarded since 1959. It is one of the four most prestigious Grammy Awards. Despite both the Song of the Year award and Record of the Year being awarded for a single or for one track from an album, this award goes to the performer and production team of the song whereas the Song of the Year award goes only to the composer(s) of the song. According to the 54th Grammy Awards description guide, the award is given for commercially released singles or tracks of",
+      "published_date": null,
+      "score": 0.19990121
+    },
+    {
+      "url": "https://www.epa.gov/sustainable-management-food/food-recovery-challenge-results-and-awardees",
+      "title": "Food Recovery Challenge Results and Awardees | US EPA",
+      "content": "EPA is pleased to recognize the following organizations for their outstanding efforts in 2019 and 2020 to advance sustainable materials management and for their leadership in the sustainable management of food. Their accomplishments, along with other FRC participants and endorsers, play a role in  contributing to the United States’ national goal of reducing food waste by 50 percent by 2030.\n\n## 2021 Food Recovery Challenge Awards - National Winners [...] In addition to national awards, EPA regional offices across the country provided recognition to Food Recovery Challenge participants and endorsers for outstanding accomplishments in preventing and diverting wasted food. Regional winners are listed below by EPA Region and then by U.S. state:\n\n### EPA's Region 2: New Jersey, New York, Puerto Rico and the U.S. Virgin Islands\n\n#### New York\n\n#### New Jersey [...] In addition to national awards, EPA regional offices across the country provided recognition to Food Recovery Challenge participants and endorsers for outstanding accomplishments in preventing and diverting wasted food. Regional winners are listed below by EPA Region and then by U.S. state:\n\n### EPA's Region 2: New Jersey, New York, Puerto Rico and the U.S. Virgin Islands\n\n#### New York\n\n#### New Jersey",
+      "published_date": null,
+      "score": 0.057456363
+    },
+    {
+      "url": "https://www.instagram.com/reel/Des8mSxojpK",
+      "title": "JOP WINS AWARD FOR BEST RECORD LABEL CEO ...",
+      "content": "WINS AWARD FOR BEST RECORD LABEL CEO. Caribbean Rising Star Award at the Billboard R&B/Hip-Hop Power. Rising Star award at Billboard's R&B/Hip-Hop Power",
+      "published_date": null,
+      "score": 0.05644935
+    },
+    {
+      "url": "https://legacy.sba.gov/success-story/2026-phoenix-award-disaster-recovery-corner-kitchen",
+      "title": "2026 Phoenix Award for Disaster Recovery: Corner Kitchen",
+      "content": "2026 Phoenix Award for Disaster Recovery, a national award recognizing the strength and resilience of a small business in the aftermath of a disaster.",
+      "published_date": null,
+      "score": 0.05644935
+    },
+    {
+      "url": "https://www.crra.com/news-and-events/2026-awards",
+      "title": "2026 Award Nominations",
+      "content": "Awards will be presented at CRRA's Annual Conference this August 30-September 2. Deadline extended to March 27th.",
+      "published_date": null,
+      "score": 0.0345309
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [
+    "duckduckgo: TimeoutException"
+  ],
+  "cached": false
+}

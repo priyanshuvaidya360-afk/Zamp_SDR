@@ -1,0 +1,46 @@
+{
+  "provider": "tavily",
+  "query": "\"Reco\" reviews G2 OR Capterra OR Trustpilot",
+  "results": [
+    {
+      "url": "https://technologymatch.com/blog/g2-vs-capterra-vs-trustpilot-vs-technologymatch-which-discovery-platform-is-best-for-it-leaders",
+      "title": "G2 vs Capterra vs Trustpilot vs TechnologyMatch: Which Vendor Discovery Platform Is Best for IT Leaders?",
+      "content": "G2 focuses on verified user reviews with 150K+ products and detailed comparison grids, while Capterra emphasizes breadth with 2M+ products and free vendor listings. Both use incentivized review programs and lead generation business models that immediately share your contact information with vendors. Neither offers IT-specific technical depth, vendor vetting, or requirements-based evaluation frameworks that complex IT vendor selection requires. [...] Trustpilot and G2 answer different questions. G2 collects software-specific peer reviews with feature-level detail and comparison grids, so it helps you shortlist products in a category. Trustpilot collects open customer feedback about a company's reputation and service quality, with no software comparison tools or IT category structure. Use G2 to compare products and Trustpilot to sanity-check a vendor's reputation, and treat neither as sufficient for a high-stakes IT decision on its own. [...] Winner: Capterra. 2M+ products listed across all business software categories.\n\nRunner-up: G2. 150K+ products with reviews and ratings.\n\n### Vendor Vetting and Risk Management\n\nWinner: TechnologyMatch. Multi-stage vetting including distributor-backed screening, financial stability checks, compliance verification, and ongoing performance monitoring.\n\nNone: G2, Capterra, Trustpilot. No vendor vetting beyond basic profile verification.\n\n### Time Efficiency",
+      "published_date": null,
+      "score": 0.66621506
+    },
+    {
+      "url": "https://pagecrawl.io/blog/trustpilot-g2-capterra-review-velocity-alerts",
+      "title": "Trustpilot, G2, and Capterra Review Velocity Alerts | PageCrawl.io",
+      "content": "Because the three surfaces that drive buying decisions all move without warning: a negative review that recovers best when answered the same day, a competitor's review velocity that signals a campaign, and a rating that feeds search snippets and category leaderboards. Trustpilot, G2, and Capterra send no reliable push for any of it.\n\n#### Negative Reviews Resolve Better When Caught Fast [...] ```\nid\n```\n\nTrustpilot profiles render the brand's TrustScore, total review count, and the recent review feed. G2 profiles render the star rating, total review count, and recent reviews with feature filters. Capterra profiles render the star rating, total review count, and review list with rating breakdown. [...] Trustpilot, G2, and Capterra sit at the top of most buyers' research funnels. Reviews on each platform update continuously, and the velocity of new reviews is itself a meaningful signal. A sharp spike in competitor review velocity over a fortnight usually points to a new acquisition campaign or product launch. A 1-star review on your own profile is a customer-success crisis that resolves better when caught in hours. Manual checking is not a workable strategy at any scale. A continuous monitor",
+      "published_date": null,
+      "score": 0.6633424
+    },
+    {
+      "url": "https://www.trustpilot.com/review/recouniversal.com",
+      "title": "Reco Universal is rated \"Average\" with 3.7 / 5 on Trustpilot",
+      "content": "6.   Business and IT Consulting Agency\n\n8.   Reco Universal\n\nSummary About Reviews\n\nVisit websiteWrite a review\n\nImage 2: Reco Universal logo\n\nVisit website\n\nClaimed profile•Jul 2025\n\n# Reco Universal Reviews\n\n4\n\n•\n\nImage 3: TrustScore 3.5 out of 5\n3.7\n\nBusiness and IT Consulting Agency\n\nWrite a reviewVisit website\n\nWrite a review\n\n## We use technology to protect platform integrity, but we don't fact-check reviews [...] While we don't verify specific claims because reviewers' opinions are their own, we may label reviews as \"Verified\" when we can confirm a business interaction took place. Read more [...] Advertisement\n\nJL\n\nJamie Lopez FR•1 review\n\nOct 9, 2026\n\nImage 19: Rated 5 out of 5 stars\n\n## Great support across cloud…\nGreat support across cloud archictecture, deployment, monitoring, CI/CD, and production issues during our AI app launch. Solid technical execution throughout. A few response times could've been quicker, but overall a strong, reliable experience.\n\nSeptember 18, 2026\n\nUnprompted review\n\nUseful\n\nShare\n\nImage 20: Reco Universal logo\n\nReply from Reco Universal\n\nOct 9, 2026",
+      "published_date": null,
+      "score": 0.6469293
+    },
+    {
+      "url": "https://blastra.io/directories/alternatives-to-trustpilot",
+      "title": "15 Trustpilot Alternatives for Software Companies, Free to List (2026)",
+      "content": "Every site here is crawled byAI systems building recommendation datasets. When a buyer asks ChatGPT or Perplexity which tool to use, the answer is assembled from what these sites say about your product, which is why an accurate listing on several of them keeps the description consistent.\n\nLooking for a different cut? The list ofalternatives to G2 covers review sites beyond G2 specifically, and alternatives to Capterra excludes the whole G2 Digital Markets family.\n\n## Frequently Asked Questions [...] :   The strongest Trustpilot alternatives for B2B software are G2 for category positioning against named competitors, Capterra for small-business buyers comparing tools in a category, SourceForge for developer-adjacent products, and GetApp and Software Advice for buyers who start from a feature comparison. The common difference from Trustpilot is that reviews attach to a specific product and sit inside a software category, so a buyer comparing three tools sees you in the set. Trustpilot reviews [...] Products\n\nFree + Paid upgrades\n\nReviews\n\nNow owned by G2 after acquisition from Gartner (closed February 2026). Localized for 30+ countries with particularly strong EMEA and Latin America presence. Reviews and profiles syndicate with Capterra and Software Advice.\n\nTraffic: 800K\n\nView details\n\nBest for: Buyers who start from a feature comparison. Shares the Capterra review corpus, so reviews collected once appear on both.\n\n800Kvisits/mo\n\nAccepts Reviews\n\n7\n\nSoftwareAdvice\n\nOn Blastra",
+      "published_date": null,
+      "score": 0.5973971
+    },
+    {
+      "url": "https://company.g2.com/news/g2-acquires-capterra-software-advice-getapp",
+      "title": "G2 to Acquire Capterra, Software Advice, and GetApp from Gartner",
+      "content": "For Buyers: We are removing noise and providing you with more helpful information during your purchasing process. With access to 6 million verified reviews in one place, you can trust G2 to be your ultimate guide to B2B software. And, through G2.ai, we’ll be able to deliver AI-driven recommendations at a scale that was previously impossible. [...] Today, that approach enters its most significant chapter yet.\n\nI’m thrilled to share that G2 has formally agreed to acquire the software discovery and recommendation platforms Capterra, Software Advice, and GetApp from Gartner.\n\nThis is a transformational moment for G2, and, more importantly, the global B2B software industry. By bringing together four of the leading software discovery platforms, we are creating the definitive system of record for B2B software in the age of AI.",
+      "published_date": null,
+      "score": 0.48074743
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [
+    "duckduckgo: TimeoutException"
+  ],
+  "cached": false
+}

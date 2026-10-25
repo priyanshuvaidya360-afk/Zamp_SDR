@@ -1,7 +1,7 @@
 """The demo, run end to end: both demo CSVs, then case 10's approve-after-twelve-days.
 
 Shared by scripts/record_demo.py (DEMO_MODE=record, live web + simulated web) and
-scripts/check_demo.py (DEMO_MODE=fixtures, network off). Spec: docs/GUIDE.md T17.
+scripts/check_demo.py (DEMO_MODE=fixtures, network off). Spec: docs/PROJECT_SPEC.md T17.
 """
 
 import tempfile
@@ -96,6 +96,7 @@ async def approve_after_wait(run_id: int) -> dict[str, Any]:
 async def run_demo(case10_name: str = "Omar Haddad", before_case10=None) -> dict[str, Any]:
     fresh_database()
     settings.today = TODAY
+    settings.require_linkedin = False  # the demo's fictional people have no LinkedIn
     results = []
     for path in CSVS:
         results += await run_csv(path)

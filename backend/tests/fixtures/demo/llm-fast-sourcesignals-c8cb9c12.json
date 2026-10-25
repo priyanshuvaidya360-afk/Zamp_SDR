@@ -1,0 +1,43 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco Manpower is an IT-focused manpower and HR services provider based in Vietnam.",
+        "evidence": "Reco Manpower is an IT-focused manpower and HR services provider, helping technology companies build, scale, and manage high-quality teams in Vietnam.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Reco Manpower entered the UK market and closed a major client.",
+        "evidence": "Successfully entered the UK market and closed a major client, generating recurring revenue.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1910,
+    "completion_tokens": 257,
+    "latency_ms": 1234,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

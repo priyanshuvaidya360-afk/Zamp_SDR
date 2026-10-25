@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "protopie.io enterprise plan pricing launch",
+  "results": [
+    {
+      "url": "https://www.protopie.io/plans",
+      "title": "Pricing Plans | ProtoPie",
+      "content": "Free, Pro, and Enterprise plans for individuals, teams, and large orgs. Start free — upgrade when your prototype demands more.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.protopie.io/support/enterprise-plan",
+      "title": "Enterprise plan Questions | Support | ProtoPie",
+      "content": "How much does ProtoPie Enterprise On-Premises cost? The cost of ProtoPie Enterprise On-Premises varies depending on the number of editor seats, security requirements, contract terms, and other related conditions. Contact us for a personalized quote.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "http://www.voidstarling.com/plans.html",
+      "title": "Pricing Plans | ProtoPie",
+      "content": "Check out the various ProtoPie pricing plans to figure out which one is right for you or your team.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.g2.com/products/protopie/pricing",
+      "title": "ProtoPie Pricing 2026ProtoPie Pricing 2026: Free-$47.0/User Plans ComparedProtoPie Pricing (2026): Explore Plans, Features & Key InsightsProtoPie Pricing in 2026: Plans and Costs | The Geeks Club",
+      "content": "Apr 9, 2026 · Learn more about the cost of ProtoPie, different pricing plans, starting costs, free trials, and more pricing-related information provided by ProtoPie. Oct 6, 2026 · ProtoPie offers 4 pricing plans, starting with a free tier and scaling to custom enterprise pricing. Plans include Free (free), Basic at $25/mo, Pro at $47/editor/mo, Enterprise (custom pricing). Get a full breakdown of ProtoPie pricing, including plan options, feature differences, and cost comparisons to help you choose the right subscription. Every ProtoPie plan and price, as ProtoPie's own pricing page lists them, free plan included.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://costbench.com/software/design/protopie/",
+      "title": "ProtoPie Pricing 2026: Free-$47.0/User Plans Compared",
+      "content": "Oct 6, 2026 · ProtoPie offers 4 pricing plans, starting with a free tier and scaling to custom enterprise pricing. Plans include Free (free), Basic at $25/mo, Pro at $47/editor/mo, Enterprise (custom pricing).",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

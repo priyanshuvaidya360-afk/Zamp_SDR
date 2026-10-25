@@ -1,0 +1,55 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum provides an AI-native FP&A solution for high-growth companies and scaling enterprises.",
+        "evidence": "building the most scalable AI-native FP&A solution for high-growth companies and scaling enterprises.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Abacum is headquartered in New York City with offices in Barcelona, Toronto and Buenos Aires.",
+        "evidence": "Today Abacum is a global company headquartered in New York City, with offices in Barcelona, Toronto and Buenos Aires",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Abacum has raised a total of $100M.",
+        "evidence": "We've raised $100M to make finance leaders the hero of their organization",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2434,
+    "completion_tokens": 379,
+    "latency_ms": 1843,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

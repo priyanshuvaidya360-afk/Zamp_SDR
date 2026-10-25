@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Reco.ai\" Gartner OR Forrester market guide",
+  "results": [
+    {
+      "url": "https://www.bing.com/aclick?ld=e8fH9kQsjwgr-fZES3zxP1rzVUCUwm2pFnryN7m7C4yOQine13ZBEohyzz1kkhA-GkSfIp5YhUIdOy1O9Kmbblhngnly4BhnQpTKgNdei5TWgIBCvj5fYSyJcvp9VMEX-h_Z_HZTjPN2JCpxJ5LqAqMboP7S2BTrEeUpo7Z0oZmCyerpCJsko1afI2ZqI9z2_-ORwc-sCdvaOdGQXOS7yaXl0Ipp0&u=aHR0cHMlM2ElMmYlMmZnby52ZWVhbS5jb20lMmZnYXJ0bmVyLW1hZ2ljLXF1YWRyYW50JTNmc3QlM2RiaW5ncGFpZHNlYXJjaCUyNnV0bV9zb3VyY2UlM2RiaW5nJTI2dXRtX21lZGl1bSUzZHBhaWRfc2VhcmNoJTI2dXRtX2NhbXBhaWduJTNkMUNNQy1QTUlYX0FQSl9FTl9TQUFSQ19QYWlkLVNlYXJjaF9XUF9HYXJ0bmVyLU1hZ2ljLVF1YWRyYW50LTIwMjYtTkJfMkNEJTI2dXRtX2NhbXBhaWduX2lkJTNkNjA3MTI0NzkxJTI2dXRtX2FkZ3JvdXAlM2R3cC1nYXJ0bmVyLW1hZ2ljLXF1YWRyYW50LTIwMjYtbmIlMjZ1dG1fYWRncm91cF9pZCUzZDEyOTYzMjU1MTY0ODAxNjElMjZ1dG1fYWRpZCUzZDgxMDIwNDEwNjU5MjQwJTI2dXRtX21hdGNodHlwZSUzZHAlMjZ1dG1fYmlkbWF0Y2h0eXBlJTNkYnAlMjZ1dG1fbmV0d29yayUzZG8lMjZ1dG1fZGV2aWNlJTNkYyUyNnV0bV9rZXl3b3JkJTNkZ2FydG5lciUyNTIwcmVwb3J0JTI2dXRtX3RhcmdldGlkJTNka3dkLTgxMDIwNjcyMTU5NzQ0JTNhbG9jLTkwJTI2dXRtX3F1ZXJ5JTNkUmVjby5haSUyNTIwR2FydG5lciUyNTIwRm9ycmVzdGVyJTI1MjBtYXJrZXQlMjUyMGd1aWRlJTI2dXRtX21zY2xraWQlM2Q2YmFjYzg4NmE2NWYxYzBmZmZlNGEyNThkYzkxYWViYyUyNm1zY2xraWQlM2Q2YmFjYzg4NmE2NWYxYzBmZmZlNGEyNThkYzkxYWViYyUyNnV0bV90ZXJtJTNkZ2FydG5lciUyNTIwcmVwb3J0JTI2dXRtX2NvbnRlbnQlM2R3cC1nYXJ0bmVyLW1hZ2ljLXF1YWRyYW50LTIwMjYtbmI&rlid=6bacc886a65f1c0fffe4a258dc91aebc",
+      "title": "2026 Gartner® MQ Report - Free Gartner® MQ 2026 Report",
+      "content": "For the 10th year, Gartner® named Veeam a Leader in Backup and Data Protection Platforms. Gartner® positioned Veeam highest in execution, 7 years straight. Read the report. Types: Instant Recovery, AI Governance, Ransomware Detection, Data Classification",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.gartner.com/reviews/product/reco-283583878",
+      "title": "Reco Reviews & Ratings 2026 | Gartner Peer Insights",
+      "content": "Explore 26 in-depth Reco reviews and insights from real users verified by Gartner, and choose your business software with confidence.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.forrester.com/analyst-bio/craig-le-clair/BIO1226",
+      "title": "Craig Le Clair | Forrester",
+      "content": "Craig is an internationally recognized expert in automation, AI, and the future of work. His coverage areas include AI agent platforms and use cases, digital process automation, and emerging adaptive process orchestration. Also included are automation centers of excellence (COE), process transformation methods, and AI-driven workforce changes such as agent experience trends. Dynamic case ...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://slator.com/",
+      "title": "Slator - Market intelligence for language solutions and AI",
+      "content": "Market Intelligence on Language Solutions and AI Ground truth that informs the most important revenue and strategy decisions for market leaders and enterprise teams.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://libguides.mit.edu/bizcat/mr",
+      "title": "LibGuides: Business Databases by Category: Market research",
+      "content": "Oct 5, 2026 · Use Gartner IntraWeb when you need reports on trends in the information technology industry, available technologies, and analysis of products on the market, including reception by customers of the products.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Abacum\" Product Hunt launch",
+  "results": [
+    {
+      "url": "https://www.producthunt.com/p/abacum",
+      "title": "Abacum Forums on Product Hunt | Product Hunt",
+      "content": "Join the Abacum community on Product Hunt. Ask questions, share feedback, request features, and connect with other users. Stay updated with the latest news and discussions.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://hunted.space/dashboard/281561",
+      "title": "Abacum | Product Hunt launch dashboard (170 upvotes | 24 ...",
+      "content": "Live Product Hunt launch dashboard for Abacum - Abacum is a financial planning tool for mid-sized companies. Save time by integrating data sources and automating manual processes.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.producthunt.com/launch",
+      "title": "Product Hunt Launch Guide",
+      "content": "Product Hunt is a curation of the best new products, every day. Discover the latest mobile apps, websites, and technology products that everyone's talking about.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.huntradars.com/",
+      "title": "Product Hunt Radar",
+      "content": "1 day ago · A report-style Product Hunt intelligence dashboard for early launch signals.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.abacum.ai/",
+      "title": "Abacum: The AI-Native FP&A Platform",
+      "content": "Abacum is the AI-native FP&A platform built for CFOs to connect data, workflows and teams, simplifying planning and reporting with 700+ integrations.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

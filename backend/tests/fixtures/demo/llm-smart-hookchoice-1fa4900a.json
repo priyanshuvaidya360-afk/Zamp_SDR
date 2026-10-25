@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 1,
+    "angle": "Maya recently talked about running outbound experiments with just two people and hitting a bottleneck on crafting personalized, research‑cited emails, which is exactly the friction Halyard eliminates for growth teams.",
+    "runners_up": [
+      2,
+      3
+    ],
+    "why_not_others": "The other signals describe Brightwave’s product or market focus, not Maya’s personal outbound challenge."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 863,
+    "completion_tokens": 283,
+    "latency_ms": 1035,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

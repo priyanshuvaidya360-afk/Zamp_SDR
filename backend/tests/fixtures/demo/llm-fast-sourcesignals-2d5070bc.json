@@ -1,0 +1,67 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "ProtoPie is retiring the legacy Individual Plan on July 24, 2026, transitioning users to Pro.",
+        "evidence": "On July 24, 2026, the legacy Individual Plan will be retired. Every Individual Plan user is being moved to Pro",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": null
+      },
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "ProtoPie launched User Testing built into the workflow.",
+        "evidence": "User Testing Built Into Your Workflow",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "press",
+        "about": "company",
+        "summary": "ProtoPie was honored as a Satisfaction Leader in the UX Tools Design Tools Awards.",
+        "evidence": "ProtoPie Honored as Satisfaction Leader in Inaugural UX Tools Design Tools Awards!",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "ProtoPie raised $21M in funding to drive interaction design innovation.",
+        "evidence": "ProtoPie Raises $21M to Drive Interaction Design Innovation",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1501,
+    "completion_tokens": 484,
+    "latency_ms": 2755,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

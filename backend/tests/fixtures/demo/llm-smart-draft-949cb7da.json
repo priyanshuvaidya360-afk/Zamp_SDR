@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "scaling your outbound pipeline",
+    "body": "I saw Ferncastle is hiring five Sales Development Representatives in Austin. Scaling your outbound pipeline by adding SDRs often leads to diminishing reply rates and higher headcount costs, which Halyard helps mitigate. Would you be open to a short 15‑minute call to explore how we could help you generate more pipeline?\n\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I saw Ferncastle is hiring five Sales Development Representatives in Austin.",
+        "signal_id": 2
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1263,
+    "completion_tokens": 1397,
+    "latency_ms": 5425,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

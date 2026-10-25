@@ -1,0 +1,46 @@
+{
+  "provider": "tavily",
+  "query": "\"\" reviews G2 OR Capterra OR Trustpilot",
+  "results": [
+    {
+      "url": "https://technologymatch.com/blog/g2-vs-capterra-vs-trustpilot-vs-technologymatch-which-discovery-platform-is-best-for-it-leaders",
+      "title": "G2 vs Capterra vs Trustpilot vs TechnologyMatch: Which Vendor Discovery Platform Is Best for IT Leaders?",
+      "content": "G2 focuses on verified user reviews with 150K+ products and detailed comparison grids, while Capterra emphasizes breadth with 2M+ products and free vendor listings. Both use incentivized review programs and lead generation business models that immediately share your contact information with vendors. Neither offers IT-specific technical depth, vendor vetting, or requirements-based evaluation frameworks that complex IT vendor selection requires. [...] Trustpilot and G2 answer different questions. G2 collects software-specific peer reviews with feature-level detail and comparison grids, so it helps you shortlist products in a category. Trustpilot collects open customer feedback about a company's reputation and service quality, with no software comparison tools or IT category structure. Use G2 to compare products and Trustpilot to sanity-check a vendor's reputation, and treat neither as sufficient for a high-stakes IT decision on its own. [...] Winner: Capterra. 2M+ products listed across all business software categories.\n\nRunner-up: G2. 150K+ products with reviews and ratings.\n\n### Vendor Vetting and Risk Management\n\nWinner: TechnologyMatch. Multi-stage vetting including distributor-backed screening, financial stability checks, compliance verification, and ongoing performance monitoring.\n\nNone: G2, Capterra, Trustpilot. No vendor vetting beyond basic profile verification.\n\n### Time Efficiency",
+      "published_date": null,
+      "score": 0.8576849
+    },
+    {
+      "url": "https://blastra.io/directories/alternatives-to-trustpilot",
+      "title": "15 Trustpilot Alternatives for Software Companies, Free to List (2026)",
+      "content": ":   The strongest Trustpilot alternatives for B2B software are G2 for category positioning against named competitors, Capterra for small-business buyers comparing tools in a category, SourceForge for developer-adjacent products, and GetApp and Software Advice for buyers who start from a feature comparison. The common difference from Trustpilot is that reviews attach to a specific product and sit inside a software category, so a buyer comparing three tools sees you in the set. Trustpilot reviews [...] Accepts Reviews\n\n2\n\nCapterra\n\nOn Blastra\n\nCapterra\n\nDirectory\n\nProducts\n\nFree + Paid upgrades\n\nReviews\n\nNow owned by G2 after acquisition from Gartner (closed February 2026). 2M+ verified reviews across 1,000+ categories. Profiles and reviews syndicate with GetApp and Software Advice (we're expecting integration with G2 some time in 2026). Offers granular pay-per-click bid slots by country and category.\n\nTraffic: 2.9M\n\nView details [...] Products\n\nFree + Paid upgrades\n\nReviews\n\nNow owned by G2 after acquisition from Gartner (closed February 2026). Localized for 30+ countries with particularly strong EMEA and Latin America presence. Reviews and profiles syndicate with Capterra and Software Advice.\n\nTraffic: 800K\n\nView details\n\nBest for: Buyers who start from a feature comparison. Shares the Capterra review corpus, so reviews collected once appear on both.\n\n800Kvisits/mo\n\nAccepts Reviews\n\n7\n\nSoftwareAdvice\n\nOn Blastra",
+      "published_date": null,
+      "score": 0.796562
+    },
+    {
+      "url": "https://legal.g2.com/community-guidelines",
+      "title": "Community Guidelines | G2",
+      "content": "+ User opinions. Please note that all reviews are based on subjective user experiences, which may be incomplete and influenced by unique circumstances. G2 is intended for use by professionals; however, reviews do not constitute expert opinions based on objective criteria. Rather, they are subjective reviews based on users’ experiences that may depend in part on their professional qualifications or experiences, but which G2 has not reviewed or confirmed. All reviews, including any endorsements, [...] ##### REVIEW CONTEXT\n\nTo remain the most trusted and authentic source of information and to stay compliant with legal regulations, it’s important to remember that:\n\n + G2 will never require or ask that only positive reviews be submitted to its site.\n  + If a review is incentivized, G2 will clearly label the review as incentivized.\n  + G2 will never suppress or otherwise mute/hide negative reviews.\n  + All reviews, written in all tones, of all quality levels, are treated equally. [...] + Algorithms & Scoring. G2 satisfaction ratings, market presence scores, and index scores are determined algorithmically in real time based on reviews gathered from our user community, as well as data aggregated from publicly available online sources and social networks. G2 ratings only include data from verified reviewers and public sources. Our algorithms are the same for all categories. Read more about our algorithm.",
+      "published_date": null,
+      "score": 0.37806922
+    },
+    {
+      "url": "https://corporate.trustpilot.com/legal/for-everyone/action-we-take/mar-2026",
+      "title": "Action We Take",
+      "content": "Every single review submitted to Trustpilot is checked by our automated detection technology before becoming visible on the platform. To safeguard our platform and make sure that we’re increasingly effective in identifying and removing fake reviews, we use a three-pronged approach that includes our people, technology, and community. Our automated detection technology goes beyond the content of reviews to analyse a large range of behavioural data points. This is supported by the human expertise [...] Any business can use Trustpilot for free to invite customers who have had a genuine experience to write a review. Businesses can use our invitation methods and tools to do this and customers can always leave a review free of charge, with or without an invitation.     \nBusinesses must not “cherry pick” when it comes to inviting, this is illegal.   \n  \nTo ensure reviews remain trustworthy and unbiased, businesses must: [...] ## Fake reviews\n\nThere’s no place for fake reviews on Trustpilot. Fake reviews undermine trust and are illegal, and we won’t tolerate that. Where we detect fake reviews, we’ll remove them and take action.\n\nWe define fake reviews as reviews which don’t reflect a genuine service or buying experience with a business. They’re written in an attempt to mislead and manipulate what other people think about that business (positively or negatively). Examples include:",
+      "published_date": null,
+      "score": 0.14991707
+    },
+    {
+      "url": "https://www.trustpilot.com/review/exactdata.com",
+      "title": "Exact Data is rated \"Great\" with 4.1 / 5 on Trustpilot",
+      "content": "(246)\n\n4 reviews in the last 12 months\n\nWrite a review\n\n- [x] \n\n5-star\n\n76%\n\n \n\n- [x] \n\n4-star\n\n2%\n\n \n\n- [x] \n\n3-star\n\n<1%\n\n \n\n- [x] \n\n2-star\n\n3%\n\n \n\n- [x] \n\n1-star\n\n18%\n\n \n\nHow Trustpilot labels reviews\n\nCompanies on Trustpilot aren't allowed to offer incentives or pay to hide reviews. Reviews are the opinions of individual users and not of Trustpilot. Read more\n\nMore filters\n\nMost recent\n\n  \n\nImage 30\n\nMrPrestonb US•1 review\n\nJul 7, 2026\n\nImage 31: Rated 1 out of 5 stars [...] Previous1234Next page\n\n### The Trustpilot Experience\n\n#### We're open to all\n\nAnyone can write a Trustpilot review. People who write reviews have ownership to edit or delete them at any time, and they’ll be displayed as long as an account is active.\n\n#### We fight fake reviews\n\nWe use dedicated people and clever technology to safeguard our platform. Find out how we combat fake reviews.\n\n#### We show the latest reviews\n\nLearn about Trustpilot’s review process. [...] #### We encourage constructive feedback\n\nHere are 8 tips for writing great reviews.\n\n#### We verify reviewers\n\nVerification can help ensure real people are writing the reviews you read on Trustpilot.\n\n#### We advocate against bias\n\nOffering incentives for reviews or asking for them selectively can bias the TrustScore, which goes against our guidelines.\n\nTake a closer look\n\nare you human?\n\nImage 73: Trustpilot reviews",
+      "published_date": null,
+      "score": 0.1208016
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [
+    "duckduckgo: TimeoutException"
+  ],
+  "cached": false
+}

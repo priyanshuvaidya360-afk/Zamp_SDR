@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 2,
+    "angle": "Amy, with the recent launch of Abacum Modeler, your growth team will need to quickly reach finance decision‑makers to drive adoption, and Halyard can supply ready‑made, research‑backed outreach to fill that pipeline without adding SDR headcount.",
+    "runners_up": [
+      4,
+      22
+    ],
+    "why_not_others": "Funding announcements are less directly tied to an immediate outreach need than the new product launch."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 715,
+    "completion_tokens": 399,
+    "latency_ms": 1041,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

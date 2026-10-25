@@ -1,0 +1,61 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "new product marketing role",
+        "about": "prospect",
+        "status": "supported",
+        "fact_id": 8,
+        "reason": "Fact 8 confirms Sandy Mathews was appointed vice president of product marketing.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I saw that you were appointed VP of Product Marketing on 8 June 2026.",
+        "about": "prospect",
+        "status": "supported",
+        "fact_id": 8,
+        "reason": "Fact 8 explicitly states the exact title and date of the appointment.",
+        "suggestion": null
+      },
+      {
+        "sentence": "As you shape product positioning, you likely face the challenge of scaling outbound pipelines without adding more SDR headcount.",
+        "about": "prospect",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a prospective challenge and opinion regarding their role.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Our outbound pipeline engine surfaces buying signals, finds the right contacts, and drafts researched first‑touch emails, letting growth teams build pipeline without expanding SDR teams.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": "seller",
+        "reason": "The sentence accurately describes what Halyard sells according to the seller definition.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15‑minute call to explore how this could fit your strategy?",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a call to action question.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email specifically references the exact appointment date and title of the prospect, making it highly tailored."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 721,
+    "completion_tokens": 467,
+    "latency_ms": 1935,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "Abacum launched Modeler, an AI agent for finance modeling.",
+        "evidence": "today launched Modeler, an AI agent that brings Agentic Modeling to finance teams.",
+        "published_at": "2026-10-13",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum is an AI-native business planning (FP&A) platform.",
+        "evidence": "Abacum is the AI-native business planning platform.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum serves over 500 customers in 40+ countries, including DISH, ThoughtSpot, Strava, Acorns and Replit.",
+        "evidence": "More than 500 customers in over 40 countries run their planning on Abacum, including DISH, ThoughtSpot, Strava, Acorns and Replit.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 2429,
+    "completion_tokens": 1530,
+    "latency_ms": 2419,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

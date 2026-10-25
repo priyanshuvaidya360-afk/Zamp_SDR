@@ -1,0 +1,8 @@
+{
+  "provider": "simweb",
+  "query": "\"Ferncastle\" news ferncastle.example",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Amy Asali\" article OR blog OR wrote OR webinar",
+  "results": [
+    {
+      "url": "https://aws.amazon.com/blogs/",
+      "title": "AWS Blogs - Cloud news & innovation | Amazon Web Services (AWS)",
+      "content": "Oct 18, 2026 · AWS Blogs AWS and DuckLabs: Building the future of analytics together On August 26, Amazon signed a definitive agreement to acquire DuckLabs, the Amsterdam-based company behind the open source analytical database DuckDB. To learn more, read the blog by Mai-Lan Tomsen Bukovec, VP of Technology at AWS.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://bereanresearch.org/blog/",
+      "title": "Blog – Berean Research",
+      "content": "Jul 23, 2026 · I recently wrote about what is often presented as a newer expression within the visible Church titled, Christian Nationalism: Why You Should Ask Questions, a movement which has been forming some religious affiliations and partnerships that the Bible warns us ought not be.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.asaporg.com/webinars/",
+      "title": "Webinars - ASAP",
+      "content": "Stay current with expert-led webinars that cover the evolving skills, tools, and insights shaping the administrative profession.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://ambrygen.com/providers/webinars",
+      "title": "Webinar - Ambry Genetics",
+      "content": "May 21, 2026 · We’ve upgraded your learning experience. Access on-demand webinars on our newly launched medical educational platform. Subscribe to receive notifications for future webinars.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://amyrysavy.com/",
+      "title": "Prairie Paper & Ink – a blog by Amy Rysavy",
+      "content": "a blog by Amy Rysavy Shops I'm Affiliated With: Clicking on my links or on the shop icons below earns me a percentage (at no additional cost to you) of the sale when you place an order.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

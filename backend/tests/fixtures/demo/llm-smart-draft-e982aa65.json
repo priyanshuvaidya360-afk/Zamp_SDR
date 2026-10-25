@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "migration & outbound pipeline",
+    "body": "Hi Ryan,\n\nI saw that ProtoPie announced the retirement of the legacy Individual Plan and migration of users to Pro on 24 July 2026, with a price-lock incentive. That migration effort needs a steady flow of qualified accounts without adding SDR headcount, which is exactly what Halyard's outbound pipeline engine provides. Would you be open to a brief 15-minute call to see how it could work for your growth team?\n\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I saw that ProtoPie announced the retirement of the legacy Individual Plan and migration of users to Pro on 24 July 2026, with a price-lock incentive.",
+        "signal_id": 2
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1383,
+    "completion_tokens": 1584,
+    "latency_ms": 3616,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

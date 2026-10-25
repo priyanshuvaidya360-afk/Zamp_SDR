@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "quick thought on outbound scaling",
+    "body": "- You noted that testing a new outbound angle each week stalls because hand‑crafting research‑backed emails for 400 accounts is a bottleneck.\n- That reflects the typical hurdle of growing outbound pipelines without expanding SDR headcount or resorting to generic sequences.\n- Would you be open to a brief 15‑minute chat to explore a solution that surfaces buying signals and drafts ready‑to‑send emails?",
+    "claims": [
+      {
+        "sentence": "You noted that testing a new outbound angle each week stalls because hand‑crafting research‑backed emails for 400 accounts is a bottleneck.",
+        "signal_id": 1
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1171,
+    "completion_tokens": 815,
+    "latency_ms": 16269,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

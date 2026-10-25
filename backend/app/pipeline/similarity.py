@@ -1,6 +1,6 @@
 """Batch-level check after every draft is written (case 9: template drift).
 
-Spec: docs/GUIDE.md "Account context" case 9 and T12. TF-IDF cosine similarity across the batch's
+Spec: docs/PROJECT_SPEC.md "Account context" case 9 and T12. TF-IDF cosine similarity across the batch's
 final drafts flags pairs above 0.8. No single hook source may open more than 20% of the drafts
 (at least one is always allowed); the lowest-scoring overflow runs are re-run from stage 5 with
 that source excluded. Diversity = 1 - mean pairwise similarity, stored on the batch.

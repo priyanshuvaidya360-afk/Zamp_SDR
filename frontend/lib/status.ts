@@ -1,8 +1,8 @@
-// Status colours, defined once and used everywhere (docs/GUIDE.md "UI: three screens", Style):
+// Status colours, defined once and used everywhere (docs/PROJECT_SPEC.md "UI: three screens", Style):
 // green = ready / approved, amber = needs input / low signal (waiting on a human),
-// red = blocked / failed, grey = running.
+// red = failed / suppressed, grey = running / already researched.
 
-import type { RowStatus, RunStatus } from "./types";
+import type { IdentityOutcome, RowStatus, RunStatus, SignalLevel } from "./types";
 
 export type Tone = "green" | "amber" | "red" | "grey";
 
@@ -28,12 +28,45 @@ export const RUN_STATUS: Record<RunStatus, { label: string; tone: Tone }> = {
   needs_input: { label: "Needs input", tone: "amber" },
   low_signal: { label: "Low signal", tone: "amber" },
   held: { label: "Held", tone: "amber" },
-  blocked: { label: "Blocked", tone: "red" },
+  blocked: { label: "Already researched", tone: "grey" },
   suppressed: { label: "Suppressed", tone: "red" },
   failed: { label: "Failed", tone: "red" },
   rejected: { label: "Rejected", tone: "grey" },
+  dismissed: { label: "Dismissed", tone: "grey" },
+  already_drafted: { label: "Already drafted", tone: "green" },
   invalid: { label: "Invalid", tone: "red" },
   skipped: { label: "Duplicate", tone: "grey" },
+};
+
+/** A needs_input run says why identity failed, so the list tells bad data from a private person. */
+export const IDENTITY_OUTCOME: Record<IdentityOutcome, { label: string; tone: Tone }> = {
+  not_public: { label: "Not found online", tone: "amber" },
+  bad_data: { label: "Check data", tone: "red" },
+  search_failed: { label: "Search failed", tone: "grey" },
+  ambiguous: { label: "Pick the person", tone: "amber" },
+  unconfirmed: { label: "Confirm person", tone: "amber" },
+};
+
+/** The lists' status column for a researched run: how much the research found. */
+export const SIGNAL_LEVEL: Record<SignalLevel, { label: string; tone: Tone }> = {
+  high: { label: "High signal", tone: "green" },
+  moderate: { label: "Moderate signal", tone: "grey" },
+  low: { label: "Low signal", tone: "amber" },
+  none: { label: "No signal", tone: "red" },
+};
+
+/** Runs whose status column shows the signal level instead: research is done and nothing is
+ *  waiting on someone (running, needs input, held, failed... keep their own status). A re-upload
+ *  of someone researched recently (blocked, already drafted) shows the earlier run's level. */
+export const SHOWS_SIGNAL_LEVEL: RunStatus[] = [
+  "ready_for_review", "low_signal", "approved", "rejected", "blocked", "already_drafted",
+];
+
+/** The prospect list's status column: was this person researched before? Drafting an already
+ *  researched person doesn't search again; it shows the earlier draft. */
+export const PROSPECT_STATE: Record<"fresh" | "researched", { label: string; tone: Tone }> = {
+  fresh: { label: "Fresh prospect", tone: "green" },
+  researched: { label: "Already researched", tone: "grey" },
 };
 
 export const ROW_STATUS: Record<RowStatus, { label: string; tone: Tone }> = {

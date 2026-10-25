@@ -1,0 +1,35 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "\"Kestrel Labs\" product-led sales motion",
+        "why": "to find if they are adding a sales-led motion"
+      },
+      {
+        "query": "\"Kestrel Labs\" new pricing tier plan release",
+        "why": "to uncover new product or plan launches needing pipeline"
+      },
+      {
+        "query": "\"Kestrel Labs\" podcast interview founder growth strategy",
+        "why": "to surface recent strategic shifts or growth goals"
+      },
+      {
+        "query": "\"Kestrel Labs\" opens new office expansion market",
+        "why": "to detect regional expansion requiring new pipeline"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 506,
+    "completion_tokens": 163,
+    "latency_ms": 1551,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Reco\" hiring SDR BDR sales development account executive growth marketing",
+  "results": [
+    {
+      "url": "https://remotegrowthpartners.com/blog/what-does-a-sales-development-representative-actually-do-in-2026-and-why-offshore-sdrs-are-now-doing-it-better",
+      "title": "What Does a Sales Development Representative Do in 2026?",
+      "content": "If most of those are true, you're ready. If you're still figuring out your ICP and messaging, build that first, an SDR of any kind will struggle without it.\n\nTo see the full range of offshore roles we place, Remote Growth Partners also places BDRs, Account Executives, and marketing staff for US-based teams.\n\n### How to Onboard and Manage an Offshore SDR for Maximum ROI [...] A sales development representative (SDR) is a top-of-funnel sales role responsible for outbound prospecting, lead qualification, and booking meetings for Account Executives using tools like Salesforce, LinkedIn Sales Navigator, and Salesloft. In 2026, the total first-year cost of a US-based SDR exceeds $100,000 when employer taxes, benefits, recruiting fees, and ramp time are included. Offshore SDRs in Latin America and the Philippines perform the same core functions at 60–70% lower cost, with [...] > Quick Answer: A sales development representative (SDR) is a top-of-funnel sales role focused on prospecting, outbound outreach, and qualifying leads before passing them to an Account Executive. In 2026, US-based SDRs cost $80,000–$100,000+ per year in total employer costs. Offshore SDRs performing the same functions cost 60–70% less, with no meaningful drop in output quality when hired through a rigorous vetting process.",
+      "published_date": null,
+      "score": 0.47986987
+    },
+    {
+      "url": "https://www.facebook.com/groups/127573880603797/posts/27013678901566597",
+      "title": "Remote sales development representative job available",
+      "content": "OCR: Location: Remote Scope: Reports part-time negotiable Regional Sales Manager seeking highly motivated Sales Development Representative (SDR) growth",
+      "published_date": null,
+      "score": 0.47884622
+    },
+    {
+      "url": "https://www.indeed.com/q-sdr-sales-team-jobs.html",
+      "title": "Sdr sales team jobs",
+      "content": "Browse 22223 Sdr Sales Team jobs. $50,000 - $70,000 a year. Development Rep (SDR) $45,000 - $70,000 a year ・ $22.50/hr. $40,000 - $50,000 a year Full-time ・",
+      "published_date": null,
+      "score": 0.46162403
+    },
+    {
+      "url": "https://www.careers.zoom.us/job-details/sales-development-representative-manager-in-sales-jobs-1761307",
+      "title": "Sales Development Representative Manager job in Sales in Remote (MA)",
+      "content": "2+ years of experience managing SDR or BDR teams in a B2B SaaS environment, with a proven track record of delivering against pipeline, meeting, and revenue targets\n Experience leading both outbound and inbound SDR motions, with a strong understanding of what drives conversion across each\n Coaching-first leadership approach, with demonstrated experience listening to calls, running role-plays, and actively developing rep capability [...] Experience identifying high performers, managing performance gaps, and creating clear development pathways for SDR talent\n Strong commercial acumen, including pipeline economics, conversion rates, and the data-driven levers that influence SDR performance\n Effective cross-functional communicator and collaborator, with experience partnering with Sales, Marketing, and Enablement stakeholders [...] Partner with Sales and Marketing to strengthen meeting quality and pipeline conversion, ensuring AMER and LATAM SDR activity aligns with campaigns and ABM priorities\n Share regional learnings and insights with the global SDR organization to influence strategy and improve what is working across the wider team",
+      "published_date": null,
+      "score": 0.40570828
+    },
+    {
+      "url": "https://resourcepro.applytojob.com/apply/LtMuNqa2tF/Senior-Sales-Development-Representative",
+      "title": "Senior Sales Development Representative - ReSource Pro - Career Page",
+      "content": "| The Senior Sales Development Representative (Sr. SDR) is an experienced outbound contributor who owns pipeline creation and opportunity qualification within an assigned vertical segment, serving as the SDR vertical partner to aligned Sales Executives. The role runs personalized, multi-stakeholder, multi-channel outreach into target accounts, builds and refines the segment-level playbook, and creates qualified opportunities (not just meetings) before SE handoff. Compensation is tied to [...] • Multi-thread target accounts. Identify and engage at minimum 3 stakeholders per account across decision-maker, influencer, and operational roles.  \n• Build account maps documenting the buying committee, current vendor relationships, and known initiatives; use them to time and shape outreach  \n• Serve as the SDR vertical partner to aligned Sales Executives, contributing to account strategy and stakeholder mapping rather than executing on a list. [...] 3-4 years of B2B outbound sales, business development, or related experience required. Demonstrated track record of consistently meeting or exceeding outbound activity and pipeline targets. Prior SDR, BDR, or inside sales experience strongly preferred.\n Insurance industry experience | Familiarity with B2B sales methodology | Experience with AI-automated sales tools, including building and refining prompts | Experience with sequencing and cadence platforms",
+      "published_date": null,
+      "score": 0.38901308
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

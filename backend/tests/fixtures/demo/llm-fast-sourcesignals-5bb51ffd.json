@@ -1,0 +1,29 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "person_content",
+        "about": "person",
+        "summary": "Maya Collins discusses outbound experimentation bottlenecks.",
+        "evidence": "We test one new outbound angle a week, but writing research-backed first emails by hand is the bottleneck. Two people can't personalise four hundred accounts.",
+        "published_at": "2026-09-30",
+        "sensitive": false,
+        "speaker": "Maya Collins",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1095,
+    "completion_tokens": 1136,
+    "latency_ms": 25685,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

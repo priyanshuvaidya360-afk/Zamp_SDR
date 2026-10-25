@@ -1,0 +1,41 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 5,
+        "specificity": 4,
+        "reasoning": "Hiring SDRs signals a need for more pipeline without expanding headcount, directly matching Halyard's value."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "A revenue‑team migration to HubSpot may create data‑cleanliness challenges that Halyard can help solve."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 5,
+        "specificity": 5,
+        "reasoning": "Priya explicitly says they need outbound outreach with clean data, a core problem Halyard addresses."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 0,
+        "specificity": 3,
+        "reasoning": "The statement describes Acme's product focus, which does not relate to outbound pipeline needs."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1124,
+    "completion_tokens": 579,
+    "latency_ms": 10608,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

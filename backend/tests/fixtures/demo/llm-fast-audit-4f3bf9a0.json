@@ -1,0 +1,53 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "Subject: outbound email bottleneck",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a subject line summarizing the topic rather than stating a confirmed factual claim.",
+        "suggestion": null
+      },
+      {
+        "sentence": "You mentioned running outbound experiments with a two-person team and hitting a bottleneck on crafting personalized, research‑cited emails (30 September).",
+        "about": "prospect",
+        "status": "supported",
+        "fact_id": 1,
+        "reason": "Fact 1 confirms Maya discussed running outbound experiments with a two-person team and personalized email bottlenecks on 30 September.",
+        "suggestion": null
+      },
+      {
+        "sentence": "That bottleneck is the exact friction Halyard removes by auto‑spotting buying signals, finding contacts, and drafting cited first‑touch emails, letting growth teams scale without extra SDRs.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": null,
+        "reason": "This sentence accurately describes what Halyard sells according to the seller description.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15‑minute call to explore?",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a call-to-action question rather than a factual statement.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 0,
+    "genericness_reason": "The email is tightly tailored to specific facts and direct quotes from Maya Collins regarding her exact outbound bottlenecks."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1034,
+    "completion_tokens": 414,
+    "latency_ms": 1656,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 7,
+    "angle": "They are hiring six SDRs to build an outbound team, which signals a need for more pipeline capacity that our engine can provide without adding headcount.",
+    "runners_up": [
+      8,
+      9
+    ],
+    "why_not_others": "The funding news isn’t directly about outbound needs, and the expansion note is less concrete than the explicit SDR hiring."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 871,
+    "completion_tokens": 259,
+    "latency_ms": 13121,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

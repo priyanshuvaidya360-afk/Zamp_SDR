@@ -1,0 +1,61 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "Subject: improve outbound pipeline",
+        "about": "market",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a general statement about a goal.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Hi Hanna,",
+        "about": "prospect",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a standard salutation.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Many heads of growth find that outbound pipeline only scales by adding more SDRs, and generic sequences see declining reply rates.",
+        "about": "market",
+        "status": "supported",
+        "fact_id": "seller",
+        "reason": "It matches the stated problem we solve in the seller context.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Our outbound pipeline engine finds buying signals, surfaces the right contacts, and drafts researched first‑touch emails, so your team can build pipeline without extra headcount.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": "seller",
+        "reason": "It accurately describes what Halyard sells.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15‑minute call to explore?",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is the call-to-action ask.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 5,
+    "genericness_reason": "This email relies entirely on a generic market problem and seller pitch with no facts specific to Hanna or her company."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 867,
+    "completion_tokens": 436,
+    "latency_ms": 1708,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

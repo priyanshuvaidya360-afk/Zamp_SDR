@@ -4,20 +4,21 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { StatusChip } from "@/components/status-chip";
+import { Chip, StatusChip } from "@/components/status-chip";
 import { StepIcon } from "@/components/step-icon";
 import { FlowSteps } from "@/components/flow-steps";
 import { MappingDialog } from "@/components/mapping-dialog";
+import { RetryButton } from "@/components/retry-button";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { api, ApiError, streams } from "@/lib/api";
 import { stateOf } from "@/lib/stages";
-import { RUN_STATUS } from "@/lib/status";
+import { PROSPECT_STATE, RUN_STATUS } from "@/lib/status";
 import type { AccountPlan, BatchDetail, BatchPreview, LiveEvent, Prospect, RunSummary } from "@/lib/types";
 import { useEventStream } from "@/lib/use-event-stream";
 import { cn } from "@/lib/utils";
 
-// Spec: docs/GUIDE.md "UI: three screens" > 1b Batch view, and T11.
+// Spec: docs/PROJECT_SPEC.md "UI: three screens" > 1b Batch view, and T11.
 
 export function BatchView({ batchId }: { batchId: number }) {
   const router = useRouter();
@@ -68,6 +69,23 @@ export function BatchView({ batchId }: { batchId: number }) {
       setError(e instanceof ApiError ? e.message : "Couldn't start the draft.");
     }
     setDrafting(null);
+  }
+
+  // A retried run is live again: show it running so the stream reopens and the row follows it.
+  function retried(runId: number) {
+    setDetail((d) =>
+      d
+        ? {
+            ...d,
+            runs: d.runs.map((r) =>
+              r.id === runId
+                ? { ...r, status: "running", final_reason: null, current_stage: null, current_state: null,
+                    retry_count: r.retry_count + 1, retries_left: r.retries_left - 1 }
+                : r,
+            ),
+          }
+        : d,
+    );
   }
 
   async function editMapping() {
@@ -142,7 +160,7 @@ export function BatchView({ batchId }: { batchId: number }) {
           </thead>
           <tbody>
             {prospects.map((p) => (
-              <ProspectRow key={p.row_number} p={p} labels={labels} busy={drafting !== null} onDraft={() => draft([p.row_number])} drafting={drafting === p.row_number} />
+              <ProspectRow key={p.row_number} p={p} labels={labels} busy={drafting !== null} onDraft={() => draft([p.row_number])} drafting={drafting === p.row_number} onRetried={retried} />
             ))}
           </tbody>
         </table>
@@ -170,7 +188,7 @@ export function BatchView({ batchId }: { batchId: number }) {
                         </span>
                         <span className="flex items-center gap-2">
                           {run.hook_type && <HookChip type={run.hook_type} />}
-                          <StatusChip status={run.status} />
+                          <StatusChip status={run.status} outcome={run.identity_outcome}/>
                         </span>
                       </Link>
                     ))}
@@ -203,12 +221,14 @@ function ProspectRow({
   busy,
   drafting,
   onDraft,
+  onRetried,
 }: {
   p: Prospect;
   labels: Record<string, string>;
   busy: boolean;
   drafting: boolean;
   onDraft: () => void;
+  onRetried: (runId: number) => void;
 }) {
   const run = p.run;
   const draftable = p.status === "valid";
@@ -224,14 +244,20 @@ function ProspectRow({
       <td className="max-w-72 px-3 py-3.5">
         {!draftable ? (
           <span className={cn("text-xs", p.status === "invalid" ? "text-red-700" : "text-muted-foreground")}>{p.reason}</span>
-        ) : !run ? (
-          <span className="text-muted-foreground">Not drafted yet</span>
-        ) : run.status === "running" ? (
-          <StageCell run={run} labels={labels} />
         ) : (
+          // One question only: was this person researched before? Signal strength is on the run page.
           <span className="flex flex-wrap items-center gap-2">
-            <StatusChip status={run.status} />
-            {run.hook_type && <HookChip type={run.hook_type} />}
+            <ProspectState p={p} />
+            {run?.status === "running" && (
+              <span className="basis-full text-xs text-muted-foreground">
+                <StageCell run={run} labels={labels} />
+              </span>
+            )}
+            {run?.status === "failed" && run.final_reason && (
+              <span className="line-clamp-2 basis-full text-xs text-red-700" title={run.final_reason}>
+                {run.final_reason}
+              </span>
+            )}
           </span>
         )}
       </td>
@@ -240,6 +266,13 @@ function ProspectRow({
           <Button onClick={onDraft} disabled={busy}>
             {drafting ? "Starting…" : "Draft email →"}
           </Button>
+        ) : run.status === "failed" ? (
+          <span className="inline-flex items-start justify-end gap-2">
+            <RetryButton runId={run.id} retriesLeft={run.retries_left} onRetried={() => onRetried(run.id)} />
+            <Link href={`/runs/${run.id}`} className={buttonVariants({ variant: "ghost" })}>
+              Details
+            </Link>
+          </span>
         ) : (
           <Link href={`/runs/${run.id}`} className={buttonVariants({ variant: run.status === "running" ? "default" : "outline" })}>
             {run.status === "running" ? "Watch live" : run.status === "needs_input" ? "Resolve" : "View draft"}
@@ -250,13 +283,26 @@ function ProspectRow({
   );
 }
 
+function ProspectState({ p }: { p: Prospect }) {
+  const earlier = p.researched_before;
+  if (!earlier) return <Chip {...PROSPECT_STATE.fresh} title="Not researched in the last 30 days: drafting runs a full search." />;
+  return (
+    <Link href={`/runs/${earlier.run_id}`} className="rounded-full hover:opacity-80">
+      <Chip
+        {...PROSPECT_STATE.researched}
+        title={`Researched on ${earlier.on} (run #${earlier.run_id}). Drafting won't search again; it shows that draft.`}
+      />
+    </Link>
+  );
+}
+
 function StageCell({ run, labels }: { run: RunSummary; labels: Record<string, string> }) {
   if (run.status === "running") {
     if (!run.current_stage) return <span className="text-muted-foreground">Queued</span>;
     return (
       <span className="flex items-center gap-2">
         <StepIcon state={stateOf(run.current_state)} />
-        {labels[run.current_stage] ?? run.current_stage}
+        {run.current_stage === "retry" ? "Retrying" : (labels[run.current_stage] ?? run.current_stage)}
       </span>
     );
   }

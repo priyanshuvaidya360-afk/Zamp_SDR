@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Abacum\" GitHub repository",
+  "results": [
+    {
+      "url": "https://github.com/abacum-io",
+      "title": "Abacum · GitHub",
+      "content": "Smart workflow solution for finance teams. Abacum has 3 repositories available. Follow their code on GitHub.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://github.com/orgs/abacum-io/repositories",
+      "title": "abacum-io repositories · GitHub",
+      "content": "Smart workflow solution for finance teams. Abacum has 3 repositories available. Follow their code on GitHub.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.abacum.ai/",
+      "title": "Abacum: The AI-Native FP&A Platform",
+      "content": "Abacum is the AI-native FP&A platform built for CFOs to connect data, workflows and teams, simplifying planning and reporting with 700+ integrations.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://github.com/Abacum-Software",
+      "title": "Abacum Software - FP&A Planning Software for Modern ... - GitHub",
+      "content": "Jun 23, 2026 · Abacum Software helps finance teams plan, budget, forecast, and analyze revenue with connected data and automated reporting. Download Abacum FP&A to streamline financial planning, budgeting, forecasting, and revenue insights in one modern workspace.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://github.com/Abacum-Finance-Platform/",
+      "title": "Abacum Finance Platform - FP&A Planning Software for ... - GitHub",
+      "content": "Aug 15, 2026 · Download Abacum FP&A to streamline financial planning, budgeting, forecasting, and revenue insights in one modern workspace. Built for finance teams, Abacum software connects data, automates reporting, and helps leaders make faster, more confident business decisions across plans, teams, and scenarios.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

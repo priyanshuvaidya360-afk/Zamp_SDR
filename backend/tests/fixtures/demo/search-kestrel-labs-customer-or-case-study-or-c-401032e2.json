@@ -1,0 +1,8 @@
+{
+  "provider": "simweb",
+  "query": "\"Kestrel Labs\" customer OR \"case study\" OR clients",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

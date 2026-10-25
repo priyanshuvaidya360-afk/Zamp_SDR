@@ -1,0 +1,69 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "hiring six sdrs in austin",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 7,
+        "reason": "The fact explicitly states that Lumen Analytics is hiring six Sales Development Representatives in Austin.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I saw that Lumen Analytics is hiring six Sales Development Representatives in Austin (14 October 2026).",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 7,
+        "reason": "This is directly supported by the hiring fact with the exact details.",
+        "suggestion": null
+      },
+      {
+        "sentence": "With your recent $40 million Series B, scaling your new outbound team without adding more SDR headcount can keep reply rates high.",
+        "about": "company",
+        "status": "uncertain",
+        "fact_id": 3,
+        "reason": "The funding amount and the Series B are supported, but keeping reply rates high by scaling without adding headcount mixes in seller problem statements.",
+        "suggestion": "With your recent $40 million Series B, scaling your new outbound team is a key focus."
+      },
+      {
+        "sentence": "Would you be open to a short 15‑minute call to explore how our outbound pipeline engine could help?",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is the meeting ask and describes the seller's offering.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Thanks,",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a sign-off remark.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Priyanshu",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is the sender's name.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email heavily relies on specific company facts such as the Austin hiring and the Series B funding round."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1032,
+    "completion_tokens": 549,
+    "latency_ms": 2110,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,6 +1,6 @@
 """SQLModel tables and the status enums.
 
-Spec: docs/GUIDE.md "Data model" and "Account context: data and tools".
+Spec: docs/PROJECT_SPEC.md "Data model" and "Account context: data and tools".
 Run statuses come only from RunStatus; nothing else may set a run's status string.
 """
 
@@ -27,6 +27,8 @@ class RunStatus(str, Enum):
     approved = "approved"
     rejected = "rejected"
     failed = "failed"
+    dismissed = "dismissed"  # the rep closed a needs_input run (bad data, or not worth chasing)
+    already_drafted = "already_drafted"  # researched in another batch recently; that run's draft is shown
     # CSV-only: rows that never start a run.
     invalid = "invalid"
     skipped = "skipped"
@@ -119,10 +121,14 @@ class Run(SQLModel, table=True):
     account_plan: dict[str, Any] = Field(default_factory=dict, sa_type=JSON)  # the committee's plan
     status: RunStatus = Field(default=RunStatus.running, index=True)
     final_reason: str | None = None
+    # Why identity failed (resolve.diagnose): search_failed / bad_data / not_public / ambiguous / unconfirmed
+    identity_outcome: str | None = None
+    identity_unverified: bool = False  # the rep chose a company-level draft for a person not found online
     confidence: float | None = None
     started_at: datetime = Field(default_factory=utcnow)
     finished_at: datetime | None = None
     cost_credits: float = 0.0
+    retry_count: int = 0  # retries of a failed run (POST /runs/{id}/retry), capped by settings
 
 
 class StageEvent(SQLModel, table=True):

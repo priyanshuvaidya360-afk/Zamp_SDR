@@ -1,0 +1,145 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "A startup recognition award provides a lightweight icebreaker but lacks a direct link to outbound pipeline needs."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "A $30M Series B round creates immediate board expectations to scale outbound sales pipeline rapidly."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Understanding Reco's AI SaaS security focus helps reps identify and target relevant buyer personas."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Product integrations create natural opportunities for targeted co-marketing and partner-focused outbound campaigns."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Knowing the platform's full security scope assists reps in crafting tailored outbound value propositions."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "A wide app integration engine gives sales reps specific target ecosystems to build outbound lists around."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Launching a new product requires generating net-new pipeline quickly without relying solely on SDR hiring."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "A new interim CEO typically evaluates go-to-market strategies and efficiency across growth operations."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Rapid quarterly team expansion signals aggressive growth goals that require efficient pipeline engine scaling."
+      },
+      {
+        "signal_id": 10,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Partnering with ServiceNow opens up a major new enterprise ecosystem that requires focused outbound outreach."
+      },
+      {
+        "signal_id": 11,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Raising $55 million in fresh funding creates heavy board pressure to accelerate sales pipeline growth."
+      },
+      {
+        "signal_id": 12,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Having AT&T as both customer and investor provides compelling social proof for enterprise outbound messaging."
+      },
+      {
+        "signal_id": 13,
+        "relevance": 4,
+        "specificity": 5,
+        "reasoning": "Discussing AI-forward GTM strategies on a podcast directly aligns with pitching an AI-driven outbound sales engine."
+      },
+      {
+        "signal_id": 14,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Clarifying their focus on AI and agent security helps reps align outbound campaigns with target cybersecurity buyers."
+      },
+      {
+        "signal_id": 15,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Integrating with ServiceNow provides clear account mapping targets for outbound prospecting efforts."
+      },
+      {
+        "signal_id": 16,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Detailed technical backend architecture details offer minimal relevance to solving outbound pipeline challenges."
+      },
+      {
+        "signal_id": 17,
+        "relevance": 0,
+        "specificity": 0,
+        "reasoning": "This signal refers to Reco Manpower, an entirely separate company entity."
+      },
+      {
+        "signal_id": 18,
+        "relevance": 0,
+        "specificity": 0,
+        "reasoning": "This signal pertains to a different business entity, Reco Manpower."
+      },
+      {
+        "signal_id": 19,
+        "relevance": 0,
+        "specificity": 0,
+        "reasoning": "This signal describes Reco Universal, an unrelated organization."
+      },
+      {
+        "signal_id": 20,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Providing a product tour indicates a product-led motion that needs outbound pipeline support for larger deals."
+      },
+      {
+        "signal_id": 21,
+        "relevance": 5,
+        "specificity": 5,
+        "reasoning": "As the incoming SVP of Sales, Kristen owns the revenue quota and is actively seeking efficient pipeline tools."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "role": "smart",
+    "prompt_tokens": 1953,
+    "completion_tokens": 1223,
+    "latency_ms": 17032,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

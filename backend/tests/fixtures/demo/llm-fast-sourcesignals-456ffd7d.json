@@ -1,0 +1,55 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "ProtoPie raised $21 million in Series B funding co-led by LB Investment and Korea Development Bank.",
+        "evidence": "ProtoPie Secures $21 Million in Series B Funding to Drive Global Expansion and Innovation in High-Fidelity Interaction Design",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "ProtoPie specializes in prototyping tools for automotive, IoT, mobile, and web industries.",
+        "evidence": "ProtoPie, a startup specializing in prototyping tools for a wide range of industries including automotive, IoT, mobile, and web, has raised $21 million in Series B funding.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "press",
+        "about": "company",
+        "summary": "ProtoPie was honored with the UX Design Awards at the International Design Center in Berlin in 2024.",
+        "evidence": "was also honored with the UX Design Awards at the International Design Center in Berlin in 2024.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1825,
+    "completion_tokens": 412,
+    "latency_ms": 1736,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

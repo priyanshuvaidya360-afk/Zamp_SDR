@@ -1,0 +1,43 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Reco raised $30 million in a Series B round led by Zeev Ventures.",
+        "evidence": "Cybersecurity company Reco has raised $30 million in a Series B round led by Oren Zeev’s Zeev Ventures",
+        "published_at": "2026-02-10",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco provides an AI SaaS security platform to secure AI adoption across enterprise SaaS applications and agents.",
+        "evidence": "Reco aims to deliver a purpose-built AI SaaS security platform designed specifically for the AI era",
+        "published_at": "2026-02-10",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1112,
+    "completion_tokens": 283,
+    "latency_ms": 1640,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "output": {
+    "subject": "55m funding & pipeline boost",
+    "body": "I saw Reco raised $55 million in additional funding on 29 September 2026. Scaling outbound without expanding SDR headcount is tough, especially as generic sequences see lower reply rates and saturate the market. Our outbound pipeline engine surfaces buying signals, finds the right contacts, and drafts cited first-touch emails, so your team can hit pipeline targets while lowering cost per opportunity. Would you be open to a brief 15-minute call to explore? Priyanshu",
+    "claims": [
+      {
+        "sentence": "I saw Reco raised $55 million in additional funding on 29 September 2026.",
+        "signal_id": 15
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "role": "smart",
+    "prompt_tokens": 1418,
+    "completion_tokens": 177,
+    "latency_ms": 24018,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

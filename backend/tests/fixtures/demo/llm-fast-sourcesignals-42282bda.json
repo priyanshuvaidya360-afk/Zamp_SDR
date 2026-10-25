@@ -1,0 +1,55 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Reco raised $30 million in a Series B round led by Zeev Ventures",
+        "evidence": "Cybersecurity company Reco has raised $30 million in a Series B round led by Oren Zeev’s Zeev Ventures",
+        "published_at": "2026-02-10",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco provides an AI SaaS security platform to secure AI adoption across platforms like Salesforce, ChatGPT, and Copilot",
+        "evidence": "Reco aims to deliver a purpose-built AI SaaS security platform designed specifically for the AI era, securing AI adoption across Salesforce, ChatGPT, Copilot",
+        "published_at": "2026-02-10",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "press",
+        "about": "company",
+        "summary": "CEO Ofer Klein discussed the enterprise shift toward AI consumption through SaaS and Reco's coverage",
+        "evidence": "\"In the enterprise, AI is being consumed through SaaS, whether its AI applications, agents embedded in existing platforms, or AI-powered integrations connecting business systems,\"",
+        "published_at": "2026-02-10",
+        "sensitive": false,
+        "speaker": "Ofer Klein",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1446,
+    "completion_tokens": 445,
+    "latency_ms": 2043,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

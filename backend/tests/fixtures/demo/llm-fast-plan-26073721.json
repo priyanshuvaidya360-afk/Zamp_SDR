@@ -1,0 +1,33 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "\"Reco\" product demo pricing",
+        "why": "find pricing details"
+      },
+      {
+        "query": "\"Reco\" interview podcast",
+        "why": "discover insights from founders"
+      },
+      {
+        "query": "\"Reco\" partner \"HubSpot\"",
+        "why": "see partnership announcements"
+      },
+      {
+        "query": "reco.ai SEC filing",
+        "why": "obtain regulatory filings"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 696,
+    "completion_tokens": 626,
+    "latency_ms": 1238,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

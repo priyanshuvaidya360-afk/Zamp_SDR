@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Abacum\" hiring SDR BDR sales development account executive growth marketing",
+  "results": [
+    {
+      "url": "https://thesaraslist.com/tags/crm",
+      "title": "Best CRM Jobs at Growth-Stage Startups",
+      "content": "61 open positions at growth-stage startups. Sales Development Representative (SDR) A week ago Abacum Favorite Sales Business. Executive CRM B2b",
+      "published_date": null,
+      "score": 0.6999322
+    },
+    {
+      "url": "https://www.ycombinator.com/companies/golinks/jobs/iuE20vT-sr-sales-development-representative-remote",
+      "title": "Sr. Sales Development Representative (Remote) at GoLinks | Y Combinator",
+      "content": "1+ year of SDR/BDR experience. You have worked in a similar role in software and understand the core responsibilities of generating leads for sales.\n Strong communicator. You communicate clearly over email and by phone. You are able to write effectively over email, and can think on your feet over the phone to manage unexpected questions with ease. [...] ## About the role\n\nWe are on an exciting journey to unlock productivity with our GoLinks Suite. As part of this product growth, we have opportunities for Sr. Sales Development Representatives (SDRs) who will partner with our Account Executives (AEs) to source and close enterprise-sized SaaS business opportunities. [...] LightSprint\n\nLightSprint\n\nFounding AE\n\nWhatnot\n\nWhatnot\n\nSales Development Representative\n\nCifrato\n\nCifrato\n\nFounding Sales Development Representative\n\nEdviro\n\nEdviro\n\nFounding GTM\n\nSpice Data\n\nSpice Data\n\nEnterprise SDR\n\nTrellis AI\n\nTrellis AI\n\nGTM Engineer\n\nHelium\n\nHelium\n\nFounding Account Executive\n\nRetell AI\n\nRetell AI\n\nEnterprise Account Manager\n\nStayflexi\n\nStayflexi\n\nBusiness Development Manager\n\nLandeed\n\nLandeed\n\nBusiness Development And Enterprise Sales (BDES)\n\nFernstone\n\nFernstone",
+      "published_date": null,
+      "score": 0.3292089
+    },
+    {
+      "url": "https://www.spainjobs.io/companies/abacum/sales-development-representative-sdr-dach--fe9c842925",
+      "title": "Sales Development Representative (SDR) - DACH",
+      "content": "The role involves owning the full sales cycle and building pipelines for finance software. Candidates must be based in EMEA.",
+      "published_date": null,
+      "score": 0.30395952
+    },
+    {
+      "url": "https://ca.linkedin.com/jobs/view/saas-sales-development-representative-sdr-at-yuja-4474076837",
+      "title": "SaaS Sales Development Representative (SDR) at YuJa",
+      "content": "Apply for SaaS Sales Development Representative (SDR) at YuJa. Full-time Entry level role. Base pay range CA$60,000.00/yr - CA$70,000.00/yr",
+      "published_date": null,
+      "score": 0.21713033
+    },
+    {
+      "url": "https://www.ycombinator.com/companies/hadrius/jobs/BJuHAmA-bdr",
+      "title": "BDR at Hadrius | Y Combinator",
+      "content": "Klaimee\n\nKlaimee\n\nFounding GTM Lead [...] As a member of the BDR team at Hadrius, you will be responsible for outbound lead generation, including email, calling, and using LinkedIn to book demos with qualified prospects on compliance teams. You’ll be on the front line of the sales team, filling the pipeline for closers before moving into a closing role yourself within the following 8-12 months. [...] Janeen\n\nJaneen\n\nChief of Staff\n\nAviaryAI\n\nAviaryAI\n\nStrategic Account Manager\n\nOuterport\n\nOuterport\n\nBusiness Development / Operations, Tokyo\n\nAxross Pte Ltd\n\nAxross Pte Ltd\n\nBusiness Development Manager\n\nPlena Health\n\nPlena Health\n\nFounding Account Executive\n\nNox Metals\n\nNox Metals\n\nSenior Finance Manager\n\nClosure\n\nClosure\n\nFounding Business Development / Account Executive\n\nTopkey\n\nTopkey\n\nSenior Sales Development Representative\n\nBrighterway\n\nBrighterway\n\nSales Associate\n\nDomu Technology Inc.",
+      "published_date": null,
+      "score": 0.094218515
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

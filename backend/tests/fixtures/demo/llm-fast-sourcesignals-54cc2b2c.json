@@ -1,0 +1,175 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Reco raised $55 million in additional funding with participation from AT&T Ventures",
+        "evidence": "Reco Raises $55 Million in Additional Funding with Participation from AT&T Ventures",
+        "published_at": "2026-09-29",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "Reco announced a partnership with ServiceNow to extend AI agent security",
+        "evidence": "Reco Announces Partnership with ServiceNow to Extend AI Agent Security",
+        "published_at": "2026-09-28",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "Reco launched AI agent security for the enterprise",
+        "evidence": "Reco Launches AI Agent Security for the Enterprise",
+        "published_at": "2026-06-25",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Reco expanded its executive team in enterprise AI agent security",
+        "evidence": "Reco Expands Executive Team in Enterprise AI Agent Security",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "Reco integrated Cyera DSPM to deliver complete data-aware SaaS and AI security",
+        "evidence": "Reco Integrates Cyera DSPM to Deliver Complete Data-Aware SaaS and AI Security",
+        "published_at": "2026-04-15",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Reco raised a B round for a total of $85M",
+        "evidence": "Reco Raises B Round for a Total of $85M to Meet Rapidly Growing Demand for SaaS & AI Security Among Enterprises",
+        "published_at": "2026-02-10",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "press",
+        "about": "company",
+        "summary": "Reco was recognized as a CRN 2025 Stellar Startup",
+        "evidence": "Reco Recognized as a CRN® 2025 Stellar Startup",
+        "published_at": "2025-11-11",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "press",
+        "about": "company",
+        "summary": "Reco was named a 2025 SINET16 Innovator",
+        "evidence": "Reco Named a 2025 SINET16 Innovator",
+        "published_at": "2025-10-13",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "press",
+        "about": "company",
+        "summary": "Reco was named a Leader and Fast Mover in the 2025 GigaOm SSPM Radar",
+        "evidence": "Reco Named a Leader and Fast Mover in 2025 GigaOm SSPM Radar",
+        "published_at": "2025-08-27",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "Reco and Black Kite partnered to close the third-party SaaS security gap",
+        "evidence": "Reco and Black Kite Partner to Close the Third-Party SaaS Security Gap",
+        "published_at": "2025-08-19",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco achieved an industry-leading milestone with 285+ SaaS app integrations",
+        "evidence": "Reco Achieves Industry-Leading Milestone with 285+ SaaS App Integrations",
+        "published_at": "2025-07-31",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "Reco became a launch partner in the new Torq AMP Alliance Program",
+        "evidence": "New Torq AMP Alliance Program Debuts with Reco as a Launch Partner",
+        "published_at": "2025-07-29",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Reco raised $25 million to expand its AI-native SaaS security platform",
+        "evidence": "Reco Raises $25m to Expand AI-Native SaaS Security Platform",
+        "published_at": "2025-04-23",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2837,
+    "completion_tokens": 1643,
+    "latency_ms": 3681,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

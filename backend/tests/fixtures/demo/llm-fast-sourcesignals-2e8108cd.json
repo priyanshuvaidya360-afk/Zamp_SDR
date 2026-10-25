@@ -1,0 +1,31 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco Universal is a global software development company empowering Asian and African talent with fair wages and inclusive work opportunities.",
+        "evidence": "Reco Universal is a global software development company with a mission to empower Asian and African talent through fair, competitive wages and inclusive work opportunities.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2560,
+    "completion_tokens": 146,
+    "latency_ms": 1422,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

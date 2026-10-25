@@ -1,6 +1,6 @@
 """Case 6: a signal that names one of our competitors.
 
-Spec: docs/GUIDE.md "Account context", the cheap rules. Code only, no model:
+Spec: docs/PROJECT_SPEC.md "Account context", the cheap rules. Code only, no model:
 - they bought or adopted the competitor within 12 months -> held, with a renewal reminder date
   (a new contract won't be ripped out; come back before it renews)
 - they have used it longer (or undated) and we have a migration story -> displacement angle

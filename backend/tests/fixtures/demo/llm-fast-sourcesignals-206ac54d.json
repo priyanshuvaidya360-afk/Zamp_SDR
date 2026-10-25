@@ -1,0 +1,55 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "person_content",
+        "about": "person",
+        "summary": "Kristen Twining appeared on the Cyber GTM Talk podcast to discuss AI-forward go-to-market strategies for cybersecurity.",
+        "evidence": "Stop Treating Agentic Cybersecurity GTM Like a Sales Project: Kristen Twining SVP Sales @ Reco",
+        "published_at": "2026-10-08",
+        "sensitive": false,
+        "speaker": "Kristen Twining",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco focuses on securing AI and agents.",
+        "evidence": "Kristen Twining is the SVP of Sales at Reco, a company that secures AI and agents, and she's rebuilding its go-to-market to be AI forward.",
+        "published_at": "2026-10-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "person",
+        "summary": "Kristen Twining joined Reco as SVP of Sales in January 2026.",
+        "evidence": "Kristen Twining is SVP Sales at Reco, which she joined in January 2026 after running Americas sales at FireMon",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2163,
+    "completion_tokens": 429,
+    "latency_ms": 2255,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

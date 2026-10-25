@@ -1,4 +1,4 @@
-"""T05: batch runner, account clustering, SSE. Spec: docs/GUIDE.md T05."""
+"""T05: batch runner, account clustering, SSE. Spec: docs/PROJECT_SPEC.md T05."""
 
 import asyncio
 import json
@@ -343,3 +343,17 @@ def test_draft_one_row_runs_only_that_prospect_and_is_idempotent(client):
 def test_draft_rejects_invalid_rows(client):
     batch_id = client.post("/batches", files={"file": ("p.csv", (FIVE + "Bad,,Acme,acme.com\n").encode(), "text/csv")}).json()["batch_id"]
     assert client.post(f"/batches/{batch_id}/draft", json={"row_numbers": [7]}).status_code == 422
+
+
+def test_hourly_limits_protect_the_free_quotas(client, monkeypatch):
+    monkeypatch.setattr(settings, "uploads_per_hour", 2)
+    monkeypatch.setattr(settings, "prospects_per_hour", 1)
+    csv = b"first_name,last_name,company_domain\nAna,Lima,acme.com\nBo,Chen,acme.com\n"
+    for _ in range(2):
+        assert client.post("/batches", files={"file": ("a.csv", csv, "text/csv")}).status_code == 201
+    third = client.post("/batches", files={"file": ("a.csv", csv, "text/csv")})
+    assert third.status_code == 429 and "2 uploads per hour" in third.json()["detail"]
+    batch_id = client.get("/batches").json()["items"][0]["id"]
+    refused = client.post(f"/batches/{batch_id}/draft", json={})  # two prospects, one allowed
+    assert refused.status_code == 429 and "1 prospects drafted per hour" in refused.json()["detail"]
+    assert client.post(f"/batches/{batch_id}/draft", json={"row_numbers": [2]}).status_code == 202

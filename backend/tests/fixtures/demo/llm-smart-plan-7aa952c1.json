@@ -1,0 +1,36 @@
+{
+  "output": {
+    "picks": [
+      {
+        "member": 1,
+        "opener": 1,
+        "context": null,
+        "angle": "The recent $55 million funding round (S1) signals strong growth, giving Merav Keren Kindler’s marketing team more budget to hit pipeline targets and lower cost per opportunity."
+      },
+      {
+        "member": 2,
+        "opener": 15,
+        "context": null,
+        "angle": "Sandy Mathews’s appointment as VP of Product Marketing (S15) underscores their role in shaping product positioning, which aligns with Halyard’s ability to deliver highly targeted outbound pipelines."
+      },
+      {
+        "member": 3,
+        "opener": 2,
+        "context": 9,
+        "angle": "Kristen Twining’s recent appearance on the Cyber GTM Talk podcast (S2) highlights their focus on AI‑forward go‑to‑market strategies, a perfect fit for boosting rep productivity and meeting bookings."
+      }
+    ],
+    "reasoning": "We assigned the highest‑scoring, role‑relevant opening signals to each person without overlap; Merav gets the top company‑wide funding signal, Sandy gets her leadership announcement, and Kristen gets her podcast feature with a single company‑wide context (ServiceNow integration) to reinforce relevance to sales productivity."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 2084,
+    "completion_tokens": 1008,
+    "latency_ms": 15639,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "Subject: 55m funding & pipeline boost",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 15,
+        "reason": "The funding amount is confirmed by fact 15.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I saw Reco raised $55 million in additional funding on 29 September 2026.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 15,
+        "reason": "Both the amount, context, and exact date are explicitly stated in fact 15.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Scaling outbound without expanding SDR headcount is tough, especially as generic sequences see lower reply rates and saturate the market.",
+        "about": "market",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a general remark about market challenges matching the seller's defined problem space.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Our outbound pipeline engine surfaces buying signals, finds the right contacts, and drafts cited first-touch emails, so your team can hit pipeline targets while lowering cost per opportunity.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": null,
+        "reason": "This accurately matches the seller description of what Halyard sells.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15-minute call to explore?",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a call to action/ask.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email relies on specific company funding data and a tailored seller pitch, though it includes a slightly generic market challenge transition."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1006,
+    "completion_tokens": 483,
+    "latency_ms": 1983,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,5 +1,9 @@
 """Prompt loader: every word a model reads lives in agents/*.md (one file per agent).
 
+Code names an agent by a short key ("draft"); AGENT_FILES maps it to a file named for the
+stage and what it does (agents/stage6_write_and_check_email.md), so people can find a prompt by
+its file name. Rename a file here and in agents/README.md together.
+
 Format of an agent file:
   - text before the first `## ` heading is documentation for people and is ignored
   - each `## name` heading starts a section; its text (trimmed) is the prompt piece
@@ -20,6 +24,15 @@ from typing import Any
 from app.config import REPO_DIR
 
 AGENTS_DIR = REPO_DIR / "agents"
+AGENT_FILES = {
+    "resolve": "stage2_identify_person.md",
+    "research": "stage3_plan_extra_searches.md",
+    "extract": "stage4_extract_signals.md",
+    "score": "stage5_score_and_pick_hook.md",
+    "account_plan": "stage5b_buying_committee_plan.md",
+    "draft": "stage6_write_and_check_email.md",
+    "recheck": "stage8_recheck_stale_facts.md",
+}
 _SECTION = re.compile(r"^## (\w+)[ \t]*$")
 _COMMENT = re.compile(r"^\s*<!--.*-->\s*$")
 _PLACEHOLDER = re.compile(r"\{([a-z_][a-z0-9_]*)\}")
@@ -37,22 +50,26 @@ def _parse(text: str) -> dict[str, str]:
     return {name: "\n".join(lines).strip() for name, lines in sections.items()}
 
 
+def file_name(agent: str) -> str:
+    return AGENT_FILES.get(agent, f"{agent}.md")
+
+
 def sections(agent: str) -> dict[str, str]:
-    path = AGENTS_DIR / f"{agent}.md"
+    path = AGENTS_DIR / file_name(agent)
     if not path.exists():
-        raise FileNotFoundError(f"Prompt file agents/{agent}.md is missing.")
+        raise FileNotFoundError(f"Prompt file agents/{file_name(agent)} is missing.")
     mtime = path.stat().st_mtime
     if agent not in _cache or _cache[agent][0] != mtime:
-        _cache[agent] = (mtime, _parse(path.read_text()))
+        _cache[agent] = (mtime, _parse(path.read_text(encoding="utf-8")))
     return _cache[agent][1]
 
 
 def get(agent: str, section: str, **values: Any) -> str:
-    """The text of `## section` in agents/<agent>.md with {placeholders} filled in."""
+    """The text of `## section` in the agent's file with {placeholders} filled in."""
     found = sections(agent)
     if section not in found:
-        raise KeyError(f"agents/{agent}.md has no '## {section}' section (it has: {', '.join(found)}).")
-    return fill(found[section], f"agents/{agent}.md ## {section}", **values)
+        raise KeyError(f"agents/{file_name(agent)} has no '## {section}' section (it has: {', '.join(found)}).")
+    return fill(found[section], f"agents/{file_name(agent)} ## {section}", **values)
 
 
 def fill(template: str, where: str = "prompt", **values: Any) -> str:

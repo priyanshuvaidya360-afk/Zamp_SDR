@@ -31,9 +31,10 @@ export function UploadHero() {
     }
   }
 
-  async function useDemo() {
-    const response = await fetch("/demo.csv");
-    await upload(new File([await response.blob()], "demo.csv", { type: "text/csv" }));
+  // The demo files live in public/ (copies of seed/demo.csv and seed/demo_messy.csv).
+  async function loadDemo(name: "demo.csv" | "demo_messy.csv") {
+    const response = await fetch(`/${name}`);
+    await upload(new File([await response.blob()], name, { type: "text/csv" }));
   }
 
   return (
@@ -41,7 +42,7 @@ export function UploadHero() {
       <div>
         <h1 className="text-[28px] leading-tight font-bold tracking-tight">Turn a prospect list into researched drafts</h1>
         <p className="mt-1.5 max-w-2xl text-muted-foreground">
-          Upload your CSV. Each row needs a first name, a last name and a company domain or LinkedIn URL. Up to 50 rows.
+          Upload your CSV. Each row needs a first name, a last name and the person&rsquo;s LinkedIn URL. Up to 50 rows.
         </p>
       </div>
 
@@ -85,8 +86,17 @@ export function UploadHero() {
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
-        <Button variant="outline" size="lg" onClick={useDemo} disabled={busy}>
+        <Button variant="outline" size="lg" onClick={() => loadDemo("demo.csv")} disabled={busy}>
           Use the demo CSV
+        </Button>
+        <Button
+          variant="ghost"
+          size="lg"
+          onClick={() => loadDemo("demo_messy.csv")}
+          disabled={busy}
+          title="Odd column names, ALL-CAPS names, a LinkedIn-only row, missing data and a duplicate"
+        >
+          Try a messy CSV
         </Button>
         <a href="/template.csv" download className="text-sm font-semibold text-primary hover:underline">
           Download the CSV template

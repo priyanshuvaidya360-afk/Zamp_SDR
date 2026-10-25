@@ -92,7 +92,7 @@ if __name__ == "__main__":
     result = asyncio.run(main(parser.parse_args()))
     text = json.dumps(result, indent=2, ensure_ascii=False, default=str)
     if parser.parse_args().out:
-        Path(parser.parse_args().out).write_text(text)
+        Path(parser.parse_args().out).write_text(text, encoding="utf-8")
     for run in result["runs"]:
         print(f"\n{run['name']} ({run['company']}): {run['status']}"
               + (f" — {run['final_reason']}" if run["final_reason"] else ""))

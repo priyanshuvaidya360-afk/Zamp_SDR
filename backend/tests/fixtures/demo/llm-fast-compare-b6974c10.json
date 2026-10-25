@@ -1,0 +1,19 @@
+{
+  "output": {
+    "verdict": "changed",
+    "reason": "The count of hires changed",
+    "new_fact": "Kestrel Labs is hiring two Sales Development Representatives in London.",
+    "new_evidence": "Kestrel Labs is hiring two Sales Development Representatives to complete our first outbound team in London."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 513,
+    "completion_tokens": 208,
+    "latency_ms": 12075,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

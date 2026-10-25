@@ -1,0 +1,47 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "UK expansion creates new outbound pipeline need, but it's a company‑level event."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Half the pipeline comes from the UK, indicating growth potential but is a broad company statement."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 5,
+        "specificity": 4,
+        "reasoning": "Hiring four SDRs shows immediate demand for more pipeline, directly relevant to the product."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Knowing they sell finance‑team software signals a SaaS buyer, a generic but usable opening."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 2,
+        "specificity": 5,
+        "reasoning": "Identifies the exact decision‑maker (VP Sales) to address, giving a clear outreach target."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1162,
+    "completion_tokens": 925,
+    "latency_ms": 40675,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

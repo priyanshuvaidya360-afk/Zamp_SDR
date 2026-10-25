@@ -1,0 +1,27 @@
+{
+  "output": {
+    "subject": "new funding, pipeline boost",
+    "body": "I saw that Reco raised $55 million in funding on 29 September 2026. I also noted your appointment as Vice President of Marketing on 8 June 2026. With that extra budget, your team can accelerate outbound pipeline without hiring more SDRs, avoiding the falling reply rates of generic sequences. Would you be open to a brief 15‑minute call to explore how Halyard can help?",
+    "claims": [
+      {
+        "sentence": "I saw that Reco raised $55 million in funding on 29 September 2026.",
+        "signal_id": 18
+      },
+      {
+        "sentence": "I also noted your appointment as Vice President of Marketing on 8 June 2026.",
+        "signal_id": 5
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1050,
+    "completion_tokens": 1356,
+    "latency_ms": 16567,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

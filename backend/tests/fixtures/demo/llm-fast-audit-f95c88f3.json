@@ -1,0 +1,61 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "four sdrs in london",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 3,
+        "reason": "The fact explicitly mentions Kestrel Labs is hiring four Sales Development Representatives in London.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Hi Omar, I saw that Kestrel Labs is hiring four Sales Development Representatives in London (2 October 2026).",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 3,
+        "reason": "The fact confirms the hiring of four Sales Development Representatives in London.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Scaling outbound pipeline usually means hiring more SDRs, but generic sequences lead to falling reply rates.",
+        "about": "market",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a general statement about market challenges.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Halyard spots buying signals and drafts researched emails for your team to review, so you can build pipeline without adding headcount.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": null,
+        "reason": "Accurately describes what Halyard sells according to the seller definition.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Worth a 15-minute call?",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is the call-to-action ask.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email heavily relies on specific company facts such as the exact hiring plans in London."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1013,
+    "completion_tokens": 449,
+    "latency_ms": 1868,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

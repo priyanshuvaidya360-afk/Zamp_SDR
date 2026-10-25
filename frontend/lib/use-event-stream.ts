@@ -7,7 +7,7 @@ import type { LiveEvent } from "./types";
 const EVENT_TYPES = ["stage", "run_status", "batch_progress", "batch_status", "end"] as const;
 
 /**
- * Subscribe to a server-sent event stream (docs/GUIDE.md "UI", Implementation).
+ * Subscribe to a server-sent event stream (docs/PROJECT_SPEC.md "UI", Implementation).
  *
  * The caller loads stored state first, then passes the stream URL (for a run, with
  * `after=<last stored event id>` so nothing is replayed twice). The browser resumes a dropped

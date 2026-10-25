@@ -1,0 +1,43 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "Zanovoy became an Abacum implementation and licensing reselling partner",
+        "evidence": "Zanovoy is an Abacum implementation and licensing reselling partner for finance leaders modernizing their FP&A stack.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum provides an AI-native FP&A platform for revenue, headcount, budgeting, forecasting, and scenario planning",
+        "evidence": "Abacum is an AI-native FP&A platform built for revenue planning, helping finance, RevOps, and FP&A teams move from spreadsheets to structured, data-driven models.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2148,
+    "completion_tokens": 282,
+    "latency_ms": 1265,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

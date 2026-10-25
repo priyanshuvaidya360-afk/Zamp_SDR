@@ -87,9 +87,10 @@ export function DraftPanel({
   );
 }
 
-/** The version the reviewer acts on: the highest one (critic rewrite or re-check correction). */
+/** The version the reviewer acts on: the newest record (critic rewrite, re-check correction, or a
+ * re-run, which starts again at v1). */
 export function latestDraft(drafts: DraftRecord[]): DraftRecord | undefined {
-  return drafts.reduce<DraftRecord | undefined>((best, d) => (!best || d.version > best.version ? d : best), undefined);
+  return drafts.reduce<DraftRecord | undefined>((best, d) => (!best || d.id > best.id ? d : best), undefined);
 }
 
 /** The body with each claimed sentence underlined and numbered; sources in order of first use. */

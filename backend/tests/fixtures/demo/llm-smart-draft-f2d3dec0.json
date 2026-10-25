@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "proto pie AI launch",
+    "body": "ProtoPie just launched ProtoPie AI with component authoring. As Head of Growth, you likely need a steady flow of qualified prospects to accelerate adoption, and Halyard can deliver ready‑to‑engage leads without expanding your SDR team. Would you be open to a brief 15‑minute call to explore this?",
+    "claims": [
+      {
+        "sentence": "ProtoPie just launched ProtoPie AI with component authoring.",
+        "signal_id": 13
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1100,
+    "completion_tokens": 898,
+    "latency_ms": 6097,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

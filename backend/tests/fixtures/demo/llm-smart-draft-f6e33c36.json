@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "hubspot migration ready for scaling",
+    "body": "I see your team just completed the HubSpot migration. Now that your new CRM is live, you can start scaling outbound pipeline without adding more SDR headcount, letting HubSpot feed the leads Halyard identifies. Would you be open to a brief 15‑minute call to explore how?",
+    "claims": [
+      {
+        "sentence": "I see your team just completed the HubSpot migration.",
+        "signal_id": 2
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1162,
+    "completion_tokens": 778,
+    "latency_ms": 2336,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

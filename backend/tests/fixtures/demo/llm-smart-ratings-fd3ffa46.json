@@ -1,0 +1,47 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Opening a new sales office creates a clear need for additional pipeline in that region."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 4,
+        "reasoning": "Hiring five SDRs signals immediate demand for outbound pipeline while they add headcount."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "The new Austin office expansion suggests a fresh market that will require more pipeline."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "Selling procurement SaaS implies a constant need for pipeline, though no specific trigger is shown."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 2,
+        "specificity": 5,
+        "reasoning": "Identifies the VP Sales decision‑maker, giving a direct person to address."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1127,
+    "completion_tokens": 935,
+    "latency_ms": 2454,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

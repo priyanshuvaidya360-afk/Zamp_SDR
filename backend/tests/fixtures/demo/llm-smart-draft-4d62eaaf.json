@@ -1,0 +1,25 @@
+{
+  "output": {
+    "subject": "four sdrs in london",
+    "body": "Hi Omar, I saw that Kestrel Labs is hiring four Sales Development Representatives in London (2 October 2026). Scaling outbound pipeline usually means hiring more SDRs, but generic sequences lead to falling reply rates. Halyard spots buying signals and drafts researched emails for your team to review, so you can build pipeline without adding headcount. Worth a 15-minute call? Priyanshu",
+    "claims": [
+      {
+        "sentence": "I saw that Kestrel Labs is hiring four Sales Development Representatives in London (2 October 2026).",
+        "signal_id": 3
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "role": "smart",
+    "prompt_tokens": 1219,
+    "completion_tokens": 137,
+    "latency_ms": 21173,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

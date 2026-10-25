@@ -1,6 +1,6 @@
 """In-process pub/sub for live updates, and SSE formatting.
 
-Spec: docs/GUIDE.md T05. Topics are "run:<id>" and "batch:<id>"; each SSE connection holds
+Spec: docs/PROJECT_SPEC.md T05. Topics are "run:<id>" and "batch:<id>"; each SSE connection holds
 one asyncio.Queue. Events are saved to the database before they are published, so a client
 that connects late replays them from the database and never misses one.
 """

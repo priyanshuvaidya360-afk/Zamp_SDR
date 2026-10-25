@@ -1,14 +1,18 @@
 """Stage 2: resolve identity. Make sure we research the right person before anything else.
 
-Spec: docs/GUIDE.md stage 2 and T06. A few targeted searches, then the fast model scores the
+Spec: docs/PROJECT_SPEC.md stage 2 and T06. A few targeted searches, then the fast model scores the
 candidate people. Code decides: one candidate >= identity_accept with no rival >=
 identity_plausible continues; anything else asks the rep (needs_input). Never guess.
 LinkedIn is only ever searched for, never fetched.
+
+When no one is accepted, diagnose() says why, from code checks: search_failed (search again),
+bad_data (fix the row or dismiss it), not_public (a real company, but the person never appears
+online: the rep can vouch, ask for a company-level draft, or dismiss), ambiguous, unconfirmed.
 """
 
 import asyncio
 import re
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 from sqlmodel import Session
@@ -46,9 +50,16 @@ class ResolveOutput(BaseModel):
     candidates: list[Candidate] = []
     queries: list[str] = []
     checks: list[str] = []  # evidence checks code applied to the model's candidates
+    found: list[dict[str, str]] = []  # every identity search result (url / title): the Sources tab
     rep_confirmed: bool = False
+    unverified: bool = False  # company-level draft: the person was never found, the rep went ahead
     company: str | None = None  # filled in when the CSV had no company name
     domain: str | None = None
+
+
+def found_results(responses: list[SearchResponse]) -> list[dict[str, str]]:
+    """Every distinct result, for the run's Sources tab (links only; nothing here is fetched)."""
+    return list({r.url: {"url": r.url, "title": r.title[:150]} for resp in responses for r in resp.results}.values())
 
 
 def display_name(row: dict[str, Any]) -> str:
@@ -155,23 +166,160 @@ def decide(candidates: list[Candidate]) -> tuple[Candidate | None, str]:
     return None, "No confident match in public search results. Confirm who they are."
 
 
-def _apply_identity(ctx: RunContext, person: Candidate) -> tuple[str | None, str | None]:
-    """Fill a missing company / domain from the confirmed person, and group the run by account."""
+Outcome = Literal["search_failed", "bad_data", "not_public", "ambiguous", "unconfirmed"]
+
+
+class IdentityCheck(BaseModel):
+    label: str
+    ok: bool | None  # None: couldn't be checked
+
+
+class Diagnosis(BaseModel):
+    outcome: Outcome
+    reason: str
+    checks: list[IdentityCheck]
+
+
+# Names that are test data, not people. Matched against the whole first or last name.
+PLACEHOLDER_NAMES = {"test", "testing", "tester", "asdf", "qwerty", "foo", "xxx", "n/a", "none", "null",
+                     "unknown", "sample", "example", "dummy", "fake", "lorem", "ipsum"}
+
+
+def placeholder_name(first: str, last: str) -> str | None:
+    """Why the name looks like test data, or None. Code rules only, kept strict: a real but
+    unusual name must never be called fake."""
+    full = f"{first} {last}".strip()
+    if any(ch.isdigit() for ch in full):
+        return f"'{full}' contains digits"
+    if {first.lower(), last.lower()} & PLACEHOLDER_NAMES:
+        return f"'{full}' looks like a placeholder"
+    if (first.lower(), last.lower()) in {("john", "doe"), ("jane", "doe")}:
+        return f"'{full}' is a placeholder name"
+    return None
+
+
+def _search_failed(response: SearchResponse) -> bool:
+    """Every provider errored (or none was available): no answer, as opposed to 'nothing found'."""
+    if response.provider != "none":
+        return False
+    return not response.fallbacks or any(not f.endswith(": no results") for f in response.fallbacks)
+
+
+def _texts(responses: list[SearchResponse]) -> list[str]:
+    """Each distinct result once, as one lowercase string (URL, title and snippet)."""
+    return list({r.url: f"{r.url} {r.title} {r.content}".lower() for resp in responses for r in resp.results}.values())
+
+
+def _results(n: int) -> str:
+    return f"{n} result{'s' if n != 1 else ''}"
+
+
+async def diagnose(row: dict[str, Any], responses: list[SearchResponse],
+                   candidates: list[Candidate], reason: str) -> Diagnosis:
+    """Why identity failed, from checks code can make. `reason` is decide()'s, kept for the
+    ambiguous / unconfirmed outcomes, where the candidate cards already explain it. We can never
+    prove a person doesn't exist, so the worst verdict is 'looks like bad data'."""
+    name, company, domain = display_name(row), row.get("company"), row.get("domain")
+    checks: list[IdentityCheck] = []
+
+    if all(_search_failed(r) for r in responses):
+        errors = sorted({f.split(":")[0] for r in responses for f in r.fallbacks if not f.endswith(": no results")})
+        checks.append(IdentityCheck(label="Search unavailable" + (f" ({', '.join(errors)})" if errors else ""), ok=False))
+        return Diagnosis(outcome="search_failed", checks=checks,
+                         reason="Web search wasn't available, so nothing could be checked. Search again.")
+    results = len({r.url for resp in responses for r in resp.results})
+    checks.append(IdentityCheck(label=f"Search working ({len(responses)} queries, {_results(results)})", ok=True))
+
+    fake = placeholder_name(row["first_name"], row["last_name"])
+    checks.append(IdentityCheck(label=f"Name looks like test data: {fake}" if fake else "Name looks real", ok=not fake))
+
+    if (email := row.get("email")) and domain:
+        same = email.rsplit("@", 1)[-1] == domain
+        checks.append(IdentityCheck(label=f"Email is at {domain}" if same else f"Email is not at {domain}", ok=same))
+
+    texts = _texts(responses)
+    company_terms = [t.lower() for t in (company, domain) if t]
+    about_company = [t for t in texts if any(c in t for c in company_terms)]
+    company_hits = len(about_company)
+    if company_terms:
+        checks.append(IdentityCheck(label=f"{company or domain} named in {_results(company_hits)}", ok=company_hits > 0))
+    site_up = None
+    if domain and not candidates and not company_hits:  # one cheap request, only when it decides something
+        site_up = await search.site_reachable(domain)
+        checks.append(IdentityCheck(label={True: f"{domain} loads", False: f"{domain} doesn't load",
+                                           None: f"Couldn't check whether {domain} loads"}[site_up], ok=site_up))
+    last = re.compile(rf"\b{re.escape(row['last_name'].lower())}\b")
+    if company_terms:  # the person together with the company, not anyone with that surname
+        together = sum(1 for t in about_company if last.search(t))
+        checks.append(IdentityCheck(label=f"{row['last_name']} named with {company or domain} in {_results(together)}",
+                                    ok=together > 0))
+    else:
+        together = sum(1 for t in texts if last.search(t))
+        checks.append(IdentityCheck(label=f"{row['last_name']} named in {_results(together)}", ok=together > 0))
+
+    if fake:
+        return Diagnosis(outcome="bad_data", checks=checks,
+                         reason=f"This row looks like bad data: {fake}. Fix the row or dismiss it.")
+    if site_up is False:
+        return Diagnosis(outcome="bad_data", checks=checks,
+                         reason=f"This row looks like bad data: {domain} doesn't load and no search result "
+                                "mentions it. Fix the row or dismiss it.")
+    if candidates:
+        rivals = [c for c in candidates if c.confidence >= settings.identity_plausible]
+        return Diagnosis(outcome="ambiguous" if len(rivals) > 1 else "unconfirmed", checks=checks, reason=reason)
+    if together:  # mentioned, but the model couldn't tie a page to them: the rep confirms
+        return Diagnosis(outcome="unconfirmed", checks=checks,
+                         reason=f"{name} appears in {_results(together)}, but none confirms who they are. "
+                                "Confirm it's the right person.")
+    if company_hits or site_up:
+        reason = f"{company or domain} is real, but {name} doesn't appear anywhere online with it."
+    else:
+        reason = f"{name} doesn't appear in any public search result."
+    return Diagnosis(outcome="not_public", checks=checks, reason=reason)
+
+
+def _unverified_person(ctx: RunContext) -> Candidate:
+    """The rep asked for a company-level draft: the CSV's details, explicitly not verified."""
+    row = ctx.row
+    if not (row.get("company") or row.get("domain")):
+        raise StopRun(RunStatus.needs_input, "A company-level draft needs the company: enter their details instead.",
+                      {"outcome": "not_public"})
+    return Candidate(name=display_name(row), title=row.get("title"), company=row.get("company"),
+                     company_domain=row.get("domain"), evidence_url="",
+                     evidence="Not found online; the rep asked for a company-level draft",
+                     confidence=settings.identity_unverified)
+
+
+def _save_run(ctx: RunContext, **fields: Any) -> None:
+    with Session(db.engine) as session:
+        run = session.get(Run, ctx.run_id)
+        for key, value in fields.items():
+            setattr(run, key, value)
+        session.add(run)
+        session.commit()
+
+
+def _apply_identity(ctx: RunContext, person: Candidate, rep: bool = False) -> tuple[str | None, str | None]:
+    """Fill a missing company / domain from the confirmed person, and group the run by account.
+    What the rep typed (`rep`) is trusted over the CSV: it replaces company, domain and title."""
     company, domain = ctx.row.get("company"), ctx.row.get("domain")
-    filled_company = filled_domain = None
-    if not company and person.company:
+    filled_company = filled_domain = filled_title = None
+    if person.company and (not company or (rep and person.company != company)):
         ctx.row["company"] = filled_company = person.company
-    if not domain and person.company_domain:
+    if person.company_domain and (not domain or rep):
         normalised, error = normalise_domain(person.company_domain)
-        if normalised and not error:
+        if normalised and not error and normalised != domain:
             ctx.row["domain"] = filled_domain = normalised
-    if filled_company or filled_domain:
-        ctx.account_key = ctx.account_key or account_key_for(
-            {"company_domain": ctx.row.get("domain"), "company": ctx.row.get("company")})
+    if rep and person.title and person.title != ctx.row.get("title"):
+        ctx.row["title"] = filled_title = person.title
+    if filled_company or filled_domain or filled_title:
+        key = account_key_for({"company_domain": ctx.row.get("domain"), "company": ctx.row.get("company")})
+        ctx.account_key = key if rep else (ctx.account_key or key)
         with Session(db.engine) as session:
             run = session.get(Run, ctx.run_id)
             run.company = ctx.row.get("company")
             run.domain = ctx.row.get("domain")
+            run.title = ctx.row.get("title")
             run.account_key = ctx.account_key
             session.add(run)
             session.commit()
@@ -192,15 +340,31 @@ def _check_region(ctx: RunContext, person: Candidate) -> None:
 
 
 async def run(ctx: RunContext) -> ResolveOutput:
+    resume = ctx.resume_input or {}
+    if resume.get("dismiss"):
+        raise StopRun(RunStatus.dismissed, "Dismissed by the rep: identity couldn't be verified.")
+    if resume.get("unverified"):
+        person = _unverified_person(ctx)
+        _save_run(ctx, identity_unverified=True)
+        ctx.confidence = person.confidence
+        return ResolveOutput(message=f"Not verified: {person.name}. Writing a company-level draft "
+                                     f"for {person.company or person.company_domain}",
+                             person=person, unverified=True)
     # Resume: the rep picked (or typed) the right person; trust it, no new searches.
-    if ctx.resume_input and ctx.resume_input.get("candidate"):
+    if resume.get("candidate"):
         person = Candidate.model_validate({**ctx.resume_input["candidate"], "confidence": 1.0})
         _check_region(ctx, person)
-        company, domain = _apply_identity(ctx, person)
+        company, domain = _apply_identity(ctx, person, rep=True)
         ctx.confidence = 1.0
         return ResolveOutput(message=f"Confirmed by rep: {person.name}"
                              + (f", {person.title}" if person.title else ""),
                              person=person, rep_confirmed=True, company=company, domain=domain)
+
+    if fix := resume.get("fix"):
+        # The rep corrected a bad-data row: search again with the new details, trusting nothing yet.
+        corrected = Candidate.model_validate({**fix, "name": display_name(ctx.row), "evidence_url": "",
+                                              "evidence": "", "confidence": 0})
+        _apply_identity(ctx, corrected, rep=True)
 
     queries = build_queries(ctx.row)
     responses = await asyncio.gather(*(
@@ -227,11 +391,16 @@ async def run(ctx: RunContext) -> ResolveOutput:
     candidates = merge_same_person(candidates)
     person, reason = decide(candidates)
     if person is None:
-        raise StopRun(RunStatus.needs_input, reason, {
+        diagnosis = await diagnose(row, responses, candidates, reason)
+        _save_run(ctx, identity_outcome=diagnosis.outcome)
+        raise StopRun(RunStatus.needs_input, diagnosis.reason, {
             "candidates": [c.model_dump() for c in candidates[:5]],
             "queries": queries,
             "reasoning": found.reasoning,
             "checks": checks,
+            "outcome": diagnosis.outcome,
+            "diagnosis": [c.model_dump() for c in diagnosis.checks],
+            "found": found_results(responses),
         })
 
     _check_region(ctx, person)
@@ -241,6 +410,6 @@ async def run(ctx: RunContext) -> ResolveOutput:
     return ResolveOutput(
         message=f"Found 1 match, confidence {person.confidence:.2f}: {person.name}"
                 + (f" ({detail})" if detail else ""),
-        person=person, candidates=candidates[:5], queries=queries, checks=checks,
+        person=person, candidates=candidates[:5], queries=queries, checks=checks, found=found_results(responses),
         company=company, domain=domain,
     )

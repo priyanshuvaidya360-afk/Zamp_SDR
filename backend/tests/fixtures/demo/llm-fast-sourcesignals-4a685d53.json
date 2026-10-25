@@ -1,0 +1,43 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "Reco announced a partnership with ServiceNow to extend AI agent security.",
+        "evidence": "Reco announces a partnership with ServiceNow to extend AI Agent Security",
+        "published_at": "2026-09-28",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco provides an Agent Security platform that secures agents and their operating environments.",
+        "evidence": "Reco is the leader in Agent Security. The Reco Platform secures agents and their operating environments where applications, identities, permissions and workflows converge.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2453,
+    "completion_tokens": 258,
+    "latency_ms": 2047,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

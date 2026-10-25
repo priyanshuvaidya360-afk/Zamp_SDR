@@ -1,0 +1,79 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Reco appointed Zoe Hillenmeyer as chief operating officer",
+        "evidence": "Zoe Hillenmeyer, who has been appointed chief operating officer",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Reco named Kristen Twining senior vice president of Americas sales and business development",
+        "evidence": "Kristen Twining senior vice president of Americas sales and business development",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Reco appointed Dana Harduf as chief human resources officer, Sandy Mathews as VP of product marketing, and Merav Keren Kindler as VP of marketing",
+        "evidence": "Dana Harduf as chief human resources officer, Sandy Mathews as vice president of product marketing and Merav Keren Kindler as vice president of marketing.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Reco opened a physical office in Texas and expanded operations into the United Kingdom and Ireland",
+        "evidence": "Reco is opening a physical office in Texas... The company is also expanding internationally with a dedicated team in the United Kingdom and Ireland.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "press",
+        "about": "company",
+        "summary": "Reco received three Global InfoSec Awards for 2026",
+        "evidence": "The company recently received three Global InfoSec Awards for 2026, including recognition in SaaS and cloud security",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1926,
+    "completion_tokens": 684,
+    "latency_ms": 2569,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Lumen Analytics closed a $40M Series B round led by Northzone with participation from Point Nine and Seedcamp.",
+        "evidence": "Lumen Analytics has closed a $40M Series B round led by Northzone. Point Nine and Seedcamp also took part.",
+        "published_at": "2026-10-10",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Lumen Analytics helps mid-market SaaS companies determine which product features drive upgrades.",
+        "evidence": "helps mid-market SaaS companies see which product features drive upgrades",
+        "published_at": "2026-10-10",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Lumen Analytics plans to use its new funding to expand sales and marketing teams in North America.",
+        "evidence": "plans to use the funding to expand its sales and marketing teams in North America",
+        "published_at": "2026-10-10",
+        "sensitive": false,
+        "speaker": "Maya Lindqvist",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1038,
+    "completion_tokens": 416,
+    "latency_ms": 1761,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

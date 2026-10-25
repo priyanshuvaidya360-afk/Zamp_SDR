@@ -1,0 +1,21 @@
+{
+  "output": {
+    "verdict": "changed",
+    "reason": "The number of Sales Development Representatives being hired has changed from four to two.",
+    "new_fact": "Kestrel Labs is hiring two Sales Development Representatives in London.",
+    "new_evidence": "Kestrel Labs is hiring two Sales Development Representatives to complete our first outbound team in London."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 438,
+    "completion_tokens": 79,
+    "latency_ms": 917,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

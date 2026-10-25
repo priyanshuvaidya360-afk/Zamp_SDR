@@ -1,7 +1,7 @@
 """The pipeline as a LangGraph graph: one node per stage, in order.
 
-Spec: docs/GUIDE.md "Pipeline stages in detail". `python -m scripts.draw_pipeline` draws this
-graph into agents/PIPELINE.md.
+Spec: docs/PROJECT_SPEC.md "Pipeline stages in detail". `python -m scripts.draw_pipeline` draws this
+graph into agents/PIPELINE_DIAGRAM.md.
 
 What the graph does (and nothing more):
 - runs the stages in order, one node each

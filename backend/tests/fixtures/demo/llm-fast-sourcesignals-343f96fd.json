@@ -1,0 +1,43 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco Universal operates as a global software development company focusing on empowering talent in Asia and Africa through competitive wages and inclusive work opportunities.",
+        "evidence": "Reco Universal is a global software development company with a mission to empower Asian and African talent through fair, competitive wages and inclusive work opportunities.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco Universal offers software development services utilizing developers hired across Asia and Africa.",
+        "evidence": "At Reco Universa l, we: Hire talented developers across Asia and Africa. Offer compensation packages that are significantly higher than local averages.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2226,
+    "completion_tokens": 278,
+    "latency_ms": 1593,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

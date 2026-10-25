@@ -1,0 +1,31 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Ryan Yu",
+        "title": null,
+        "company": "ProtoPie",
+        "company_domain": "protopie.io",
+        "location": "Seoul",
+        "country": "KR",
+        "evidence_url": "https://kr.linkedin.com/pub/dir/Ryan/+/kr-7715-%EC%84%9C%EC%9A%B8-%EC%9D%B8%EC%B2%9C-%EC%A7%80%EC%97%AD",
+        "evidence": "Ryan Yu. 강남구. ProtoPie",
+        "confidence": 0.95
+      }
+    ],
+    "reasoning": "The search results include a LinkedIn directory reference matching Ryan Yu at ProtoPie located in Seoul, which aligns directly with the prospect's LinkedIn handle and company domain."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1833,
+    "completion_tokens": 208,
+    "latency_ms": 1530,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -6,7 +6,7 @@ from sqlalchemy.engine import Engine
 from sqlmodel import Session, create_engine
 from tenacity import wait_none
 
-from app import db, llm, search
+from app import db, limits, llm, search
 from app.config import settings
 from app.db import create_db_and_tables
 from app.main import app
@@ -48,6 +48,10 @@ def isolated_settings(tmp_path, monkeypatch):
     monkeypatch.setattr(settings, "gemini_api_key", "test-gemini")
     monkeypatch.setattr(settings, "tavily_api_key", "")
     monkeypatch.setattr(settings, "exa_api_key", "")
+    # Most test rows predate the LinkedIn rule; test_ingest turns it on where it is tested.
+    monkeypatch.setattr(settings, "require_linkedin", False)
+    monkeypatch.setattr(settings, "gather_planned_queries", 0)  # the planner is an LLM call; its tests turn it on
+    limits.reset()
     monkeypatch.setattr(runner, "get_stages", lambda: stubs.STAGES)
 
     async def no_network(*args, **kwargs):

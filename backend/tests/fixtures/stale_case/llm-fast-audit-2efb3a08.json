@@ -1,0 +1,53 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "hiring 4 sdrs in london",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 3,
+        "reason": "The fact explicitly states Kestrel Labs is hiring 4 Sales Development Representatives in London.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I saw that Kestrel Labs is hiring four Sales Development Representatives in London (2 October).",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 3,
+        "reason": "This is directly supported by the hiring fact dated 2 October 2026.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Hiring more SDRs is the usual way to grow outbound capacity, but it adds headcount and can strain reply rates.",
+        "about": "market",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a general remark about common industry practices and challenges.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Open to a quick 15‑minute call to see how Halyard could generate the same pipeline without extra hires?",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": "seller",
+        "reason": "This matches what Halyard sells regarding generating pipeline without adding SDR headcount.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email is highly specific as it relies directly on the exact recent hiring event for the prospect's company."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1000,
+    "completion_tokens": 393,
+    "latency_ms": 1501,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

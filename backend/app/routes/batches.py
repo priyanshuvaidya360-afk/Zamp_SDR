@@ -1,21 +1,21 @@
-"""Batch upload and preview. Spec: docs/GUIDE.md "Input: the prospect CSV" and T04."""
+"""Batch upload and preview. Spec: docs/PROJECT_SPEC.md "Input: the prospect CSV" and T04."""
 
 import asyncio
 from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, UploadFile
 from fastapi.responses import Response, StreamingResponse
 from pydantic import BaseModel
 from sqlalchemy import func
 from sqlmodel import Session, select
 
-from app import db, ingest, review
+from app import db, ingest, limits, review
 from app.config import settings
 from app.db import get_session
 from app.events import HEARTBEAT, bus, format_sse, sse_response
-from app.models import Batch, BatchStatus, Run, RunStatus
-from app.pipeline import runner
-from app.routes.runs import hook_types, latest_stage_events, run_summary
+from app.models import Batch, BatchStatus, Run, RunStatus, StageEvent
+from app.pipeline import intake, runner
+from app.routes.runs import hook_types, latest_stage_events, run_summary, signal_levels
 
 router = APIRouter(prefix="/batches", tags=["batches"])
 
@@ -59,8 +59,9 @@ def _get_batch(session: Session, batch_id: int) -> Batch:
 
 
 @router.post("", status_code=201)
-async def upload_batch(file: UploadFile, session: Session = Depends(get_session)) -> dict[str, Any]:
+async def upload_batch(file: UploadFile, http: Request, session: Session = Depends(get_session)) -> dict[str, Any]:
     """Validate a prospect CSV and return the preview. Spends no API credits."""
+    limits.spend(http, "uploads", 1, settings.uploads_per_hour, "uploads")
     content = await file.read(ingest.MAX_BYTES + 1)
     filename = file.filename or "upload.csv"
     try:
@@ -106,13 +107,14 @@ def get_preview(batch_id: int, session: Session = Depends(get_session)) -> dict[
 
 
 @router.post("/{batch_id}/start", status_code=202)
-async def start_batch(batch_id: int, session: Session = Depends(get_session)) -> dict[str, Any]:
+async def start_batch(batch_id: int, http: Request, session: Session = Depends(get_session)) -> dict[str, Any]:
     """Create one run per valid row and process them in the background (5 at a time)."""
     batch = _get_batch(session, batch_id)
     if batch.status != BatchStatus.validating:
         raise HTTPException(409, "This batch has already started.")
     if batch.valid_count == 0:
         raise HTTPException(422, "No valid rows to run. Fix the file or the column mapping first.")
+    limits.spend(http, "prospects", batch.valid_count, settings.prospects_per_hour, "prospects drafted")
     run_ids = runner.create_runs(session, batch)
     runner.spawn(runner.run_batch(run_ids))
     return {"batch_id": batch.id, "status": batch.status, "run_ids": run_ids}
@@ -123,7 +125,7 @@ class DraftRequest(BaseModel):
 
 
 @router.post("/{batch_id}/draft", status_code=202)
-async def draft_rows(batch_id: int, request: DraftRequest | None = None,
+async def draft_rows(batch_id: int, http: Request, request: DraftRequest | None = None,
                      session: Session = Depends(get_session)) -> dict[str, Any]:
     """Start the pipeline for chosen rows (or all remaining ones). Returns each row's run id, so the
     UI can open the live run page straight away. A row that already has a run is not run again."""
@@ -134,6 +136,9 @@ async def draft_rows(batch_id: int, request: DraftRequest | None = None,
         raise HTTPException(422, "Only valid rows can be drafted. Check the row numbers.")
     if not valid:
         raise HTTPException(422, "No valid rows to run. Fix the file or the column mapping first.")
+    started = set(session.exec(select(Run.row_number).where(Run.batch_id == batch.id)).all())
+    limits.spend(http, "prospects", len((valid if wanted is None else wanted) - started),
+                 settings.prospects_per_hour, "prospects drafted")
     new_ids = runner.create_runs(session, batch, wanted)
     if new_ids:
         runner.spawn(runner.run_batch(new_ids))
@@ -142,7 +147,35 @@ async def draft_rows(batch_id: int, request: DraftRequest | None = None,
                                            if wanted is None or r.row_number in wanted]}
 
 
-def _prospects(batch: Batch, runs: list[Run], latest: dict, hooks: dict) -> list[dict[str, Any]]:
+def _researched_before(session: Session, batch: Batch, row: dict[str, Any], run: Run | None,
+                       researched: bool) -> dict[str, Any] | None:
+    """The run that already researched this person: this row's own run once its research is done
+    (`researched`), or an earlier batch's within recent_run_days. The list then says "Already
+    researched" before anyone clicks Draft, because drafting it won't search again."""
+    if run is not None and researched and run.status not in (RunStatus.blocked, RunStatus.already_drafted):
+        earlier = run
+    elif run is not None and run.status in (RunStatus.blocked, RunStatus.already_drafted):
+        # The intake event names the earlier run (the latest event is a later stage's "not run").
+        stop = session.exec(select(StageEvent).where(StageEvent.run_id == run.id, StageEvent.stage == "intake")
+                            .order_by(StageEvent.id.desc())).first()
+        earlier_id = stop.payload.get("earlier_run_id") if stop is not None else None
+        earlier = session.get(Run, earlier_id) if earlier_id else None
+    elif run is not None:
+        earlier = None
+    elif row["status"] == "valid":
+        d = row["data"]
+        earlier = intake.find_recent({"first_name": d.get("first_name"), "last_name": d.get("last_name"),
+                                      "domain": d.get("company_domain"), "linkedin_url": d.get("linkedin_url"),
+                                      "email": d.get("email")}, batch.id)
+    else:
+        earlier = None
+    if earlier is None:
+        return None
+    return {"run_id": earlier.id, "on": earlier.started_at.date().isoformat(), "status": earlier.status}
+
+
+def _prospects(session: Session, batch: Batch, runs: list[Run], latest: dict, hooks: dict,
+               levels: dict) -> list[dict[str, Any]]:
     """Every row of the file, in file order, with its run (if it has been drafted yet)."""
     by_row = {r.row_number: r for r in runs}
     out = []
@@ -159,7 +192,8 @@ def _prospects(batch: Batch, runs: list[Run], latest: dict, hooks: dict) -> list
             "company": d.get("company"),
             "domain": d.get("company_domain"),
             "linkedin_url": d.get("linkedin_url"),
-            "run": run_summary(run, latest.get(run.id), hooks.get(run.id)) if run else None,
+            "run": run_summary(run, latest.get(run.id), hooks.get(run.id), levels.get(run.id)) if run else None,
+            "researched_before": _researched_before(session, batch, row, run, bool(run and levels.get(run.id))),
         })
     return out
 
@@ -170,13 +204,13 @@ def get_batch(batch_id: int, session: Session = Depends(get_session)) -> dict[st
     batch = _get_batch(session, batch_id)
     runs = session.exec(select(Run).where(Run.batch_id == batch_id).order_by(Run.row_number)).all()
     ids = [r.id for r in runs]
-    latest, hooks = latest_stage_events(session, ids), hook_types(session, ids)
+    latest, hooks, levels = latest_stage_events(session, ids), hook_types(session, ids), signal_levels(session, ids)
     return {
         "batch": batch.model_dump(exclude={"source_rows", "rows", "headers"}),
         "progress": runner.batch_progress(session, batch_id),
         "stages": [{"name": s.name, "label": s.label} for s in runner.get_stages()],
-        "runs": [run_summary(r, latest.get(r.id), hooks.get(r.id)) for r in runs],
-        "prospects": _prospects(batch, runs, latest, hooks),
+        "runs": [run_summary(r, latest.get(r.id), hooks.get(r.id), levels.get(r.id)) for r in runs],
+        "prospects": _prospects(session, batch, runs, latest, hooks, levels),
         "not_run": [
             {"row_number": r["row_number"], "status": r["status"], "reason": r["reason"],
              "name": " ".join(filter(None, (r["data"].get("first_name"), r["data"].get("last_name"))))}

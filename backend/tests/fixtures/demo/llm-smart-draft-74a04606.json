@@ -1,0 +1,31 @@
+{
+  "output": {
+    "subject": "scaling your outbound team",
+    "body": "I saw that Kestrel Labs is hiring four Sales Development Representatives in London. Aoife Byrne mentioned that half of your pipeline already comes from the UK. I know Kestrel Labs provides close‑management software for finance teams. As you scale your outbound team, you may soon feel the pressure of growing pipeline solely by adding headcount, while generic sequences see diminishing replies. Would you be open to a brief 15‑minute call to explore how Halyard can help you build qualified pipeline without expanding SDR headcount?",
+    "claims": [
+      {
+        "sentence": "I saw that Kestrel Labs is hiring four Sales Development Representatives in London.",
+        "signal_id": 2
+      },
+      {
+        "sentence": "Aoife Byrne mentioned that half of your pipeline already comes from the UK.",
+        "signal_id": 1
+      },
+      {
+        "sentence": "I know Kestrel Labs provides close‑management software for finance teams.",
+        "signal_id": 3
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1119,
+    "completion_tokens": 957,
+    "latency_ms": 2401,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

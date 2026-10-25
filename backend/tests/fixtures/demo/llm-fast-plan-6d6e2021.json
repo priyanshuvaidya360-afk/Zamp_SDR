@@ -1,0 +1,35 @@
+{
+  "output": {
+    "queries": [
+      {
+        "query": "\"Acme Fintech\" fintech startup podcast interview",
+        "why": "to find recent leadership insights on growth"
+      },
+      {
+        "query": "\"Acme Fintech\" product update release notes",
+        "why": "to uncover new feature launches needing pipeline"
+      },
+      {
+        "query": "\"Acme Fintech\" conference speaker presentation",
+        "why": "to identify strategic shifts and new market targets"
+      },
+      {
+        "query": "site:techcrunch.com \"Acme Fintech\"",
+        "why": "to surface major company announcements and funding news"
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 509,
+    "completion_tokens": 155,
+    "latency_ms": 1086,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

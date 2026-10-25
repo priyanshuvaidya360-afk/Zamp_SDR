@@ -1,0 +1,29 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "Acme Fintech completes CRM migration to HubSpot, moving all marketers and sellers to the platform.",
+        "evidence": "\"Our CRM migration is done: as of this week every Acme Fintech marketer and seller works in HubSpot.\"",
+        "published_at": "2026-10-06",
+        "sensitive": false,
+        "speaker": "Priya Raman",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1103,
+    "completion_tokens": 928,
+    "latency_ms": 6559,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

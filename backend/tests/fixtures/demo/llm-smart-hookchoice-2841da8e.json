@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 3,
+    "angle": "They are hiring four SDRs in London, showing a push to scale outbound capacity—exactly the problem our engine solves by delivering ready‑to‑send, researched emails so the sales team can grow pipeline without adding headcount.",
+    "runners_up": [
+      1,
+      2
+    ],
+    "why_not_others": "The office expansion is less about outbound needs, and the UK pipeline comment is from another exec, not Omar."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 898,
+    "completion_tokens": 441,
+    "latency_ms": 10240,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

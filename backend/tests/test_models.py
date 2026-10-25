@@ -90,7 +90,7 @@ def test_insert_and_read_one_row_per_table(session: Session):
 def test_run_status_is_the_closed_set_from_the_guide():
     assert {s.value for s in RunStatus} == {
         "running", "needs_input", "low_signal", "ready_for_review", "blocked", "suppressed",
-        "held", "approved", "rejected", "failed", "invalid", "skipped",
+        "held", "approved", "rejected", "failed", "dismissed", "already_drafted", "invalid", "skipped",
     }
 
 

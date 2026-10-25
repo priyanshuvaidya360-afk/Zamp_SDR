@@ -1,5 +1,5 @@
 {
-  "_comment": "Fake CRM and sales-engagement data for the account-context rules (docs/GUIDE.md, 'Account context'). Dates are relative to the day the seed script runs, so the demo stays stable. Northwind must stay free of deals: it is the buying-committee demo account.",
+  "_comment": "Fake CRM and sales-engagement data for the account-context rules (docs/PROJECT_SPEC.md, 'Account context'). Dates are relative to the day the seed script runs, so the demo stays stable. Northwind must stay free of deals: it is the buying-committee demo account.",
   "crm_accounts": [
     {"domain": "acmefintech.com", "name": "Acme Fintech", "parent_domain": null, "owner": "Asha Menon"},
     {"domain": "contosologistics.com", "name": "Contoso Logistics", "parent_domain": null, "owner": "Sam Patel"},

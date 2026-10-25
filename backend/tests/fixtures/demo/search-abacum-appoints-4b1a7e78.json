@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Abacum\" appoints",
+  "results": [
+    {
+      "url": "https://bernews.com/2026/02/abacus-appoints-susan-pateras-coral-wells",
+      "title": "Abacus Appoints Susan Pateras & Coral Wells",
+      "content": "Abacus Appoints Susan Pateras & Coral Wells ... Abacus has announced the appointment of Susan Pateras as Board Chair and Coral Wells as a Board Member to its",
+      "published_date": "Fri, 27 Feb 2026 21:00:00 GMT",
+      "score": 0.7663815
+    },
+    {
+      "url": "https://ffnews.com/news/accountsiq-and-abacum-partner-to-launch-ai-powered-finance-stack-for-mid-market-businesses",
+      "title": "AccountsIQ and Abacum Partner to Launch AI-Powered Finance Stack for Mid-Market Businesses",
+      "content": "LiveMore Secures £212 Million in Third Social Bond Securitisation for Older HomeownersDune Launches Real-Time Market Data Feeds for Onchain Trading VenuesMercuryo Launches Swaps to Enable Seamless Multi-Chain Token ConversionHKEX Launches Artificial Intelligence Index to Track China's AI Value ChainFiserv Appoints Mastercard Strategic Advisor Raj Seshadri to Board of DirectorsExtend Launches 'Verify' API to Combat AI-Generated Document Fraud at Money20/20Kira Launches Agentic POBO to Solve [...] Multi-Chain Token ConversionHKEX Launches Artificial Intelligence Index to Track China's AI Value ChainFiserv Appoints Mastercard Strategic Advisor Raj Seshadri to Board of DirectorsExtend Launches 'Verify' API to Combat AI-Generated Document Fraud at Money20/20Kira Launches Agentic POBO to Solve Cross-Border Payment Rejections for Fintechs1891 Financial Life Debuts 3-Pay Whole Life Insurance for Rapid Legacy BuildingDyna.Ai and Bahrain FinTech Bay Partner to Scale AI-as-a-Service Across the [...] integrations, ensuring that financial intelligence is scalable for high-growth companies.",
+      "published_date": "Tue, 04 Aug 2026 08:40:04 GMT",
+      "score": 0.59344494
+    },
+    {
+      "url": "https://www.broadcastnow.co.uk/production-and-post/sphere-abacus-hires-deep-fusion-exec-for-acquisitions/5220455.article",
+      "title": "Sphere Abacus hires Deep Fusion exec for acquisitions",
+      "content": "Niki Page to work across scripted and unscripted deals at Bell Media-backed company. Sphere Abacus has appointed Niki Page from AI production company Deep",
+      "published_date": "Fri, 25 Sep 2026 21:00:00 GMT",
+      "score": 0.53517187
+    },
+    {
+      "url": "https://ffnews.com/news/bingx-appoints-kevin-lee-as-chief-strategy-officer-to-drive-multi-asset-growth",
+      "title": "BingX Appoints Kevin Lee as Chief Strategy Officer to Drive Multi-Asset Growth",
+      "content": "LiveMore Secures £212 Million in Third Social Bond Securitisation for Older HomeownersDune Launches Real-Time Market Data Feeds for Onchain Trading VenuesMercuryo Launches Swaps to Enable Seamless Multi-Chain Token ConversionHKEX Launches Artificial Intelligence Index to Track China's AI Value ChainFiserv Appoints Mastercard Strategic Advisor Raj Seshadri to Board of DirectorsExtend Launches 'Verify' API to Combat AI-Generated Document Fraud at Money20/20Kira Launches Agentic POBO to Solve [...] Multi-Chain Token ConversionHKEX Launches Artificial Intelligence Index to Track China's AI Value ChainFiserv Appoints Mastercard Strategic Advisor Raj Seshadri to Board of DirectorsExtend Launches 'Verify' API to Combat AI-Generated Document Fraud at Money20/20Kira Launches Agentic POBO to Solve Cross-Border Payment Rejections for Fintechs1891 Financial Life Debuts 3-Pay Whole Life Insurance for Rapid Legacy BuildingDyna.Ai and Bahrain FinTech Bay Partner to Scale AI-as-a-Service Across the [...] Image 10 10 Sep 2026 ### Eftsure Acquires US AI Vendor Data Specialist Relish to Secure Global PaymentsImage 11 9 Sep 2026 ### IXOPAY Unveils Agentic Commerce Solutions to Empower Merchants in AI-Driven Shopping EraImage 12 7 Sep 2026 ### 97% of UK Software Providers Bet on Embedded Payments Despite Tech FragmentationImage 13 4 Sep 2026 ### Reach Partners with Atlar to Power AI-Native Treasury and Cash Management Across 200+ MarketsImage 14 4 Sep 2026 ### CheckAlt and LoanPro Partner to",
+      "published_date": "Tue, 04 Aug 2026 07:58:04 GMT",
+      "score": 0.09695367
+    },
+    {
+      "url": "https://ffnews.com/news/engine-by-starling-appoints-tom-bentley-as-managing-director-for-european-expansion",
+      "title": "Engine by Starling Appoints Tom Bentley as Managing Director for European Expansion",
+      "content": "Why European Wealth Managers are Failing to Communicate Private Markets ValueFinix Integrates Cash App Pay and Afterpay to Boost Checkout Flexibility for U.S. MerchantsOrion180 Launches FlexLuxe: High-Value Homeowners Insurance for Florida and Texas MarketsSecondSight Appoints Six Industry Veterans to Drive AI-Powered Insurance ExpansionMastercard and Moovn Technologies Strike 5-Year Deal to Scale Digital Payments in East AfricaAKUVO Accelerates Growth with 18 New Financial Institution [...] Image 11 21 Oct 2026 ### The Wealth 30: Why European Wealth Managers are Failing to Communicate Private Markets ValueImage 12 21 Oct 2026 ### AKUVO Accelerates Growth with 18 New Financial Institution Partnerships in Q3 2026Image 13 21 Oct 2026 ### Masttro Appoints Andrew Peddar as COO to Scale AI-Powered Wealth SolutionsImage 14 21 Oct 2026 ### UK Banking Sector Tax Hits Record £47.8 Billion as London Rate Tops Global Financial CentresImage 15 21 Oct 2026 ### AppZen Launches AI VAT Reclaim [...] UK Businesses Face Payment Visibility Crisis Despite Tech Adoption, Finexer Research RevealsThe Wealth 30: Why European Wealth Managers are Failing to Communicate Private Markets ValueFinix Integrates Cash App Pay and Afterpay to Boost Checkout Flexibility for U.S. MerchantsOrion180 Launches FlexLuxe: High-Value Homeowners Insurance for Florida and Texas MarketsSecondSight Appoints Six Industry Veterans to Drive AI-Powered Insurance ExpansionMastercard and Moovn Technologies Strike 5-Year Deal",
+      "published_date": "Tue, 04 Aug 2026 07:37:04 GMT",
+      "score": 0.08486382
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

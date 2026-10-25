@@ -1,0 +1,101 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "The AI beta launch creates a clear need for new outbound pipeline to acquire early adopters."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Migrating users to the Pro plan and offering price‑lock signals an upsell wave that requires fresh outbound outreach."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 0,
+        "specificity": 0,
+        "reasoning": "The signal is about Visily, not ProtoPie, and has no connection to the prospect."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 0,
+        "specificity": 0,
+        "reasoning": "Describes Visily’s product, unrelated to ProtoPie’s growth needs."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Showcasing major customers indicates a growth stage where additional pipeline would be valuable."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Integration with design tools shows product depth but offers only a weak link to outbound pipeline needs."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Listing big customers adds credibility but provides little direct reason to discuss pipeline generation."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "A recent $21 M funding round likely raises expectations for rapid pipeline growth."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Multiple pricing tiers suggest monetization focus, giving a modest reason to explore outbound pipeline."
+      },
+      {
+        "signal_id": 10,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Launch of ProtoPie Connect opens a new use‑case area, creating a reasonable outbound opportunity."
+      },
+      {
+        "signal_id": 11,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Detailing the ecosystem signals product breadth, offering a modest pipeline relevance."
+      },
+      {
+        "signal_id": 12,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Built‑in plugins broaden appeal, giving a moderate reason to discuss outbound outreach."
+      },
+      {
+        "signal_id": 13,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "General positioning statement provides only a weak link to pipeline needs."
+      },
+      {
+        "signal_id": 14,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Official launch of ProtoPie AI expands the product line, a clear trigger for new outbound pipeline efforts."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1759,
+    "completion_tokens": 1506,
+    "latency_ms": 13778,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

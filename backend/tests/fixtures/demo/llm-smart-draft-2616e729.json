@@ -1,0 +1,25 @@
+{
+  "output": {
+    "subject": "outbound email bottleneck",
+    "body": "- You mentioned running outbound experiments with a two-person team and hitting a bottleneck on crafting personalized, research-cited emails (30 September 2026).\n- Halyard solves this by drafting researched, cited first-touch emails for reps to review, so growth teams build pipeline without adding SDR headcount.\n- Would you be open to a brief 15-minute call to explore? Priyanshu",
+    "claims": [
+      {
+        "sentence": "- You mentioned running outbound experiments with a two-person team and hitting a bottleneck on crafting personalized, research-cited emails (30 September 2026).",
+        "signal_id": 1
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "role": "smart",
+    "prompt_tokens": 1481,
+    "completion_tokens": 171,
+    "latency_ms": 37776,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

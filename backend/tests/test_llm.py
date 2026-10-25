@@ -208,3 +208,22 @@ def test_strict_schema_is_provider_safe():
         assert banned not in text
     # Optional fields keep a null branch so the model can say "unknown".
     assert {"type": "null"} in schema["properties"]["published_at"]["anyOf"]
+
+
+
+async def test_a_reply_cut_off_at_the_length_limit_falls_back(monkeypatch):
+    # gpt-oss can spend its whole reply budget thinking; that must not fail the run.
+    cut = openai.LengthFinishReasonError.__new__(openai.LengthFinishReasonError)
+    Exception.__init__(cut, "length limit reached")
+    fake = FakeCall(cut, json.dumps(HOOK))
+    monkeypatch.setattr(llm, "_call", fake)
+    out, usage = await llm.structured("fast", "sys", "user", HookChoice)
+    assert [c["provider"] for c in fake.calls] == ["groq", "gemini"] and out.signal_id == 2
+    assert usage.fallbacks == ["groq: LengthFinishReasonError"]
+
+
+def test_groq_is_asked_for_long_enough_replies():
+    groq = llm._chat_model("k", "http://groq", "m", 60, settings.groq_max_output_tokens)
+    gemini = llm._chat_model("k", "http://gemini", "m", 60, None)
+    assert groq._get_request_payload([("user", "hi")])["max_completion_tokens"] == settings.groq_max_output_tokens
+    assert "max_completion_tokens" not in gemini._get_request_payload([("user", "hi")])

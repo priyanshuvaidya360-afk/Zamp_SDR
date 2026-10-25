@@ -46,6 +46,15 @@ def test_outlets_in_the_same_search_count_towards_coverage():
     assert crowded_case.UNRELATED[0] not in signal.cluster_urls
 
 
+def test_a_raise_read_on_the_own_site_still_counts_the_press_reports():
+    # The newsroom page (own-site search) found the raise; the funding search found the press.
+    signal = raise_signal(coverage=1)
+    signal.published_at = date(2026, 10, 10)
+    signal.category = "company_site"
+    crowded.add_search_coverage([signal], crowded_case.gather_output().queries)
+    assert signal.coverage == 9
+
+
 @pytest.mark.parametrize("days, coverage, type_, expected", [
     (9, 9, "funding", True),
     (29, 5, "product_launch", True),

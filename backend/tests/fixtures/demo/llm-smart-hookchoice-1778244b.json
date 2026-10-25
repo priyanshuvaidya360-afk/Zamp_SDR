@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 13,
+    "angle": "She just discussed AI-forward go‑to‑market strategies on a podcast, highlighting the need to scale sales efficiently, which is exactly what our outbound pipeline engine enables without adding SDR headcount.",
+    "runners_up": [
+      11,
+      22
+    ],
+    "why_not_others": "The funding news is about the company, not her personal GTM focus, and the leadership change is older and less actionable."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 936,
+    "completion_tokens": 366,
+    "latency_ms": 12310,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

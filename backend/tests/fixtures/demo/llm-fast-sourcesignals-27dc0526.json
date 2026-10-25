@@ -1,0 +1,79 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Reco raised $55M in a funding round on September 29, 2026.",
+        "evidence": "Reco raised $55M in a Series C extension on Sep 30th '26",
+        "published_at": "2026-09-29",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Reco grew its employee count by 16% QoQ from 174 to 202 employees.",
+        "evidence": "Grew 16% QoQ, from 174 to 202 employees.",
+        "published_at": "2026-09-23",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "Reco integrated with ServiceNow.",
+        "evidence": "Reco integrates with ServiceNow so customers can govern agents inside the tools where they already function.",
+        "published_at": "2026-10-15",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "Reco launched Browser Guard.",
+        "evidence": "Reco launched Browser Guard on Sep 3rd '26",
+        "published_at": "2026-09-02",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco provides an identity-centric SaaS and AI agent security platform.",
+        "evidence": "Reco is a cybersecurity company that provides an identity-centric SaaS and AI agent security platform designed to discover, map, and secure SaaS applications, AI agents, and identities.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1876,
+    "completion_tokens": 651,
+    "latency_ms": 2538,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

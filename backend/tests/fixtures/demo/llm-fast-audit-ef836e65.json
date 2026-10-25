@@ -1,0 +1,51 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "I saw Ferncastle is hiring five Sales Development Representatives in Austin.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 2,
+        "reason": "Matches fact 2.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Scaling your outbound pipeline by adding SDRs often leads to diminishing reply rates and higher headcount costs.",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "No evidence",
+        "suggestion": null
+      },
+      {
+        "sentence": "Halyard can address by delivering qualified leads and drafting researched first‑touch emails for your reps to review.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": null,
+        "reason": "Matches seller description.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a short 15‑minute call to explore how we could help you generate more pipeline?",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "No evidence",
+        "suggestion": null
+      }
+    ],
+    "genericness": 2,
+    "genericness_reason": "Email includes specific hiring fact."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1138,
+    "completion_tokens": 1944,
+    "latency_ms": 11691,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

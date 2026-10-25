@@ -1,0 +1,8 @@
+{
+  "provider": "simweb",
+  "query": "site:kestrellabs.example blog OR news OR announcement",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

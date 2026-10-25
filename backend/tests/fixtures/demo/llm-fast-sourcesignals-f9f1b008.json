@@ -1,0 +1,43 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Visily has raised a total funding of $2.27M over 1 round.",
+        "evidence": "Visily has raised a total funding of $2.27M over 1 round.",
+        "published_at": "2026-08-25",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Visily is a developer of an AI-powered UI design software for non-designers.",
+        "evidence": "Developer of an AI-powered UI design software for non-designers",
+        "published_at": "2026-08-25",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1983,
+    "completion_tokens": 274,
+    "latency_ms": 1687,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

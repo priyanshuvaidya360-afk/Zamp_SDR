@@ -1,0 +1,71 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "A new CRO will focus on building outbound pipeline, creating a clear need for Halyard."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "The CRO's praise of the product shows satisfaction but does not directly create a pipeline problem."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "A $40M Series B raises pressure to scale revenue quickly, a strong pipeline trigger."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Providing product analytics for SaaS teams implies a need for new customers, modestly relevant."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Selling to product and growth teams suggests outbound outreach is needed, modest relevance."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Plans to expand sales/marketing with new funding directly create demand for outbound pipeline tools."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Hiring six SDRs signals a desire to boost outbound activity, matching Halyard's value."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Announcement of closing a Series B reinforces the need to generate pipeline fast."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Building the first outbound team indicates immediate need for a pipeline engine."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1418,
+    "completion_tokens": 1273,
+    "latency_ms": 9142,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

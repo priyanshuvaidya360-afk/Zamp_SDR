@@ -1,0 +1,69 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "Subject: migration & outbound pipeline",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "The subject line is a general remark combining topics.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Hi Ryan,",
+        "about": "prospect",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a salutation.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I saw that ProtoPie announced the retirement of the legacy Individual Plan and migration of users to Pro on 24 July 2026, with a price-lock incentive.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 2,
+        "reason": "The fact explicitly mentions the retirement of the legacy Individual Plan on July 24, 2026, and price locking.",
+        "suggestion": null
+      },
+      {
+        "sentence": "That migration effort needs a steady flow of qualified accounts without adding SDR headcount, which is exactly what Halyard's outbound pipeline engine provides.",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is the linking sentence connecting their situation to the problem we solve and describing what we sell.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15-minute call to see how it could work for your growth team?",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is the call to action.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Priyanshu",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is the signature.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email heavily relies on a very specific, dated company event regarding their plan migration."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1056,
+    "completion_tokens": 537,
+    "latency_ms": 2098,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

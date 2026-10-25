@@ -1,0 +1,77 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Abacum raised $60m Series B round led by Scale Venture Partners",
+        "evidence": "Abacum, the business planning software company founded by Julio Martínez and Jorge Lluch, today announces that it has raised a $60m Series B round led by San Francisco‑headquartered Scale Venture Partners.",
+        "published_at": "2025-06-11",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Abacum expanding rapidly across the U.S. market",
+        "evidence": "Headquartered in New York, Abacum will use the fresh injection of capital to double down on product innovation and growth, continuing to expand rapidly across the U.S.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum is the leading business planning platform that empowers finance teams to drive performance",
+        "evidence": "Abacum is the leading business planning platform that empowers finance teams to drive performance.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum’s platform brings financial and operational data into one place in real‑time",
+        "evidence": "Abacum’s end‑to‑end business planning platform brings financial and operational data into one place in real‑time.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum serves hundreds of mid‑market companies, including Strava, Aiven, JG Wentworth, and Mastercam",
+        "evidence": "Abacum is used by hundreds of mid‑market companies to drive efficient growth and performance, including industry leaders such as Strava, Aiven, JG Wentworth, and Mastercam.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 2288,
+    "completion_tokens": 2069,
+    "latency_ms": 33861,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

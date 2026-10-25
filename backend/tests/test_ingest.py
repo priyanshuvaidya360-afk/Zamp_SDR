@@ -1,9 +1,10 @@
-"""T04: CSV ingest + preview. Spec: docs/GUIDE.md "Input: the prospect CSV"."""
+"""T04: CSV ingest + preview. Spec: docs/PROJECT_SPEC.md "Input: the prospect CSV"."""
 
 import pytest
 from sqlmodel import Session
 
 from app import ingest
+from app.config import settings
 from app.ingest import CsvRejected
 from app.models import Batch
 
@@ -93,6 +94,27 @@ def test_missing_both_domain_and_linkedin_is_invalid():
     row = result.rows[0]
     assert row.status == "invalid"
     assert row.reason == "needs a company domain or LinkedIn URL to identify this person"
+
+
+def test_linkedin_is_required_when_the_rule_is_on(monkeypatch):
+    # Two Priya Sharmas at HDFC Bank: the domain alone can't tell them apart.
+    monkeypatch.setattr(settings, "require_linkedin", True)
+    result = parse(
+        "first_name,last_name,company,company_domain,linkedin_url\n"
+        "Priya,Sharma,HDFC Bank,hdfcbank.com,\n"
+        "Priya,Sharma,HDFC Bank,,https://in.linkedin.com/in/priya-sharma-hdfc/\n"
+        "Rahul,Mehta,HDFC Bank,hdfcbank.com,https://www.linkedin.com/company/hdfc-bank\n"
+    )
+    first, second, third = result.rows
+    assert (first.status, first.reason) == ("invalid", ingest.NEEDS_LINKEDIN)
+    assert second.status == "valid" and second.data["linkedin_url"] == "linkedin.com/in/priya-sharma-hdfc"
+    assert third.status == "invalid" and "not a personal profile" in third.reason
+
+
+def test_file_without_linkedin_column_is_rejected_when_the_rule_is_on(monkeypatch):
+    monkeypatch.setattr(settings, "require_linkedin", True)
+    with pytest.raises(CsvRejected, match="linkedin_url column"):
+        parse("first_name,last_name,company_domain\nPriya,Sharma,hdfcbank.com\n")
 
 
 @pytest.mark.parametrize(

@@ -1,0 +1,8 @@
+{
+  "provider": "simweb",
+  "query": "\"Ferncastle\" customer success OR case study OR testimonial",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

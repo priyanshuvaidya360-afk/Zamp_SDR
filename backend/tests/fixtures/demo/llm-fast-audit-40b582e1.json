@@ -1,0 +1,61 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "new funding, pipeline boost",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 18,
+        "reason": "The funding event is verified by fact 18.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I saw that Reco raised $55 million in funding on 29 September 2026.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 18,
+        "reason": "The funding amount and date are directly supported by fact 18.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I also noted your appointment as Vice President of Marketing on 8 June 2026.",
+        "about": "prospect",
+        "status": "supported",
+        "fact_id": 5,
+        "reason": "The prospect's role and appointment date are supported by fact 5.",
+        "suggestion": null
+      },
+      {
+        "sentence": "With that extra budget, your team can accelerate outbound pipeline without hiring more SDRs, avoiding the falling reply rates of generic sequences.",
+        "about": "prospect",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This links their funding to our product's problem space as a pitch rather than a verified fact about their current operations.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15‑minute call to explore how Halyard can help?",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a call to action and request for a meeting, which is not a factual claim.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 0,
+    "genericness_reason": "The email is tailored specifically around Reco's exact funding details and the prospect's precise appointment date and title."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 794,
+    "completion_tokens": 505,
+    "latency_ms": 1887,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

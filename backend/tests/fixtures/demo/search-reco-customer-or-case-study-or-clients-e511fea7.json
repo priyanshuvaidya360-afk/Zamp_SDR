@@ -1,0 +1,46 @@
+{
+  "provider": "tavily",
+  "query": "\"Reco\" customer OR \"case study\" OR clients",
+  "results": [
+    {
+      "url": "https://www.evitconsulting.com/case-studies/reco-manpower",
+      "title": "Reco Manpower Case Study",
+      "content": "These case studies demonstrate our commitment to delivering practical value and long-term excellence for every client.",
+      "published_date": null,
+      "score": 0.6654328
+    },
+    {
+      "url": "https://www.recodemand.com/recodemand-reviews",
+      "title": "RECODemand Reviews: Official Case Studies & Client ...",
+      "content": "The published case studies are first-party accounts written up by RECODemand from named clients' own reports, not independent reviews or audited measurements.",
+      "published_date": null,
+      "score": 0.6612456
+    },
+    {
+      "url": "https://www.facebook.com/mosmanchamber/videos/reco-makes-it-easy-and-rewarding-for-your-clients-to-refer-more-friends-to-your-/1736072917686130",
+      "title": "Reco makes it easy and rewarding for your clients to refer ...",
+      "content": "This approach increases referrals by 20%, based on a study by Dr. Zhenling Jiang from The Wharton School, which analyzed data from 40 million customers.",
+      "published_date": null,
+      "score": 0.4280666
+    },
+    {
+      "url": "https://www.citybiz.co/article/910774/reco-raises-55m-as-enterprises-confront-ai-agent-security-risks",
+      "title": "Reco Raises $55M as Enterprises Confront AI Agent Security Risks | citybiz",
+      "content": "The financing brings Reco’s total funding to $140 million. The company plans to use the new capital to expand sales, partnerships, channel operations and customer support as large enterprises deploy more autonomous and AI-enabled agents across business applications and workflows.\n\nAT&T is both an investor and a Reco customer, giving the financing a strategic component as enterprises grapple with how AI agents access corporate applications, data and identities. [...] The additional financing gives Reco more resources to build its commercial organization as agent security develops into a distinct area of enterprise cybersecurity. With AI systems gaining the ability to interact directly with corporate applications and execute business processes, the company is betting that understanding relationships among agents, identities, permissions and data will become a core requirement for enterprise security teams.\n\n## Clients who trust citybiz\n\n\n\n[](\n\n[](\n\n[](\n\n[]( [...] “As both an investor and customer, AT&T recognizes the growing importance of helping organizations understand and manage how AI agents interact with business applications and data,” Taneja said.\n\nAT&T Chief Information Security Officer Rich Baich said the telecommunications company uses Reco to improve visibility into agent security risks, access management and third-party integrations across its enterprise application and AI environment.",
+      "published_date": null,
+      "score": 0.28899077
+    },
+    {
+      "url": "https://www.linkedin.com/posts/recolabs_a-client-was-sure-they-ran-300-applications-activity-7500930574514196482-NOkv",
+      "title": "A client was sure they ran 300 applications. Our first scan ...",
+      "content": "A client was sure they ran 300 applications. Our first scan said otherwise. Nir Greenberg, VP of Solutions Engineering at Reco, sees the same thing across",
+      "published_date": null,
+      "score": 0.2125101
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [
+    "duckduckgo: TimeoutException"
+  ],
+  "cached": false
+}

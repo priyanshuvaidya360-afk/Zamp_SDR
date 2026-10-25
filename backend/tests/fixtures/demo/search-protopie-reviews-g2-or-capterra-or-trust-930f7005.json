@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"ProtoPie\" reviews G2 OR Capterra OR Trustpilot",
+  "results": [
+    {
+      "url": "https://en.wikipedia.org/wiki/Capterra",
+      "title": "Capterra - Wikipedia",
+      "content": "Capterra, Inc. is a software review and discovery website. [1] It operates as an online marketplace and directory that acts as an intermediary between software buyers and the vendors that sell it, publishing product listings, user reviews and comparison research. [2][3]",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.trustpilot.com/",
+      "title": "Trustpilot Reviews: Experience the power of customer reviews",
+      "content": "We're all about consumer reviews. Get the real inside story from shoppers like you. Read, write and share reviews on Trustpilot today.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.g2.com/products/capterra/reviews",
+      "title": "Capterra Reviews 2026: Details, Pricing, & Features | G2Business Software and Services Reviews | G2Capterra: Find The Right SoftwareCapterra Reviews | Read Customer Service Reviews of www ...G2 or Capterra or even TrustPilot? Where is better to start ...Capterra - Wikipedia",
+      "content": "Capterra is a comprehensive online software marketplace designed to assist businesses in discovering, comparing, and selecting the most suitable software solutions for their specific needs. By providing access to millions of verified user reviews across a diverse range of software categories—including customer relationship management (CRM), project management, accounting, human resources (HR ... See full list on g2.com Compare the best business software and services based on user ratings and social data. Reviews for CRM, ERP, HR, CAD, PDM and Marketing software. Choose the best software on Capterra, with insights from millions of users and 2 million+ verified reviews. Compare features, pricing, & more. Written by the company Capterra is a free platform to quickly explore, compare, and choose the right software — backed by millions of verified reviews. Part of the G2 ecosystem. Visit www.capterrra.com for more information. G2 or Capterra or even TrustPilot? Where is better to start from the review campaign for a startup? Capterra, Inc. is a software review and discovery website. [1] It operates as an online marketplace and directory that acts as an intermediary between software buyers and the vendors that sell it, publishing product listings, user reviews and comparison research. [2][3]",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.g2.com/",
+      "title": "Business Software and Services Reviews | G2",
+      "content": "Compare the best business software and services based on user ratings and social data. Reviews for CRM, ERP, HR, CAD, PDM and Marketing software.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.capterra.com/",
+      "title": "Capterra: Find The Right Software",
+      "content": "Choose the best software on Capterra, with insights from millions of users and 2 million+ verified reviews. Compare features, pricing, & more.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

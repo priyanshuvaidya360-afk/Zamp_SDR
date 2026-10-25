@@ -1,0 +1,31 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "ProtoPie offers multiple pricing tiers including a Free plan, Basic plan at $25/mo, Pro plan at $47/editor/mo, and custom Enterprise pricing.",
+        "evidence": "Free $0 2 prototypes, saved in Cloud... Basic $25 /mo 1 seat only... Pro $47 /editor/mo... Enterprise Custom min. 3 seats",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2413,
+    "completion_tokens": 173,
+    "latency_ms": 1282,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

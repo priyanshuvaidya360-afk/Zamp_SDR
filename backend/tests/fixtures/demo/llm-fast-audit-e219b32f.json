@@ -1,0 +1,77 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "Subject: ai-forward gtm insight",
+        "about": "market",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a general subject line and not a factual claim.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Hi Kristen,",
+        "about": "prospect",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a standard greeting.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I saw you appeared on the Cyber GTM Talk podcast to discuss AI-forward go-to-market strategies in cybersecurity (8 October 2026).",
+        "about": "prospect",
+        "status": "supported",
+        "fact_id": "13",
+        "reason": "Fact 13 confirms Kristen Twining appeared on the Cyber GTM Talk podcast on 8 October 2026 discussing AI-forward GTM strategies.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Since joining Reco as SVP of Sales in January 2026, you’ve been driving your team’s outbound growth.",
+        "about": "prospect",
+        "status": "uncertain",
+        "fact_id": "22",
+        "reason": "Fact 22 confirms she joined as SVP of Sales in January 2026, but driving outbound growth is an assumption.",
+        "suggestion": "Since joining Reco as SVP of Sales in January 2026."
+      },
+      {
+        "sentence": "Halyard surfaces buying signals, finds the right contacts, and drafts cited first‑touch emails that your reps can review, helping you increase meetings per rep without adding SDR headcount.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": "seller",
+        "reason": "This matches what Halyard sells according to the seller data.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15‑minute call to explore?",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a standard meeting ask.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Priyanshu",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is the sender signature.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email is tailored specifically using the prospect's podcast appearance and leadership role details."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1035,
+    "completion_tokens": 661,
+    "latency_ms": 2060,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

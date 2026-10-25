@@ -1,0 +1,161 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "leadership_change",
+        "about": "person",
+        "summary": "Merav Keren Kindler appointed Vice President of Marketing at Reco",
+        "evidence": "Merav Keren Kindler as vice president of marketing.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Zoe Hillenmeyer appointed Chief Operating Officer at Reco",
+        "evidence": "Zoe Hillenmeyer, who has been appointed chief operating officer.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Kristen Twining appointed Senior Vice President of Americas Sales and Business Development at Reco",
+        "evidence": "Kristen Twining senior vice president of Americas sales and business development.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Dana Harduf appointed Chief Human Resources Officer at Reco",
+        "evidence": "Dana Harduf as chief human resources officer.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Sandy Mathews appointed Vice President of Product Marketing at Reco",
+        "evidence": "Sandy Mathews as vice president of product marketing.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Reco opens a physical office in Texas to support enterprise customers",
+        "evidence": "Reco is opening a physical office in Texas, where it already maintains employees and serves enterprise customers.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Reco expands internationally with a dedicated team in the United Kingdom and Ireland",
+        "evidence": "Reco is also expanding internationally with a dedicated team in the United Kingdom and Ireland.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "Reco partners with a top national U.S. channel reseller",
+        "evidence": "The company said it has achieved top national reseller rankings with a key U.S. channel partner that has developed a managed security services practice built around Reco’s platform.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "press",
+        "about": "company",
+        "summary": "Reco received three Global InfoSec Awards for 2026",
+        "evidence": "The company recently received three Global InfoSec Awards for 2026, including recognition in SaaS and cloud security, AI security solutions and generative AI cybersecurity categories.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco provides an AI security platform for discovering, governing and securing AI agents, identities and SaaS connections",
+        "evidence": "Reco, which provides an AI security platform focused on discovering, governing and securing AI agents, identities and SaaS connections.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco platform supports >235 applications and >1,000 detection controls",
+        "evidence": "The company says the platform supports more than 235 applications and includes more than 1,000 detection controls designed to identify security and governance risks.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Over 100 enterprises currently use Reco’s platform",
+        "evidence": "More than 100 enterprises are currently using the platform as organizations move beyond experimentation and begin deploying AI agents at scale, according to the company.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 2019,
+    "completion_tokens": 2926,
+    "latency_ms": 3715,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

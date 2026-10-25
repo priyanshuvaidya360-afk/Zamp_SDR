@@ -1,0 +1,179 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "Recent award highlights growth, prompting need to capitalize with outbound pipeline."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 2,
+        "reasoning": "Series B funding creates immediate pressure to scale pipeline quickly."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "General product description does not drive pipeline urgency."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 3,
+        "specificity": 2,
+        "reasoning": "New integration with Cyera opens sales opportunities requiring outbound outreach."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 5,
+        "specificity": 5,
+        "reasoning": "New VP of Marketing likely tasked with driving growth and pipeline."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 2,
+        "specificity": 4,
+        "reasoning": "COO appointment may prioritize scaling sales operations."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 3,
+        "specificity": 4,
+        "reasoning": "New SVP of Americas Sales signals a push for more pipeline in the region."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 3,
+        "specificity": 4,
+        "reasoning": "Texas office opening suggests targeting new enterprise customers needing outreach."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 3,
+        "specificity": 4,
+        "reasoning": "UK/Ireland expansion creates new markets for outbound prospecting."
+      },
+      {
+        "signal_id": 10,
+        "relevance": 3,
+        "specificity": 2,
+        "reasoning": "Channel reseller partnership can increase demand for outbound prospecting."
+      },
+      {
+        "signal_id": 11,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "Awards boost brand visibility, prompting pipeline expansion."
+      },
+      {
+        "signal_id": 12,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Security platform description is not a pipeline trigger."
+      },
+      {
+        "signal_id": 13,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "No-code integration engine may enable cross‑sell opportunities."
+      },
+      {
+        "signal_id": 14,
+        "relevance": 5,
+        "specificity": 2,
+        "reasoning": "Browser Guard launch creates immediate need for outbound pipeline."
+      },
+      {
+        "signal_id": 15,
+        "relevance": 2,
+        "specificity": 4,
+        "reasoning": "Interim CEO appointment may shift growth priorities."
+      },
+      {
+        "signal_id": 16,
+        "relevance": 4,
+        "specificity": 2,
+        "reasoning": "16% QoQ headcount growth indicates scaling sales and marketing."
+      },
+      {
+        "signal_id": 17,
+        "relevance": 4,
+        "specificity": 2,
+        "reasoning": "ServiceNow partnership opens a large market, driving outbound outreach needs."
+      },
+      {
+        "signal_id": 18,
+        "relevance": 5,
+        "specificity": 2,
+        "reasoning": "Additional $55M funding heightens urgency for rapid pipeline growth."
+      },
+      {
+        "signal_id": 19,
+        "relevance": 3,
+        "specificity": 2,
+        "reasoning": "AT&T as customer/investor creates new sales opportunities."
+      },
+      {
+        "signal_id": 20,
+        "relevance": 4,
+        "specificity": 2,
+        "reasoning": "ServiceNow integration expands product reach, requiring outbound prospecting."
+      },
+      {
+        "signal_id": 21,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Technical detail about Reco Graph does not affect pipeline needs."
+      },
+      {
+        "signal_id": 22,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Manpower services are unrelated to outbound SaaS pipeline."
+      },
+      {
+        "signal_id": 23,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "UK market entry for Manpower suggests modest new prospecting need."
+      },
+      {
+        "signal_id": 24,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Global dev company focus is unrelated to outbound pipeline."
+      },
+      {
+        "signal_id": 25,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Product tour feature does not create pipeline pressure."
+      },
+      {
+        "signal_id": 26,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Platform support stats are not a trigger for outbound outreach."
+      },
+      {
+        "signal_id": 27,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Number of enterprise customers alone does not create new pipeline demand."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 2308,
+    "completion_tokens": 2098,
+    "latency_ms": 4892,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

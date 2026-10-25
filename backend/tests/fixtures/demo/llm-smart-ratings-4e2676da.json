@@ -1,0 +1,155 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "The new partnership opens a mid‑market channel, likely increasing the need for outbound pipeline."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Launching Modeler creates a fresh product that will require fresh pipeline to sell."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "General company description; little direct impact on pipeline need."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Recent $60M Series B funding creates pressure to grow revenue quickly."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "Targeting a smaller mid‑market hints at a growth focus but is indirect."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "U.S. market focus suggests geographic expansion, modest pipeline relevance."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Hiring an SDR indicates sales scaling, which may need more qualified leads."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Product feature overview, not a clear trigger for outbound demand."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Customer list shows traction but doesn’t create new pipeline urgency."
+      },
+      {
+        "signal_id": 10,
+        "relevance": 2,
+        "specificity": 2,
+        "reasoning": "Integration with sales tools suggests existing outreach; could benefit from better pipeline."
+      },
+      {
+        "signal_id": 11,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Opening new offices expands reach, likely increasing outbound pipeline needs."
+      },
+      {
+        "signal_id": 12,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Large customer base is a status point, not a direct trigger."
+      },
+      {
+        "signal_id": 13,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Industry‑specific positioning is background information."
+      },
+      {
+        "signal_id": 14,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Data‑integration details are tangential to outbound pipeline demand."
+      },
+      {
+        "signal_id": 15,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Feature highlight doesn’t directly create a pipeline problem."
+      },
+      {
+        "signal_id": 16,
+        "relevance": 0,
+        "specificity": 1,
+        "reasoning": "Consumer review platform is unrelated to B2B SaaS outbound sales."
+      },
+      {
+        "signal_id": 17,
+        "relevance": 0,
+        "specificity": 1,
+        "reasoning": "Trustpilot integration is irrelevant to the prospect’s growth needs."
+      },
+      {
+        "signal_id": 18,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "New implementation/reselling partner could generate fresh sales opportunities."
+      },
+      {
+        "signal_id": 19,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "General product description offers little actionable trigger."
+      },
+      {
+        "signal_id": 20,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Rapid U.S. expansion signals imminent demand for more pipeline."
+      },
+      {
+        "signal_id": 21,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Real‑time data claim is background, not a pipeline driver."
+      },
+      {
+        "signal_id": 22,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "$100M raise intensifies pressure to accelerate revenue growth."
+      },
+      {
+        "signal_id": 23,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Mission statement is generic and does not create immediate pipeline need."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 2037,
+    "completion_tokens": 1748,
+    "latency_ms": 4169,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

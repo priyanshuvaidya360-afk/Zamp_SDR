@@ -1,0 +1,23 @@
+{
+  "output": {
+    "subject": "new product marketing role",
+    "body": "I saw that you were appointed VP of Product Marketing on 8 June 2026. As you shape product positioning, you likely face the challenge of scaling outbound pipelines without adding more SDR headcount. Our outbound pipeline engine surfaces buying signals, finds the right contacts, and drafts researched first‑touch emails, letting growth teams build pipeline without expanding SDR teams. Would you be open to a brief 15‑minute call to explore how this could fit your strategy?\n\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I saw that you were appointed VP of Product Marketing on 8 June 2026.",
+        "signal_id": 8
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 994,
+    "completion_tokens": 810,
+    "latency_ms": 12118,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

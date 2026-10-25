@@ -1,0 +1,173 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Award shows growth and could raise pipeline needs."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Series B funding creates immediate pressure to build outbound pipeline."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "General product description gives little direct reason to reach out."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "CEO’s comment on AI shift hints at market expansion, modest pipeline relevance."
+      },
+      {
+        "signal_id": 5,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "New partnership may open fresh buyer segments needing pipeline support."
+      },
+      {
+        "signal_id": 6,
+        "relevance": 2,
+        "specificity": 4,
+        "reasoning": "Executive‑team expansion signals organizational growth, modest pipeline impact."
+      },
+      {
+        "signal_id": 7,
+        "relevance": 4,
+        "specificity": 3,
+        "reasoning": "Geographic expansion creates new markets that will need outbound outreach."
+      },
+      {
+        "signal_id": 8,
+        "relevance": 2,
+        "specificity": 4,
+        "reasoning": "COO appointment suggests scaling efforts, modest relevance for pipeline."
+      },
+      {
+        "signal_id": 9,
+        "relevance": 4,
+        "specificity": 4,
+        "reasoning": "SVP of Americas sales likely to push for more pipeline to hit targets."
+      },
+      {
+        "signal_id": 10,
+        "relevance": 1,
+        "specificity": 3,
+        "reasoning": "Awards are positive but not a direct pipeline driver."
+      },
+      {
+        "signal_id": 11,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Platform description is generic and not a clear trigger."
+      },
+      {
+        "signal_id": 12,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Technical capability stats don’t create immediate pipeline need."
+      },
+      {
+        "signal_id": 13,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "New product launch will require fresh outbound pipeline to drive adoption."
+      },
+      {
+        "signal_id": 14,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Product description adds little urgency for outreach."
+      },
+      {
+        "signal_id": 15,
+        "relevance": 2,
+        "specificity": 4,
+        "reasoning": "Interim CEO change may shift growth strategy, modest relevance."
+      },
+      {
+        "signal_id": 16,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "ServiceNow partnership could open new sales opportunities needing pipeline."
+      },
+      {
+        "signal_id": 17,
+        "relevance": 5,
+        "specificity": 3,
+        "reasoning": "Additional $55 M funding heightens demand for rapid pipeline generation."
+      },
+      {
+        "signal_id": 18,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Strategic investor/customer AT&T may drive larger deal flow, raising pipeline needs."
+      },
+      {
+        "signal_id": 19,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Manpower subsidiary is unrelated to SaaS security product."
+      },
+      {
+        "signal_id": 20,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Manpower expansion is unrelated to the target SaaS business."
+      },
+      {
+        "signal_id": 21,
+        "relevance": 0,
+        "specificity": 2,
+        "reasoning": "Reco Universal is a different business line, not relevant."
+      },
+      {
+        "signal_id": 22,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Integration list is generic and doesn’t create a direct pipeline trigger."
+      },
+      {
+        "signal_id": 23,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "High G2 rating is positive but not a clear reason to contact."
+      },
+      {
+        "signal_id": 24,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Pricing model info is background, not a pipeline driver."
+      },
+      {
+        "signal_id": 25,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Company background details give minimal relevance."
+      },
+      {
+        "signal_id": 26,
+        "relevance": 1,
+        "specificity": 2,
+        "reasoning": "Product tour feature is a generic benefit, not a strong outreach trigger."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 2439,
+    "completion_tokens": 2294,
+    "latency_ms": 15283,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

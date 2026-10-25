@@ -1,0 +1,77 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "Subject: 55m funding & pipeline boost",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 15,
+        "reason": "The funding amount matches the $55 million raised by Reco.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I saw Reco raised $55 million in additional funding on 29 September 2026.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 15,
+        "reason": "The amount and date match the funding fact.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Scaling outbound without expanding SDR headcount is tough, especially as generic sequences see lower reply rates and saturate the market.",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a general framing of the problem we solve.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Ofer Klein mentioned AT&T’s dual role as customer and strategic investor, underscoring the need for secure, high‑impact outreach.",
+        "about": "company",
+        "status": "unsupported",
+        "fact_id": null,
+        "reason": "No fact mentions Ofer Klein or this quote.",
+        "suggestion": "AT&T's participation as a customer and strategic investor underscores the need for secure outreach."
+      },
+      {
+        "sentence": "Our outbound pipeline engine surfaces buying signals, finds the right contacts, and drafts cited first‑touch emails, so your team can hit pipeline targets while lowering cost per opportunity.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": "seller",
+        "reason": "This accurately describes what Halyard sells.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a brief 15‑minute call to explore?",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is the call to action.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Priyanshu",
+        "about": "seller",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is the sender's sign-off.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email heavily relies on specific facts regarding Reco's funding and AT&T's partnership."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1039,
+    "completion_tokens": 640,
+    "latency_ms": 2088,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

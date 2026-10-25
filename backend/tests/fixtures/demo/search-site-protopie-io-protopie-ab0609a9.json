@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "site:protopie.io ProtoPie",
+  "results": [
+    {
+      "url": "https://www.protopie.io/blog/protopie-vs-axure",
+      "title": "ProtoPie vs. Axure : Which Is Best for Prototyping?",
+      "content": "## What is ProtoPie?\n\nProtoPie is a multi-platform rapid high-fidelity prototyping tool that enables developers to create interactive wireframes quickly and intuitively — in short, rich and realistic prototypes that look and feel like the real thing. [...] ProtoPie is the prototyping equivalent of flying to the moon without years of training. Create rapid high-fidelity prototypes for multiple devices complete with rich animations and complex interactions in a few clicks and drags — entirely code-free.\n\nBest of all, unlike Axure, ProtoPie’s free version has no time limit.\n\n### Intuitive and easy [...] ProtoPie is all about smooth connectivity. This is best seen by its remarkable capacity for the deployment of prototypes — from chat platforms to payment apps — across multiple devices. They can talk to each other as if the prototype were the real thing. Learn more about ProtoPie Connect.\n\nVideo\n\n### World-leading prototyping features\n\n#### Seamlessly integrate hardware and software",
+      "published_date": null,
+      "score": 0.89545894
+    },
+    {
+      "url": "https://www.protopie.io/blog/best-prototyping-tools",
+      "title": "Best Prototyping Tools in 2024",
+      "content": "### ProtoPie\n\nProtoPie is a high-fidelity prototyping tool that helps you create interactive prototypes easily for all kinds of digital products, including phones, desktops, tablets, smart watches, and even cars.\n\nSave your prototypes in the Cloud and share them with both internal and external stakeholders, and test your prototypes on the devices they are intended for. The Handoff feature for developer handoff also makes it a great choice for companies and cross-team collaborations. [...] We might be biased towards ProtoPie, but we're certainly not alone in our enthusiasm. The fact is, ProtoPie was voted as the number one tool for advanced prototyping in the UX Design Tools Survey in 2022.\n\nProtoPie homepage\n\nProtoPie - Prototyping Tool\n\nStrengths: [...] Luckily, you can use plugins like the ProtoPie plugin to create more interactive prototypes (high-fidelity prototypes) with your Figma designs.\n\nFigma homepage\n\nFigma\n\nStrengths:\n\n Extensive vector design features.\n Available in-browser.\n Supports real-time collaboration.\n Offers a ProtoPie plugin for creating advanced prototypes with Figma designs.\n\nWeaknesses:\n\n The “noodle chaos” that occurs when you have more than a few states.\n Can only add simple interactions between the elements.",
+      "published_date": null,
+      "score": 0.8925721
+    },
+    {
+      "url": "https://www.protopie.io/figma",
+      "title": "Figma + ProtoPie | High-Fidelity Prototyping",
+      "content": "Rom Impas\n\n,\n\nPrincipal UX designer, Zillow\n\n\"ProtoPie is the modern prototyping tool I have been looking for! It has the ease, speed, and simplicity to bring your designs to interactivity like the real product and allows you to explore different directions without requiring any coding. ProtoPie is absolutely brilliant! For companies like Zillow, which need security, team support, and the ability to share prototypes for external testing, ProtoPie does the job and more!\" [...] \"ProtoPie is the modern prototyping tool I have been looking for! It has the ease, speed, and simplicity to bring your designs to interactivity like the real product and allows you to explore different directions without requiring any coding. ProtoPie is absolutely brilliant! For companies like Zillow, which need security, team support, and the ability to share prototypes for external testing, ProtoPie does the job and more!\"\n\n## FAQs [...] \"ProtoPie is the modern prototyping tool I have been looking for! It has the ease, speed, and simplicity to bring your designs to interactivity like the real product and allows you to explore different directions without requiring any coding. ProtoPie is absolutely brilliant! For companies like Zillow, which need security, team support, and the ability to share prototypes for external testing, ProtoPie does the job and more!\"\n\n## Trusted by the world's best teams\n\nRom Impas\n\n,",
+      "published_date": null,
+      "score": 0.89030397
+    },
+    {
+      "url": "https://www.protopie.io/blog/dynamic-prototyping-protopie-connect-features-use-cases-more",
+      "title": "Dynamic Prototyping with ProtoPie Connect: Features, Use Cases, and More",
+      "content": "ProtoPie Connect is an advanced extension of ProtoPie Studio that enables designers to create experiences replicating real-world interactions across various devices, displays, hardware components, and APIs.\n\nProtoPie Connect functions as a powerful communication hub, using Socket.IO technology to bridge various clients, such as:\n\n ProtoPie prototypes;\n Physical hardware systems like Arduino boards or Logitech G29 steering wheels;\n External services like IFTTT webhooks and public APIs. [...] ProtoPie Studio: Our powerful prototyping application, available on both macOS and Windows, is where you create high-fidelity prototypes.\n ProtoPie Cloud: A web-based platform that enables you to store, share, and hand off ProtoPie prototypes effortlessly.\n ProtoPie Player: A free app that complements ProtoPie Studio, allowing you to view and test prototypes on iOS, iPad, and Android devices.\n\nProtoPie Connect is an integral part of the ProtoPie ecosystem. [...] ProtoPie Connect is a game-changer for creating interactive, connected prototyping experiences. Whether you're working with multiple screens, integrating custom hardware, or tapping into APIs, ProtoPie Connect opens up a world of possibilities for dynamic prototyping. Dive into this article to discover how to unlock its full potential and enhance your workflow through seamless integrations and advanced features.\n\n## What is ProtoPie Connect?",
+      "published_date": null,
+      "score": 0.78886026
+    },
+    {
+      "url": "https://www.protopie.io/download",
+      "title": "Download ProtoPie | Free to Start",
+      "content": "“We’ve tried countless prototyping tools and ProtoPie is hands down the most flexible and powerful tool that fits perfectly into any team’s workflow.”\n\nEduardo Sonnino\n\nSenior Designer, Microsoft\n\nStep 1\n\n# Download ProtoPie Studio\n\nInstall ProtoPie Studio on your desktop, and create interactive prototypes anywhere!\n\nAvailable on macOS and Windows desktops. [...] “We’ve tried countless prototyping tools and ProtoPie is hands down the most flexible and powerful tool that fits perfectly into any team’s workflow.”\n\nEduardo Sonnino\n\nSenior Designer, Microsoft\n\nStep 2\n\n### Import from your favorite design tool\n\nInstall the ProtoPie plugin, and import your assets straight from Figma, Sketch, or Adobe XD.\n\nGet Figma plugin\n\nGet Sketch plugin\n\nGet Adobe XD plugin\n\nStep 2\n\n### Import from your favorite design tool [...] Connect your prototypes to multiple screens, devices, hardware, and APIs.\n\nDownload Connect\n\nLearn More\n\nMacOS 10.15 Catalina or above, or Windows 10 or above required.\n\n## Bring your ideas to life, start with ProtoPie Studio\n\nFree. No credit card required.\n\nGet Started\n\n## Prototype the future with ProtoPie Connect\n\nConnect your prototypes to multiple screens, devices, hardware, and APIs.\n\nDownload Connect\n\nLearn More\n\nMacOS 10.15 Catalina or above, or Windows 10 or above required.",
+      "published_date": null,
+      "score": 0.767638
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

@@ -1,0 +1,53 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "hubspot migration ready for scaling",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 2,
+        "reason": "Fact 2 confirms the completion of the HubSpot CRM migration.",
+        "suggestion": null
+      },
+      {
+        "sentence": "I see your team just completed the HubSpot migration.",
+        "about": "company",
+        "status": "supported",
+        "fact_id": 2,
+        "reason": "Fact 2 confirms the completion of the HubSpot CRM migration.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Now that your new CRM is live, you can start scaling outbound pipeline without adding more SDR headcount, letting HubSpot feed the leads Halyard identifies.",
+        "about": "company",
+        "status": "uncertain",
+        "fact_id": 2,
+        "reason": "While the CRM migration is supported, the connection to scaling pipeline and feeding leads via Halyard goes beyond the facts.",
+        "suggestion": "Now that your CRM migration is complete, Halyard can help you scale outbound pipeline."
+      },
+      {
+        "sentence": "Would you be open to a brief 15‑minute call to explore how?",
+        "about": "other",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a call to action question rather than a factual claim.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email directly references Acme Fintech's specific CRM migration to HubSpot based on known facts."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 823,
+    "completion_tokens": 393,
+    "latency_ms": 2854,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

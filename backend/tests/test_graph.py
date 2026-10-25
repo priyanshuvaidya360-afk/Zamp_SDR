@@ -1,4 +1,4 @@
-"""The LangGraph pipeline (app/pipeline/graph.py) and its diagram (agents/PIPELINE.md)."""
+"""The LangGraph pipeline (app/pipeline/graph.py) and its diagram (agents/PIPELINE_DIAGRAM.md)."""
 
 from app.pipeline.graph import build_graph
 from app.pipeline.stages import STAGE_INFO, STAGES
@@ -25,5 +25,5 @@ def test_every_stage_is_described_for_the_diagram():
 
 
 def test_pipeline_md_is_up_to_date():
-    assert (AGENTS_DIR / "PIPELINE.md").read_text() == draw_pipeline.render(), \
-        "agents/PIPELINE.md is out of date: run `python -m scripts.draw_pipeline` in backend/"
+    assert (AGENTS_DIR / "PIPELINE_DIAGRAM.md").read_text(encoding="utf-8") == draw_pipeline.render(), \
+        "agents/PIPELINE_DIAGRAM.md is out of date: run `python -m scripts.draw_pipeline` in backend/"

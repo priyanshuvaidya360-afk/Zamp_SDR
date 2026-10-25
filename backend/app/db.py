@@ -16,9 +16,20 @@ from app.config import settings
 log = logging.getLogger(__name__)
 
 
+def normalise_url(url: str) -> str:
+    """Hosts (Neon, Supabase, Render) hand out postgres:// or postgresql:// URLs; SQLAlchemy
+    needs the driver named, and psycopg (v3) is the one installed."""
+    for prefix in ("postgres://", "postgresql://"):
+        if url.startswith(prefix):
+            return "postgresql+psycopg://" + url.removeprefix(prefix)
+    return url
+
+
 def make_engine(url: str) -> Engine:
-    connect_args = {"check_same_thread": False} if url.startswith("sqlite") else {}
-    return create_engine(url, connect_args=connect_args)
+    url = normalise_url(url)
+    if url.startswith("sqlite"):
+        return create_engine(url, connect_args={"check_same_thread": False})
+    return create_engine(url, pool_pre_ping=True)  # free Postgres tiers drop idle connections
 
 
 engine = make_engine(settings.database_url)

@@ -1,0 +1,8 @@
+{
+  "provider": "simweb",
+  "query": "ferncastle.example pricing OR plans OR enterprise",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

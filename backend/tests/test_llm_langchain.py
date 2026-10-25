@@ -43,9 +43,9 @@ def server(monkeypatch):
         seen.append((request.url.host, json.loads(request.content)))
         return script.pop(0)
 
-    def chat_model(api_key, base_url, model, timeout):
+    def chat_model(api_key, base_url, model, timeout, max_tokens=None):
         return ChatOpenAI(model=model, api_key=api_key, base_url=base_url, timeout=timeout, max_retries=0,
-                          use_responses_api=False,
+                          max_tokens=max_tokens, use_responses_api=False,
                           http_async_client=httpx.AsyncClient(transport=httpx.MockTransport(handler)))
 
     monkeypatch.setattr(llm, "_chat_model", chat_model)
@@ -85,6 +85,9 @@ async def test_rate_limit_falls_back_to_gemini(server):
     _, usage = await llm.structured("smart", "SYS", "USER", HookChoice)
     assert [host for host, _ in seen] == ["api.groq.com", "generativelanguage.googleapis.com"]
     assert usage.provider == "gemini" and usage.fallbacks == ["groq: rate limited"]
+    # Groq is asked for room to answer (its default is 2,048 tokens); Gemini keeps its own default.
+    assert seen[0][1]["max_completion_tokens"] == settings.groq_max_output_tokens
+    assert "max_completion_tokens" not in seen[1][1]
 
 
 async def test_every_provider_failing_is_one_readable_error(server, monkeypatch):

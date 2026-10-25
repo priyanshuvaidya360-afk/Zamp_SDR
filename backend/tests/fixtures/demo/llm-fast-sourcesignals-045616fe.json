@@ -1,0 +1,35 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "hiring",
+        "about": "company",
+        "summary": "Ferncastle is hiring five Sales Development Representatives in Austin.",
+        "evidence": "Ferncastle is hiring five Sales Development Representatives for our new Austin office.",
+        "published_at": "2026-10-05",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": {
+          "title": "",
+          "locations": [
+            "Austin"
+          ],
+          "posted_days_ago": null
+        }
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1077,
+    "completion_tokens": 841,
+    "latency_ms": 13514,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

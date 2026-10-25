@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 13,
+    "angle": "Kristen Twining recently discussed AI‑forward go‑to‑market strategies on the Cyber GTM Talk podcast, underscoring her focus on modernizing sales pipelines – a challenge Halyard can solve by automating prospecting without extra SDR headcount.",
+    "runners_up": [
+      11,
+      21
+    ],
+    "why_not_others": "The funding news is about the company overall, and the leadership change is older and less directly tied to her current GTM priorities."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 750,
+    "completion_tokens": 612,
+    "latency_ms": 1844,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

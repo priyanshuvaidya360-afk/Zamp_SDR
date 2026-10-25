@@ -1,0 +1,149 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Zoe Hillenmeyer appointed chief operating officer",
+        "evidence": "\"I joined Reco because the company is solving the right problem at exactly the right moment.\"",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": "Zoe Hillenmeyer",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Kristen Twining named senior vice president of Americas sales and business development",
+        "evidence": "Kristen Twining senior vice president of Americas sales and business development",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Dana Harduf appointed chief human resources officer",
+        "evidence": "Dana Harduf as chief human resources officer",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "company",
+        "summary": "Merav Keren Kindler named vice president of marketing",
+        "evidence": "Merav Keren Kindler as vice president of marketing",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "leadership_change",
+        "about": "person",
+        "summary": "Sandy Mathews appointed vice president of product marketing",
+        "evidence": "Sandy Mathews as vice president of product marketing",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Reco opens new office in Texas and expands internationally to the United Kingdom and Ireland",
+        "evidence": "To support customer growth, Reco is opening a physical office in Texas, where it already maintains employees and serves enterprise customers. Reco is also expanding internationally with a dedicated team in the United Kingdom and Ireland.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "Reco partners with a key U.S. channel reseller",
+        "evidence": "The company said it has achieved top national reseller rankings with a key U.S. channel partner that has developed a managed security services practice built around Reco’s platform.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "press",
+        "about": "company",
+        "summary": "Reco received three Global InfoSec Awards 2026",
+        "evidence": "The company recently received three Global InfoSec Awards for 2026, including recognition in SaaS and cloud security, AI security solutions and generative AI cybersecurity categories.",
+        "published_at": "2026-06-08",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco offers an AI security platform focused on discovering, governing and securing AI agents, identities and SaaS connections",
+        "evidence": "Reco, which provides an AI security platform focused on discovering, governing and securing AI agents, identities and SaaS connections.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco’s platform uses a knowledge graph architecture to map identities, permissions, connectivity and activity in real time",
+        "evidence": "The company’s platform uses a knowledge graph architecture to map identities, permissions, connectivity and activity across enterprise environments in real time.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco’s platform supports more than 235 applications and over 1,000 detection controls",
+        "evidence": "The platform supports more than 235 applications and includes more than 1,000 detection controls designed to identify security and governance risks.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 2015,
+    "completion_tokens": 2653,
+    "latency_ms": 8671,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

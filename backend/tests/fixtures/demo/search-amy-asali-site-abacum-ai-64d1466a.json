@@ -5,7 +5,7 @@
   "credits": 0.0,
   "fallbacks": [
     "tavily: no results",
-    "duckduckgo: no results"
+    "duckduckgo: TimeoutException"
   ],
   "cached": false
 }

@@ -1,0 +1,30 @@
+{
+  "provider": "tavily",
+  "query": "\"Abacum\" raises funding round",
+  "results": [
+    {
+      "url": "https://en.wowtale.net/2026/10/22/235679",
+      "title": "AI Planning Platform Pigment Raises $250M Series E at $2.3B Valuation - WOWTALE",
+      "content": "Pigment isn’t the only one going after this space. Abacum, which started in Barcelona and now focuses mainly on the U.S. market, raised a $60 million Series B in June 2025 led by Scale Venture Partners (with Cathay Innovation, Y Combinator, Creandum, and others participating; total funding is around $90 million). Abacum targets a smaller mid-market customer base than Pigment — a different position in the same category. [...] Image resources: – Official source: \n\n### MORE FROM THE POST\n\n Cognition Raises Over $2B at $48B Valuation\n Rillet Achieves Unicorn Status With $100M Series C Funding\n AI Training Data & Agents Firm Labelbox Raises $100M+ Series E\n Structured-Decision AI Maker TypeSafe Raises $870M Series A\n AI Training-Data Startup Micro1 Reportedly Hits $4B Valuation\n\n Abacum\n AI\n Datarails\n enterprise AI\n EQT\n funding\n mega funding\n Nvidia\n Overseas funding\n Pigment\n seriesE\n unicorn\n\n#### Share [...] The category is splitting into three strategies: layer AI onto Excel (Datarails), target the mid-market (Abacum), or replace the enterprise planning stack outright (Pigment). The gap in valuation multiples shows which strategy investors are currently willing to pay the biggest premium for.\n\n## The Real Test Is Decision-Making",
+      "published_date": "Thu, 22 Oct 2026 09:38:52 GMT",
+      "score": 0.8131201
+    },
+    {
+      "url": "https://www.eu-startups.com/2026/03/beyond-llms-ai-pioneer-yann-lecuns-new-venture-ami-raises-e890-million-to-build-world-model-ai-systems",
+      "title": "Beyond LLMs: AI pioneer Yann LeCun’s new venture AMI raises €890 million to build “world model” AI systems | EU-Startups",
+      "content": "UK-Startups\n\n### CuspAI raises €393.2 million at €2.2 billion valuation; launches AI Materials Foundry to accelerate materials discovery\n\nSwitzerland-Startups\n\n### Amazon acquires Zurich-based Rivr, developer of stair-climbing robots for doorstep delivery\n\nEU-Startups Podcast\n\n### EU-Startups Podcast | Episode 142: Julio Martinez, Co-founder and CEO of Abacum\n\nFunding\n\n### Barcelona-based Abacum raises over €50 million for their business planning software\n\nFunding [...] Funding\n\n### Berlin’s Nelly raises €50 million to redefine financial operations in European healthcare\n\nFrance-Startups\n\n### London calling: Paris-based AQEMIA secures €94.9 million to expand to the UK and accelerates molecular research\n\nFunding\n\n### Barcelona-based Payflow raises €6 million to expand flexible salary in Iberian and Latam markets\n\n#### Most Popular\n\n### FashionTech startup Rodinia Generation aims to save 100 billion litres of water annually, secures €4 million [...] This is among the largest Seed rounds ever raised by a European company. It was co-led by Cathay Innovation, Greycroft, Hiro Capital, HV Capital, Bezos Expeditions, and various other investors and angels worldwide.\n\nAMI is additionally backed by a group of long-term international investors and strategic partners, such as Toyota Ventures, New Legacy Ventures, Temasek, SBVA, NVIDIA, Mark Cuban, Association Familiale Mulliez, Groupe industriel Marcel Dassault, Sea, and Alpha Intelligence Capital.",
+      "published_date": "Tue, 10 Mar 2026 09:46:38 GMT",
+      "score": 0.7106489
+    },
+    {
+      "url": "https://finance.yahoo.com/news/model-ml-raises-75m-one-122200147.html",
+      "title": "Model ML raises $75M In One of The Largest FinTech Series A Rounds In History to Transform Financial Services with AI Workflow Automation",
+      "content": "This new financing will be used to accelerate global expansion and deepen AI capabilities across key financial hubs. The company will build out dedicated onboarding and customer success teams in San Francisco, New York, London, and Hong Kong to support rapid enterprise adoption. [...] Addressing a Critical Market Need [...] This is a paid press release. Contact the press release distributor directly with any inquiries.\n\nPR Newswire\n\n# Model ML raises $75M In One of The Largest FinTech Series A Rounds In History to Transform Financial Services with AI Workflow Automation\n\nPR Newswire\n\n7 min read",
+      "published_date": "Mon, 24 Nov 2025 00:00:00 GMT",
+      "score": 0.06767611
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

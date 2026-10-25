@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 1,
+    "angle": "Maya Collins is discussing outbound experimentation bottlenecks, indicating she’s seeking ways to make outbound outreach more efficient—our engine can surface buying signals and draft ready‑to‑send emails to address that need.",
+    "runners_up": [
+      2,
+      3
+    ],
+    "why_not_others": "Signals 2 and 3 focus on Brightwave’s product launch and overall market focus rather than Maya’s personal outbound challenges."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 671,
+    "completion_tokens": 486,
+    "latency_ms": 1148,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

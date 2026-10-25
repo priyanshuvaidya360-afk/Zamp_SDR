@@ -1,0 +1,43 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "product_launch",
+        "about": "company",
+        "summary": "Abacum launched Modeler, an AI agent that brings agentic modeling to finance teams.",
+        "evidence": "Abacum, the AI-native FP&A platform, today launched Modeler, an AI agent that brings Agentic Modeling to finance teams.",
+        "published_at": "2026-10-13",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "Abacum achieved Built for NetSuite status for its SuiteApp.",
+        "evidence": "Abacum, an AI-native financial planning and analysis (FP&A) platform, today announced that its SuiteApp has achieved the 'Built for NetSuite' status.",
+        "published_at": "2026-07-09",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2313,
+    "completion_tokens": 297,
+    "latency_ms": 1499,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

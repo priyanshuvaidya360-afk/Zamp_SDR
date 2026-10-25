@@ -37,7 +37,7 @@ SOURCES = [
 
 def gather_output() -> GatherOutput:
     sources = [Source(category=c, about="company", url=u, title=t, published_date=d, snippet="",
-                      text=(DATA / name).read_text()) for name, u, c, t, d in SOURCES]
+                      text=(DATA / name).read_text(encoding="utf-8")) for name, u, c, t, d in SOURCES]
     return GatherOutput(message="fixture", sources=sources, searches=2, extracts=len(sources))
 
 
@@ -48,7 +48,7 @@ def now_slug() -> str:
 
 def write_now_fixture() -> None:
     """The careers page as it is 'today': two roles left."""
-    page = (DATA / "careers_now.txt").read_text()
+    page = (DATA / "careers_now.txt").read_text(encoding="utf-8")
     save_fixture(now_slug(), ExtractResponse(provider="tavily", pages={CAREERS: page}, failed=[], credits=1).model_dump())
 
 

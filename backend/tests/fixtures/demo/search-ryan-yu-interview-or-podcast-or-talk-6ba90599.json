@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Ryan Yu\" interview OR podcast OR talk",
+  "results": [
+    {
+      "url": "https://www.facebook.com/ReadyForDuel/videos/ryan-yu-10000000-aura/3212697822451325",
+      "title": "Ryan Yu Wins 2026 NAWCQ Advanced 18-0 as World ...",
+      "content": "During a Yu-Gi-Oh! tournament interview, a world champion is asked about the performance of his Sky Striker deck. He responds by stating that his success is",
+      "published_date": null,
+      "score": 0.46147847
+    },
+    {
+      "url": "https://www.linkedin.com/in/ryan-j-yu",
+      "title": "Ryan Yu - Carnegie Mellon University",
+      "content": "Description: Hi, I'm Ryan! Growing up surrounded by games and having a strong interest in math and data, I treat almost everything as a puzzle that needs to be solved. I strive to find meaning in the seemingly random data, to break down a convoluted issue into manageable parts, and to find simple, elegant solutions to complex problems. I'm currently pursuing my Master of Science in Applied Data Science at Carnegie Mellon University, after having completed my B.S.'s in Computer Science, Data [...] # Ryan Yu [...] Science, Data Science and Statistics, and Mathematics at Miami University.",
+      "published_date": null,
+      "score": 0.32627192
+    },
+    {
+      "url": "https://www.instagram.com/reel/Dau96erx1-V?hl=en",
+      "title": "Ryan Yu + 10000000 Aura!",
+      "content": ";Ryan Yu + 10000000 Aura!\". Talk your ish well deserved … he is indeed a solid top tier player. Sky Striker is a solid deck but only a solid Pilot",
+      "published_date": null,
+      "score": 0.31031856
+    },
+    {
+      "url": "https://www.reddit.com/r/yugioh/comments/1uvnffm/ryan_yu_with_the_mic_drop_after_winning_the_nawcq",
+      "title": "Ryan Yu with the mic drop after winning the NAWCQ 2026",
+      "content": "A bald interviewer with a gray suit asks a person in a purple t-shirt about their deck's performance, to which the person humorously replies it's not the deck",
+      "published_date": null,
+      "score": 0.2969095
+    },
+    {
+      "url": "https://www.facebook.com/respectygo/posts/its-not-the-deck-its-me-ryan-yu-after-going-18-0-undefeated-in-nawcq-2026na-wcq/1679660467012168",
+      "title": "\"It's not the deck, IT'S ME\" 😏 - Ryan Yu, after going 18-0 ...",
+      "content": "\"It's not the deck, IT'S ME\" 😏\n\n- Ryan Yu, after going 18-0 undefeated in NAWCQ 2026\n\n🎬NA WCQ 2026 Stream",
+      "published_date": null,
+      "score": 0.2560108
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

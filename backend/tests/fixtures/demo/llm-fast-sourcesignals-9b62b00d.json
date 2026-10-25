@@ -1,0 +1,55 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "ProtoPie Connect is an advanced extension of ProtoPie Studio enabling connected prototyping experiences across devices and hardware.",
+        "evidence": "ProtoPie Connect is an advanced extension of ProtoPie Studio that enables designers to create experiences replicating real-world interactions",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "ProtoPie details the components of its ecosystem including Studio, Cloud, Player, and Connect.",
+        "evidence": "ProtoPie Connect is an integral part of the ProtoPie ecosystem, designed to integrate seamlessly with our other products",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "ProtoPie Connect offers built-in plugins for API, IFTTT, Logitech G29, Arduino, Gamepad, blokdots, and Unity.",
+        "evidence": "ProtoPie Connect has a range of built-in plugins that allow you to integrate your ProtoPie prototypes (Pies) with external hardware devices and services.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2156,
+    "completion_tokens": 416,
+    "latency_ms": 1656,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

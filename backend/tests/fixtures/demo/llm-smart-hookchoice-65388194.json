@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 13,
+    "angle": "Sandy just rolled out Reco’s AI agent security for enterprises, a fresh product that will need demand generation without scaling the SDR team, which is exactly what Halyard helps with.",
+    "runners_up": [
+      17,
+      18
+    ],
+    "why_not_others": "The funding news is about company cash, and the AT&T partnership quote isn’t from Sandy, so they’re less directly tied to her product‑marketing goals."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 899,
+    "completion_tokens": 424,
+    "latency_ms": 20652,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

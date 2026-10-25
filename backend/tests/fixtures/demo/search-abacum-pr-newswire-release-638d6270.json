@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Abacum\" PR Newswire release",
+  "results": [
+    {
+      "url": "https://www.prnewswire.com/news/abacum/",
+      "title": "Abacum News and Press Releases | PR Newswire",
+      "content": "Oct 13, 2026 · Join PR Newswire for Journalists to access all of the free services designated to make your job easier. In need of subject matter experts for your story? Submit a free ProfNet request and find...",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.prnewswire.com/news-releases/building-on-abacum-intelligence-abacum-launches-modeler-and-brings-agentic-modeling-to-every-finance-team-302907146.html",
+      "title": "Building on Abacum Intelligence, Abacum ... - PR Newswire",
+      "content": "Oct 13, 2026 · NEW YORK and BARCELONA, Spain, Oct. 13, 2026 /PRNewswire/ -- Abacum, the AI-native FP&A platform, today launched Modeler, an AI agent that brings Agentic Modeling to finance teams.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.prnewswire.co.uk/news-releases/building-on-abacum-intelligence-abacum-launches-modeler-and-brings-agentic-modeling-to-every-finance-team-302907187.html",
+      "title": "Building on Abacum Intelligence, Abacum Launches Modeler and ...",
+      "content": "Oct 13, 2026 · NEW YORK and BARCELONA, Spain, Oct. 13, 2026 / PRNewswire / -- Abacum, the AI-native FP &A platform, today launched Modeler, an AI agent that brings AgenticModeling to finance teams.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.abacum.ai/newsroom",
+      "title": "Newsroom: Finance Updates from the Founders | Abacum",
+      "content": "Read the latest news about financial planning and analysis, and what Abacum's co-founders have to say about it.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.abacum.ai/newsroom/series-b-announcement",
+      "title": "Abacum raises $60m Series B",
+      "content": "Jun 11, 2025 · New York/London/Barcelona, 11th June 2025 - Abacum, the business planning software company founded by Julio Martínez and Jorge Lluch, today announces that it has raised a $60m Series B round led by San Francisco-headquartered Scale Venture Partners.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

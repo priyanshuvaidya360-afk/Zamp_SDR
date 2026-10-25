@@ -1,0 +1,43 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Acme Fintech raised $40 million in a Series C round led by Lightspeed",
+        "evidence": "has raised $40 million in its Series C round led by Lightspeed",
+        "published_at": "2026-10-03",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "hiring",
+        "about": "company",
+        "summary": "Acme Fintech announced plans to hire aggressively across engineering and sales",
+        "evidence": "CEO Arjun Mehta said the company will hire aggressively across engineering and sales.",
+        "published_at": "2026-10-03",
+        "sensitive": false,
+        "speaker": "Arjun Mehta",
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 980,
+    "completion_tokens": 265,
+    "latency_ms": 1966,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

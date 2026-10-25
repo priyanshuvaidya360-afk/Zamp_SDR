@@ -1,6 +1,6 @@
 """Batch runner: runs each prospect through the stages and streams every step.
 
-Spec: docs/GUIDE.md "Pipeline stages in detail" (batch layer) and T05.
+Spec: docs/PROJECT_SPEC.md "Pipeline stages in detail" (batch layer) and T05.
 
 Code owns the flow; stages only do work. A stage is `async def run(ctx) -> BaseModel`. It may
 raise StopRun to end the run with a named status (needs_input, low_signal, blocked, held,
@@ -15,16 +15,18 @@ import time
 from collections import Counter
 from collections.abc import Awaitable, Callable, Coroutine
 from dataclasses import dataclass, field
+from datetime import timedelta, timezone
 from typing import Any
 
 import httpx
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
+from sqlalchemy import update
 from sqlmodel import Session, select
 
 from app import db
 from app.config import settings
 from app.events import bus
-from app.models import Batch, BatchStatus, Run, RunStatus, StageEvent, StageState, utcnow
+from app.models import Batch, BatchStatus, Run, RunStatus, SignalRecord, StageEvent, StageState, utcnow
 from app.seller import load_seller_profile
 
 log = logging.getLogger(__name__)
@@ -235,16 +237,21 @@ def stage_event_dict(event: StageEvent, batch_id: int | None = None) -> dict[str
 
 def _record(ctx: RunContext, stage: Stage, state: StageState, message: str = "",
             payload: dict[str, Any] | None = None, duration_ms: int | None = None) -> None:
+    _save_event(ctx.run_id, ctx.batch_id, stage.name, state, message, payload, duration_ms)
+
+
+def _save_event(run_id: int, batch_id: int, stage: str, state: StageState, message: str = "",
+                payload: dict[str, Any] | None = None, duration_ms: int | None = None) -> None:
     """Save the event, then publish it (full on the run topic, slim on the batch topic)."""
     with Session(db.engine) as session:
-        event = StageEvent(run_id=ctx.run_id, stage=stage.name, state=state, message=message,
+        event = StageEvent(run_id=run_id, stage=stage, state=state, message=message,
                            payload=payload or {}, duration_ms=duration_ms)
         session.add(event)
         session.commit()
         session.refresh(event)
-        data = stage_event_dict(event, ctx.batch_id)
-    bus.publish(f"run:{ctx.run_id}", data)
-    bus.publish(f"batch:{ctx.batch_id}", {**data, "payload": {}})
+        data = stage_event_dict(event, batch_id)
+    bus.publish(f"run:{run_id}", data)
+    bus.publish(f"batch:{batch_id}", {**data, "payload": {}})
 
 
 def publish_status(run: Run) -> None:
@@ -254,6 +261,7 @@ def publish_status(run: Run) -> None:
         "batch_id": run.batch_id,
         "status": run.status.value,
         "final_reason": run.final_reason,
+        "identity_outcome": run.identity_outcome,
         "confidence": run.confidence,
         "cost_credits": run.cost_credits,
     }
@@ -311,6 +319,21 @@ def _restore_outputs(ctx: RunContext, stages: list[Stage]) -> None:
             ).first()
             if event and "output" in event.payload:
                 ctx.outputs[stage.name] = stage.output.model_validate(event.payload["output"])
+    _restore_context(ctx)
+
+
+def _restore_context(ctx: RunContext) -> None:
+    """What restored stages had set on the context besides their output: the identity confidence
+    (halved by a screening trap, case 11) and a low-signal ending (stage 5)."""
+    resolved = ctx.outputs.get("resolve")
+    if resolved is not None and getattr(resolved, "person", None) is not None:
+        ctx.confidence = 1.0 if getattr(resolved, "rep_confirmed", False) else resolved.person.confidence
+        if getattr(ctx.outputs.get("extract"), "ai_screening", None) == "screening_trap":
+            ctx.confidence = round(ctx.confidence * 0.5, 2)
+    scored = ctx.outputs.get("score")
+    if getattr(scored, "low_signal", False):
+        ctx.final_status = RunStatus.low_signal
+        ctx.final_reason = scored.message
 
 
 async def run_one(run_id: int, start_stage: str | None = None,
@@ -423,6 +446,135 @@ async def run_batch(run_ids: list[int]) -> None:
     finally:
         context.running_batch = False
         update_batch_progress(batch_id)
+
+
+# --- Retrying a failed run ---------------------------------------------------------------
+
+RESEARCH_STAGES = {"gather", "extract"}  # web research: redone once older than retry_research_max_age_hours
+
+
+class RetryRefused(Exception):
+    """The run can't be retried now; the message says why, for the rep."""
+
+
+@dataclass
+class RetryPlan:
+    start_stage: str
+    reused: list[str]  # stages whose saved output is used as is
+    refreshed: list[str]  # reusable on their own, but redone because they are stale
+
+
+def _aware(ts):
+    return ts if ts.tzinfo else ts.replace(tzinfo=timezone.utc)
+
+
+def _reusable(session: Session, run_id: int, stage: Stage, event: StageEvent | None) -> str | None:
+    """None if the stage's saved result can be used again, else why not."""
+    if event is None or event.state != StageState.done:
+        return "did not finish"
+    if event.payload.get("stopped") or "output" not in event.payload:
+        return "no saved result"
+    try:
+        output = stage.output.model_validate(event.payload["output"])
+    except ValidationError:
+        return "saved result is unreadable"
+    if stage.name == "extract":
+        ids = {s.id for s in getattr(output, "signals", [])}
+        stored = set(session.exec(select(SignalRecord.id).where(SignalRecord.run_id == run_id)).all())
+        if not ids <= stored:
+            return "stored signals are missing"
+    return None
+
+
+def plan_retry(session: Session, run_id: int) -> RetryPlan:
+    """Restart at the first stage whose saved result is missing, unreadable or stale research;
+    every stage before it is restored from its saved 'done' event (as a resume does)."""
+    stages = get_stages()
+    max_age = timedelta(hours=settings.retry_research_max_age_hours)
+    reused: list[str] = []
+    for i, stage in enumerate(stages):
+        event = session.exec(
+            select(StageEvent).where(StageEvent.run_id == run_id, StageEvent.stage == stage.name)
+            .order_by(StageEvent.id.desc())
+        ).first()
+        if _reusable(session, run_id, stage, event) is not None:
+            return RetryPlan(stage.name, reused, [])
+        if stage.name in RESEARCH_STAGES and utcnow() - _aware(event.ts) > max_age:
+            # Stale research: redo it and everything after (later stages read it).
+            refreshed = [s.name for s in stages[i:] if s.name in RESEARCH_STAGES]
+            return RetryPlan(stage.name, reused, refreshed)
+        reused.append(stage.name)
+    return RetryPlan(stages[-1].name, reused[:-1], [])  # every stage finished: redo the last one
+
+
+def claim_retry(run_id: int) -> tuple[int, str | None]:
+    """Atomically move a failed run back to running (one UPDATE guarded by status and the retry
+    cap, so two simultaneous requests can't both start it). Returns (attempt, previous error)."""
+    with Session(db.engine) as session:
+        run = session.get(Run, run_id)
+        if run is None:
+            raise LookupError(f"Run {run_id} not found.")
+        previous_error = run.final_reason
+    with db.engine.begin() as connection:
+        claimed = connection.execute(
+            update(Run)
+            .where(Run.id == run_id, Run.status == RunStatus.failed,
+                   Run.retry_count < settings.retry_max_attempts)
+            .values(status=RunStatus.running, retry_count=Run.retry_count + 1,
+                    final_reason=None, finished_at=None)
+        ).rowcount
+    with Session(db.engine) as session:
+        run = session.get(Run, run_id)
+        if claimed:
+            return run.retry_count, previous_error
+        if run.status == RunStatus.running:
+            raise RetryRefused("This run is already running.")
+        if run.status != RunStatus.failed:
+            label = run.status.value.replace("_", " ")
+            raise RetryRefused(f"This run is {label}; only failed runs can be retried.")
+        raise RetryRefused(f"This run was retried {run.retry_count} times already (the limit is "
+                           f"{settings.retry_max_attempts}). Upload the prospect again to start fresh.")
+
+
+def start_retry(run_id: int) -> dict[str, Any]:
+    """Claim the run, decide where to restart, record the retry as a stage event, then run it in
+    the background. Raises LookupError / RetryRefused."""
+    with Session(db.engine) as session:
+        plan = plan_retry(session, run_id)  # read-only, so it is safe to work out before claiming
+    attempt, previous_error = claim_retry(run_id)
+    with Session(db.engine) as session:
+        run = session.get(Run, run_id)
+        batch_id = run.batch_id
+        publish_status(run)
+    research_reused = any(s in RESEARCH_STAGES for s in plan.reused)
+    parts = [f"Retry {attempt} of {settings.retry_max_attempts}", f"restarting at {plan.start_stage}"]
+    if plan.refreshed:
+        parts.append("saved research is older than "
+                     f"{settings.retry_research_max_age_hours:g} h, searching again")
+    elif research_reused:
+        parts.append("reusing saved research")
+    _save_event(run_id, batch_id, "retry", StageState.done, " · ".join(parts), {
+        "attempt": attempt, "max_attempts": settings.retry_max_attempts, "start_stage": plan.start_stage,
+        "reused": plan.reused, "refreshed": plan.refreshed, "previous_error": previous_error,
+    })
+    spawn(retry_one(run_id, plan.start_stage))
+    return {"run_id": run_id, "status": RunStatus.running.value, "attempt": attempt,
+            "max_attempts": settings.retry_max_attempts, "start_stage": plan.start_stage,
+            "reused_stages": plan.reused, "research_reused": research_reused}
+
+
+async def retry_one(run_id: int, start_stage: str) -> None:
+    """Run a retried prospect from `start_stage`, then the batch-level step, as run_batch does."""
+    from app.pipeline.similarity import check_batch
+
+    await run_one(run_id, start_stage=start_stage)
+    with Session(db.engine) as session:
+        batch_id = session.get(Run, run_id).batch_id
+    try:
+        await check_batch(batch_id)
+    except Exception:
+        log.exception("similarity check failed for batch %s", batch_id)
+    update_batch_progress(batch_id)
 
 
 def recover_interrupted() -> int:

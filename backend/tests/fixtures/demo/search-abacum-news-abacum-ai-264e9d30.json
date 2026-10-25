@@ -1,0 +1,32 @@
+{
+  "provider": "tavily",
+  "query": "\"Abacum\" news abacum.ai",
+  "results": [
+    {
+      "url": "https://www.prnewswire.com/news-releases/building-on-abacum-intelligence-abacum-launches-modeler-and-brings-agentic-modeling-to-every-finance-team-302907146.html",
+      "title": "Building on Abacum Intelligence, Abacum Launches Modeler and Brings Agentic Modeling to Every Finance Team",
+      "content": "NEW YORK and BARCELONA, Spain, Oct. 13, 2026 /PRNewswire/ -- Abacum, the AI-native FP&A platform, today launched Modeler, an AI agent that brings Agentic Modeling to finance teams. Starting from natural language prompts or existing spreadsheets, Modeler transforms initial inputs into live, fully functional business models instantly ready for execution. [...] Accessibility Statement Skip Navigation\n\n# Building on Abacum Intelligence, Abacum Launches Modeler and Brings Agentic Modeling to Every Finance Team\n\n- USA - English\n- USA - Deutsch\n\nAbacum logo\n\n## News provided by\n\n Abacum \n\nOct 13, 2026, 09:44 ET\n\n## Share this article\n\nShare toX\n\nShare this article\n\nShare toX [...] Abacum is the AI-native business planning platform. Built first for finance and extended to every department, Abacum holds a company's data, business logic and context in one governed layer, where AI agents and teams plan the business together. Agents own the recurring workflows; people own the judgment. More than 500 customers in over 40 countries run their planning on Abacum, including DISH, ThoughtSpot, Strava, Acorns and Replit. Founded in 2020 and headquartered in New York, with offices in",
+      "published_date": "Tue, 13 Oct 2026 13:44:00 GMT",
+      "score": 0.78944516
+    },
+    {
+      "url": "https://ffnews.com/news/accountsiq-and-abacum-partner-to-launch-ai-powered-finance-stack-for-mid-market-businesses",
+      "title": "AccountsIQ and Abacum Partner to Launch AI-Powered Finance Stack for Mid-Market Businesses",
+      "content": "AccountsIQ and Abacum have partnered to launch an AI-powered finance stack for mid-market businesses, integrating cloud accounting with automated FP&A to eliminate manual spreadsheets and improve strategic planning.\n\n   Total Users:35,000+\n   Abacum Funding:$90 million\n   Geographic Reach:85+ countries\n   Partner Integrations:30+\n\nImage 6: Press Release: AccountsIQ and Abacum Partner to Launch AI-Powered Finance Stack for Mid-Market Businesses | Featured Image by FF News\n\nIn this article [...] ## How Does This Move the Needle for AI-Powered Finance?\n\nThe shift from backward-looking reporting to forward-looking strategic planning is the core value proposition of this alliance. By acting as an intelligence layer, Abacum transforms raw data from AccountsIQ into actionable insights. This partnership is specifically designed for modern European businesses looking to scale with confidence by utilizing clean, consolidated numbers across complex global operations.\n\n## FF NEWS TAKE: [...] Last Verified 4 Aug 2026\n\nPrimary Entities(\n\nCategorization Banking · Digital Onboarding\n\nCoverage Ireland · Europe\n\n© 2026 FF News\n\nCopyright © 2026 FF News Ltd All Rights Reserved.\n\nJoin Our Newsletter.Get all the latest News, Views and Exclusives, 100% free.Privacy Notice\n\nSubscribe Subscribe NowPrivacy Notice\n\n© 2026 FF News Ltd. All Rights Reserved.\n\nAbout UsMeet the TeamMedia PartnershipsPrivacy & Cookie SettingsPrivacy Policy",
+      "published_date": "Tue, 04 Aug 2026 08:40:04 GMT",
+      "score": 0.67321366
+    },
+    {
+      "url": "https://fintech.global/2026/08/04/accountsiq-and-abacum-team-up-on-finance-intelligence",
+      "title": "AccountsIQ and Abacum team up on finance intelligence",
+      "content": "AccountsIQ, a cloud accounting platform built for mid-market organisations, has entered into a strategic partnership with Abacum, an AI-native financial planning and analysis provider, in a move designed to give finance teams a fully connected stack spanning accounting through to strategic planning. [...] As part of the tie-up, Abacum will function as an intelligence layer sitting above AccountsIQ’s data, linking financial information across systems in real time. The two firms describe the partnership as part of a broader shift within European finance functions, away from historical reporting and towards forward-looking planning supported by AI. [...] AccountsIQ will continue to handle multi-entity, multi-currency accounting, while Abacum layers AI-driven planning and forecasting capability on top, joining the two into a single workflow that runs from initial recordkeeping through reporting and into forward planning.\n\nThe companies said the combined offering is intended to give finance teams more certainty in their figures while freeing up time for teams to take on a more strategic role within their organisations.",
+      "published_date": "Tue, 04 Aug 2026 16:12:12 GMT",
+      "score": 0.63125396
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [
+    "duckduckgo: TimeoutException"
+  ],
+  "cached": false
+}

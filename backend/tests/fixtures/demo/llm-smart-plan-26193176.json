@@ -1,0 +1,36 @@
+{
+  "output": {
+    "picks": [
+      {
+        "member": 1,
+        "opener": 2,
+        "context": 5,
+        "angle": "The $55 million funding round (S2) means a larger marketing budget to hit pipeline targets while driving down cost per opportunity."
+      },
+      {
+        "member": 2,
+        "opener": 4,
+        "context": null,
+        "angle": "The launch of AI agent security (S4) gives your product marketing team a fresh, high‑impact story to position and promote."
+      },
+      {
+        "member": 3,
+        "opener": 1,
+        "context": null,
+        "angle": "Your recent Cyber GTM Talk podcast on AI‑forward go‑to‑market strategies (S1) showcases thought leadership that can boost rep productivity and increase meetings per rep."
+      }
+    ],
+    "reasoning": "Each VP receives a unique opener aligned with their role focus, with M1 also getting a company‑wide context about AT&T’s partnership to reinforce market momentum."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 2056,
+    "completion_tokens": 1000,
+    "latency_ms": 15824,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "Opening a London office creates a new market that will need outbound pipeline."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "The UK‑centric pipeline comment hints they may want more qualified leads in that region."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 5,
+        "specificity": 4,
+        "reasoning": "Hiring SDRs shows a direct need for more pipeline, which Halyard can replace."
+      },
+      {
+        "signal_id": 4,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Their focus on finance teams indicates a target market that requires outbound prospecting."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1139,
+    "completion_tokens": 632,
+    "latency_ms": 11624,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

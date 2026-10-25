@@ -1,4 +1,4 @@
-"""One realistic prospect whose sources cover every T07 case (docs/GUIDE.md T07 "Done when").
+"""One realistic prospect whose sources cover every T07 case (docs/PROJECT_SPEC.md T07 "Done when").
 
 Priya Raman, VP Finance at Acme Fintech:
 - public_bio hides a flan-recipe screening trap (case 11)
@@ -56,7 +56,7 @@ SOURCES = [
 def gather_output() -> GatherOutput:
     sources = [
         Source(category=category, about=about, url=url, title=title, published_date=listed,
-               snippet="", text=(DATA / "pages" / name).read_text())
+               snippet="", text=(DATA / "pages" / name).read_text(encoding="utf-8"))
         for name, url, category, about, title, listed in SOURCES
     ]
     return GatherOutput(message="fixture", sources=sources, searches=7, extracts=len(sources))
@@ -67,7 +67,7 @@ def make_batch(session: Session, with_bio: bool = True) -> list[int]:
     buffer = io.StringIO()
     writer = csv.writer(buffer)
     writer.writerow(["first_name", "last_name", "company", "title", "company_domain", "email", "public_bio"])
-    bio = (DATA / "flan_bio.txt").read_text().strip() if with_bio else ""
+    bio = (DATA / "flan_bio.txt").read_text(encoding="utf-8").strip() if with_bio else ""
     writer.writerow(["Priya", "Raman", "Acme Fintech", "VP Finance", "acmefintech.com",
                      "priya.raman@acmefintech.com", bio])
     batch = Batch(filename="extraction_case.csv")

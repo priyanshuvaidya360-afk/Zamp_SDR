@@ -1,6 +1,6 @@
 """Stage 4: scan for instructions aimed at AI tools, then extract signals from each source.
 
-Spec: docs/GUIDE.md stage 4, case 11 (AI screening), case 7 (borrowed words), case 4 (ghost
+Spec: docs/PROJECT_SPEC.md stage 4, case 11 (AI screening), case 7 (borrowed words), case 4 (ghost
 jobs) and T07. The fast model reads one page at a time and proposes signals; code then owns
 everything checkable: the source URL, that the evidence really is on the page, the date
 window, who actually said it, duplicate events across outlets, and ghost-job flags.
@@ -122,7 +122,8 @@ async def scan(text: str, origin: Literal["page", "public_bio"], source_url: str
 # --- 2. Extraction ------------------------------------------------------------------------
 
 ExtractableType = Literal["funding", "acquisition", "hiring", "product_launch", "leadership_change",
-                          "person_content", "expansion", "partnership", "press", "negative_event", "other"]
+                          "person_content", "expansion", "partnership", "press", "negative_event",
+                          "company_focus", "other"]
 
 
 class JobPosting(BaseModel):
@@ -270,6 +271,9 @@ def apply_speaker_rules(signal: ExtractedSignal, prospect: str, last_name: str) 
 
     Someone else's quote or a reshare is never person-level, and always carries a note so the
     draft attributes it correctly ("your CFO said...", not "you said...")."""
+    if signal.type == "company_focus":
+        # What the company says about itself is never one person's words, whoever it mentions.
+        signal.about = "company"
     someone_else = bool(signal.speaker) and last_name.lower() not in signal.speaker.lower()
     if not (someone_else or signal.is_reshare):
         return

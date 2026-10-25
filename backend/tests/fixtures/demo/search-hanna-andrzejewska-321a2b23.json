@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Hanna Andrzejewska\" \"\"",
+  "results": [
+    {
+      "url": "https://www.znanylekarz.pl/profil/hanna-andrzejewska",
+      "title": "Dr n. med. Hanna Andrzejewska",
+      "content": "Hanna Andrzejewska to laryngolog, audiolog-foniatra. Gdzie Hanna Andrzejewska ma swój gabinet? Hanna Andrzejewska przyjmuje pod adresem: ul.Dudzińskiego 52",
+      "published_date": null,
+      "score": 0.84767824
+    },
+    {
+      "url": "https://www.instagram.com/hania.a74",
+      "title": "hania.a74 - Hanna Andrzejewska",
+      "content": "88 followers · 529 following. See photos and videos from friends on Instagram, and discover other accounts you'll love. Follow. Message. This profile is private.",
+      "published_date": null,
+      "score": 0.5976789
+    },
+    {
+      "url": "https://www.facebook.com/p/Hanna-Andrzejewska-100068987320025",
+      "title": "Hanna Andrzejewska",
+      "content": "Profile photo of Hanna. Hanna Andrzejewska. Wartosław. Lives in Wartosław. Photos. Photos.",
+      "published_date": null,
+      "score": 0.5962692
+    },
+    {
+      "url": "https://jedynkakornik.pl/aktualnosci/swietny-strat-plywakow-na-mistrzostwach-okregu",
+      "title": "Świetny strat pływaków na Mistrzostwach Okręgu - UKS Jedynka Kórnik",
+      "content": "Igor Miszkiewicz wkategorii młodzik brązowy medal na dystansie 400 m dowolnym\n\nHanna Andrzejewska w kategorii młodzik brązowy medal na dystansie 200 m stylem klasycznym.\n\nNależy podkreślić , że sztafeta 4 x 100 m dow młodziczek naszego klubu zajęły 4 m w kategorii open.\n\nJeszcze dodam, że w kategorii młodziczek na dystansach 200 dow , 400 dow , 800 dow  wszystkie miejsca na podium zajmowały zawodniczki naszego klubu 🙂\n\nMP\n\n[](\n\n### Kontakt [...] Klub zdobył łącznie 16 medali : 5 złotych , 5 srebrnych, 6 brązowych. W zawodach brało udział 9  naszych zawodników. Najlepszą zawodniczką została Alicja Andrzejewska , która w kategorii młodziczek zdobyła 3 złote medale na 200 , 400 , 800 m styl dowolnym. Pozostałe medale zdobywali :\n\nMajchrzak Anna w kategorii 16- 18 lat złoty medal na dystansie 1500m dow,  brązowy medal na 800 m dow. [...] Adrianna Zając w kategorii młodzik złoty medal na dystansie 200 m motylkowym , srebrny medal na 1500 m dow , srebrny medal na 800 dow  brązowy medal na 400 m dow.\n\nDolniak Pola w kategorii młodzik – srebrny medal na dystansie 50 m dow , brązowy medal na 200 m dow.\n\nLena Konieczna w kategorii młodzik srebrny medal na dystansie 400 m dow , brązowy medal na 800 dow.\n\nMilena Pochtar w kategorii młodzik srebrny medal na dystansie 200 m dowolnym",
+      "published_date": null,
+      "score": 0.50564
+    },
+    {
+      "url": "https://www.ait-journal.com/Author-agata-andrzejewska/22661",
+      "title": "Anaesthesiology Intensive Therapy - Author Agata Andrzejewska",
+      "content": "Logo of the journal: Anaesthesiology Intensive Therapy\n\nCurrent issue\n\nArchive\n\nAbout the Journal  Editorial Office Editorial Board Publisher Ethical standards and procedures Abstracting and indexing Contact Subscription Publication charge Reviewers\n\nInstructions for authors\n\n:262-270\n\nDOI: \n\nAbstract Article (PDF)\n\nStats\n\nSubmit your paper  Instructions for authors  Archive\n\nMost read\n\n Month\n Year\n\nAnesthesia for robot-assisted surgery: a review\n\nRemimazolam: a comprehensive review [...] Skip to content\n\nCurrent issue Archive About the Journal Editorial Office Editorial Board Publisher Ethical standards and procedures Abstracting and indexing Contact Subscription Publication charge Reviewers Instructions for authors\n\nSEARCH\n\nCurrent issue\n\nArchive\n\nAbout the Journal \n\nEditorial Office Editorial Board Publisher Ethical standards and procedures Abstracting and indexing Contact Subscription Publication charge Reviewers\n\nInstructions for authors [...] We process personal data collected when visiting the website. The function of obtaining information about users and their behavior is carried out by voluntarily entered information in forms and saving cookies in end devices. Data, including cookies, are used to provide services, improve the user experience and to analyze the traffic in accordance with the Privacy policy. Data are also collected and processed by Google Analytics tool (more).",
+      "published_date": null,
+      "score": 0.1788271
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

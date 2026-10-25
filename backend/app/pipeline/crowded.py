@@ -1,7 +1,7 @@
 """Case 5: the crowded hook. A big public event (funding, launch, acquisition) that every
 vendor is already writing about is a weak opener: it gets a penalty and may only be context.
 
-Spec: docs/GUIDE.md case 5 and T14. Code only, no model:
+Spec: docs/PROJECT_SPEC.md case 5 and T14. Code only, no model:
 - crowded = type in CROWDED_TYPES, younger than settings.crowded_max_days, and reported by
   settings.crowded_min_coverage+ distinct outlets
 - coverage counts the outlets whose pages we read (extract.cluster_events) plus the outlets in
@@ -37,16 +37,17 @@ def _domain(url: str) -> str:
 
 def add_search_coverage(signals: list[ExtractedSignal], queries: list[QueryLog]) -> None:
     """Count outlets in the search results that report the same event as an extracted signal
-    (same search category, and either a similar headline within a week or the same amount, e.g.
-    "$55 million" in the summary and "$55M" in a headline, within the crowded window).
-    Adds them to cluster_urls."""
+    (a similar headline within a week, or the same amount, e.g. "$55 million" in the summary and
+    "$55M" in a headline, within the crowded window). Every company search counts, not only the
+    one that found the signal: a raise read on the company's own newsroom page (own-site search)
+    is still the same raise the funding search found in the press. Adds them to cluster_urls."""
     for s in signals:
         if s.type not in CROWDED_TYPES or s.about != "company":
             continue
         urls = list(dict.fromkeys([s.source_url, *s.cluster_urls]))
         money = amounts(s.summary)
         for log in queries:
-            if log.category != s.category:
+            if log.about != "company":
                 continue
             for result in log.relevant_results:
                 when = parse_date(result.get("published_date"))

@@ -1,10 +1,11 @@
 """CSV intake: header mapping, cleaning, file-level and row-level checks, in-file dedupe.
 
-Spec: docs/GUIDE.md "Input: the prospect CSV" and T04. Pure functions, no database and no
+Spec: docs/PROJECT_SPEC.md "Input: the prospect CSV" and T04. Pure functions, no database and no
 API credits: everything here runs before the user clicks "Run N prospects".
 
-Identity rule: every row needs first name, last name, and a company domain or LinkedIn
-URL, because a company name alone is not a unique identity.
+Identity rule: every row needs first name, last name, and the person's LinkedIn URL, because
+a common name at a big company is not a unique identity (settings.require_linkedin; when off,
+a company domain is enough).
 """
 
 import csv
@@ -16,8 +17,11 @@ from urllib.parse import unquote, urlparse
 import pandas as pd
 from pydantic import BaseModel
 
+from app.config import settings
+
 MAX_ROWS = 50  # demo-scale cap (ASSUMPTIONS.md)
 MAX_BYTES = 1_000_000
+NEEDS_LINKEDIN = "needs the person's LinkedIn URL (linkedin.com/in/...) to identify them"
 PREVIEW_ROWS = 20
 
 RowStatus = Literal["valid", "invalid", "skipped"]
@@ -176,6 +180,11 @@ def check_mapping(mapping: dict[str, str | None], headers: list[str]) -> None:
             "Couldn't find name columns. Expected first_name and last_name "
             "(or a single full_name column)."
         )
+    if settings.require_linkedin and not mapping.get("linkedin_url"):
+        raise CsvRejected(
+            "Couldn't find a linkedin_url column. Each prospect needs their LinkedIn profile URL "
+            "(linkedin.com/in/...), because a common name at a big company is not a unique identity."
+        )
     if not (mapping.get("company_domain") or mapping.get("linkedin_url")):
         raise CsvRejected(
             "Couldn't find a company_domain or linkedin_url column. Each prospect needs one of "
@@ -295,7 +304,9 @@ def validate_rows(
             problems.append(domain_error)
         if linkedin_error:
             problems.append(linkedin_error)
-        if not (domain or linkedin) and not (domain_error or linkedin_error):
+        if settings.require_linkedin and not linkedin and not linkedin_error:
+            problems.append(NEEDS_LINKEDIN)
+        elif not (domain or linkedin) and not (domain_error or linkedin_error):
             problems.append("needs a company domain or LinkedIn URL to identify this person")
         if not company and not problems:
             warnings.append("no company name; it will be derived from the domain or LinkedIn")

@@ -11,7 +11,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { api, ApiError } from "@/lib/api";
 import type { BatchDetail, ReviewResult, RunDetail } from "@/lib/types";
 
-// Spec: docs/GUIDE.md "UI: three screens" > 1b "Review queue" and T15: step through every
+// Spec: docs/PROJECT_SPEC.md "UI: three screens" > 1b "Review queue" and T15: step through every
 // ready_for_review draft in row order. Keys: a approve · e edit · r reject · j next · k previous.
 
 export function ReviewQueue({ batchId }: { batchId: number }) {
@@ -146,6 +146,7 @@ export function ReviewQueue({ batchId }: { batchId: number }) {
               runId={run.id}
               draft={draft}
               recheckFacts={shown.recheck.facts}
+              unverified={shown.run.identity_unverified}
               shortcuts
               onDone={reviewed}
             />

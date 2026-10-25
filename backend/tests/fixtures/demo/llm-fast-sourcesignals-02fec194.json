@@ -1,0 +1,55 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum provides AI-native FP&A software for financial services and fintech to control cost-to-income and plan headcount, entities, and currencies.",
+        "evidence": "FP&A for financial services. Control cost-to-income as the book grows. Plan headcount, entities, and currencies in one model",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum integrates with data tools such as Snowflake, BigQuery, NetSuite, and Sage Intacct to pull actuals continuously.",
+        "evidence": "Abacum connects to Snowflake, BigQuery, NetSuite and Sage Intacct, and pulls actuals continuously.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum features AI Modeler for creating financial models using plain language without formulas.",
+        "evidence": "Meet AI Modeler: financial models in plain language. No formulas needed.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2299,
+    "completion_tokens": 411,
+    "latency_ms": 1998,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

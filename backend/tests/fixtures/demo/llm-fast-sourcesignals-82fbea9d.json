@@ -1,0 +1,31 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Abacum raised a $60m Series B round led by Scale Venture Partners",
+        "evidence": "Abacum, the business planning software company founded by Julio Martínez and Jorge Lluch, today announces that it has raised a $60m Series B round led by San Francisco-headquartered Scale Venture Partners.",
+        "published_at": "2025-06-11",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 2189,
+    "completion_tokens": 165,
+    "latency_ms": 1656,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

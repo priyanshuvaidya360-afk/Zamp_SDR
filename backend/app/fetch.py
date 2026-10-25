@@ -14,7 +14,7 @@ from app.config import settings
 
 USER_AGENT = "Mozilla/5.0 (compatible; SignalResearchBot/0.1; +https://github.com/priyanshuvaidya360-afk/Zamp_SDR)"
 
-# Never scrape LinkedIn (docs/GUIDE.md, "LinkedIn: don't scrape it").
+# Never scrape LinkedIn (docs/PROJECT_SPEC.md, "LinkedIn: don't scrape it").
 BLOCKED_DOMAINS = ("linkedin.com",)
 
 
@@ -46,6 +46,20 @@ async def fetch_text(url: str, client: httpx.AsyncClient | None = None) -> str |
     finally:
         if owns_client:
             await client.aclose()
+
+
+async def reachable(url: str) -> bool | None:
+    """Does a web server answer at this URL? Any HTTP response counts (a 403 from a bot filter is
+    still a live site); only a failed connection (DNS, refused) means no. None: couldn't tell."""
+    try:
+        async with httpx.AsyncClient(timeout=settings.fetch_timeout_s, follow_redirects=True,
+                                     headers={"User-Agent": USER_AGENT}) as client:
+            await client.get(url)
+        return True
+    except httpx.ConnectError:
+        return False
+    except httpx.HTTPError:
+        return None
 
 
 async def fetch_many(

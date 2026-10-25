@@ -1,0 +1,44 @@
+{
+  "provider": "duckduckgo",
+  "query": "\"Reco\" SaaS security posture management integration",
+  "results": [
+    {
+      "url": "https://www.reco.ai/solutions/saas-security-posture-management-sspm",
+      "title": "SaaS Security Posture Management – Continuous SSPM+ Coverage",
+      "content": "Continuously monitor SaaS security posture with SSPM+. Detect misconfigurations in real time, enforce policies, and stay audit-ready across your SaaS stack.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.reco.ai/platform/saas-posture-management-and-compliance",
+      "title": "SaaS Posture Management & Compliance - reco.ai",
+      "content": "Built to power Posture Management across your entire stack from day one. Connect to 285+ SaaS apps, monitor configurations, and maintain compliance across every integration that matters.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://splunkbase.splunk.com/app/7673",
+      "title": "Reco | Splunkbase",
+      "content": "Reco's SaaS & AI Security platform closes the SaaS Security Gap — between what you can protect and what's actually running. This add-on brings Reco's posture findings, threat alerts, accounts, discovered apps, identities, and audit logs into Splunk.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://cybersectools.com/tools/reco-saas-posture-management-and-compliance",
+      "title": "Reco SaaS Posture Management & Compliance - CybersecTools",
+      "content": "Reco SaaS Posture Management & Compliance is a platform designed to monitor and manage security configurations across SaaS applications. The product provides continuous monitoring of security posture and compliance across enterprise SaaS environments.",
+      "published_date": null,
+      "score": null
+    },
+    {
+      "url": "https://www.tanium.com/partners/reco",
+      "title": "Reco | Tanium",
+      "content": "Reco's SaaS & AI Security platform extends to endpoint management via the Tanium integration.",
+      "published_date": null,
+      "score": null
+    }
+  ],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

@@ -1,0 +1,27 @@
+{
+  "output": {
+    "subject": "hiring six sdrs in austin",
+    "body": "Hi Dana,\n\nI saw that Lumen Analytics is hiring six Sales Development Representatives in Austin (14 October 2026). With your recent $40 million Series B, scaling your new outbound team without adding more SDR headcount can keep reply rates high. Would you be open to a short 15‑minute call to explore how our outbound pipeline engine could help?\n\nThanks,\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "I saw that Lumen Analytics is hiring six Sales Development Representatives in Austin (14 October 2026).",
+        "signal_id": 7
+      },
+      {
+        "sentence": "With your recent $40 million Series B, scaling your new outbound team without adding more SDR headcount can keep reply rates high.",
+        "signal_id": 3
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1407,
+    "completion_tokens": 1734,
+    "latency_ms": 20300,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

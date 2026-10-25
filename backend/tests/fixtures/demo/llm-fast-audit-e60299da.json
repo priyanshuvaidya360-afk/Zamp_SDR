@@ -1,0 +1,61 @@
+{
+  "output": {
+    "claims": [
+      {
+        "sentence": "ai-forward gtm strategies",
+        "about": "prospect",
+        "status": "supported",
+        "fact_id": 13,
+        "reason": "Fact 13 confirms Kristen discussed AI-forward go-to-market strategies.",
+        "suggestion": null
+      },
+      {
+        "sentence": "You discussed AI-forward go-to-market strategies on the Cyber GTM Talk podcast on 8 October 2026.",
+        "about": "prospect",
+        "status": "supported",
+        "fact_id": 13,
+        "reason": "Fact 13 directly supports this statement.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Scaling outbound pipeline often relies on adding SDR headcount, while generic sequences face falling reply rates.",
+        "about": "market",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This describes general challenges faced by teams, which is not_verifiable.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Halyard spots accounts showing buying signals and drafts researched, cited emails for reps to review before sending, helping teams build pipeline efficiently.",
+        "about": "seller",
+        "status": "supported",
+        "fact_id": "seller",
+        "reason": "This accurately reflects what Halyard sells according to the seller definition.",
+        "suggestion": null
+      },
+      {
+        "sentence": "Would you be open to a 15-minute call to explore how this could work for Reco?",
+        "about": "prospect",
+        "status": "not_verifiable",
+        "fact_id": null,
+        "reason": "This is a call to action / question.",
+        "suggestion": null
+      }
+    ],
+    "genericness": 1,
+    "genericness_reason": "The email heavily relies on a specific podcast appearance by the prospect on Cyber GTM Talk."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 864,
+    "completion_tokens": 473,
+    "latency_ms": 2214,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "provider": "tavily",
+  "query": "\"Ryan Yu\" \"ProtoPie\"",
+  "results": [
+    {
+      "url": "https://www.facebook.com/insider/posts/whats-changed-a-lot-is-that-ai-has-made-it-possible-to-prototype-your-ideas-in-r/1390820399572226",
+      "title": "\"What's changed a lot is that AI has made it possible to ...",
+      "content": "we can generate prototypes in minutes, screens, flows, even user journeys. Protopie AI → NL-based interactions. We got the idea from Ryan Singer!",
+      "published_date": null,
+      "score": 0.3554845
+    },
+    {
+      "url": "https://www.auto-ui.org/26/proceedings-2",
+      "title": "Proceedings – AutoUI '26",
+      "content": "phase testing are still not explored enough. The proposed method is implemented in Unreal Engine (UE). It showcases the workflow for integrating User Interface (UI) prototypes developed on external platforms like ProtoPie and Figma into the UE platform, thus not only representing the UI visually but also integrating the UI prototype’s interaction logic with the simulation environment bi-directionally. This UI prototype simulation is coupled with the adjustable seating buck to evaluate ergonomic [...] ### Left at the kerb: A Systematic Review of eHMI Evaluations for Underrepresented VRUs — Children, Older Adults, and People with Disabilities\n\n Benjamin Wj Kwok\n Thomas Goodge\n Ryan Y. H. Sim\n Kan Chen\n Jeannie S.A. Lee [...] ### From Roadways to Shared Spaces: Extending Vehicle eHMI Research to Public Mobile Robots\n\n Suhwan Jung\n Young Woo Kim\n Xinyan Yu\n Callum Parker\n Byungju Kim\n Joel Fredericks",
+      "published_date": null,
+      "score": 0.20201814
+    },
+    {
+      "url": "https://www.facebook.com/alkemist.no/posts/playing-around-with-some-infinite-scrolls-for-new-portfolio-page/1362687959176667",
+      "title": "Playing around with some infinite scrolls for new portfolio ...",
+      "content": "Hey everyone, I just created this infinite scroll in ProtoPie. Check out my website patreon/protopilot. Infinite meaning one project is laid out in a single",
+      "published_date": null,
+      "score": 0.19132802
+    },
+    {
+      "url": "https://www.linkedin.com/in/denis-somar",
+      "title": "Denis Somar - Product Design at DualEntry",
+      "content": "## Education\n- Hamilton College, Bachelor of Science - BS Economics\n- LaGuardia High School of Music, Art and Perfoming Arts, Bachelor of Arts (BA) equivalent Art/Art Studies, General\n- Hamilton College, Bachelor of Arts Economics\n\n## Skills\ndesigns, b2b/b2c, cto, software design, led, attention to detail, research methods, product manager, partnering, mortar, identity management, director, b2b, protopie, technology [...] little friction as possible.I'm always interested in expanding my network and meeting new people. Let's connect.Specialties:AI Design in high-risk and compliance industries, Design Systems, The System of Design, PM, UX, UI, UXRSkills &amp; Tools:Languages: JS, HTML, CSS, PHP, SQL, FileMaker, AppleScript, RubyProject Management: Pivotal Tracker, JIRA, Target Process, Basecamp, ConnectWise, Asana, SlackWireframing: Sketch, Balsamiq, Figma, Omnigraffle, LucidChart, Photoshop, Illustrator, [...] Illustrator, InvisionAnalytics: Google Analytics, Optimizely, SQL, Excel",
+      "published_date": null,
+      "score": 0.122051775
+    },
+    {
+      "url": "https://ux-design-awards.com/winners?year=2024",
+      "title": "Winners",
+      "content": "++ Spring Awards 2027: Enter Now! ++ How to Design for Human Care: Deep Dive Oct. 28\n\n++ Spring Awards 2027: Enter Now! ++ How to Design for Human Care: Deep Dive Oct. 28\n\n# Proudly presenting all UX Design Awards winners and nominees!\n\n Projects\n Awards\n Category\n Year\n Application\n Industry\n\n### Unfortunately, there is no project that matches the selected search terms/filters.",
+      "published_date": null,
+      "score": 0.013924864
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [],
+  "cached": false
+}

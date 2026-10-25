@@ -1,6 +1,6 @@
 """Stage 5: score every signal, then pick ONE hook and say why it beat the others.
 
-Spec: docs/GUIDE.md stage 5, the hook score formula, the hook-choice prompt, and T08.
+Spec: docs/PROJECT_SPEC.md stage 5, the hook score formula, the hook-choice prompt, and T08.
 The smart model judges relevance (ties to what we sell) and specificity (about this person >
 company > industry). Code computes recency and verifiability, applies the weights, removes
 signals that may never be a hook, and decides low_signal. The smart model then picks from the
@@ -57,7 +57,7 @@ class ScoredSignal(BaseModel):
     specificity: int = 0
     reasoning: str = ""
     days_old: int = 0
-    recency: float = 0.0  # 5 * e^(-d/60)
+    recency: float = 0.0  # 5 * e^(-d/recency_scale_days)
     verifiability: float = 0.0  # 0 / 0.5 / 1
     adjustments: list[Adjustment] = []
     score: float = 0.0

@@ -1,0 +1,53 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "funding",
+        "about": "company",
+        "summary": "Abacum raised $60M Series B in June 2025.",
+        "evidence": "\"Abacum ... raised a $60 million Series B in June 2025 led by Scale Venture Partners\"",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum targets a smaller mid-market customer base.",
+        "evidence": "\"Abacum ... targets a smaller mid-market customer base than Pigment\"",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Abacum focuses mainly on the U.S. market.",
+        "evidence": "\"Abacum ... focuses mainly on the U.S. market\"",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 2402,
+    "completion_tokens": 1663,
+    "latency_ms": 2411,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

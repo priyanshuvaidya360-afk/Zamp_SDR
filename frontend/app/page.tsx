@@ -3,7 +3,7 @@ import { FlowSteps } from "@/components/flow-steps";
 import { RecentLists } from "./recent-lists";
 import { UploadHero } from "./upload-hero";
 
-// Step 1 of the flow: upload a prospect CSV. Spec: docs/GUIDE.md "UI: three screens" > 1.
+// Step 1 of the flow: upload a prospect CSV. Spec: docs/PROJECT_SPEC.md "UI: three screens" > 1.
 export default function Home() {
   return (
     <div className="space-y-8">

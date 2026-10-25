@@ -1,0 +1,8 @@
+{
+  "provider": "simweb",
+  "query": "\"Kestrel Labs\" news kestrellabs.example",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

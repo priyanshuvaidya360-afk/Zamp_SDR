@@ -1,0 +1,22 @@
+{
+  "output": {
+    "signal_id": 2,
+    "angle": "Daniel Okoro is hiring five SDRs in Austin, showing a need to scale the sales pipeline; Halyard can help Ferncastle generate qualified leads and draft targeted emails, reducing the reliance on additional SDR headcount.",
+    "runners_up": [
+      1,
+      3
+    ],
+    "why_not_others": "The other signals describe office expansion or product focus, which are less directly tied to the immediate SDR hiring challenge Halyard solves."
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 672,
+    "completion_tokens": 560,
+    "latency_ms": 1607,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

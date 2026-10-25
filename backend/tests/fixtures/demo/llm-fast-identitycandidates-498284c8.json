@@ -1,0 +1,31 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Maya Collins",
+        "title": null,
+        "company": "Brightwave",
+        "company_domain": "brightwave.example",
+        "location": "London",
+        "country": "GB",
+        "evidence_url": "https://brightwave.example/company",
+        "evidence": "Maya Collins, Head of Growth (London)",
+        "confidence": 0.95
+      }
+    ],
+    "reasoning": "The search results explicitly place Maya Collins as the Head of Growth at Brightwave with a matching company domain and location details confirming her identity."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 700,
+    "completion_tokens": 110,
+    "latency_ms": 1445,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

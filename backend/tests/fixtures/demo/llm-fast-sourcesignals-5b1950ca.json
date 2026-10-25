@@ -1,0 +1,65 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "partnership",
+        "about": "company",
+        "summary": "Reco announces partnership with ServiceNow to extend AI agent security.",
+        "evidence": "Reco, the leader in Agent Security, today announced a partnership with ServiceNow, the AI control tower for business reinvention.",
+        "published_at": "2026-09-28",
+        "sensitive": false,
+        "speaker": "Zoe Hillenmeyer",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco is the leader in Agent Security.",
+        "evidence": "Reco is the leader in Agent Security.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco Platform secures agents and their operating environments.",
+        "evidence": "The Reco Platform secures agents and their operating environments where applications, identities, permissions and workflows converge.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      },
+      {
+        "type": "company_focus",
+        "about": "company",
+        "summary": "Reco built on the Reco Graph with integrations delivered in hours.",
+        "evidence": "Built on the Reco Graph, with new integrations delivered in hours through the Reco Factory and pre‑built agent and app intelligence from the Reco Library.",
+        "published_at": null,
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 2542,
+    "completion_tokens": 1785,
+    "latency_ms": 2463,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

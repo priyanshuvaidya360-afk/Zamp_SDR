@@ -1,0 +1,25 @@
+{
+  "output": {
+    "subject": "ai-forward gtm strategies",
+    "body": "You discussed AI-forward go-to-market strategies on the Cyber GTM Talk podcast on 8 October 2026.\n\nScaling outbound pipeline often relies on adding SDR headcount, while generic sequences face falling reply rates. Halyard spots accounts showing buying signals and drafts researched, cited emails for reps to review before sending, helping teams build pipeline efficiently.\n\nWould you be open to a 15-minute call to explore how this could work for Reco?\n\nBest,\nPriyanshu",
+    "claims": [
+      {
+        "sentence": "You discussed AI-forward go-to-market strategies on the Cyber GTM Talk podcast on 8 October 2026.",
+        "signal_id": 13
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.6-flash",
+    "role": "smart",
+    "prompt_tokens": 952,
+    "completion_tokens": 192,
+    "latency_ms": 63193,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "output": {
+    "candidates": [
+      {
+        "name": "Kristen Twining",
+        "title": null,
+        "company": "Reco",
+        "company_domain": "reco.ai",
+        "location": null,
+        "country": null,
+        "evidence_url": "https://www.reco.ai/blog/reco-expands-executive-team-in-enterprise-ai-agent-security",
+        "evidence": "Reco has appointed Kristen Twining as Senior Vice President of Americas Sales and Business Development.",
+        "confidence": 0.99
+      }
+    ],
+    "reasoning": "Multiple reputable search results confirm that Kristen Twining is the SVP of Sales / SVP of Americas Sales and Business Development at Reco (reco.ai), matching the prospect details perfectly."
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 1881,
+    "completion_tokens": 179,
+    "latency_ms": 1782,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

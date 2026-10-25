@@ -14,8 +14,22 @@ export type RunStatus =
   | "approved"
   | "rejected"
   | "failed"
+  | "dismissed"
+  | "already_drafted"
   | "invalid"
   | "skipped";
+
+/** How much the research found (backend routes/runs.signal_levels). */
+export type SignalLevel = "high" | "moderate" | "low" | "none";
+
+/** Why identity failed (backend resolve.diagnose); only meaningful while a run is needs_input. */
+export type IdentityOutcome = "search_failed" | "bad_data" | "not_public" | "ambiguous" | "unconfirmed";
+
+/** One check code made while diagnosing a failed identity. ok null = couldn't be checked. */
+export interface IdentityCheck {
+  label: string;
+  ok: boolean | null;
+}
 
 export type BatchStatus = "validating" | "running" | "done";
 
@@ -81,11 +95,17 @@ export interface RunSummary {
   account_key: string | null;
   status: RunStatus;
   final_reason: string | null;
+  identity_outcome: IdentityOutcome | null;
+  identity_unverified: boolean;
   confidence: number | null;
   cost_credits: number;
+  retry_count: number;
+  retries_left: number;
   current_stage: string | null;
   current_state: StageState | null;
   hook_type: string | null;
+  /** How much the research found; null until research finishes (the run status shows then). */
+  signal_level: SignalLevel | null;
   send_day: number | null;
   account_plan: AccountPlan | null;
   started_at: string;
@@ -138,6 +158,8 @@ export interface Prospect {
   domain: string | null;
   linkedin_url: string | null;
   run: RunSummary | null;
+  /** The earlier run that already researched this person (within 30 days), or null: a fresh prospect. */
+  researched_before: { run_id: number; on: string; status: RunStatus } | null;
 }
 
 export interface DraftResponse {
@@ -194,6 +216,7 @@ export interface RunStatusEvent {
   batch_id: number;
   status: RunStatus;
   final_reason: string | null;
+  identity_outcome?: IdentityOutcome | null;
   confidence: number | null;
   cost_credits: number;
 }
@@ -222,10 +245,49 @@ export interface Run {
   linkedin_url: string | null;
   status: RunStatus;
   final_reason: string | null;
+  identity_outcome: IdentityOutcome | null;
+  /** The rep asked for a company-level draft: approving needs them to vouch the person exists. */
+  identity_unverified: boolean;
   confidence: number | null;
   cost_credits: number;
   account_key: string | null;
   message_type: "cold" | "follow_up";
+  retry_count: number;
+  retries_left: number;
+  started_at: string;
+  /** How much the research found; null until research finishes. */
+  signal_level: SignalLevel | null;
+}
+
+/** POST /runs/{id}/retry: a failed run restarted in place. */
+export interface RetryResponse {
+  run_id: number;
+  status: RunStatus;
+  attempt: number;
+  max_attempts: number;
+  start_stage: string;
+  reused_stages: string[];
+  research_reused: boolean;
+}
+
+/** The critic's factual audit of a draft (or of a rep's edit). */
+export interface FactualIssue {
+  sentence: string;
+  status: "unsupported" | "contradicted" | "uncertain";
+  reason: string;
+  evidence: string | null;
+  source_url: string | null;
+  suggestion: string | null;
+}
+
+export interface FactualReport {
+  checked: number;
+  supported: number;
+  unsupported: number;
+  contradicted: number;
+  uncertain: number;
+  blocking: boolean;
+  issues: FactualIssue[];
 }
 
 export interface ScoreAdjustment {
@@ -298,6 +360,7 @@ export interface DraftRecord {
     confidence?: number;
     confidence_formula?: string;
     revalidated_from?: number;
+    factual?: FactualReport;
   };
   created_at: string;
   reviewer_action: "approve" | "edit" | "reject" | null;
@@ -320,7 +383,7 @@ export interface RunDetail {
   recheck: { facts: number; draft_age_days: number | null };
 }
 
-// Review (T15, case 10). Spec: docs/GUIDE.md case 10 and "UI: three screens".
+// Review (T15, case 10). Spec: docs/PROJECT_SPEC.md case 10 and "UI: three screens".
 export type ReviewAction = "approve" | "edit" | "reject";
 
 export interface FactCheck {
@@ -335,12 +398,13 @@ export interface FactCheck {
 }
 
 export interface ReviewResult {
-  outcome: "approved" | "edited" | "rejected" | "changed" | "gone";
+  outcome: "approved" | "edited" | "rejected" | "changed" | "gone" | "needs_fix";
   message: string;
   run_status: RunStatus;
   draft_id: number;
   checks: FactCheck[];
   diff: { before: string; after: string } | null;
+  factual: FactualReport | null;
 }
 
 export interface Candidate {
@@ -355,7 +419,16 @@ export interface Candidate {
   confidence: number;
 }
 
-// Dashboard (T16). Spec: docs/GUIDE.md "UI: three screens" > 3 Dashboard.
+/** POST /runs/{id}/resume input (identity): the rep's pick, corrected row details (searched
+ *  again), a company-level draft, dismiss, or {} to search again. */
+export type ResumeInput =
+  | { candidate: Candidate }
+  | { fix: { title: string | null; company: string | null; company_domain: string | null } }
+  | { unverified: true }
+  | { dismiss: true }
+  | Record<string, never>;
+
+// Dashboard (T16). Spec: docs/PROJECT_SPEC.md "UI: three screens" > 3 Dashboard.
 export interface Stats {
   batches_this_week: number;
   prospects_this_week: number;
@@ -371,6 +444,11 @@ export interface Stats {
   median_run_seconds: number | null;
   avg_credits_per_prospect: number | null;
   not_ready: Record<"needs_input" | "low_signal" | "blocked" | "suppressed" | "held" | "failed", number>;
+  retryable: number;
+  factual_review: number;
+  /** needs_input runs by why identity failed. */
+  identity: Partial<Record<IdentityOutcome, number>>;
+  dismissed: number;
 }
 
 export interface BatchListItem {

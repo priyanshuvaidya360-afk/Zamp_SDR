@@ -1,0 +1,46 @@
+{
+  "provider": "tavily",
+  "query": "\"Reco\" partner \"HubSpot\"",
+  "results": [
+    {
+      "url": "https://knowledge.hubspot.com/partner-tools/use-partner-clients",
+      "title": "Use Partner Clients",
+      "content": "## Manage Partner Client records\n\nThe Partner Clients object is like other HubSpot CRM objects such as contacts and companies. With this object, you can do the following: [...] ## Client record cards\n\nThe information on the Partner Client record can help you ensure your clients are getting the most out of HubSpot. The available cards for clients you are directly managing include: [...] You can also use the Partner Client API to integrate Partner Client records with other external applications such as Asana Clickup. Learn more about using the Partner Clients API.\n\nPermissions required View permissions for the Partner Client object are required to access Partner Clients.\n\n## Review Partner Clients\n\nTo review your Partner Clients:\n\n1. In your HubSpot account, navigate to CRM > Partner Clients.\n2. In the table, review your Partner Client records.",
+      "published_date": null,
+      "score": 0.50315
+    },
+    {
+      "url": "https://journeybee.io/resources/hubspot-integrations-prm",
+      "title": "PRM Tool Integration with HubSpot | Journeybee",
+      "content": "The widget acts as a partner command center within your HubSpot records. Without leaving a contact, company, or deal page, your team can send that record to a partner as a new lead, view the details of the partner who sourced the deal, and communicate directly with them about that specific opportunity. [...] Send & Associate Leads: Instantly send a HubSpot record to a partner as a new lead or associate an existing record with a partner.\n View Partner Details: Immediately see which partner sourced or is influencing a deal, accessing their details without switching tabs.\n Collaborate Directly: Communicate with the associated partner on a specific deal, with all conversations logged as notes for a clear audit trail.\n\nhubspot widget [...] A headless partner data layer that isn't capped by HubSpot's schema, so your program logic can be as custom as your business needs it to be.\n A native-feeling widget inside HubSpot's own Contact, Company, and Deal records — so your sales team gets partner context without learning a new tool or leaving the CRM they already love.",
+      "published_date": null,
+      "score": 0.38338786
+    },
+    {
+      "url": "https://www.marketveep.com/hubspot-services/hubspot-integrations",
+      "title": "HubSpot Integrations | HubSpot Partner Agency | Market Veep",
+      "content": "Market Veep combines strategic growth expertise with deep technical experience to deliver HubSpot integrations that drive measurable business results. As a certified HubSpot partner agency, we focus on building scalable systems that improve operational efficiency, data visibility, and customer experience across your organization. [...] Help your support team maximize Service Hub functionality through practical training and workflow optimization. Improve efficiency and customer satisfaction.\n\n## Why Choose Market Veep as Your HubSpot Partner Agency? [...] 3\n\nConfiguration & Implementation\n\n4\n\nTesting & Optimization\n\n5\n\nHubSpot Training\n\n## Why Work with a HubSpot Partner Agency?\n\n### HubSpot Expertise\n\nAs a certified HubSpot partner agency, Market Veep builds integrations that support long-term growth and immediate functionality. We align your systems with your sales, marketing, and operational goals to create a scalable revenue engine.\n\n### Cleaner Data For Better Visibility",
+      "published_date": null,
+      "score": 0.30959794
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=YF4SsWa0HMc",
+      "title": "How HubSpot's Partner Program Boosts Revenue for Everyone",
+      "content": "[0:25] HubSpot pairs us together as a tech partner with  a solutions partner that provides value for the  \n[0:31] end customer. The solutions partners that we have,  they tend to be agencies that are already working  \n[0:37] with customers or have that industry expertise  like solution one. It's our job to architect a [...] Listen to people from partners like Sinch and Solution One Partners talk about how the program helps them unlock more revenue opportunities and better serve customers like Chuze Fitness.\n\nHubSpot's partner program: \nSinch Engage HubSpot integration: \nSolution One Partners: \nChuze Fitness: [...] [0:44] proper CRM that your team's actually going to  be able to use and it's going to make their   day easier. I think our playbook is really how we  uncover what your secret sauce is going to be from  \n[0:54] how you communicate to your clients. And as a tech  partner working with a solution one for instance,  \n[1:00] Sinch has a direct integration with HubSpot. And  so that allows HubSpot users to send and receive",
+      "published_date": null,
+      "score": 0.26884386
+    },
+    {
+      "url": "https://www.onemetric.io/blog/top-hubspot-agency-us",
+      "title": "Top HubSpot Agencies in the US (2026) - Ranked for Implementation, RevOps & CRM",
+      "content": "HubSpot becomes a true system for growth when built on clean data, clear processes, and measurable outcomes.  \nThat is exactly what OneMetric delivers. From secure migrations to finance-grade integrations and RevOps architecture, their work helps companies move from disconnected tools to unified revenue systems.\n\nIf you want HubSpot to reflect how your business actually operates and have every dashboard, report, and workflow align around truth, OneMetric is the partner built for it. [...] Elite is one of HubSpot's top partner tiers, held by a small percentage of agencies worldwide. It reflects a sustained track record of client results, HubSpot revenue under management, and accreditations across multiple hubs - not just certifications an individual employee completed. [...] Author: Nishant Gupta\n 14 min read\n February 12, 2026\n\n#### Table of contents\n\nShow all table of contents\n\n Share\n Linkdin\n Twitter \"twitter\")\n\nHubSpot has become the foundation for how modern businesses connect marketing, sales, and service into one system. But even the best software can fail to deliver if it’s not implemented correctly.\n\nThat’s where a HubSpot partner comes in. A good partner helps you set up HubSpot. A great one helps you make it your company’s operating system for growth.",
+      "published_date": null,
+      "score": 0.25759742
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [
+    "duckduckgo: DDGSException"
+  ],
+  "cached": false
+}

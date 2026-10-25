@@ -1,7 +1,7 @@
 # Assumptions
 
 Decisions and assumptions made while building Signal. Add to this as you build
-(see docs/GUIDE.md, "Assumptions and interview talking points").
+(see docs/PROJECT_SPEC.md, "Assumptions and interview talking points").
 
 ## Product
 - The seller is fictional but specific: Halyard, an outbound pipeline engine sold to growth,
@@ -10,8 +10,12 @@ Decisions and assumptions made while building Signal. Add to this as you build
   with is Heads of Growth and CMOs; against an AP seller most rows correctly scored
   low_signal. Relevance scoring, hiring searches and personas all read this file.
 - Input is a CSV of up to 50 prospects per upload; larger files and CRM import are next steps.
-- Each prospect needs first name, last name, and a company domain or LinkedIn URL. Company
-  name alone is not a unique identity.
+- Each prospect needs first name, last name, and their own LinkedIn profile URL
+  (linkedin.com/in/...); a company domain is optional. A common name at a big company (two
+  Priya Sharmas at HDFC Bank) can't be told apart by name + domain, and a company LinkedIn
+  page doesn't identify a person. The URL is only matched in search results, never fetched.
+  REQUIRE_LINKEDIN=false restores "domain or LinkedIn"; the recorded demo uses it because its
+  fictional people have no LinkedIn profiles.
 - CSV intake (T04): files must be UTF-8 (BOM fine), comma/semicolon/tab delimited, at most
   1 MB and 50 rows. Row numbers in messages are spreadsheet line numbers (header = line 1).
   A malformed email is dropped with a warning rather than rejecting the row; a missing
@@ -134,12 +138,84 @@ Decisions and assumptions made while building Signal. Add to this as you build
 - LangGraph costs about 2 ms per prospect (compiling the graph, once, about 10 ms; importing the
   library about 0.3 s at startup). LangSmith (LangChain's cloud tracing) is installed as a
   dependency but off unless someone sets LANGSMITH_TRACING; nothing is sent anywhere.
-- Python 3.15 was checked: langgraph 1.2.16, langchain-core 1.6.12, langchain-openai 1.7.2 install
+- Python 3.13 was checked: langgraph 1.2.16, langchain-core 1.6.12, langchain-openai 1.7.2 install
   and run, and both providers answered a live structured call through ChatOpenAI.
 - Editing a prompt changes its exact text, so recorded demo answers no longer match: re-record
   (free, uses Groq/Gemini quota) before replaying the demo.
+- Retrying a failed run (POST /runs/{id}/retry) restarts at the first stage whose saved result is
+  missing, unreadable or stale, and reuses the rest from the saved stage events; no LangGraph
+  checkpointer is needed. Web research (gather, extract) older than 24 hours is redone. At most 3
+  retries per run (settings.retry_max_attempts); after that the rep uploads the prospect again.
+  A retried member of a buying committee is planned alone: its colleagues have already finished.
+- Draft versions restart at v1 when a run is redone (retry, batch rebalance), so "the draft to
+  review" is the newest record, not the highest version number.
+- The critic's factual audit reads the whole email, not just the writer's declared claims. Its
+  evidence is exactly what the writer was given (the hook and supporting facts, our offer from
+  seller_profile.yaml, the rep's notes); a model's own angle or reasoning never counts. Unsupported
+  or contradicted facts that survive the one rewrite block approval; the rep edits, and the edit
+  is audited against the same evidence before it is approved. "Uncertain" only warns. Drafts made
+  before the audit existed are not blocked. The audit is one fast-model call that also scores
+  genericness, so hooked drafts cost no extra call; role-based and outline drafts gain one.
+- Written-out quantities ("two", "a dozen", "three hundred") count as numbers in the sourced-numbers
+  check; a lone "one" does not ("one question" is not a count).
+- When identity fails, code says why (resolve.diagnose) instead of one generic "needs input":
+  search_failed (every provider errored; "no results" from all of them still counts as search
+  working), bad_data, not_public (the company is real but the person never appears with it),
+  ambiguous, unconfirmed. We can never prove a person doesn't exist, so the harshest verdict is
+  "looks like bad data", never "doesn't exist".
+- bad_data needs hard evidence: a placeholder name (test, asdf, John Doe, digits; kept short so a
+  real unusual name like "Na Li" is never called fake), or a company domain that doesn't connect
+  at all while no search result mentions it. Any HTTP answer, even a 403 from a bot filter, counts
+  as a live site. The site is checked only when nothing else found the company (one request).
+- A fixed bad-data row is searched again with the corrected details; it is not trusted the way
+  "I know them" (the rep vouching) is.
+- Company-level draft: for a not_public person the rep may go ahead on the CSV's details. Identity
+  confidence is 0.3 (settings.identity_unverified), research is company-only in practice (person
+  results need the full name with the company), the writer is told to say nothing personal, the
+  draft carries an "Identity not verified" banner, and approve or edit needs the rep to tick that
+  they confirmed the person exists (stored on the draft's review). Reject never needs it.
+- A rep can dismiss a needs_input run (status `dismissed`). Dismissed runs count as finished but
+  not as "not ready": the rep decided, the agent didn't fall short.
+- Hook choice is deliberately flexible: a true, good-enough fact can open an email, because a
+  modest real reason to write beats a generic one. Low signal is below 1.5 (was 2.5), recency
+  decays over 120 days (was 60: a 4-month-old fact kept only 14% of its points), and facts up to a
+  year old are kept (was 180 days). The rating prompt scores an honest indirect link as relevance 2,
+  and the hook picker returns "no hook" only when every signal is unrelated to what we sell.
+  None of this touches the ethics rules: sensitive news, AI-screening findings and competitor news
+  are still never hooks, opted-out and open-deal rules still stop the run, and every claim still
+  needs a source (unsupported facts block approval).
+- The lists' status column shows how much the research found once it is done: High signal (a
+  hook scoring 3.0 or more), Moderate signal (a hook below 3.0), Low signal (facts found, none
+  good enough to open with), No signal (no usable fact; AI-screening findings don't count).
+  Runs that haven't finished research, or wait on someone (running, needs input, held, blocked,
+  failed...), keep their own status: "No signal" there would be misleading. The run page itself
+  still shows the real status (ready for review, approved...).
+- A `company_focus` signal is always company-level, whoever it names: it is what the company
+  says about itself (code rule; the model once filed a CFO's remark about the prospect as theirs).
+- Research also searches the company's own site (site:domain, no date window, up to 2 pages).
+  What a company states about itself (what it sells, to whom, customers, pricing, integrations,
+  stated goals) becomes a `company_focus` signal: often the only real information on a small
+  company. Company names are searched without LinkedIn-style extras ("X | tagline", "X (ABC)").
+- Research searches wider: 14 fixed searches per prospect (core news, own site + blog, customers
+  and case studies, reviews, awards, general news, the person's talks, news and writing) plus up
+  to 4 the fast model writes for that prospect (agents/stage3_plan_extra_searches.md). Planned queries must name the
+  company or the person, never touch LinkedIn, and use site: only on the company's own domain;
+  a planner failure just means no extra searches. To stay on the free tier, the core and own-site
+  searches use Tavily first (9 credits, about the old 8) and every wider or planned search tries
+  DuckDuckGo first. Up to 14 pages are read (was 10).
+- The company relevance gate also accepts a result whose text names the company repeatedly (its
+  domain once, or its name twice), not only in the headline: small companies are usually covered
+  inside an article. A single passing mention (a listicle) still doesn't count.
 
 ## Technical
+- Deployed: backend on Render's free plan (render.yaml), frontend on Vercel, Postgres on Neon.
+  psycopg 3 is the driver; postgres:// URLs from any host are rewritten to the psycopg dialect.
+  Render's disk is ephemeral, so the 24 h search cache restarts with each deploy (harmless).
+- Per-visitor hourly caps, in memory (they reset on restart; enough for one free instance): 20
+  uploads and 60 prospects sent through the pipeline. Uploads cost nothing; a prospect costs
+  about 9 search credits plus model tokens. Files are still capped at 50 rows.
+- Prompt files are named by stage and job (agents/stage6_write_and_check_email.md) so a reader
+  finds them without opening code; code keeps short keys ("draft") mapped in prompts.AGENT_FILES.
 - Zero cost: every service runs on a free tier with no credit card. The LLM is Groq
   (`openai/gpt-oss-120b` smart, `openai/gpt-oss-20b` fast) with Gemini free tier as
   fallback, instead of the Claude API the guide first assumed. Search is Tavily's free
@@ -151,8 +227,8 @@ Decisions and assumptions made while building Signal. Add to this as you build
   swapped in later through config only.
 - Gemini's free tier may use prompts to improve Google's models; acceptable because inputs
   are public web text plus fictional seller data.
-- Python 3.15 instead of the guide's 3.12: it is what this machine has, and every backend
-  dependency ships 3.15 wheels. Pin the version on the backend host at deploy time.
+- Python 3.13 (the guide said 3.12): it is what this machine's venv uses, and every backend
+  dependency ships 3.13 wheels. render.yaml pins 3.13 on the host.
 - Next.js 16.3.8 / React 19.2.
 - Node 20.11 is below shadcn's stated minimum (20.18.1); the CLI still worked. Upgrade to
   Node 22 LTS before deploying.

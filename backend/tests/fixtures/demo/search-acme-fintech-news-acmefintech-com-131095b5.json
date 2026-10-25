@@ -1,0 +1,8 @@
+{
+  "provider": "simweb",
+  "query": "\"Acme Fintech\" news acmefintech.com",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

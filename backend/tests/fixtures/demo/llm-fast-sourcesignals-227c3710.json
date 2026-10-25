@@ -1,0 +1,49 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "hiring",
+        "about": "company",
+        "summary": "Ferncastle is hiring five Sales Development Representatives for their Austin office.",
+        "evidence": "Ferncastle is hiring five Sales Development Representatives for our new Austin office.",
+        "published_at": "2026-10-05",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": true,
+        "job_posting": {
+          "title": "",
+          "locations": [
+            "Austin"
+          ],
+          "posted_days_ago": null
+        }
+      },
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Ferncastle opened a new Austin office.",
+        "evidence": "our new Austin office",
+        "published_at": "2026-10-05",
+        "sensitive": false,
+        "speaker": null,
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "gemini",
+    "model": "gemini-3.5-flash-lite",
+    "role": "fast",
+    "prompt_tokens": 938,
+    "completion_tokens": 166,
+    "latency_ms": 1268,
+    "cost_usd": 0.0,
+    "fallbacks": [
+      "groq: rate limited"
+    ],
+    "from_fixture": false
+  }
+}

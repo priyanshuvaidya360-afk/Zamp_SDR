@@ -1,6 +1,6 @@
 """Internal account context: CRM accounts, open deals, past outreach.
 
-Spec: docs/GUIDE.md "Account context: data and tools". Today this reads the seeded stand-in
+Spec: docs/PROJECT_SPEC.md "Account context: data and tools". Today this reads the seeded stand-in
 tables; a HubSpot / Salesforce / Outreach adapter replaces this one file and nothing else.
 """
 

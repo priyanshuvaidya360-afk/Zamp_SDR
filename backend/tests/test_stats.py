@@ -89,3 +89,46 @@ def test_runs_filter_by_status_and_search_by_name(client, session):
     assert globex["total"] == 5 and len(globex["items"]) == 2
     page = client.get("/runs?limit=3&offset=3").json()
     assert page["total"] == 10 and len(page["items"]) == 3
+
+
+def test_signal_level_reflects_what_the_research_found(session, client):
+    from app.models import SignalRecord, StageEvent, StageState
+    from app.routes.runs import signal_levels
+
+    batch = Batch(filename="levels.csv", status=BatchStatus.running, row_count=6)
+    session.add(batch)
+    session.commit()
+    runs = [Run(batch_id=batch.id, row_number=i, first_name=f"P{i}", last_name="Q", status=RunStatus.ready_for_review)
+            for i in range(2, 7)]
+    session.add_all(runs)
+    session.commit()
+    high, moderate, low, none, unresearched = (r.id for r in runs)
+
+    def signal(run_id, score, selected=False, type_="funding"):
+        session.add(SignalRecord(run_id=run_id, type=type_, about="company", summary="s", evidence="e",
+                                 source_url="https://x.example", scores={"score": score}, selected=selected))
+
+    signal(high, 3.4, selected=True)
+    signal(moderate, 2.1, selected=True)
+    signal(moderate, 1.2)
+    signal(low, 1.1)  # a fact, but too weak to open with
+    signal(none, 0, type_="ai_screening")  # an AI-screening finding is not a usable fact
+    for run_id in (high, moderate, low, none):  # research finished for these four, not the fifth
+        session.add(StageEvent(run_id=run_id, stage="extract", state=StageState.done))
+    session.commit()
+
+    assert signal_levels(session, [r.id for r in runs]) == {high: "high", moderate: "moderate", low: "low", none: "none"}
+
+    # A re-upload stopped before research shows the level of the run it points to, if it has one.
+    again = Run(batch_id=batch.id, row_number=7, first_name="P2", last_name="Q", status=RunStatus.blocked)
+    waiting = Run(batch_id=batch.id, row_number=8, first_name="P6", last_name="Q", status=RunStatus.blocked)
+    session.add_all([again, waiting])
+    session.commit()
+    for run, earlier in ((again, high), (waiting, unresearched)):
+        session.add(StageEvent(run_id=run.id, stage="intake", state=StageState.done,
+                               payload={"stopped": "blocked", "earlier_run_id": earlier}))
+    session.commit()
+    levels = signal_levels(session, [again.id, waiting.id])
+    assert levels == {again.id: "high"}  # the earlier run of `waiting` has no level yet
+    by_id = {r["id"]: r["signal_level"] for r in client.get(f"/batches/{batch.id}").json()["runs"]}
+    assert by_id[high] == "high" and by_id[unresearched] is None

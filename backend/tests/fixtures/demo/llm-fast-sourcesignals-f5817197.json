@@ -1,0 +1,29 @@
+{
+  "output": {
+    "signals": [
+      {
+        "type": "expansion",
+        "about": "company",
+        "summary": "Kestrel Labs opens first London office",
+        "evidence": "Half of our pipeline already comes from the UK,\" said chief executive Aoife Byrne.",
+        "published_at": "2026-09-22",
+        "sensitive": false,
+        "speaker": "Aoife Byrne",
+        "is_reshare": false,
+        "time_sensitive": false,
+        "job_posting": null
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-20b",
+    "role": "fast",
+    "prompt_tokens": 1083,
+    "completion_tokens": 501,
+    "latency_ms": 33364,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

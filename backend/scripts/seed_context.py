@@ -41,7 +41,7 @@ def _upsert(session: Session, existing: Any, model: type, values: dict[str, Any]
 
 def seed(session: Session, path: Path = DEFAULT_PATH, now: datetime | None = None) -> dict[str, int]:
     now = now or datetime.now(timezone.utc)
-    data = json.loads(path.read_text())
+    data = json.loads(path.read_text(encoding="utf-8"))
 
     for row in data["crm_accounts"]:
         _upsert(session, session.get(CrmAccount, row["domain"]), CrmAccount, row)

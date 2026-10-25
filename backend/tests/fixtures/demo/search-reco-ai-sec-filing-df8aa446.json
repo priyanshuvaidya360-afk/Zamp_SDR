@@ -1,0 +1,46 @@
+{
+  "provider": "tavily",
+  "query": "reco.ai SEC filing",
+  "results": [
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/2077709/000121390025117845/ea0266543-s1_rankone.htm",
+      "title": "filings with the SEC",
+      "content": "ROC\nis an independent American artificial intelligence company redefining the global standard for Vision AI in identity, security, and digital\nforensics. Our Vision AI platform delivers real-time facial recognition, multimodal biometric verification, video analytics, and AI-powered\nevidence analysis to mission-critical organizations across private and public sectors. ROC’s biometric algorithms are routinely [...] recommendations that our AI applications assist in producing are or are alleged\nto be deficient, inaccurate, or biased, our business, financial condition, and results of\noperations may be adversely affected. Our use of AI and machine learning is subject\nto risks related to flaws in our algorithms and datasets that may be insufficient or contain\nbiased information. The development of AI technologies is complex, and there are [...] systems could impair the acceptance of AI solutions. If the recommendations, forecasts, or\nanalyses that AI applications assist in producing are deficient or inaccurate, we could be\nsubjected to competitive harm, potential legal liability, and brand or reputational harm.\nSome AI scenarios present ethical issues. Though our technologies and business practices\nare designed to mitigate many of these risks, if we enable or offer AI solutions that are",
+      "published_date": null,
+      "score": 0.61779
+    },
+    {
+      "url": "https://www.caplight.com/company/reco",
+      "title": "Reco Valuation & Funding History | Caplight",
+      "content": "Reco launched Browser Guard on Sep 3rd '26\n\nView all news\n\n## Reco Filings\n\nExplore SEC and related filing metadata, where available.\n\nReco filings preview — column headings only; records require access\n\n| Type | Date | Amount Offered | Amount Sold | Filing | Pages | Download |\n\nFiling documents are not displayed on this public page. Request access to learn about available coverage.\n\nRequest access\n\n## Frequently Asked Questions [...] Caplight Logo\n\nLog inBook a demo\n\n  \n  \n  \n  \n  \n  \n  \n\nReco\n\n# Reco\n\nPrivate\n\nTel AvivCybersecurity\n\nLast Round\n\nSeries B\n\nSep 29, 2026\n\nEst. Valuation\n\nTotal Funding Raised\n\n$139.2M\n\nMomentum\n\nTop 1%\n\nof companies Caplight tracks\n\n## Company Overview\n\nReco is a cybersecurity company that provides an identity-centric SaaS and AI agent security platform designed to discover, map, and secure SaaS applications, AI agents, and identities.\n\nSector\n\nCybersecurity\n\nVerticals [...] Reco received $55M in Series B1 financing on Oct 3rd '26\n receives\\_financingSep 29, 2026\n\n  On Sep 29th '26, Reco raised $55M in additional strategic funding from AT&T Ventures, with support from Quadrille Capital and new investor Forestay, following its Series B round in Feb '26 to expand sales, partnerships, channels, and customer support.\n receives\\_financingSep 29, 2026\n\n  Reco raised $55M in a Series C extension on Sep 30th '26\n launchesSep 2, 2026",
+      "published_date": null,
+      "score": 0.5709301
+    },
+    {
+      "url": "https://finance.biggo.com/news/5130b06b-556e-4932-9117-77efba3ab02b",
+      "title": "US-based Reco raises $55 million to monitor AI agents, with strategic investment from AT&T — BigGo Finance",
+      "content": "¥2.79 trillion) by 2033, representing a compound annual growth rate of 38.9%. [...] Reco's platform identifies AI agents operating within an enterprise, maps their identities, permissions, and the data and systems they can access, and then visualizes business workflows to reduce risk. It integrates with more than 280 applications including OpenAI, Anthropic, Microsoft Copilot, Salesforce, ServiceNow, and Workday, and features 1,000 detection controls. [...] to AI tools and agents.",
+      "published_date": null,
+      "score": 0.41435426
+    },
+    {
+      "url": "https://www.linkedin.com/posts/stevenc81_github-stevenc81sec-analyst-activity-7418134263738540032-aT9e",
+      "title": "AI Agents Analyze SEC Filings in 20 Minutes | Steven C. posted on the topic | LinkedIn",
+      "content": "What 3 AI agents can do in 20 minutes: → Collect 5 years of SEC filings (10-K, 10-Q, 8-K) → Analyze revenue trends, margins, ROIC, debt levels → Assess management quality and track record → Identify accounting red flags → Cross-validate what executives say vs. what the numbers show → Score against investment principles → Generate buy/hold/avoid recommendation with entry points Built this with Claude Code. The agents run in parallel, each with specialized prompts and tooling. The output per [...] easier and discussion more focused. Judgment stays human (we still want a review before it goes to print). Preparation of the memo becomes reliable. If IC conversations are drifting toward reconciling memos instead of debating decisions, this Agentic AI workflow helps reset the baseline. Book time if you want to see it in action (see bio). #aiagents #investment #wealth #PE",
+      "published_date": null,
+      "score": 0.34627652
+    },
+    {
+      "url": "https://www.akerman.com/a/web/dGGqfRX6NfW5CJGS85nwYS/ai-governance-tips-for-avoiding-securities-suits.pdf",
+      "title": "AI Governance Tips For Avoiding Securities Suits",
+      "content": "continued under the current administration, with the SEC's Cyber and Emerging Technologies Unit identifying AI washing as an immediate enforcement priority. In April 2025, the SEC and the U.S. Department of Justice filed parallel actions against the founder of Nate Inc., a privately held startup, for raising over $40 million through false claims that his company's app used proprietary AI when transactions were actually processed manually. These cases signal that enforcement will continue to [...] focus on AI washing began in March 2024 with settled charges against investment advisers Delphia (USA) Inc. and Global Predictions Inc. for false claims about their use of AI, resulting in penalties of $225,000 and $175,000, respectively. And in January 2025, the SEC filed charges against Presto Automation Inc., widely regarded as the first AI-washing case against a public company, for misleading statements about its AI-powered drive-through technology. Enforcement has continued under the [...] Recent SEC commentary and enforcement activity reinforce that AI-related disclosure is not a niche issue. It is being evaluated in the same way as any other statement that could influence an investor's decision-making. While there are no AI-specific SEC disclosure rules currently in effect, there are early signs of where expectations may continue to evolve. In December 2025, the SEC's Investor Advisory Committee recommended that companies consider more structured approaches to AI-related",
+      "published_date": null,
+      "score": 0.29903916
+    }
+  ],
+  "credits": 1.0,
+  "fallbacks": [
+    "duckduckgo: DDGSException"
+  ],
+  "cached": false
+}

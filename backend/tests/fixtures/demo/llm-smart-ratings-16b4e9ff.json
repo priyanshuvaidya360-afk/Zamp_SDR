@@ -1,0 +1,35 @@
+{
+  "output": {
+    "ratings": [
+      {
+        "signal_id": 1,
+        "relevance": 5,
+        "specificity": 5,
+        "reasoning": "Maya explicitly mentions outbound email bottlenecks, a direct problem Halyard solves."
+      },
+      {
+        "signal_id": 2,
+        "relevance": 3,
+        "specificity": 3,
+        "reasoning": "A new self‑serve product likely creates a need for fresh outbound pipeline."
+      },
+      {
+        "signal_id": 3,
+        "relevance": 2,
+        "specificity": 3,
+        "reasoning": "Company’s SaaS focus implies a baseline need for outbound pipeline, but the info is generic."
+      }
+    ]
+  },
+  "usage": {
+    "provider": "groq",
+    "model": "openai/gpt-oss-120b",
+    "role": "smart",
+    "prompt_tokens": 1059,
+    "completion_tokens": 596,
+    "latency_ms": 14563,
+    "cost_usd": 0.0,
+    "fallbacks": [],
+    "from_fixture": false
+  }
+}

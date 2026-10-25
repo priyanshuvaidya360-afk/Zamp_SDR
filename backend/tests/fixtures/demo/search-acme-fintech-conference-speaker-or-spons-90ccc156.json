@@ -1,0 +1,8 @@
+{
+  "provider": "simweb",
+  "query": "\"Acme Fintech\" conference speaker OR sponsor",
+  "results": [],
+  "credits": 0.0,
+  "fallbacks": [],
+  "cached": false
+}

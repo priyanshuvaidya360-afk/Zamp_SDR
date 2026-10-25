@@ -4,7 +4,7 @@ import { buttonVariants } from "@/components/ui/button";
 
 import { Dashboard } from "../dashboard-view";
 
-// Spec: docs/GUIDE.md "UI: three screens" > 3 Dashboard, and T16.
+// Spec: docs/PROJECT_SPEC.md "UI: three screens" > 3 Dashboard, and T16.
 export default function Home() {
   return (
     <div className="space-y-6">
