@@ -29,7 +29,14 @@ def make_engine(url: str) -> Engine:
     url = normalise_url(url)
     if url.startswith("sqlite"):
         return create_engine(url, connect_args={"check_same_thread": False})
-    return create_engine(url, pool_pre_ping=True)  # free Postgres tiers drop idle connections
+    # pool_pre_ping: free Postgres tiers (Neon scales to zero) drop idle connections.
+    return create_engine(url, pool_pre_ping=True, connect_args=postgres_connect_args(url))
+
+
+def postgres_connect_args(url: str) -> dict:
+    """Neon's pooled host ("-pooler") runs PgBouncer in transaction mode: a server-side prepared
+    statement made in one transaction may be gone in the next, so psycopg must not make any."""
+    return {"prepare_threshold": None} if "-pooler." in url else {}
 
 
 engine = make_engine(settings.database_url)
@@ -40,10 +47,19 @@ engine = make_engine(settings.database_url)
 
 
 def create_db_and_tables(bind: Engine | None = None) -> None:
+    """Startup schema work. On Neon it runs over the direct (unpooled) connection, as Neon
+    advises for schema changes; the app's own queries use the pooled `engine`."""
+    direct = None
+    if bind is None and settings.database_url_unpooled:
+        bind = direct = make_engine(settings.database_url_unpooled)
     bind = bind or engine
-    SQLModel.metadata.create_all(bind)
-    if added := add_missing_columns(bind):
-        log.info("database: added columns %s", ", ".join(added))
+    try:
+        SQLModel.metadata.create_all(bind)
+        if added := add_missing_columns(bind):
+            log.info("database: added columns %s", ", ".join(added))
+    finally:
+        if direct is not None:
+            direct.dispose()
 
 
 def _default_sql(column: Column) -> str:

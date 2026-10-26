@@ -24,3 +24,6 @@ node_modules/
 .DS_Store
 .vscode/
 .idea/
+
+# Neon CLI local link (written by neon init / checkout)
+.neon

@@ -47,14 +47,17 @@ With `make` installed, `make setup`, `make dev-api` and `make dev-web` do the sa
 
 **Tests:** `cd backend && python -m pytest -q`. The offline demo check is `python -m scripts.check_demo`. It replays every demo row and compares each with its expected outcome in `seed/demo_cases.json`.
 
-## Deploy (free tiers)
+## Deploy (free, no credit card)
 
-1. **Database:** create a free Postgres on [Neon](https://neon.tech) and copy its connection string.
-2. **Backend on Render:** New → Blueprint → this repo. [render.yaml](render.yaml) sets everything up. Fill in `DATABASE_URL`, the API keys and `CORS_ORIGINS` (your Vercel URL as a JSON list).
-3. **Frontend on Vercel:** import the repo, set the root directory to `frontend`, and set `NEXT_PUBLIC_API_URL` to the Render URL.
-4. Open `https://<render-url>/health`. It should return `{"ok": true}`. The free plan sleeps, so open it a few minutes before a demo.
+Each service is set up by importing this GitHub repo; the config files do the rest. Step by step: **[docs/DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md)**.
 
-A shared link can't drain the free quotas: each visitor gets 20 uploads and 60 drafted prospects per hour (`uploads_per_hour`, `prospects_per_hour` in [backend/app/config.py](backend/app/config.py)).
+| Part | Host | Config | You only paste |
+|---|---|---|---|
+| Database | Neon | [neon.ts](neon.ts) | nothing (`neon deploy` writes `.env.local`) |
+| Backend | Render (Blueprint) | [render.yaml](render.yaml) | the two Neon URLs from `.env.local`, the Groq/Gemini/Tavily keys |
+| Frontend | Vercel (Root Directory `frontend`) | [frontend/vercel.json](frontend/vercel.json) | `NEXT_PUBLIC_API_URL` = the Render URL |
+
+CORS needs no input: the backend already accepts the Vercel project `zamp-sdr` (production and preview URLs). Render's free plan sleeps after 15 idle minutes, so open the site a few minutes before a demo. A shared link can't drain the free quotas: each visitor gets 20 uploads and 60 drafted prospects per hour (`uploads_per_hour`, `prospects_per_hour` in [backend/app/config.py](backend/app/config.py)).
 
 ## Where things live
 
@@ -68,6 +71,7 @@ A shared link can't drain the free quotas: each visitor gets 20 uploads and 60 d
 | [frontend/](frontend/) | Next.js app: upload → map columns → prospect list → live run view → review queue → dashboard |
 | [ASSUMPTIONS.md](ASSUMPTIONS.md) | Every assumption and design decision, with the reason |
 | [docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md) | The full specification: stages, edge cases, build tasks |
+| [docs/DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) | Deploying to Neon, Render and Vercel, step by step |
 | [docs/TECHNICAL_BRIEF_PROMPT.md](docs/TECHNICAL_BRIEF_PROMPT.md) | A complete technical brief to paste into an AI assistant |
 | [CLAUDE.md](CLAUDE.md) | Working notes for the coding assistant (stack, commands, conventions) |
 

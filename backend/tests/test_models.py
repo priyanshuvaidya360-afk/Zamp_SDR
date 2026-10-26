@@ -136,3 +136,26 @@ def test_old_database_gains_new_columns_with_defaults(tmp_path):
         old = session.exec(select(SignalRecord)).one()
         assert old.cluster_urls == [] and old.note is None  # the existing row loads with defaults
     create_db_and_tables(engine)  # running again changes nothing
+
+
+
+def test_neon_urls_get_the_psycopg_driver_and_the_pooler_gets_no_prepared_statements():
+    from app import db
+    pooled = "postgresql://u:p@ep-x-123-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
+    direct = "postgres://u:p@ep-x-123.us-east-2.aws.neon.tech/neondb?sslmode=require"
+    assert db.normalise_url(pooled).startswith("postgresql+psycopg://u:p@ep-x-123-pooler.")
+    assert db.normalise_url(direct).startswith("postgresql+psycopg://u:p@ep-x-123.")
+    assert db.postgres_connect_args(pooled) == {"prepare_threshold": None}
+    assert db.postgres_connect_args(direct) == {}  # a direct connection may prepare statements
+    assert db.normalise_url("sqlite:///x.db") == "sqlite:///x.db"
+
+
+def test_startup_schema_work_uses_the_direct_connection_when_given(monkeypatch, tmp_path):
+    from app import db
+    used = []
+    real = db.make_engine
+    direct = f"sqlite:///{tmp_path / 'direct.db'}"
+    monkeypatch.setattr(db.settings, "database_url_unpooled", direct)
+    monkeypatch.setattr(db, "make_engine", lambda url: used.append(url) or real(url))
+    db.create_db_and_tables()
+    assert used == [direct] and (tmp_path / "direct.db").exists()

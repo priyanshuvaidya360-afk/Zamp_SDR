@@ -96,6 +96,10 @@ class Settings(BaseSettings):
     require_linkedin: bool = True
 
     database_url: str = f"sqlite:///{BACKEND_DIR / 'signal.db'}"
+    # Neon: DATABASE_URL is the pooled connection (app traffic); DATABASE_URL_UNPOOLED the direct
+    # one, used for creating tables and adding columns at startup. Both come from `neon deploy`
+    # (.env.local) and go into the host's env vars. Unset locally: everything uses database_url.
+    database_url_unpooled: str | None = None
     # live: real calls. record: real calls + save each response as a fixture.
     # fixtures: replay saved responses only (no network, no keys needed).
     demo_mode: Literal["live", "record", "fixtures"] = "live"
@@ -108,6 +112,9 @@ class Settings(BaseSettings):
     fixtures_dir: Path = BACKEND_DIR / "tests" / "fixtures"
     cache_dir: Path = BACKEND_DIR / "tests" / "fixtures" / "cache"
     cors_origins: list[str] = ["http://localhost:3000"]
+    # Origins matching this pattern are allowed too: the deployed frontend's production and
+    # preview URLs (render.yaml sets it for Vercel), so no URL has to be pasted after deploying.
+    cors_origin_regex: str | None = None
     # Per visitor (IP), per hour, so a shared demo link can't drain the free quotas (app/limits.py).
     # 0 turns a limit off. Uploads cost nothing; each prospect costs ~9 search credits + tokens.
     uploads_per_hour: int = 20

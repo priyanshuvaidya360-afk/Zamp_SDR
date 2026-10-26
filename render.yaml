@@ -1,26 +1,40 @@
-# Render blueprint for the backend API (free plan). New > Blueprint > pick this repo.
-# The frontend goes on Vercel (root directory: frontend). Steps in README.md, "Deploy".
+# Render blueprint for the backend API (free plan, no credit card).
+# Render dashboard > New > Blueprint > pick this GitHub repo. Render reads this file, creates the
+# service and asks for the values marked `sync: false`. Every push to main redeploys.
+# Full walkthrough: docs/DEPLOYMENT_GUIDE.md
 services:
   - type: web
-    name: signal-api
+    name: zamp-sdr-api                # the URL becomes https://zamp-sdr-api.onrender.com (or with a suffix if taken)
     runtime: python
     plan: free
+    region: ohio                      # same AWS region as the Neon database (us-east-2): fast queries
     rootDir: backend
+    autoDeploy: true
     buildCommand: pip install -r requirements.txt
-    # Seeding the fake CRM data is idempotent, so it is safe on every start.
+    # Startup creates any missing tables (over the direct Neon connection) and seeds the fake CRM
+    # data the edge-case rules use. Both are idempotent, so they are safe on every restart.
     startCommand: python -m scripts.seed_context && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
         value: 3.13.15
+      - key: PYTHONUTF8
+        value: "1"
       - key: DEMO_MODE
         value: live
-      # Free Postgres: Neon or Supabase. Paste its connection string (postgres://... is fine).
+      # The deployed frontend: Vercel production and preview URLs of the project "zamp-sdr".
+      # If you rename the Vercel project or add a custom domain, change this pattern (or add the
+      # domain to CORS_ORIGINS, a JSON list).
+      - key: CORS_ORIGIN_REGEX
+        value: https://zamp-sdr(-[a-z0-9-]+)?\.vercel\.app
+      # Neon (project soft-boat-20927108, branch production). Copy both from the repo-root
+      # .env.local that `neon deploy` wrote: the pooled URL for app traffic, the direct one for
+      # startup schema work. Never commit them.
       - key: DATABASE_URL
         sync: false
-      # JSON list: your Vercel URL, e.g. ["https://signal-outreach.vercel.app"]
-      - key: CORS_ORIGINS
+      - key: DATABASE_URL_UNPOOLED
         sync: false
+      # Free API keys (the same ones as in backend/.env). EXA_API_KEY is optional: leave it empty.
       - key: GROQ_API_KEY
         sync: false
       - key: GEMINI_API_KEY

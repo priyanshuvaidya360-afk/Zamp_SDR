@@ -130,7 +130,8 @@ ASSUMPTIONS.md         every assumption made; add to it as you build
 docs/PROJECT_SPEC.md   the spec (stages, edge cases, build tasks T01-T18)
 docs/TECHNICAL_BRIEF_PROMPT.md  a full technical brief to paste into an AI assistant
 README.md              overview, process map, run locally, deploy
-render.yaml            Render blueprint for the backend (frontend deploys on Vercel)
+render.yaml            Render blueprint for the backend; frontend/vercel.json for Vercel; neon.ts for
+                       Neon. Step by step: docs/DEPLOYMENT_GUIDE.md
 ```
 
 ## Commands
