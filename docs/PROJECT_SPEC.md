@@ -26,14 +26,14 @@ The CSV is the contract with the user, so validate it before spending a single A
 | --- | --- | --- | --- |
 | `first_name` | Yes | first, firstname, given\_name | Identity search |
 | `last_name` | Yes | last, lastname, surname, family\_name | Identity search |
-| `company_domain` | Yes, unless `linkedin_url` is given | website, domain, company\_url | Exact company match; account grouping |
-| `linkedin_url` | Yes, unless `company_domain` is given | linkedin, profile\_url | Exact person anchor for identity (searched, never scraped) |
+| `linkedin_url` | One anchor of these three | linkedin, profile\_url | Exact person anchor for identity (searched, never scraped) |
+| `email` | One anchor of these three (a work email; Gmail, Yahoo, Outlook etc. don't count) | work\_email, email\_address | Anchor; fills a missing company domain; dedupe key; carried to export |
+| `company_domain` | One anchor of these three | website, domain, company\_url | Exact company match; account grouping |
 | `company` | Recommended | company\_name, account, organization | Display + search queries; derived from the domain or identity step if missing |
 | `title` | No | job\_title, role, position | Disambiguation, relevance |
-| `email` | No | work\_email | Dedupe key; carried to export |
 | `notes` | No | rep\_notes, context | Rep context, trusted input |
 
-**Why these are mandatory:** first name + last name + a company name alone is not a unique identity. Company names collide ("Acme", "Northwind"), and common names at large companies return several people, which leads to drafts about the wrong person or generic, low-quality output. A company domain pins the company exactly; a LinkedIn URL pins the person exactly. Requiring one of them up front is cheaper than guessing later. If the file only has a single `full_name` column (alias: name, prospect, contact), split it on the last space into first and last name and show the split in the preview so the user can check it.
+**Why these are mandatory:** first name + last name + a company name alone is not a unique identity. Company names collide ("Acme", "Northwind"), and common names at large companies return several people, which leads to drafts about the wrong person or generic, low-quality output. So every row needs first name, last name and at least one **anchor**: a LinkedIn URL pins the person exactly; a work email pins the company (its domain becomes the company domain when that column is empty); a company domain pins the company exactly. A personal email (the free-email list in `config.py`, `free_email_domains`) says nothing about the employer, so it is not an anchor. Requiring an anchor up front is cheaper than guessing later; identity (stage 2) still decides whether one person matches. If the file only has a single `full_name` column (alias: name, prospect, contact), split it on the last space into first and last name and show the split in the preview so the user can check it.
 
 Sample to build and demo with (the rows map to your happy path and edge cases):
 
@@ -48,20 +48,23 @@ Meera,Shah,NewCo Payments,Head of Finance Ops,,,
 Priya,Raman,Acme Fintech,VP Finance,acmefintech.com,,
 ```
 
-Row by row: Priya is the happy path; Rahul is valid but a common name at a huge company with no title (identity stays ambiguous → `needs_input`); Ananya is thin signal; David is valid on LinkedIn URL alone; Meera is `invalid` (no domain and no LinkedIn URL); the Controller row is `invalid` (no name); the last row is a `skipped` duplicate.
+Row by row: Priya is the happy path; Rahul is valid but a common name at a huge company with no title (identity stays ambiguous → `needs_input`); Ananya is thin signal; David is valid on LinkedIn URL alone; Meera is `invalid` (no LinkedIn URL, work email or domain); the Controller row is `invalid` (no name); the last row is a `skipped` duplicate.
 
-**File-level checks** (reject the upload with a clear message): not UTF-8 or not CSV, no rows, no columns mappable to first name and last name (or a splittable full name), no column mappable to either company domain or LinkedIn URL, more than 50 rows (a demo-scale cap, stated as an assumption).
+**File-level checks** (reject the upload with a clear message): not UTF-8 or not CSV, no rows, no columns mappable to first name and last name (or a splittable full name), no column mappable to any anchor (LinkedIn URL, email or company domain), more than 50 rows (a demo-scale cap, stated as an assumption).
 
 **Row-level checks** (row gets `invalid` or `skipped`, the rest of the batch runs):
 
 - Missing first name or last name → `invalid` ("missing last name").
-- Missing both company domain and LinkedIn URL → `invalid` ("needs a company domain or LinkedIn URL to identify this person").
-- Malformed domain (no dot, contains spaces) or a LinkedIn URL that is not a `linkedin.com/in/...` profile → `invalid` with the reason.
+- No anchor (no LinkedIn URL, no work email, no company domain) → `invalid` ("needs a LinkedIn URL, work email or company domain to identify this person"; a personal email adds "(gmail.com is a personal email)").
+- Malformed domain (no dot, contains spaces) → `invalid` with the reason.
+- A LinkedIn URL that is not a `linkedin.com/in/...` profile (a `/company/` page, another site) → `invalid` if it is the row's only anchor; otherwise the URL is dropped with a warning.
+- Work email and no company domain → the email's domain fills `company_domain` (warning says so).
 - Exact duplicate inside the file (same LinkedIn URL, same email, or same first + last name + company domain) → second copy `skipped` as duplicate.
 - Same person run in the last 30 days → `blocked` (stage 1, as before).
+- Free consistency checks, shown as warnings (the row stays valid): the LinkedIn slug contains neither the first nor the last name; the work email's domain differs from the company domain.
 - Trim whitespace, fix casing, strip `www.`, `https://` and paths from domains, normalise LinkedIn URLs to `linkedin.com/in/<slug>`, split a single full-name column into first + last.
 
-Before running, show a **preview**: detected column mapping (user can correct it), row count, and how many rows are valid, duplicate or invalid. The user clicks "Run N prospects" to start. This preview is cheap to build and shows judgement in the demo.
+Before running, show a **preview**: detected column mapping (user can correct it), row count, and how many rows are valid, duplicate, invalid or valid with warnings (each warning listed by row). The user clicks "Run N prospects" to start. This preview is cheap to build and shows judgement in the demo.
 
 ## Process map
 
@@ -466,7 +469,7 @@ The live demo is where submissions are won or lost, so treat reliability as a fe
 
 **Before the live interview**
 
-- [ ] Demo CSV ready (happy path + 4 edge cases + messy rows) and a second clean CSV as backup; order to open rows written down: happy path (the crowded-hook company) → buying committee → AI screening → stale draft → warm prospect / open deal if asked
+- [ ] Demo CSV ready (happy path + 4 edge cases) and a second clean CSV as backup; order to open rows written down: happy path (the crowded-hook company) → buying committee → AI screening → stale draft → warm prospect / open deal if asked
 - [ ] Ran all cases on the deployed URL within the last 24 hours
 - [ ] Backend warmed up 10 minutes before (free hosts sleep and cold-start slowly)
 - [ ] `DEMO_MODE=fixtures` toggle ready if the network or an API fails; say so openly if you use it
@@ -628,11 +631,12 @@ map headers by the alias table, clean values, run file-level checks (cap 50 rows
 row-level checks (invalid with reason, skipped duplicate within file). Store raw_row.
 Endpoints: POST /batches (multipart file) -> batch_id + preview {mapping, counts, first 20 rows
 with status and reason}; PATCH /batches/{id}/mapping -> re-validate with a corrected mapping.
-Required per row: first_name, last_name, and at least one of company_domain / linkedin_url
+Required per row: first_name, last_name, and at least one anchor: linkedin_url, a work email or company_domain
 (company name is recommended, not required). Split a single full_name column into first + last.
 Validate domain and LinkedIn URL formats; dedupe on LinkedIn URL, email, or first + last + domain.
 Done when: pytest covers clean file, aliased headers, BOM, full_name split, missing last name,
-missing both domain and LinkedIn URL, LinkedIn-only row (valid), malformed LinkedIn URL,
+no anchor, each anchor alone (valid), a free email alone (invalid), domain filled from a work
+email, a /company/ URL as the only anchor (invalid), slug and email-domain warnings,
 in-file duplicate, 51 rows, and a non-CSV file, each with the expected statuses and messages.
 ```
 
@@ -839,10 +843,11 @@ Spec: docs/PROJECT_SPEC.md "Input: the prospect CSV" sample, "Edge cases: what t
 Create seed/demo.csv with: one happy-path row at the crowded-hook company; Northwind CMO,
 Head of Growth and VP Sales; one row whose public_bio holds the flan line and one holding a
 hostile instruction; Priya Raman (warm, not_now); a Contoso Logistics contact (open deal);
-plus messy rows (aliased headers in a second file seed/demo_messy.csv, a row with neither
-company domain nor LinkedIn URL, a row missing a last name, a LinkedIn-only row, an exact duplicate). Write seed/demo_cases.json describing each row's expected status.
+Write seed/demo_cases.json describing each row's expected status. (Messy-input cases (aliased
+headers, missing anchors, a missing last name, duplicates) are covered by tests/test_ingest.py,
+not by a second demo file.)
 Record fixtures for every row with DEMO_MODE=record, plus the two careers-page snapshots
-(4 roles, then 2) for case 10. Add scripts/check_demo.py that runs both CSVs in fixtures
+(4 roles, then 2) for case 10. Add scripts/check_demo.py that runs seed/demo.csv in fixtures
 mode and asserts each row's status against demo_cases.json.
 Done when: check_demo.py passes twice in a row with the network off.
 ```

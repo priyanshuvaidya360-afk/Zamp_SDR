@@ -1,6 +1,6 @@
 # Signal: a cold-email outreach agent that never sends
 
-An SDR uploads a CSV of prospects (name plus a company domain or LinkedIn URL). For each one, a fixed pipeline confirms who the person is, researches the public web, picks **one cited hook**, and writes a short first-touch email (under 120 words). Every factual sentence links to the source that proves it. Drafts wait in a review queue: a human approves, edits or rejects each one. **Nothing is ever sent.** The live run view streams every stage as it happens, and a dashboard shows what reached review and why the rest didn't.
+An SDR uploads a CSV of prospects (first and last name plus at least one of: their LinkedIn URL, a work email, or the company domain). For each one, a fixed pipeline confirms who the person is, researches the public web, picks **one cited hook**, and writes a short first-touch email (under 120 words). Every factual sentence links to the source that proves it. Drafts wait in a review queue: a human approves, edits or rejects each one. **Nothing is ever sent.** The live run view streams every stage as it happens, and a dashboard shows what reached review and why the rest didn't.
 
 ## How one prospect is processed
 
@@ -43,7 +43,7 @@ npm run dev                       # http://localhost:3000
 
 With `make` installed, `make setup`, `make dev-api` and `make dev-web` do the same.
 
-**Showing the demo (no keys or network needed):** start the backend in demo mode with `make dev-api-demo`, or on Windows `powershell -ExecutionPolicy Bypass -File run-demo.ps1`. Then use **"Use the demo CSV"** (9 prospects, one per feature: happy path, buying committee, AI screening trap, hostile instruction, warm follow-up, open deal, stale draft) or **"Try a messy CSV"** (odd column names, ALL-CAPS names, a LinkedIn-only row, missing data, a duplicate). Every search and model answer is replayed from `backend/tests/fixtures/demo`, in its own database (`backend/demo.db`).
+**Showing the demo (no keys or network needed):** start the backend in demo mode with `make dev-api-demo`, or on Windows `powershell -ExecutionPolicy Bypass -File run-demo.ps1`. Then use **"Use the demo CSV"** (9 prospects, one per feature: happy path, buying committee, AI screening trap, hostile instruction, warm follow-up, open deal, stale draft). Every search and model answer is replayed from `backend/tests/fixtures/demo`, in its own database (`backend/demo.db`).
 
 **Tests:** `cd backend && python -m pytest -q`. The offline demo check is `python -m scripts.check_demo`. It replays every demo row and compares each with its expected outcome in `seed/demo_cases.json`.
 

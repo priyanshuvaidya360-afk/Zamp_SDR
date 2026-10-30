@@ -7,7 +7,7 @@ from sqlmodel import select
 from app.models import DraftRecord, ReviewerAction, Run, RunStatus
 from app.pipeline import draft
 from app.pipeline.draft import Evidence, factual_report, spell_out_numbers
-from app.review import ReviewError, review
+from app.review import ReviewError, latest_draft, review
 from tests.test_draft import GOOD, GOOD_BODY, GOOD_CLAIM, check, ctx, fake_models  # noqa: F401 (fixture)
 
 INVENTED = "Abacum also raised $40M in September."
@@ -176,3 +176,26 @@ async def test_an_edit_is_audited_before_it_is_approved(ctx, monkeypatch, sessio
     fake_models(monkeypatch, [], generic=[], audits=[[SUPPORTED]])
     fixed = await review(session, run_id, ReviewerAction.edit, body=GOOD_BODY)
     assert fixed.outcome == "edited" and fixed.run_status == RunStatus.approved
+
+
+async def test_after_one_warning_the_rep_can_approve_an_edit_anyway(ctx, monkeypatch, session):
+    run_id = await blocked_draft(ctx, monkeypatch, session)
+    fake_models(monkeypatch, [], generic=[], audits=[[claim(INVENTED, "unsupported")]])
+    edited = FUNDED["body"] + " "
+    warned = await review(session, run_id, ReviewerAction.edit, body=edited)
+    assert warned.outcome == "needs_fix"
+
+    fake_models(monkeypatch, [], generic=[], audits=[])  # no second audit: an LLM call here would fail
+    approved = await review(session, run_id, ReviewerAction.edit, body=edited, approve_anyway=True)
+    assert approved.outcome == "edited" and approved.run_status == RunStatus.approved
+    stored = latest_draft(session, run_id)
+    assert stored.edited_body == edited.strip()
+    override = stored.review["approved_over_warning"]
+    assert override["by"] == "rep" and override["sentences"][0]["sentence"] == INVENTED
+
+
+async def test_the_rep_can_approve_a_flagged_draft_anyway(ctx, monkeypatch, session):
+    run_id = await blocked_draft(ctx, monkeypatch, session)
+    result = await review(session, run_id, ReviewerAction.approve, approve_anyway=True)
+    assert result.outcome == "approved" and result.run_status == RunStatus.approved
+    assert latest_draft(session, run_id).review["approved_over_warning"]["sentences"][0]["sentence"] == INVENTED

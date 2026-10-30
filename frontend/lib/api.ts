@@ -90,12 +90,13 @@ export const api = {
   review: (
     runId: number,
     action: ReviewAction,
-    opts: { body?: string; reason?: string; draftId?: number; identityConfirmed?: boolean } = {},
+    opts: { body?: string; reason?: string; draftId?: number; identityConfirmed?: boolean; approveAnyway?: boolean } = {},
   ) =>
     request<ReviewResult>(
       `/runs/${runId}/review`,
       json("POST", {
         action, body: opts.body, reason: opts.reason, draft_id: opts.draftId, identity_confirmed: opts.identityConfirmed,
+        approve_anyway: opts.approveAnyway,
       }),
     ),
   /** A plain link: the browser downloads the file. Approved rows only unless `all`. */

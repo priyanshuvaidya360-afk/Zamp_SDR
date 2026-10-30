@@ -7,6 +7,9 @@ Spec: docs/PROJECT_SPEC.md case 10, "UI: three screens" (review queue, export) a
   new draft version to approve again (with a diff); gone -> the hook is invalid: the run goes
   back through scoring without that source, so the runner-up becomes the hook.
 - edit: the rep's text is final (approved as edited); the diff is stored.
+- Unsupported facts warn once: an approve or edit that the factual audit blocks comes back with
+  the flagged sentences. If the rep then approves anyway (approve_anyway), the human decides: it
+  is approved without another audit, and the override is stored with the flagged sentences.
 - reject: with an optional reason.
 Nothing is ever sent.
 """
@@ -179,9 +182,7 @@ def edit_diff(before: str, after: str) -> list[str]:
 
 async def review(session: Session, run_id: int, action: ReviewerAction, body: str | None = None,
                  reason: str | None = None, draft_id: int | None = None,
-                 identity_confirmed: bool = False) -> ReviewResult:
-    from app.pipeline import runner
-
+                 identity_confirmed: bool = False, approve_anyway: bool = False) -> ReviewResult:
     run, draft = _get(session, run_id)
     if draft_id is not None and draft_id != draft.id:
         raise ReviewError("A newer version of this draft exists; review that one.")
@@ -199,6 +200,14 @@ async def review(session: Session, run_id: int, action: ReviewerAction, body: st
     if action == ReviewerAction.edit:
         if not body or not body.strip():
             raise ReviewError("An edit needs the edited body.")
+        if approve_anyway:  # warned once already: the rep's call, no second audit
+            report = (draft.review or {}).get("edit_check") or (draft.critic_report or {}).get("factual")
+            draft.edited_body = body.strip()
+            _close(session, run, draft, action, RunStatus.approved, None,
+                   edit_diff=edit_diff(draft.body, draft.edited_body), approved_over_warning=_override(report))
+            _announce(run)
+            return ReviewResult(outcome="edited", message="Approved with your edits (over the fact-check warning)",
+                                run_status=run.status, draft_id=draft.id)
         report = await check_edit(run, draft, body.strip())
         if report is not None and report["blocking"]:
             draft.review = {**(draft.review or {}), "edit_check": report}
@@ -213,14 +222,24 @@ async def review(session: Session, run_id: int, action: ReviewerAction, body: st
         return ReviewResult(outcome="edited", message="Approved with your edits", run_status=run.status,
                             draft_id=draft.id)
 
-    if blocked := drafting.blocking_message((draft.critic_report or {}).get("factual")):
-        raise ReviewError(f"This draft has {blocked}. Edit the flagged sentences, then save.")
+    factual = (draft.critic_report or {}).get("factual")
+    if blocked := drafting.blocking_message(factual):
+        if not approve_anyway:
+            raise ReviewError(f"This draft has {blocked}. Edit the flagged sentences, or approve anyway.")
+        draft.review = {**(draft.review or {}), "approved_over_warning": _override(factual)}
     stale = stale_claims(session, draft)
     if not stale:
         _close(session, run, draft, action, RunStatus.approved)
         _announce(run)
         return ReviewResult(outcome="approved", message="Approved", run_status=run.status, draft_id=draft.id)
     return await revalidate(session, run, draft, stale)
+
+
+def _override(report: dict[str, Any] | None) -> dict[str, Any]:
+    """The audit trail of a rep approving over the fact-check warning: who, when, which sentences."""
+    issues = [i for i in (report or {}).get("issues", []) if i.get("status") != "uncertain"]
+    return {"by": "rep", "at": utcnow().isoformat(),
+            "sentences": [{"sentence": i.get("sentence"), "reason": i.get("reason")} for i in issues]}
 
 
 async def check_edit(run: Run, draft: DraftRecord, body: str) -> dict[str, Any] | None:

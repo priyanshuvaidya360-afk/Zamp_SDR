@@ -140,7 +140,7 @@ function FactualIssues({ factual }: { factual: FactualReport }) {
       <h3 className="text-xs font-bold tracking-[0.08em] text-primary uppercase">Factual accuracy</h3>
       {factual.blocking && (
         <p className="text-[13px] text-[#a14a00]">
-          Approve is off until these sentences are fixed. Edit the email; your edit is checked again before it is approved.
+          Fix these sentences with Edit (your edit is checked once), or approve anyway: the reviewer has the final say, and the override is recorded.
         </p>
       )}
       <ul className="space-y-3 text-sm">

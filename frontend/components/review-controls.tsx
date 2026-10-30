@@ -12,8 +12,9 @@ import type { DraftRecord, FactualIssue, ReviewResult } from "@/lib/types";
 // screens". Approving an old draft with time-sensitive facts first shows "Re-checking N facts";
 // a changed fact comes back as a red/green diff to approve again. Nothing is ever sent.
 // Callers key it by draft id, so a new draft starts with fresh state.
-// A draft whose factual audit found unsupported facts can't be approved as is: the rep edits it,
-// and the edit is audited again before it is approved.
+// Unsupported facts warn once, never in a loop: a flagged draft shows the sentences, and an edit is
+// audited once. After that warning the rep decides: "Approve anyway" approves (the override is
+// recorded on the draft), "Check again" audits the edited text once more.
 // A company-level draft (the person was never found online) needs the rep to tick that they
 // confirmed the person exists before approve or edit is allowed; reject never needs it.
 
@@ -48,9 +49,13 @@ export function ReviewControls({
   const factual = draft.critic_report.factual;
   const blocked = Boolean(factual?.blocking);
   const blockedCount = (factual?.issues ?? []).filter((i) => i.status !== "uncertain").length;
+  const warned = Boolean(editIssues && editIssues.length > 0); // the edit was checked once and flagged
 
   const send = useCallback(
-    async (action: "approve" | "edit" | "reject", opts: { body?: string; reason?: string; draftId?: number } = {}) => {
+    async (
+      action: "approve" | "edit" | "reject",
+      opts: { body?: string; reason?: string; draftId?: number; approveAnyway?: boolean } = {},
+    ) => {
       setError(null);
       setMode(action === "approve" && recheckFacts > 0 && !opts.draftId ? "rechecking" : "busy");
       try {
@@ -105,7 +110,7 @@ export function ReviewControls({
           className="space-y-2"
           onSubmit={(e) => {
             e.preventDefault();
-            send("edit", { body });
+            send("edit", { body, approveAnyway: warned });
           }}
         >
           <label htmlFor={`edit-${draft.id}`} className="text-sm font-medium">
@@ -118,30 +123,37 @@ export function ReviewControls({
             onChange={(e) => setBody(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Escape") setMode("idle");
-              if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) send("edit", { body });
+              if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) send("edit", { body, approveAnyway: warned });
             }}
             rows={10}
             className="w-full rounded-lg border px-3 py-2 text-sm leading-relaxed outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
           />
           {editIssues && editIssues.length > 0 && (
             <div className="space-y-1.5 rounded-lg border border-[#f7d6b2] bg-[#fff4e8] px-3 py-2.5 text-sm text-[#a14a00]" role="alert">
-              <p className="font-semibold">Not approved: these sentences still state facts the research doesn&rsquo;t support.</p>
+              <p className="font-semibold">Not approved yet: these sentences state facts the research doesn&rsquo;t support.</p>
               <ul className="list-disc space-y-1 pl-5">
                 {editIssues.map((i) => (
                   <li key={i.sentence}>
                     &ldquo;{i.sentence}&rdquo; <span className="text-xs">({i.reason})</span>
+                    {i.suggestion && <span className="block text-xs text-[#7a3a00]">Suggestion: &ldquo;{i.suggestion}&rdquo;</span>}
                   </li>
                 ))}
               </ul>
+              <p className="text-xs">Fix them, or approve anyway: it&rsquo;s your call, and it is recorded on the draft.</p>
             </div>
           )}
           {blocked && !editIssues && (
-            <p className="text-xs text-muted-foreground">Your edit is checked for unsupported facts before it is approved.</p>
+            <p className="text-xs text-muted-foreground">Your edit is checked once for unsupported facts before it is approved.</p>
           )}
           <div className="flex flex-wrap gap-2">
-            <Button type="submit" disabled={!body.trim() || body.trim() === draft.body.trim() || needsVouch}>
-              Save and approve
+            <Button type="submit" disabled={!body.trim() || (!warned && body.trim() === draft.body.trim()) || needsVouch}>
+              {warned ? "Approve anyway" : "Save and approve"}
             </Button>
+            {warned && (
+              <Button type="button" variant="outline" onClick={() => send("edit", { body })} disabled={!body.trim() || needsVouch}>
+                Check again
+              </Button>
+            )}
             <Button type="button" variant="ghost" onClick={() => setMode("idle")}>
               Cancel
             </Button>
@@ -180,11 +192,11 @@ export function ReviewControls({
       ) : (
         <div className="flex flex-wrap items-center gap-2">
           <Button
-            onClick={() => send("approve")}
-            disabled={waiting || blocked || needsVouch}
-            title={blocked ? "Fix the unsupported facts first (Edit)" : needsVouch ? "Confirm the person exists first" : undefined}
+            onClick={() => send("approve", { approveAnyway: blocked })}
+            disabled={waiting || needsVouch}
+            title={blocked ? "Approve despite the unsupported facts (recorded on the draft)" : needsVouch ? "Confirm the person exists first" : undefined}
           >
-            <Check /> Approve {shortcuts && <Kbd>a</Kbd>}
+            <Check /> {blocked ? "Approve anyway" : "Approve"} {shortcuts && !blocked && <Kbd>a</Kbd>}
           </Button>
           <Button variant="outline" onClick={() => setMode("editing")} disabled={waiting}>
             <Pencil /> Edit {shortcuts && <Kbd>e</Kbd>}
@@ -212,9 +224,10 @@ export function ReviewControls({
 
       {blocked && mode === "idle" && !changed && (
         <p className="text-sm text-[#a14a00]">
-          Approve is off: {blockedCount} sentence{blockedCount === 1 ? "" : "s"} state
+          {blockedCount} sentence{blockedCount === 1 ? "" : "s"} state
           {blockedCount === 1 ? "s" : ""} facts the research doesn&rsquo;t support (see Factual accuracy in the content
-          guide). Edit the email to fix {blockedCount === 1 ? "it" : "them"}.
+          guide). Edit the email to fix {blockedCount === 1 ? "it" : "them"}, or approve anyway: your call is recorded on
+          the draft.
         </p>
       )}
 
@@ -241,7 +254,7 @@ export function ReviewControls({
         <DiffModal
           result={changed}
           busy={mode === "busy"}
-          onApprove={() => send("approve", { draftId: changed.draft_id })}
+          onApprove={() => send("approve", { draftId: changed.draft_id, approveAnyway: blocked })}
           onClose={() => {
             const result = changed;
             setChanged(null);

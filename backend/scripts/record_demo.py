@@ -1,4 +1,4 @@
-"""Record the demo: both demo CSVs through the real pipeline, plus case 10's re-check.
+"""Record the demo: the demo CSV through the real pipeline, plus case 10's re-check.
 
   cd backend && .venv/bin/python -m scripts.record_demo
 

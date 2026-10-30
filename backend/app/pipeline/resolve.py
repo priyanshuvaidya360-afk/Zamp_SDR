@@ -99,12 +99,15 @@ def verify_candidates(candidates: list[Candidate], row: dict[str, Any],
                       responses: list[SearchResponse]) -> list[str]:
     """Code checks the model's evidence instead of trusting its confidence. Returns notes.
 
-    - Evidence URL is the prospect's own LinkedIn profile: strong, at least 0.9.
+    - Evidence URL is the prospect's own LinkedIn profile: certain, 1.0.
     - Evidence URL is not among the search results: the model made it up, cap at 0.5.
     - Evidence names neither the person + company/domain nor their LinkedIn: cap at 0.75,
       so it can never be auto-accepted.
+    - Same first + last name and the prospect's company domain, evidence checked: certain, 1.0,
+      unless check_namesakes() finds a second person with that name at that company.
     """
     linkedin = row.get("linkedin_url")
+    domain = normalise_domain(row.get("domain") or "")
     results = {r.url.rstrip("/"): r for response in responses for r in response.results}
     company_terms = [t.lower() for t in (row.get("company"), row.get("domain")) if t]
     last = row["last_name"].lower()
@@ -112,7 +115,7 @@ def verify_candidates(candidates: list[Candidate], row: dict[str, Any],
     for c in candidates:
         url_linkedin = normalise_linkedin(c.evidence_url)[0]
         if linkedin and url_linkedin == linkedin:
-            c.confidence = max(c.confidence, 0.9)
+            c.confidence = 1.0
             continue
         source = results.get(c.evidence_url.rstrip("/"))
         if source is None:
@@ -124,12 +127,60 @@ def verify_candidates(candidates: list[Candidate], row: dict[str, Any],
             if c.confidence > 0.75:
                 notes.append(f"{c.name}: evidence doesn't name both the person and the company")
             c.confidence = min(c.confidence, 0.75)
+            continue
+        if domain and _same_name(c, row) and normalise_domain(c.company_domain or "") == domain:
+            c.confidence = 1.0
+    return notes + check_namesakes(candidates, row)
+
+
+def _same_name(c: Candidate, row: dict[str, Any]) -> bool:
+    words = _plain_name(c.name).split()
+    return bool(words) and words[0] == _plain_name(row["first_name"]) and words[-1] == _plain_name(row["last_name"])
+
+
+def _plain_name(name: str) -> str:
+    name = re.sub(r"\(.*?\)", "", name).lower()
+    return " ".join(re.sub(r"[^\w\s]", " ", name).split())
+
+
+def _profile(c: Candidate) -> str | None:
+    """The LinkedIn profile a candidate's evidence is, if it is one."""
+    return normalise_linkedin(c.evidence_url)[0] if "linkedin.com/in/" in c.evidence_url.lower() else None
+
+
+def check_namesakes(candidates: list[Candidate], row: dict[str, Any]) -> list[str]:
+    """Two people with the prospect's name at the same company (different LinkedIn profiles)
+    can't be told apart by name + domain: none of them is certain,
+    the rep picks. A match on the prospect's own LinkedIn URL still settles it."""
+    linkedin = row.get("linkedin_url")
+    groups: dict[tuple[str, str], list[Candidate]] = {}
+    for c in candidates:
+        if _same_name(c, row) and (key := _person_key(c)):
+            groups.setdefault(key, []).append(c)
+    notes = []
+    for (_, employer), group in groups.items():
+        if not _different_people(group):
+            continue
+        exact = [c for c in group if linkedin and _profile(c) == linkedin]
+        for c in group:
+            if exact and c not in exact:
+                c.confidence = min(c.confidence, 0.3)  # a namesake: not the LinkedIn URL in the CSV
+            elif not exact:
+                c.confidence = min(c.confidence, settings.identity_plausible)
+        notes.append(f"{len(group)} people named {group[0].name} at {employer}"
+                     + (": kept the one whose LinkedIn matches" if exact else ": ask the rep"))
     return notes
 
 
+def _different_people(group: list[Candidate]) -> bool:
+    """Several entries with one name + employer are usually one person found twice (merged later).
+    They are different people when their LinkedIn profiles differ. Titles alone don't count:
+    'VP Finance' on one page and 'Vice President, Finance' on another is one person."""
+    return len({p for c in group if (p := _profile(c))}) > 1
+
+
 def _person_key(c: Candidate) -> tuple[str, str] | None:
-    name = re.sub(r"\(.*?\)", "", c.name).lower()
-    name = " ".join(re.sub(r"[^\w\s]", " ", name).split())
+    name = _plain_name(c.name)
     employer = (c.company_domain or c.company or "").lower().strip()
     return (name, employer) if name and employer else None
 
@@ -137,15 +188,16 @@ def _person_key(c: Candidate) -> tuple[str, str] | None:
 def merge_same_person(candidates: list[Candidate]) -> list[Candidate]:
     """Several results about ONE person (their LinkedIn, a RocketReach page, a team page) are
     not rivals: same name + same employer = same person, keep the best-evidenced entry.
-    Without this, strong evidence from two sources would wrongly look ambiguous."""
-    best: dict[tuple[str, str], Candidate] = {}
+    Without this, strong evidence from two sources would wrongly look ambiguous.
+    Namesakes at one company (_different_people) stay apart, so the rep can pick."""
+    kept: dict[tuple[str, str], list[Candidate]] = {}
     merged: list[Candidate] = []
     for c in sorted(candidates, key=lambda c: c.confidence, reverse=True):
         key = _person_key(c)
         if key is None:
             merged.append(c)  # unknown employer: can't tell, keep it as its own person
-        elif key not in best:
-            best[key] = c
+        elif all(_different_people([k, c]) for k in kept.get(key, [])):
+            kept.setdefault(key, []).append(c)
             merged.append(c)
     return merged
 

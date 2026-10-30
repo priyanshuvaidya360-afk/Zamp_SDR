@@ -24,7 +24,7 @@ export function BatchView({ batchId }: { batchId: number }) {
   const router = useRouter();
   const [detail, setDetail] = useState<BatchDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [drafting, setDrafting] = useState<number | "all" | null>(null);
+  const [drafting, setDrafting] = useState<number | null>(null);
   const [mapping, setMapping] = useState<BatchPreview | null>(null);
   const refetch = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
@@ -55,16 +55,14 @@ export function BatchView({ batchId }: { batchId: number }) {
   );
   const accounts = useMemo(() => groupAccounts(detail?.runs ?? []), [detail?.runs]);
 
-  async function draft(rows?: number[]) {
-    setDrafting(rows?.length === 1 ? rows[0] : "all");
+  // One prospect at a time: the rep drafts a row and watches it on the run view (no bulk drafting).
+  async function draft(row: number) {
+    setDrafting(row);
     setError(null);
     try {
-      const result = await api.draftRows(batchId, rows);
-      if (rows?.length === 1) {
-        router.push(`/runs/${result.runs.find((r) => r.row_number === rows[0])!.run_id}`);
-        return;
-      }
-      load();
+      const result = await api.draftRows(batchId, [row]);
+      router.push(`/runs/${result.runs.find((r) => r.row_number === row)!.run_id}`);
+      return;
     } catch (e) {
       setError(e instanceof ApiError ? e.message : "Couldn't start the draft.");
     }
@@ -135,11 +133,6 @@ export function BatchView({ batchId }: { batchId: number }) {
           <a href={api.exportUrl(batchId)} className={buttonVariants({ variant: "outline", size: "lg" })}>
             Export approved CSV
           </a>
-          {remaining > 1 && (
-            <Button size="lg" onClick={() => draft()} disabled={drafting !== null}>
-              {drafting === "all" ? "Starting…" : `Draft all ${remaining}`}
-            </Button>
-          )}
         </div>
       </div>
 
@@ -160,7 +153,7 @@ export function BatchView({ batchId }: { batchId: number }) {
           </thead>
           <tbody>
             {prospects.map((p) => (
-              <ProspectRow key={p.row_number} p={p} labels={labels} busy={drafting !== null} onDraft={() => draft([p.row_number])} drafting={drafting === p.row_number} onRetried={retried} />
+              <ProspectRow key={p.row_number} p={p} labels={labels} busy={drafting !== null} onDraft={() => draft(p.row_number)} drafting={drafting === p.row_number} onRetried={retried} />
             ))}
           </tbody>
         </table>

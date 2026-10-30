@@ -2,7 +2,7 @@
 
   cd backend && .venv/bin/python -m scripts.check_demo
 
-Runs both demo CSVs in DEMO_MODE=fixtures (recordings in tests/fixtures/demo/) on a throwaway
+Runs the demo CSV in DEMO_MODE=fixtures (recordings in tests/fixtures/demo/) on a throwaway
 database, then case 10's approve-after-twelve-days. Any connection to another host fails, so a
 pass proves the demo needs no network and no API keys. Exit code 0 = every row as expected.
 Spec: docs/PROJECT_SPEC.md T17 ("Done when: passes twice in a row with the network off").

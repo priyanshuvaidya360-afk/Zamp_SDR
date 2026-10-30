@@ -62,7 +62,8 @@ export interface Preview {
   mapping: Mapping;
   headers: string[];
   unmapped_headers: string[];
-  counts: { total: number; valid: number; invalid: number; duplicate: number };
+  // warnings: valid rows with a warning (absent on batches uploaded before it existed)
+  counts: { total: number; valid: number; invalid: number; duplicate: number; warnings?: number };
   rows: PreviewRow[];
 }
 

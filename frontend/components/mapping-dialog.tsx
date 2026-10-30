@@ -17,12 +17,12 @@ const NOT_MAPPED = "__not_mapped__";
 const FIELDS: { field: Field; label: string; hint: string; required?: boolean }[] = [
   { field: "first_name", label: "First name", hint: "required", required: true },
   { field: "last_name", label: "Last name", hint: "required", required: true },
-  { field: "company_domain", label: "Company domain", hint: "optional, helps research" },
-  { field: "linkedin_url", label: "LinkedIn URL", hint: "required: the person's profile (linkedin.com/in/…)", required: true },
+  { field: "linkedin_url", label: "LinkedIn URL", hint: "an anchor: the person's profile (linkedin.com/in/…)" },
+  { field: "email", label: "Email", hint: "an anchor if it's a work email (not Gmail etc.)" },
+  { field: "company_domain", label: "Company domain", hint: "an anchor; filled from a work email if empty" },
   { field: "company", label: "Company", hint: "recommended" },
   { field: "title", label: "Title", hint: "shapes who the email is written for" },
   { field: "full_name", label: "Full name", hint: "used if first/last are missing" },
-  { field: "email", label: "Email", hint: "optional" },
   { field: "notes", label: "Rep notes", hint: "your own context; trusted" },
   { field: "public_bio", label: "Public bio", hint: "treated as untrusted" },
 ];
@@ -43,6 +43,8 @@ export function MappingDialog({
   const [error, setError] = useState<string | null>(null);
   const { preview } = batch;
   const { counts } = preview;
+  const warned = preview.rows.filter((row) => row.status === "valid" && row.warnings.length > 0);
+  const noAnchorColumn = !preview.mapping.linkedin_url && !preview.mapping.email && !preview.mapping.company_domain;
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -90,14 +92,36 @@ export function MappingDialog({
         </div>
 
         <div className="space-y-6 overflow-y-auto px-7 py-6">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
             <Count label="Rows" value={counts.total} />
             <Count label="Ready to draft" value={counts.valid} tone="text-[#137a43]" />
             <Count label="Need a fix" value={counts.invalid} tone="text-red-700" />
             <Count label="Duplicates" value={counts.duplicate} tone="text-muted-foreground" />
+            <Count label="Ready, with warnings" value={counts.warnings ?? warned.length} tone="text-[#a14a00]" />
           </div>
 
+          {warned.length > 0 && (
+            <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
+              <p className="text-xs font-bold tracking-[0.08em] text-[#a14a00] uppercase">Check these rows (they will still run)</p>
+              <ul className="mt-1.5 space-y-1 text-sm">
+                {warned.map((row) => (
+                  <li key={row.row_number} className="min-w-0">
+                    <span className="font-semibold tabular-nums">Row {row.row_number}</span>
+                    <span className="text-muted-foreground"> · {[row.data.first_name, row.data.last_name].filter(Boolean).join(" ")}: </span>
+                    <span className="break-words text-[#7a3a00]">{row.warnings.join("; ")}</span>
+                  </li>
+                ))}
+              </ul>
+              {(counts.warnings ?? 0) > warned.length && (
+                <p className="mt-1.5 text-xs text-muted-foreground">Showing the first {preview.rows.length} rows of the file.</p>
+              )}
+            </div>
+          )}
+
           {error && <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-2.5 text-sm text-red-700">{error}</p>}
+          {noAnchorColumn && (
+            <p className="text-sm text-[#a14a00]">Map at least one of LinkedIn URL, Email or Company domain: each row needs one to identify the person.</p>
+          )}
 
           <div className="grid gap-x-8 gap-y-3.5 sm:grid-cols-2">
             {FIELDS.map(({ field, label, hint, required }) => (
@@ -126,7 +150,7 @@ export function MappingDialog({
                     <th className="px-3 py-2 font-semibold">Row</th>
                     <th className="px-3 py-2 font-semibold">Name</th>
                     <th className="px-3 py-2 font-semibold">Company</th>
-                    <th className="px-3 py-2 font-semibold">LinkedIn / Domain</th>
+                    <th className="px-3 py-2 font-semibold">LinkedIn / Email / Domain</th>
                     <th className="px-3 py-2 font-semibold">Check</th>
                   </tr>
                 </thead>
@@ -138,10 +162,12 @@ export function MappingDialog({
                         <td className="px-3 py-2 text-muted-foreground tabular-nums">{row.row_number}</td>
                         <td className="px-3 py-2 font-medium">{d.full_name || [d.first_name, d.last_name].filter(Boolean).join(" ") || "—"}</td>
                         <td className="px-3 py-2">{d.company || "—"}</td>
-                        <td className="max-w-48 truncate px-3 py-2 text-muted-foreground">{d.linkedin_url || d.company_domain || "—"}</td>
+                        <td className="max-w-48 truncate px-3 py-2 text-muted-foreground">{d.linkedin_url || d.email || d.company_domain || "—"}</td>
                         <td className="px-3 py-2">
                           {row.status === "valid" ? (
-                            <span className="font-semibold text-[#137a43]">✓ ready</span>
+                            <span className={cn("font-semibold", row.warnings.length ? "text-[#a14a00]" : "text-[#137a43]")}>
+                              {row.warnings.length ? `✓ ready · ${row.warnings.length} warning${row.warnings.length === 1 ? "" : "s"}` : "✓ ready"}
+                            </span>
                           ) : (
                             <span className={row.status === "invalid" ? "text-red-700" : "text-muted-foreground"}>{row.reason}</span>
                           )}

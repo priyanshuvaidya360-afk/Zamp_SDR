@@ -90,10 +90,17 @@ class Settings(BaseSettings):
     # Review (T15, case 10): approving a draft older than this re-checks its time-sensitive facts.
     revalidate_after_days: int = 3
 
-    # Intake: every row needs the person's own LinkedIn profile (linkedin.com/in/...): a common
-    # name at a big company (two Priya Sharmas at HDFC Bank) can't be told apart by domain alone.
-    # False restores "company domain or LinkedIn URL" (the recorded demo's fictional people have none).
-    require_linkedin: bool = True
+    # Intake: a row needs first + last name and one anchor: the person's LinkedIn URL, a work email,
+    # or the company domain. An email at one of these hosts is personal, so it is not an anchor
+    # and never fills in the company domain.
+    free_email_domains: list[str] = [
+        "gmail.com", "googlemail.com", "yahoo.com", "yahoo.co.in", "yahoo.co.uk", "ymail.com",
+        "rocketmail.com", "outlook.com", "hotmail.com", "hotmail.co.uk", "live.com", "msn.com",
+        "icloud.com", "me.com", "mac.com", "aol.com", "proton.me", "protonmail.com", "pm.me",
+        "zoho.com", "zohomail.com", "gmx.com", "gmx.de", "gmx.net", "web.de", "mail.com",
+        "yandex.com", "yandex.ru", "mail.ru", "qq.com", "163.com", "126.com", "rediffmail.com",
+        "tutanota.com", "fastmail.com", "hey.com",
+    ]
 
     database_url: str = f"sqlite:///{BACKEND_DIR / 'signal.db'}"
     # Neon: DATABASE_URL is the pooled connection (app traffic); DATABASE_URL_UNPOOLED the direct

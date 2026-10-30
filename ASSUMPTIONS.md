@@ -10,12 +10,17 @@ Decisions and assumptions made while building Signal. Add to this as you build
   with is Heads of Growth and CMOs; against an AP seller most rows correctly scored
   low_signal. Relevance scoring, hiring searches and personas all read this file.
 - Input is a CSV of up to 50 prospects per upload; larger files and CRM import are next steps.
-- Each prospect needs first name, last name, and their own LinkedIn profile URL
-  (linkedin.com/in/...); a company domain is optional. A common name at a big company (two
-  Priya Sharmas at HDFC Bank) can't be told apart by name + domain, and a company LinkedIn
-  page doesn't identify a person. The URL is only matched in search results, never fetched.
-  REQUIRE_LINKEDIN=false restores "domain or LinkedIn"; the recorded demo uses it because its
-  fictional people have no LinkedIn profiles.
+- Each prospect needs first name, last name and at least one anchor: their LinkedIn profile URL
+  (linkedin.com/in/...), a work email, or the company domain. A personal email (Gmail, Yahoo,
+  Outlook, iCloud, Proton...: settings.free_email_domains) is not an anchor, because it says
+  nothing about the employer. A work email fills in a missing company domain. A LinkedIn URL is
+  the strongest anchor (two Priya Sharmas at HDFC Bank share a domain), but it is not required:
+  many exports lack it, and stage 2 asks the rep when name + domain finds more than one person.
+  A LinkedIn URL that isn't a /in/ profile makes the row invalid only when it is the only anchor;
+  otherwise it is dropped with a warning. The URL is only matched in search results, never fetched.
+- Upload warnings (row stays valid, shown per row in the mapping dialog): the LinkedIn slug
+  contains neither the first nor the last name (slugs like 'jdoe' or 'priya-s-1a2b' pass); the
+  work email's domain differs from the company domain (a subdomain counts as the same).
 - CSV intake (T04): files must be UTF-8 (BOM fine), comma/semicolon/tab delimited, at most
   1 MB and 50 rows. Row numbers in messages are spreadsheet line numbers (header = line 1).
   A malformed email is dropped with a warning rather than rejecting the row; a missing
@@ -61,6 +66,12 @@ Decisions and assumptions made while building Signal. Add to this as you build
   several places (LinkedIn + RocketReach), not rivals; same name at different employers still
   asks the rep. Schema changes are applied by adding missing columns at startup (no
   destructive migrations at demo scale).
+- Identity is certain (1.0, set by code) when the evidence is the prospect's own LinkedIn URL,
+  or when the candidate has the same first and last name and the CSV's company domain and the
+  evidence checks pass. Exception: two different LinkedIn profiles with that name at that
+  company are namesakes, not one person found twice; each is capped at 0.5 and the rep picks,
+  unless one of them is the LinkedIn URL in the CSV (that one is kept, the other drops to 0.3).
+  Different job titles alone don't make two people (titles vary between pages).
 - T12 account plan (case 3): runs at a company with 2+ people still running wait after
   scoring; colleagues who stop earlier leave the group, a colleague resumed later is planned
   alone. Pooled company signals are de-duplicated; person-level signals stay with their
@@ -232,3 +243,7 @@ Decisions and assumptions made while building Signal. Add to this as you build
 - Next.js 16.3.8 / React 19.2.
 - Node 20.11 is below shadcn's stated minimum (20.18.1); the CLI still worked. Upgrade to
   Node 22 LTS before deploying.
+- Unsupported facts warn once, then the reviewer decides: a flagged draft (or an edit flagged by
+  its one audit) can be approved with "Approve anyway". It is approved with no further audit, and
+  draft.review.approved_over_warning records who, when and which sentences were flagged. The
+  human in the loop has the final say; the app still never sends anything.

@@ -31,9 +31,9 @@ def statuses(result: ingest.ParseResult) -> list[str]:
 def test_clean_file_matches_the_guide_sample():
     result = parse(GUIDE_SAMPLE)
     assert statuses(result) == ["valid", "valid", "valid", "valid", "invalid", "invalid", "skipped"]
-    assert result.counts == {"total": 7, "valid": 4, "invalid": 2, "duplicate": 1}
+    assert result.counts == {"total": 7, "valid": 4, "invalid": 2, "duplicate": 1, "warnings": 0}
     meera, controller, dup = result.rows[4], result.rows[5], result.rows[6]
-    assert meera.reason == "needs a company domain or LinkedIn URL to identify this person"
+    assert meera.reason == ingest.NEEDS_ANCHOR
     assert controller.reason == "missing first and last name"
     assert (dup.reason, dup.duplicate_of) == ("duplicate of row 2", 2)
     assert result.rows[0].row_number == 2  # spreadsheet line numbers: header is line 1
@@ -89,32 +89,83 @@ def test_missing_last_name_is_invalid_with_reason():
     assert (result.rows[0].status, result.rows[0].reason) == ("invalid", "missing last name")
 
 
-def test_missing_both_domain_and_linkedin_is_invalid():
-    result = parse("first_name,last_name,company,company_domain,linkedin_url\nMeera,Shah,NewCo,,\n")
+def test_missing_every_anchor_is_invalid():
+    result = parse("first_name,last_name,company,company_domain,linkedin_url,email\nMeera,Shah,NewCo,,,\n")
     row = result.rows[0]
-    assert row.status == "invalid"
-    assert row.reason == "needs a company domain or LinkedIn URL to identify this person"
+    assert (row.status, row.reason) == ("invalid", ingest.NEEDS_ANCHOR)
 
 
-def test_linkedin_is_required_when_the_rule_is_on(monkeypatch):
-    # Two Priya Sharmas at HDFC Bank: the domain alone can't tell them apart.
-    monkeypatch.setattr(settings, "require_linkedin", True)
-    result = parse(
-        "first_name,last_name,company,company_domain,linkedin_url\n"
-        "Priya,Sharma,HDFC Bank,hdfcbank.com,\n"
-        "Priya,Sharma,HDFC Bank,,https://in.linkedin.com/in/priya-sharma-hdfc/\n"
-        "Rahul,Mehta,HDFC Bank,hdfcbank.com,https://www.linkedin.com/company/hdfc-bank\n"
-    )
-    first, second, third = result.rows
-    assert (first.status, first.reason) == ("invalid", ingest.NEEDS_LINKEDIN)
-    assert second.status == "valid" and second.data["linkedin_url"] == "linkedin.com/in/priya-sharma-hdfc"
-    assert third.status == "invalid" and "not a personal profile" in third.reason
+# --- Anchors: LinkedIn URL, work email or company domain ---------------------------
+
+ANCHORS = "first_name,last_name,company,company_domain,linkedin_url,email\n"
 
 
-def test_file_without_linkedin_column_is_rejected_when_the_rule_is_on(monkeypatch):
-    monkeypatch.setattr(settings, "require_linkedin", True)
-    with pytest.raises(CsvRejected, match="linkedin_url column"):
-        parse("first_name,last_name,company_domain\nPriya,Sharma,hdfcbank.com\n")
+@pytest.mark.parametrize("cells", [
+    ",https://in.linkedin.com/in/priya-sharma-hdfc/,",  # LinkedIn URL only
+    ",,priya.sharma@hdfcbank.com",  # work email only
+    "hdfcbank.com,,",  # company domain only
+])
+def test_each_anchor_alone_is_valid(cells):
+    row = parse(ANCHORS + f"Priya,Sharma,HDFC Bank,{cells}\n").rows[0]
+    assert row.status == "valid", row.reason
+
+
+@pytest.mark.parametrize("email", ["priya.sharma@gmail.com", "PRIYA@Yahoo.com", "p@proton.me", "p@outlook.com"])
+def test_a_free_email_alone_is_invalid(email):
+    row = parse(ANCHORS + f"Priya,Sharma,HDFC Bank,,,{email}\n").rows[0]
+    domain = email.lower().rsplit("@", 1)[1]
+    assert (row.status, row.reason) == ("invalid", f"{ingest.NEEDS_ANCHOR} ({domain} is a personal email)")
+    assert row.data["company_domain"] is None  # a free email host is never the company domain
+
+
+def test_free_email_domains_live_in_settings(monkeypatch):
+    monkeypatch.setattr(settings, "free_email_domains", ["acme-mail.com"])
+    assert parse(ANCHORS + "Priya,Sharma,,,,p@acme-mail.com\n").rows[0].status == "invalid"
+    assert parse(ANCHORS + "Priya,Sharma,,,,p@gmail.com\n").rows[0].status == "valid"  # no longer on the list
+
+
+def test_company_domain_is_filled_from_the_work_email():
+    row = parse(ANCHORS + "Priya,Sharma,HDFC Bank,,,Priya.Sharma@HDFCBank.com\n").rows[0]
+    assert row.status == "valid" and row.data["company_domain"] == "hdfcbank.com"
+    assert row.warnings == ["company domain 'hdfcbank.com' taken from the work email"]
+
+
+def test_a_company_linkedin_url_alone_is_invalid():
+    row = parse(ANCHORS + "Rahul,Mehta,HDFC Bank,,https://www.linkedin.com/company/hdfc-bank,\n").rows[0]
+    assert row.status == "invalid" and "not a personal profile" in row.reason
+
+
+def test_a_bad_linkedin_url_is_ignored_when_another_anchor_exists():
+    row = parse(ANCHORS + "Rahul,Mehta,HDFC Bank,hdfcbank.com,https://www.linkedin.com/company/hdfc-bank,\n").rows[0]
+    assert row.status == "valid" and row.data["linkedin_url"] is None
+    assert row.warnings == ["ignored LinkedIn URL 'https://www.linkedin.com/company/hdfc-bank' is not a personal "
+                            "profile (expected linkedin.com/in/...)"]
+
+
+@pytest.mark.parametrize(("url", "warns"), [
+    ("linkedin.com/in/johnsmith42", True),  # neither Priya nor Sharma
+    ("linkedin.com/in/psharma", False),  # last name is enough
+    ("linkedin.com/in/priya-s-1a2b3c", False),  # first name is enough
+    ("linkedin.com/in/pri%C3%BDa-x", False),  # accents dropped before comparing
+])
+def test_linkedin_slug_without_the_name_is_a_warning(url, warns):
+    row = parse(ANCHORS + f"Priya,Sharma,HDFC Bank,,{url},\n").rows[0]
+    assert row.status == "valid"
+    assert any("doesn't contain Priya or Sharma" in w for w in row.warnings) == warns
+
+
+@pytest.mark.parametrize(("domain", "email", "warns"), [
+    ("hdfcbank.com", "priya@hdfc.com", True),
+    ("hdfcbank.com", "priya@hdfcbank.com", False),
+    ("hdfcbank.com", "priya@mail.hdfcbank.com", False),  # a subdomain of the company domain
+    ("hdfcbank.com", "priya@gmail.com", False),  # a personal email says nothing about the company
+])
+def test_email_domain_that_differs_from_company_domain_is_a_warning(domain, email, warns):
+    result = parse(ANCHORS + f"Priya,Sharma,HDFC Bank,{domain},,{email}\n")
+    row = result.rows[0]
+    assert row.status == "valid" and row.data["company_domain"] == domain
+    assert any("differs from company domain" in w for w in row.warnings) == warns
+    assert result.counts["warnings"] == int(warns)
 
 
 @pytest.mark.parametrize(
@@ -247,7 +298,7 @@ def test_link_shortener_domain_is_ignored_and_linkedin_carries_identity():
     assert akil.status == "valid" and akil.data["company_domain"] is None
     assert "not the company's site" in akil.warnings[0]
     assert hanna.status == "invalid"
-    assert hanna.reason == "needs a company domain or LinkedIn URL to identify this person"
+    assert hanna.reason == ingest.NEEDS_ANCHOR
 
 
 def test_initial_only_last_name_is_flagged():
@@ -290,8 +341,8 @@ def test_file_without_name_columns_is_rejected():
         parse("company,company_domain\nAcme,acme.com\n")
 
 
-def test_file_without_domain_or_linkedin_column_is_rejected():
-    with pytest.raises(CsvRejected, match="company_domain or linkedin_url column"):
+def test_file_without_any_anchor_column_is_rejected():
+    with pytest.raises(CsvRejected, match="linkedin_url, email or company_domain column"):
         parse("first_name,last_name,company\nPriya,Raman,Acme\n")
 
 
@@ -307,7 +358,7 @@ def test_post_batches_stores_batch_and_returns_preview(client, session: Session)
     assert response.status_code == 201
     body = response.json()
     assert body["status"] == "validating"
-    assert body["preview"]["counts"] == {"total": 7, "valid": 4, "invalid": 2, "duplicate": 1}
+    assert body["preview"]["counts"] == {"total": 7, "valid": 4, "invalid": 2, "duplicate": 1, "warnings": 0}
     assert len(body["preview"]["rows"]) == 7
     assert body["preview"]["unmapped_headers"] == []
 
@@ -350,7 +401,7 @@ def test_patch_mapping_rejects_unknown_column_and_missing_identity(client):
     assert client.patch(url, json={"mapping": bad_column}).status_code == 422
     no_identity = body["preview"]["mapping"] | {"company_domain": None, "linkedin_url": None}
     response = client.patch(url, json={"mapping": no_identity})
-    assert response.status_code == 422 and "company_domain or linkedin_url" in response.json()["detail"]
+    assert response.status_code == 422 and "linkedin_url, email or company_domain" in response.json()["detail"]
 
 
 def test_patch_mapping_after_start_is_refused(client, session: Session):
@@ -365,3 +416,22 @@ def test_patch_mapping_after_start_is_refused(client, session: Session):
 
 def test_unknown_batch_is_404(client):
     assert client.get("/batches/999/preview").status_code == 404
+
+
+# --- The demo files --------------------------------------------------------------
+
+
+def test_the_messy_csv_demo_is_gone():
+    from app.config import REPO_DIR
+    assert not (REPO_DIR / "seed" / "demo_messy.csv").exists()
+    assert not (REPO_DIR / "frontend" / "public" / "demo_messy.csv").exists()
+    upload_page = (REPO_DIR / "frontend" / "app" / "upload-hero.tsx").read_text(encoding="utf-8")
+    assert "messy" not in upload_page.lower() and "Use the demo CSV" in upload_page
+    cases = (REPO_DIR / "seed" / "demo_cases.json").read_text(encoding="utf-8")
+    assert "demo_messy" not in cases
+
+
+def test_template_csv_rows_are_all_valid():
+    from app.config import REPO_DIR
+    result = ingest.parse_upload((REPO_DIR / "frontend" / "public" / "template.csv").read_bytes(), "template.csv")
+    assert {r.status for r in result.rows} == {"valid"}

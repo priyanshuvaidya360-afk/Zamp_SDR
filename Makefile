@@ -16,7 +16,7 @@ dev-api:
 # The recorded demo, no network or keys needed ("Use demo CSV" on the upload screen).
 # FIXTURE_DELAY_S makes the replay stream like a live run.
 # Its own database (demo.db, git-ignored) with the seed CRM data; repeat runs are allowed.
-DEMO_ENV := DEMO_MODE=fixtures FIXTURES_DIR=tests/fixtures/demo TODAY=2026-10-19 RECENT_RUN_DAYS=0 REQUIRE_LINKEDIN=false \
+DEMO_ENV := DEMO_MODE=fixtures FIXTURES_DIR=tests/fixtures/demo TODAY=2026-10-19 RECENT_RUN_DAYS=0 \
 	DATABASE_URL=sqlite:///demo.db
 dev-api-demo:
 	cd backend && $(DEMO_ENV) .venv/$(BIN)/python -m scripts.seed_context

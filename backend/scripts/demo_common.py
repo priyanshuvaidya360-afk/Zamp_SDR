@@ -1,4 +1,4 @@
-"""The demo, run end to end: both demo CSVs, then case 10's approve-after-twelve-days.
+"""The demo, run end to end: the demo CSV, then case 10's approve-after-twelve-days.
 
 Shared by scripts/record_demo.py (DEMO_MODE=record, live web + simulated web) and
 scripts/check_demo.py (DEMO_MODE=fixtures, network off). Spec: docs/PROJECT_SPEC.md T17.
@@ -19,7 +19,7 @@ from app.routes.batches import _store
 from scripts.seed_context import seed
 
 SEED = REPO_DIR / "seed"
-CSVS = [SEED / "demo.csv", SEED / "demo_messy.csv"]
+CSVS = [SEED / "demo.csv"]
 CASES = SEED / "demo_cases.json"
 FIXTURES = BACKEND_DIR / "tests" / "fixtures" / "demo"
 TODAY = date(2026, 10, 19)  # the day the demo was recorded; replays pretend it is still that day
@@ -96,7 +96,6 @@ async def approve_after_wait(run_id: int) -> dict[str, Any]:
 async def run_demo(case10_name: str = "Omar Haddad", before_case10=None) -> dict[str, Any]:
     fresh_database()
     settings.today = TODAY
-    settings.require_linkedin = False  # the demo's fictional people have no LinkedIn
     results = []
     for path in CSVS:
         results += await run_csv(path)

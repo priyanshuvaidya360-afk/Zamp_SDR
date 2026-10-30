@@ -167,12 +167,29 @@ def test_identity_queries_use_domain_company_role_and_linkedin():
     ]
 
 
+async def test_resolve_runs_without_a_linkedin_url(session, fake_search, monkeypatch):
+    # Work email only: the domain comes from the email, no LinkedIn query, and a missing URL is no failure.
+    fake_identity(monkeypatch, person())
+    ctx = make_ctx(session, "Priya,Raman,,Acme Fintech,VP Finance,,,priya.raman@acmefintech.com")
+    assert ctx.row.get("linkedin_url") is None and ctx.row["domain"] == "acmefintech.com"
+    out = await resolve.run(ctx)
+    assert not any("linkedin" in q.lower() for q in out.queries)
+    assert out.person.name == "Priya Raman" and out.checks == []
+
+    fake_identity(monkeypatch)  # nobody found: the rep is asked; the diagnosis never blames a missing URL
+    with pytest.raises(StopRun) as stop:
+        await resolve.run(make_ctx(session, "Priya,Raman,,Acme Fintech,VP Finance,acmefintech.com,,"))
+    assert stop.value.status == RunStatus.needs_input
+    assert not any("linkedin" in c["label"].lower() for c in stop.value.payload["diagnosis"])
+
+
 async def test_one_strong_match_continues(session, fake_search, monkeypatch):
     calls = fake_identity(monkeypatch, person(), person("Priya R. (other)", confidence=0.2))
     ctx = make_ctx(session, PRIYA)
     out = await resolve.run(ctx)
-    assert out.person.name == "Priya Raman" and ctx.confidence == 0.92
-    assert out.message == "Found 1 match, confidence 0.92: Priya Raman (VP Finance, Acme Fintech)"
+    # Same first + last name and the CSV's company domain, evidence checked: certain.
+    assert out.person.name == "Priya Raman" and ctx.confidence == 1.0
+    assert out.message == "Found 1 match, confidence 1.00: Priya Raman (VP Finance, Acme Fintech)"
     assert calls[0]["role"] == "fast" and "<untrusted_source>" in calls[0]["user"]
     assert len(fake_search.queries) == 3 and ctx.tokens == 120 and ctx.credits == 3
 
@@ -191,7 +208,7 @@ async def test_the_same_person_found_twice_is_not_a_rival(session, fake_search, 
     fake_identity(monkeypatch, person(confidence=0.95),
                   person("Priya Raman (Acme)", confidence=0.85, evidence_url="https://acmefintech.com/team"))
     out = await resolve.run(make_ctx(session, PRIYA))
-    assert out.person.confidence == 0.95 and len(out.candidates) == 1
+    assert out.person.confidence == 1.0 and len(out.candidates) == 1
 
 
 def test_same_name_at_different_companies_stays_ambiguous():
@@ -203,8 +220,9 @@ def test_same_name_at_different_companies_stays_ambiguous():
 @pytest.mark.parametrize(("candidates", "reason"), [
     # No candidate, but results name her with Acme (the fake's titles echo the query): the rep confirms.
     ([], "Priya Raman appears in 10 results, but none confirms who they are. Confirm it's the right person."),
-    ([person(confidence=0.6)], "Best match is only 0.60 confident. Confirm it's the right person."),
-    ([person(confidence=0.3)], "No confident match in public search results. Confirm who they are."),
+    # No employer domain on the candidate, so the name + domain rule can't make it certain.
+    ([person(confidence=0.6, company_domain=None)], "Best match is only 0.60 confident. Confirm it's the right person."),
+    ([person(confidence=0.3, company_domain=None)], "No confident match in public search results. Confirm who they are."),
 ])
 async def test_weak_or_no_match_asks_the_rep(session, fake_search, monkeypatch, candidates, reason):
     fake_identity(monkeypatch, *candidates)
@@ -220,11 +238,43 @@ async def test_linkedin_url_match_is_strong_evidence_and_fills_company(session, 
     ctx = make_ctx(session, "Hanna,Andrzejewska,,,,,linkedin.com/in/hanna-a,")
     assert ctx.account_key is None
     out = await resolve.run(ctx)
-    assert out.person.confidence == 0.9
+    assert out.person.confidence == 1.0
     assert (out.company, out.domain, ctx.account_key) == ("GetResponse", "getresponse.com", "getresponse.com")
     session.expire_all()
     stored = session.get(Run, ctx.run_id)
     assert (stored.company, stored.domain, stored.account_key) == ("GetResponse", "getresponse.com", "getresponse.com")
+
+
+def _profile_person(slug, title="VP Finance", **extra) -> dict:
+    return person(title=title, evidence_url=f"https://in.linkedin.com/in/{slug}",
+                  evidence=f"Priya Raman, {title} at Acme Fintech", **extra)
+
+
+async def test_two_people_with_the_same_name_at_the_same_company_ask_the_rep(session, fake_search, monkeypatch):
+    # Two different LinkedIn profiles, both Priya Raman at acmefintech.com, and no LinkedIn URL in the CSV.
+    fake_identity(monkeypatch, _profile_person("priya-raman-1", confidence=0.95),
+                  _profile_person("priya-raman-2", title="Analyst", confidence=0.9))
+    with pytest.raises(StopRun) as stop:
+        await resolve.run(make_ctx(session, PRIYA))
+    assert (stop.value.status, stop.value.reason) == (RunStatus.needs_input, "2 people could match. Pick the right one.")
+    assert [c["confidence"] for c in stop.value.payload["candidates"]] == [0.5, 0.5]
+    assert "2 people named Priya Raman at acmefintech.com: ask the rep" in stop.value.payload["checks"]
+
+
+async def test_the_csv_linkedin_url_settles_a_namesake(session, fake_search, monkeypatch):
+    fake_identity(monkeypatch, _profile_person("priya-raman-2", title="Analyst", confidence=0.9),
+                  _profile_person("priya-raman-1", confidence=0.6))
+    out = await resolve.run(make_ctx(session, PRIYA.replace(",,priya", ",linkedin.com/in/priya-raman-1,priya")))
+    assert out.person.evidence_url.endswith("priya-raman-1") and out.person.confidence == 1.0
+    assert [c.confidence for c in out.candidates] == [1.0, 0.3]
+
+
+async def test_name_and_domain_are_not_enough_without_matching_names(session, fake_search, monkeypatch):
+    # Right company and domain, but a different first name: not certain.
+    fake_identity(monkeypatch, person("Priyanka Raman", confidence=0.6, evidence="Priyanka Raman, VP Finance"))
+    with pytest.raises(StopRun) as stop:
+        await resolve.run(make_ctx(session, PRIYA))
+    assert stop.value.payload["candidates"][0]["confidence"] == 0.6
 
 
 async def test_evidence_url_the_model_made_up_is_capped(session, fake_search, monkeypatch):

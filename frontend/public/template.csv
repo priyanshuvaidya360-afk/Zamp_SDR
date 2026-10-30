@@ -1,2 +1,5 @@
 first_name,last_name,company,title,company_domain,linkedin_url,email,notes
 Jane,Doe,Example Inc,Head of Growth,example.com,https://www.linkedin.com/in/janedoe,jane@example.com,met at SaaStock
+Arjun,Mehta,Example Inc,VP Sales,,,arjun.mehta@example.com,work email only: the domain is taken from it
+Lena,Fischer,,Head of Marketing,,https://www.linkedin.com/in/lena-fischer,,LinkedIn URL only
+Tom,Baker,Example Inc,CFO,example.com,,,company domain only

@@ -26,7 +26,7 @@ Truth:
 
 Writing:
 - Open with the specific observation. Not a compliment, not "congrats".
-- One sentence links it to the problem we solve. One soft ask (a 15-minute call, or a short resource) with no day, date or time in it: the rep may send this days later.
+- One sentence links it to the problem we solve. One soft ask (a 15-minute call(not the same line all the time), or a short resource) with no day, date or time in it: the rep may send this days later.
 - Write dates as absolute dates (e.g. 13 October). Never "last week", "recently" or "this month".
 - Follow every ATTRIBUTION line exactly: name whoever said or posted it. Never present someone else's words or a reshare as the prospect's own.
 - Address the prospect as "you". Never refer to them by name in the third person.

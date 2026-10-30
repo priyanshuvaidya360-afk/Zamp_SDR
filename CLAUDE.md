@@ -1,7 +1,7 @@
 # Signal (PS-3 Outreach Engine)
 
-An SDR uploads a CSV of prospects (first name, last name, the person's LinkedIn URL, and
-optionally a company domain). For each row, a fixed pipeline resolves the person's identity, researches the public
+An SDR uploads a CSV of prospects (first name, last name, and at least one anchor: the person's
+LinkedIn URL, a work email, or the company domain). For each row, a fixed pipeline resolves the person's identity, researches the public
 web, picks one cited hook, and writes a short first-touch email (under 120 words) that waits
 in a review queue. The UI shows a live run view (every stage streamed over SSE) and a
 dashboard. Nothing is ever sent: the end state is approve / edit / reject by a human.
@@ -104,8 +104,8 @@ backend/
   scripts/             CLI helpers (smoke tests, seeding, demo checks)
 frontend/
   app/                 the flow: page.tsx (1 upload + recent lists) -> components/mapping-dialog.tsx (2 map
-                       columns, a dialog) -> batches/[id] (3 prospect list, a "Draft email" button per row, or
-                       "Draft all") -> runs/[id] (4 live run view: agent activity, cited email, signals / content
+                       columns, a dialog) -> batches/[id] (3 prospect list, a "Draft email" button per row; one
+                       prospect at a time, no bulk draft) -> runs/[id] (4 live run view: agent activity, cited email, signals / content
                        guide, review controls); batches/[id]/review (review queue, keys a/e/r/j/k);
                        dashboard/ (metrics, why-not-ready; dashboard-view.tsx); batches/new redirects to /
                        components/flow-steps.tsx is the 4-step progress bar shown on each screen
@@ -123,7 +123,7 @@ frontend/
 agents/                one .md per agent, named by stage and job (stage2_identify_person.md ...
                        stage8_recheck_stale_facts.md; prompts.AGENT_FILES maps code keys to files)
                        + README.md (how to edit) + PIPELINE_DIAGRAM.md (generated diagram)
-seed/                  context.json (fake CRM data); demo.csv + demo_messy.csv (the demo);
+seed/                  context.json (fake CRM data); demo.csv (the demo);
                        demo_cases.json (each row's expected outcome); simweb/ (fictional pages)
 seller_profile.yaml    what "we" sell, ICP, tone, personas, competitors, regions
 ASSUMPTIONS.md         every assumption made; add to it as you build
@@ -149,7 +149,7 @@ render.yaml            Render blueprint for the backend; frontend/vercel.json fo
   case (after changing a scoring/draft/critic prompt); tests/test_draft.py replays it
 - `cd backend && .venv/bin/python -m scripts.record_crowded_case` / `scripts.record_stale_case`:
   re-record case 5 (crowded hook) / case 10 (stale draft: re-check, rewrite, export)
-- `cd backend && .venv/bin/python -m scripts.record_demo [--fresh]`: record the demo (both CSVs,
+- `cd backend && .venv/bin/python -m scripts.record_demo [--fresh]`: record the demo (the demo CSV,
   live web for real companies + simulated web, then case 10) into tests/fixtures/demo/. Resumable:
   after a free-tier rate limit, run it again until no row fails; it then prunes unused recordings
 - `cd backend && .venv/bin/python -m scripts.check_demo`: replay the demo with the network off and

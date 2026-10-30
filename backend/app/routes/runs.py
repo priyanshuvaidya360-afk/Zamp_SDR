@@ -25,6 +25,7 @@ class ReviewRequest(BaseModel):
     reason: str | None = None  # reject: why
     draft_id: int | None = None  # the version the rep was looking at (409 if a newer one exists)
     identity_confirmed: bool = False  # company-level draft: the rep vouches the person exists
+    approve_anyway: bool = False  # the rep saw the unsupported-fact warning and approves regardless
 
 
 class ResumeRequest(BaseModel):
@@ -253,7 +254,8 @@ async def review_run(run_id: int, request: ReviewRequest, session: Session = Dep
     re-checks them first (case 10): the answer may be a corrected version to approve again."""
     try:
         result = await review.review(session, run_id, request.action, request.body, request.reason, request.draft_id,
-                                     identity_confirmed=request.identity_confirmed)
+                                     identity_confirmed=request.identity_confirmed,
+                                     approve_anyway=request.approve_anyway)
     except LookupError as error:
         raise HTTPException(404, str(error)) from error
     except review.ReviewError as error:

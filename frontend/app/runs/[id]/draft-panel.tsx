@@ -129,10 +129,22 @@ function citeBody(draft: DraftRecord, signals: Map<number, SignalRecord>, firstN
  * greeting, one short paragraph per idea, sign-off. Display only: the stored text is unchanged, and
  * every sentence stays intact, so the underlined claims still match. */
 function letterLayout(body: string, firstName: string | undefined, sender: string, isOutline: boolean): string {
-  const text = body.trim();
+  let text = body.trim();
   if (isOutline) return text;
-  const sentences = text.split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter(Boolean);
   let signoff = sender.split(" ")[0];
+  // The model sometimes writes its own greeting and closing; keep its sign-off name, but show each once.
+  let greeting = firstName ? `Hi ${firstName},` : "Hi,";
+  const opened = text.match(/^((?:hi|hello|hey|dear)\b[^\n,.!?]{0,40}[,!])\s*/i);
+  if (opened) {
+    greeting = opened[1].replace(/!$/, ",");
+    text = text.slice(opened[0].length);
+  }
+  const closed = text.match(/(?<=^|[.!?\n])\s*\b(?:best(?: regards)?|kind regards|regards|thanks|thank you|cheers|warmly)[,!.]?\s*\n?\s*([^\n.!?]{0,40})$/i);
+  if (closed) {
+    if (closed[1].trim()) signoff = closed[1].trim();
+    text = text.slice(0, closed.index).trim();
+  }
+  const sentences = text.split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter(Boolean);
   const last = sentences[sentences.length - 1];
   if (last && !/[.!?]$/.test(last)) {
     // A name left at the end of the body ("... a chat? Priyanshu") is the sign-off, not a sentence.
@@ -144,5 +156,5 @@ function letterLayout(body: string, firstName: string | undefined, sender: strin
     } else signoff = last;
   }
   const joined = sentences.join("\n\n");
-  return `${firstName ? `Hi ${firstName},` : "Hi,"}\n\n${joined}\n\nBest,\n${signoff}`;
+  return `${greeting}\n\n${joined}\n\nBest,\n${signoff}`;
 }

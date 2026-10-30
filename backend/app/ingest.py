@@ -3,14 +3,16 @@
 Spec: docs/PROJECT_SPEC.md "Input: the prospect CSV" and T04. Pure functions, no database and no
 API credits: everything here runs before the user clicks "Run N prospects".
 
-Identity rule: every row needs first name, last name, and the person's LinkedIn URL, because
-a common name at a big company is not a unique identity (settings.require_linkedin; when off,
-a company domain is enough).
+Identity rule: every row needs first name, last name, and at least one anchor: the person's
+LinkedIn URL (linkedin.com/in/...), a work email, or the company domain. A personal email
+(settings.free_email_domains) is not an anchor. A work email fills in a missing company domain.
+Free consistency checks (LinkedIn slug vs name, email domain vs company domain) are warnings.
 """
 
 import csv
 import io
 import re
+import unicodedata
 from typing import Any, Literal
 from urllib.parse import unquote, urlparse
 
@@ -21,7 +23,7 @@ from app.config import settings
 
 MAX_ROWS = 50  # demo-scale cap (ASSUMPTIONS.md)
 MAX_BYTES = 1_000_000
-NEEDS_LINKEDIN = "needs the person's LinkedIn URL (linkedin.com/in/...) to identify them"
+NEEDS_ANCHOR = "needs a LinkedIn URL, work email or company domain to identify this person"
 PREVIEW_ROWS = 20
 
 RowStatus = Literal["valid", "invalid", "skipped"]
@@ -45,13 +47,24 @@ FIELDS = list(ALIASES)
 # Exports write these for empty cells (Saleshandy uses " - ").
 PLACEHOLDERS = {"-", "–", "—", "n/a", "null", "#n/a"}
 
-# Hosts that are never a prospect's company domain: link shorteners, link-in-bio pages,
-# free email and social sites. Seen in real exports (e.g. GetResponse -> bit.ly).
-NOT_COMPANY_DOMAINS = {
+# Hosts that are never a prospect's company domain: link shorteners, link-in-bio pages and
+# social sites (seen in real exports, e.g. GetResponse -> bit.ly), plus free email hosts.
+LINK_HOSTS = {
     "bit.ly", "linktr.ee", "lnkd.in", "t.co", "tinyurl.com", "carrd.co",
-    "gmail.com", "googlemail.com", "yahoo.com", "hotmail.com", "outlook.com", "icloud.com",
     "linkedin.com", "facebook.com", "twitter.com", "x.com", "instagram.com", "medium.com",
 }
+
+
+def _on(host: str, domains) -> bool:
+    return any(host == d or host.endswith("." + d) for d in domains)
+
+
+def is_free_email_domain(host: str) -> bool:
+    return _on(host, settings.free_email_domains)
+
+
+def not_company_domain(host: str) -> bool:
+    return _on(host, LINK_HOSTS) or is_free_email_domain(host)
 
 # Trailing credentials in name fields: "Malini Gujral, MBA", "Jane Doe, PhD, CPA". An explicit
 # list, so a "Raman, Priya" style name never loses its first name.
@@ -90,6 +103,7 @@ class ParseResult(BaseModel):
             "valid": sum(r.status == "valid" for r in self.rows),
             "invalid": sum(r.status == "invalid" for r in self.rows),
             "duplicate": sum(r.status == "skipped" for r in self.rows),
+            "warnings": sum(r.status == "valid" and bool(r.warnings) for r in self.rows),  # valid, but check them
         }
 
     def preview(self) -> dict[str, Any]:
@@ -180,15 +194,11 @@ def check_mapping(mapping: dict[str, str | None], headers: list[str]) -> None:
             "Couldn't find name columns. Expected first_name and last_name "
             "(or a single full_name column)."
         )
-    if settings.require_linkedin and not mapping.get("linkedin_url"):
+    if not (mapping.get("linkedin_url") or mapping.get("email") or mapping.get("company_domain")):
         raise CsvRejected(
-            "Couldn't find a linkedin_url column. Each prospect needs their LinkedIn profile URL "
-            "(linkedin.com/in/...), because a common name at a big company is not a unique identity."
-        )
-    if not (mapping.get("company_domain") or mapping.get("linkedin_url")):
-        raise CsvRejected(
-            "Couldn't find a company_domain or linkedin_url column. Each prospect needs one of "
-            "them, because a company name alone is not a unique identity."
+            "Couldn't find a linkedin_url, email or company_domain column. Each prospect needs a "
+            "LinkedIn URL, a work email or a company domain, because a name and company name alone "
+            "are not a unique identity."
         )
 
 
@@ -252,6 +262,20 @@ def normalise_linkedin(value: str) -> tuple[str | None, str | None]:
     return f"linkedin.com/in/{parts[1].lower()}", None
 
 
+def _ascii(text: str) -> str:
+    """Lowercase letters and digits only, accents dropped: 'Nowák-Lee' -> 'nowaklee'."""
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]", "", text.lower())
+
+
+def slug_matches_name(linkedin: str, first: str, last: str) -> bool:
+    """Does linkedin.com/in/<slug> contain the first or last name (or one word of either)?
+    Slugs are often 'jdoe', 'jane-doe-1234' or 'janed'; only a slug with neither is suspect."""
+    slug = _ascii(linkedin.rsplit("/", 1)[-1])
+    words = [w for w in (_ascii(part) for part in re.split(r"[\s\-']+", f"{first} {last}")) if len(w) >= 2]
+    return not slug or not words or any(w in slug for w in words)
+
+
 # --- Row level ----------------------------------------------------------------
 
 
@@ -284,7 +308,7 @@ def validate_rows(
             full_name = " ".join(p for p in (first, last) if p)
 
         domain, domain_error = normalise_domain(get(raw, "company_domain"))
-        if domain and any(domain == d or domain.endswith("." + d) for d in NOT_COMPANY_DOMAINS):
+        if domain and not_company_domain(domain):
             warnings.append(f"ignored domain '{domain}': it is a link or email host, not the company's site")
             domain = None
         linkedin, linkedin_error = normalise_linkedin(get(raw, "linkedin_url"))
@@ -292,6 +316,14 @@ def validate_rows(
         if email and not EMAIL_RE.match(email):
             warnings.append(f"ignored malformed email '{email}'")
             email = None
+        email_domain = email.rsplit("@", 1)[1] if email else None
+        work_email = email if email_domain and not not_company_domain(email_domain) else None
+        if work_email and domain and not (_on(email_domain, [domain]) or _on(domain, [email_domain])):
+            warnings.append(f"email domain '{email_domain}' differs from company domain '{domain}'")
+        if work_email and not domain and not domain_error:
+            domain = normalise_domain(email_domain)[0]
+            if domain:
+                warnings.append(f"company domain '{domain}' taken from the work email")
         company = get(raw, "company") or None
 
         if not first and not last:
@@ -303,11 +335,15 @@ def validate_rows(
         if domain_error:
             problems.append(domain_error)
         if linkedin_error:
-            problems.append(linkedin_error)
-        if settings.require_linkedin and not linkedin and not linkedin_error:
-            problems.append(NEEDS_LINKEDIN)
-        elif not (domain or linkedin) and not (domain_error or linkedin_error):
-            problems.append("needs a company domain or LinkedIn URL to identify this person")
+            if domain or work_email:  # another anchor carries identity: drop the bad URL, say so
+                warnings.append(f"ignored {linkedin_error}")
+            else:
+                problems.append(linkedin_error)
+        if not (linkedin or work_email or domain) and not (domain_error or linkedin_error):
+            personal = f" ({email_domain} is a personal email)" if email_domain else ""
+            problems.append(NEEDS_ANCHOR + personal)
+        if linkedin and first and last and not slug_matches_name(linkedin, first, last):
+            warnings.append(f"LinkedIn URL '{linkedin}' doesn't contain {first} or {last}; check it is their profile")
         if not company and not problems:
             warnings.append("no company name; it will be derived from the domain or LinkedIn")
         if not problems and len(last.rstrip(".")) == 1:
