@@ -5,7 +5,7 @@ import type { NextConfig } from "next";
 // is baked in at build time, and without it the site would quietly call http://localhost:8000.
 if (process.env.VERCEL && !process.env.NEXT_PUBLIC_API_URL) {
   throw new Error(
-    "NEXT_PUBLIC_API_URL is not set. Add it in Vercel (e.g. https://zamp-sdr-api.onrender.com) and redeploy.",
+    "NEXT_PUBLIC_API_URL is not set. Add it in Vercel (e.g. https://signal-sdr-agent-api.onrender.com) and redeploy.",
   );
 }
 

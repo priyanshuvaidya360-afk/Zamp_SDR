@@ -26,7 +26,7 @@ neon deploy                     # applies neon.ts and writes DATABASE_URL + DATA
 ## 2. Backend: Render
 
 1. Sign in at [render.com](https://render.com) with GitHub.
-2. **New → Blueprint** → choose this repo → Render reads `render.yaml` and shows service `zamp-sdr-api` (free plan, region Ohio, next to the database).
+2. **New → Blueprint** → choose this repo → Render reads `render.yaml` and shows service `signal-sdr-agent-api` (free plan, region Ohio, next to the database).
 3. Fill in the values it asks for:
 
    | Key | Value |
@@ -36,14 +36,14 @@ neon deploy                     # applies neon.ts and writes DATABASE_URL + DATA
    | `GROQ_API_KEY`, `GEMINI_API_KEY`, `TAVILY_API_KEY` | the same keys as in `backend/.env` |
    | `EXA_API_KEY` | optional: leave empty |
 
-   CORS needs no input: `render.yaml` already allows the Vercel project `zamp-sdr` (production and preview URLs).
+   CORS needs no input: `render.yaml` already allows the Vercel project `signal-sdr-agent` (production and preview URLs).
 4. **Apply**. The first build takes a few minutes. When it is live, open `https://<your-service>.onrender.com/health`; it should answer `{"ok":true}`. Copy that base URL for step 3.
 
 ## 3. Frontend: Vercel
 
 1. Sign in at [vercel.com](https://vercel.com) with GitHub → **Add New → Project** → import this repo.
 2. **Root Directory: `frontend`** (click Edit next to it). Vercel then detects Next.js and uses `frontend/vercel.json`.
-3. **Project name: `zamp-sdr`** (the default from the repo name). The backend's CORS pattern expects it; if you choose another name, change `CORS_ORIGIN_REGEX` in `render.yaml`.
+3. **Project name: `signal-sdr-agent`** (the default from the repo name). The backend's CORS pattern expects it; if you choose another name, change `CORS_ORIGIN_REGEX` in `render.yaml`.
 4. **Environment Variables:** `NEXT_PUBLIC_API_URL` = the Render URL from step 2 (no trailing slash). The build stops with a clear message if it is missing.
 5. **Deploy.** Open the site, click **Use the demo CSV** or upload your own, and draft a prospect.
 

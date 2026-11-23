@@ -203,7 +203,7 @@ render.yaml            Render blueprint for the backend; frontend/vercel.json fo
   default; mock `search.search` / `search.extract` / `llm.structured` in stage tests.
 
 ## Git
-- Push to https://github.com/priyanshuvaidya360-afk/Zamp_SDR (`origin`, branch `main`).
+- Push to https://github.com/priyanshuvaidya360-afk/signal-sdr-agent (`origin`, branch `main`).
 - The repo is public: never commit `backend/.env`, API keys, or `*.db`. Check
   `git status` before every commit.
 - One commit per task, e.g. `T05 runner + SSE`, after its "Done when" checks pass.

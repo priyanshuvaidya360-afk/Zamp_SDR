@@ -15,7 +15,7 @@ How I want you to use it:
 
 ## 1. What the product is and who it is for
 
-**Name:** Signal (repo: `Zamp_SDR`). Built for the PS-3 "GTM AI agent" assignment.
+**Name:** Signal (repo: `signal-sdr-agent`). Built for the PS-3 "GTM AI agent" assignment.
 
 **User:** an SDR / growth rep who has a list of prospects and needs a researched, personal first-touch email for each one.
 

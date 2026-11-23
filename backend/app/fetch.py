@@ -12,7 +12,7 @@ import trafilatura
 
 from app.config import settings
 
-USER_AGENT = "Mozilla/5.0 (compatible; SignalResearchBot/0.1; +https://github.com/priyanshuvaidya360-afk/Zamp_SDR)"
+USER_AGENT = "Mozilla/5.0 (compatible; SignalResearchBot/0.1; +https://github.com/priyanshuvaidya360-afk/signal-sdr-agent)"
 
 # Never scrape LinkedIn (docs/PROJECT_SPEC.md, "LinkedIn: don't scrape it").
 BLOCKED_DOMAINS = ("linkedin.com",)
