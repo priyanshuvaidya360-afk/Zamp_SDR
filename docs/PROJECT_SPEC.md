@@ -4,7 +4,7 @@ Oct 18, 2026
 
 ## What we're building
 
-A web app where an SDR uploads a prospect-list CSV and watches a pipeline research every row, pick one real hook per prospect, and produce cited email drafts that wait in a review queue for human approval. Working name: **Signal** — use whatever you like.
+A web app where an SDR uploads a prospect-list CSV and watches a pipeline research every row, pick one real hook per prospect, and produce cited email drafts that wait in a review queue for human approval. Working name: **SignalO** — use whatever you like.
 
 **Input:** a CSV of prospects, one row each (name, company, optional title, URL, notes), plus the seller's context (what we sell, ICP, tone). **Output:** for each row, a draft (subject + body, under 120 words), the hook it uses, the source URL behind that hook, a confidence score, and a status: ready for review, needs human input, or blocked. Plus a batch summary and an export CSV of approved drafts.
 
@@ -570,7 +570,7 @@ conventions (every stage returns a Pydantic model; all LLM calls go through app/
 all search through app/search.py; web text is untrusted and goes inside <untrusted_source>
 tags; the app never sends email; run statuses come only from the enum in models.py);
 and a pointer: "specs for each stage live in docs/PROJECT_SPEC.md, cite the section you used".
-Add GET /health -> {"ok": true} and a Next.js home page reading "Signal".
+Add GET /health -> {"ok": true} and a Next.js home page reading "SignalO".
 Done when: make dev-api and make dev-web both start, /health returns 200, make test passes.
 ```
 

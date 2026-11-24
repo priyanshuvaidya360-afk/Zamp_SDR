@@ -80,7 +80,7 @@ export function DraftPanel({
             ))}
           </section>
         )}
-        <p className="border-t bg-zinc-50 px-8 py-2.5 text-xs text-muted-foreground">Nothing is sent from Signal. Approve, edit or reject below.</p>
+        <p className="border-t bg-zinc-50 px-8 py-2.5 text-xs text-muted-foreground">Nothing is sent from SignalO. Approve, edit or reject below.</p>
       </article>
       {final.review.reason && <p className="text-sm text-muted-foreground">Rejected: {final.review.reason}</p>}
     </div>

@@ -1,4 +1,4 @@
-# Signal (PS-3 Outreach Engine)
+# SignalO (PS-3 Outreach Engine)
 
 An SDR uploads a CSV of prospects (first name, last name, and at least one anchor: the person's
 LinkedIn URL, a work email, or the company domain). For each row, a fixed pipeline resolves the person's identity, researches the public

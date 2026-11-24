@@ -1,4 +1,4 @@
-# Signal: a cold-email outreach agent that never sends
+# SignalO: a cold-email outreach agent that never sends
 
 An SDR uploads a CSV of prospects (first and last name plus at least one of: their LinkedIn URL, a work email, or the company domain). For each one, a fixed pipeline confirms who the person is, researches the public web, picks **one cited hook**, and writes a short first-touch email (under 120 words). Every factual sentence links to the source that proves it. Drafts wait in a review queue: a human approves, edits or rejects each one. **Nothing is ever sent.** The live run view streams every stage as it happens, and a dashboard shows what reached review and why the rest didn't.
 

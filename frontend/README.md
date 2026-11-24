@@ -1,6 +1,6 @@
-# Signal frontend
+# SignalO frontend
 
-The Next.js app for Signal. It covers upload → map columns → prospect list → live run view → review queue → dashboard. See the [main README](../README.md) for what the project does, how to run it and how to deploy it.
+The Next.js app for SignalO. It covers upload → map columns → prospect list → live run view → review queue → dashboard. See the [main README](../README.md) for what the project does, how to run it and how to deploy it.
 
 ```bash
 npm install

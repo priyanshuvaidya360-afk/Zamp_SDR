@@ -122,7 +122,7 @@ export function ReviewQueue({ batchId }: { batchId: number }) {
       {!pending.length ? (
         <div className="rounded-xl border border-dashed bg-white px-4 py-10 text-center text-sm text-muted-foreground">
           <p>Every draft in this batch has been reviewed.</p>
-          <p className="mt-1">Approved emails are in the export. Nothing is sent from Signal.</p>
+          <p className="mt-1">Approved emails are in the export. Nothing is sent from SignalO.</p>
         </div>
       ) : !shown || !run || !draft ? (
         <p className="text-muted-foreground">Loading draft…</p>

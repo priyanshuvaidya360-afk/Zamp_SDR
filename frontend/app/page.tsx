@@ -11,7 +11,7 @@ export default function Home() {
       <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <UploadHero />
         <aside className="space-y-4 rounded-[14px] border bg-white p-6">
-          <h2 className="text-xs font-bold tracking-[0.08em] text-primary uppercase">Why Signal</h2>
+          <h2 className="text-xs font-bold tracking-[0.08em] text-primary uppercase">Why SignalO</h2>
           <p className="text-[15px] leading-relaxed text-zinc-800">
             A rep with 200 prospects cannot research every person, find the news or pain point that matters, and write a
             message that sounds like it.

@@ -1,6 +1,6 @@
 # Assumptions
 
-Decisions and assumptions made while building Signal. Add to this as you build
+Decisions and assumptions made while building SignalO. Add to this as you build
 (see docs/PROJECT_SPEC.md, "Assumptions and interview talking points").
 
 ## Product

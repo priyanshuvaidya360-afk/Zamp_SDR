@@ -1,6 +1,6 @@
 # Deployment guide (free, no credit card)
 
-Signal runs on three free services, each set up by importing this GitHub repo. The config files in the repo do the setup; you only paste secrets.
+SignalO runs on three free services, each set up by importing this GitHub repo. The config files in the repo do the setup; you only paste secrets.
 
 | Part | Host | Config file in the repo |
 |---|---|---|

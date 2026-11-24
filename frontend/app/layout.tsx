@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Signal",
+  title: "SignalO",
   description: "Prospect research and cited outreach drafts for SDRs",
 };
 

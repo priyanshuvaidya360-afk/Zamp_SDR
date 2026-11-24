@@ -80,7 +80,7 @@ export function MappingDialog({
           <div>
             <p className="text-xs font-bold tracking-[0.08em] text-[#a9c1ee]">STEP 2 · MAP COLUMNS</p>
             <h2 id="mapping-title" className="mt-1 text-xl font-bold tracking-tight">
-              Match your columns to what Signal needs
+              Match your columns to what SignalO needs
             </h2>
             <p className="mt-1 text-sm text-[#c9d8f5]">
               {batch.filename} · we guessed from your headers. Change any field and every row is checked again.

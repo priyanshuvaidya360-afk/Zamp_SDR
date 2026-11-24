@@ -19,7 +19,7 @@ export function Nav() {
           <span className="flex size-[26px] items-center justify-center rounded-[7px] bg-[#3b82f6]">
             <span className="size-2.5 rounded-full bg-white" />
           </span>
-          Signal
+          SignalO
         </Link>
         <div className="flex gap-1.5 text-sm">
           {LINKS.map((link) => (

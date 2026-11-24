@@ -62,7 +62,7 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* Signal design system: navy chrome, blue actions, cool blue-grey surfaces. */
+/* SignalO design system: navy chrome, blue actions, cool blue-grey surfaces. */
 :root {
   --background: #f2f6fc;
   --foreground: #0f1b2d;
