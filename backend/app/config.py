@@ -122,6 +122,9 @@ class Settings(BaseSettings):
     # Origins matching this pattern are allowed too: the deployed frontend's production and
     # preview URLs (render.yaml sets it for Vercel), so no URL has to be pasted after deploying.
     cors_origin_regex: str | None = None
+    # The live frontend (Vercel project "signalo-sdr"). Always allowed on top of the two settings
+    # above, so a backend whose CORS env vars were set before a rename still accepts the live site.
+    frontend_origin: str = "https://signalo-sdr.vercel.app"
     # Per visitor (IP), per hour, so a shared demo link can't drain the free quotas (app/limits.py).
     # 0 turns a limit off. Uploads cost nothing; each prospect costs ~9 search credits + tokens.
     uploads_per_hour: int = 20

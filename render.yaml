@@ -22,11 +22,11 @@ services:
         value: "1"
       - key: DEMO_MODE
         value: live
-      # The deployed frontend: Vercel production and preview URLs of the project "signal-sdr-agent".
+      # The deployed frontend: Vercel production and preview URLs of the project "signalo-sdr".
       # If you rename the Vercel project or add a custom domain, change this pattern (or add the
       # domain to CORS_ORIGINS, a JSON list).
       - key: CORS_ORIGIN_REGEX
-        value: https://signal-sdr-agent(-[a-z0-9-]+)?\.vercel\.app
+        value: https://signalo-sdr(-[a-z0-9-]+)?\.vercel\.app
       # Neon (project soft-boat-20927108, branch production). Copy both from the repo-root
       # .env.local that `neon deploy` wrote: the pooled URL for app traffic, the direct one for
       # startup schema work. Never commit them.

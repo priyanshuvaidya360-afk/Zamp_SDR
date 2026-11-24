@@ -22,7 +22,7 @@ def test_cors_allows_the_deployed_frontend_by_pattern(monkeypatch):
 
     from app import main
     from app.config import settings
-    monkeypatch.setattr(settings, "cors_origin_regex", r"https://signal-sdr-agent(-[a-z0-9-]+)?\.vercel\.app")
+    monkeypatch.setattr(settings, "cors_origin_regex", r"https://signalo-sdr(-[a-z0-9-]+)?\.vercel\.app")
     app = importlib.reload(main).app
     client = TestClient(app)  # no `with`: the startup (database work) is not needed for CORS
 
@@ -30,10 +30,10 @@ def test_cors_allows_the_deployed_frontend_by_pattern(monkeypatch):
         r = client.options("/health", headers={"Origin": origin, "Access-Control-Request-Method": "GET"})
         return r.headers.get("access-control-allow-origin") == origin
 
-    assert allowed("https://signal-sdr-agent.vercel.app")
-    assert allowed("https://signal-sdr-agent-git-main-priyanshuvaidya.vercel.app")
+    assert allowed("https://signalo-sdr.vercel.app")
+    assert allowed("https://signalo-sdr-git-main-priyanshuvaidya.vercel.app")
     assert allowed("http://localhost:3000")
     assert not allowed("https://evil.vercel.app")
-    assert not allowed("https://signal-sdr-agent.vercel.app.evil.com")
+    assert not allowed("https://signalo-sdr.vercel.app.evil.com")
     monkeypatch.undo()
     importlib.reload(main)

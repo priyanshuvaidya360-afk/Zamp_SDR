@@ -57,7 +57,7 @@ Each service is set up by importing this GitHub repo; the config files do the re
 | Backend | Render (Blueprint) | [render.yaml](render.yaml) | the two Neon URLs from `.env.local`, the Groq/Gemini/Tavily keys |
 | Frontend | Vercel (Root Directory `frontend`) | [frontend/vercel.json](frontend/vercel.json) | `NEXT_PUBLIC_API_URL` = the Render URL |
 
-CORS needs no input: the backend already accepts the Vercel project `signal-sdr-agent` (production and preview URLs). Render's free plan sleeps after 15 idle minutes, so open the site a few minutes before a demo. A shared link can't drain the free quotas: each visitor gets 20 uploads and 60 drafted prospects per hour (`uploads_per_hour`, `prospects_per_hour` in [backend/app/config.py](backend/app/config.py)).
+CORS needs no input: the backend already accepts the Vercel project `signalo-sdr` (production and preview URLs). Render's free plan sleeps after 15 idle minutes, so open the site a few minutes before a demo. A shared link can't drain the free quotas: each visitor gets 20 uploads and 60 drafted prospects per hour (`uploads_per_hour`, `prospects_per_hour` in [backend/app/config.py](backend/app/config.py)).
 
 ## Where things live
 

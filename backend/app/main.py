@@ -25,7 +25,7 @@ app = FastAPI(title="SignalO API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
+    allow_origins=[*settings.cors_origins, settings.frontend_origin],
     allow_origin_regex=settings.cors_origin_regex,
     allow_methods=["*"],
     allow_headers=["*"],

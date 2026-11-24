@@ -36,7 +36,7 @@ neon deploy                     # applies neon.ts and writes DATABASE_URL + DATA
    | `GROQ_API_KEY`, `GEMINI_API_KEY`, `TAVILY_API_KEY` | the same keys as in `backend/.env` |
    | `EXA_API_KEY` | optional: leave empty |
 
-   CORS needs no input: `render.yaml` already allows the Vercel project `signal-sdr-agent` (production and preview URLs).
+   CORS needs no input: `render.yaml` already allows the Vercel project `signalo-sdr` (production and preview URLs).
 4. **Apply**. The first build takes a few minutes. When it is live, open `https://<your-service>.onrender.com/health`; it should answer `{"ok":true}`. Copy that base URL for step 3.
 
 ## 3. Frontend: Vercel
